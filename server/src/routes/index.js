@@ -1,9 +1,9 @@
-// const { Router } = require("express");
-// const mueblesRoutes = require("./mueblesRoutes")
+const { Router } = require("express");
+const productsRouter = require("./productsRoutes");
+const productTypes = require("./productTypeRoutes");
+const router = Router();
 
-// const mainRouter = Router();//enrutador principal
-// //enrutadoores secundarios
-// mainRouter.use("/muebles", mueblesRoutes)//rutas para countries
+router.use("/products", productsRouter);
+router.use("/productTypes", productTypes);
 
-
-// module.exports = mainRouter;
+module.exports = router;

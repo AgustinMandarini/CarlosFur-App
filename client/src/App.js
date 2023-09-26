@@ -1,11 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <h1>SILLAS 2x1</h1>
-    </div>
+    <Routes>
+      <div className="App">
+        <Route exact path="/" />
+        <Route path="/home" />
+        <Route path="/detail/:detailId" />
+        <Route path="/create" />
+      </div>
+    </Routes>
   );
 }
 

@@ -11,41 +11,41 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      name: {
+      nombre: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
       },
-      price: {
+      precio: {
         type: DataTypes.FLOAT,
         allowNull: false,
         validate: { min: 0 },
       },
-      height: {
+      altura: {
         type: DataTypes.FLOAT,
-        allowNull: true,
+        allowNull: false,
         validate: { min: 0 },
       },
-      depth: {
+      profundidad: {
         type: DataTypes.FLOAT,
-        allowNull: true,
+        allowNull: false,
         validate: { min: 0 },
       },
-      width: {
+      ancho: {
         type: DataTypes.FLOAT,
-        allowNull: true,
+        allowNull: false,
         validate: { min: 0 },
       },
-      weight: {
+      peso: {
         type: DataTypes.FLOAT,
-        allowNull: true,
+        allowNull: false,
         validate: { min: 0 },
       },
       color: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
-      description: {
+      descripcion: {
         type: DataTypes.TEXT,
       },
     },

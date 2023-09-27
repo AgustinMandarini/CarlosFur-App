@@ -4,5 +4,4 @@ const productTypeRouter = Router();
 
 productTypeRouter.get("", getProductTypeHandler);
 
-
 module.exports = productTypeRouter;

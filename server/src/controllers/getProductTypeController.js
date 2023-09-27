@@ -1,12 +1,9 @@
-const {productType} = require("../model/ProductType");
+const mockDatabase = require("../../api/dbProductType.json");
 
-//  función asincrona que trae todos los tipos de muebles
-const getAllTypes = async () => {
-  allTypesArray= await productType.findAll();
-  return allTypesArray;
+const getProductTypeController = () => {
+  return mockDatabase;
 };
 
 module.exports = {
-  getAllTypes,
+  getProductTypeController,
 };
-

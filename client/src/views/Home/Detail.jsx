@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Detail.module.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Detail = () => {
   const { id } = useParams();

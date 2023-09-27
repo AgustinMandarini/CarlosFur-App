@@ -1,12 +1,21 @@
 import React from "react";
 import style from "./Detail.module.css";
-import { Link } from "react-router-dom";
+
+import { Link, useParams } from "react-router-dom";
 
 const Detail = () => {
+  const { id } = useParams();
+
   return (
     <div>
       <Link to="/home">Volver</Link>
-      <div>Acá va la info</div>
+      <div>
+        <p>Nombre: </p>
+        <p>Altura: </p>
+        <p>Peso: </p>
+        <p>Tipo de madera: </p>
+      </div>
+
     </div>
   );
 };

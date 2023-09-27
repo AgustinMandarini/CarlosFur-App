@@ -15,7 +15,6 @@ const Detail = () => {
         <p>Peso: </p>
         <p>Tipo de madera: </p>
       </div>
-
     </div>
   );
 };

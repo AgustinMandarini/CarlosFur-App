@@ -8,6 +8,9 @@ const NavBar = () => {
       <div className={style.divLinks}>
         <p className={style.logo}>LOGO</p>
         <Link to="/create" className={style.links}>
+          Home
+        </Link>
+        <Link to="/create" className={style.links}>
           Form
         </Link>
         <Link to="/about" className={style.links}>

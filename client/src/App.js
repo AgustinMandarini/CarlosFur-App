@@ -2,7 +2,7 @@ import "./App.css";
 import { Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import About from "./views/About/About";
-import Detail from "./views/Home/Detail";
+import Detail from "./views/Detail/Detail";
 import Home from "./views/Home/Home";
 import LandingPage from "./views/LandingPage/LandingPage";
 import NavBar from "./views/Nav/NavBar";

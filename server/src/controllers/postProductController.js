@@ -1,7 +1,7 @@
 const { Product } = require("../model/Product");
 const { ProductType } = require("../model/ProductType");
 
-const postProduct = async ({
+const postProductController = async ({
   name,
   price,
   height,

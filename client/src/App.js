@@ -8,12 +8,15 @@ import Detail from "./views/Home/Detail";
 function App() {
   return (
     <div className="App">
-      <NavBar />
       <Routes>
-        <Route path="/home" Component={<Home />} />
-        <Route path="/detail/:detailId" Component={<Detail />} />
+        <Route path="/" component={<NavBar />} />
+
+        <Route path="/home" component={<Home />} />
+
+        <Route path="/home" component={<Home />} />
+        <Route path="/detail/:detailId" component={<Detail />} />
         <Route path="/create" />
-        <Route path="/about" Component={<About />} />
+        <Route path="/about" component={<About />} />
       </Routes>
     </div>
   );

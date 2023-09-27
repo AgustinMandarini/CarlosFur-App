@@ -1,0 +1,8 @@
+import React from "react";
+import style from "./Detail.module.css";
+
+const Detail = () => {
+  return <div>Acá va la info</div>;
+};
+
+export default Detail;

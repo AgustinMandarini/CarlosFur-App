@@ -1,0 +1,24 @@
+.navBar {
+  background-color: rgba(126, 105, 59, 0.808);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+}
+.divLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.links {
+  text-decoration: none;
+  padding-right: 35px;
+  color: black;
+}
+.logo {
+  display: flex;
+  height: 20px;
+  width: 100px;
+  object-fit: fill;
+  margin-right: 80px;
+}

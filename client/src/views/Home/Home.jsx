@@ -1,10 +1,10 @@
 //import Cardscontainer
+import React from "react";
 
-
-const home = () =>{
-
-<div>
+const Home = () => {
+  <div>
     <h1>Vistaaa home</h1>
     <p>Donde iría el CardsContainer</p>
-</div>
-}
+  </div>;
+};
+export default Home;

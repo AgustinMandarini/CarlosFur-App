@@ -15,7 +15,7 @@ function App() {
 
         <Route path="/home" element={<Home />} />
         <Route path="/detail/:detailId" component={<Detail />} />
-        <Route path="/create" />
+        <Route path="/crgeate" />
         <Route path="/about" element={<About />} />
       </Routes>
     </div>

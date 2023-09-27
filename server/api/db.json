@@ -1,64 +1,104 @@
 {
-    "muebles": [
-      {
-        "nombre": "Mesa de comedor",
-        "altura": "75 cm",
-        "peso": "20 kg",
-        "tipo_madera": "Roble"
-      },
-      {
-        "nombre": "Silla de cocina",
-        "altura": "85 cm",
-        "peso": "5 kg",
-        "tipo_madera": "Pino"
-      },
-      {
-        "nombre": "Sofá de cuero",
-        "altura": "90 cm",
-        "peso": "40 kg",
-        "tipo_madera": "Sin madera"
-      },
-      {
-        "nombre": "Cama King Size",
-        "altura": "60 cm",
-        "peso": "50 kg",
-        "tipo_madera": "Cerezo"
-      },
-      {
-        "nombre": "Mesa de centro",
-        "altura": "45 cm",
-        "peso": "15 kg",
-        "tipo_madera": "Nogal"
-      },
-      {
-        "nombre": "Silla de escritorio",
-        "altura": "95 cm",
-        "peso": "10 kg",
-        "tipo_madera": "Haya"
-      },
-      {
-        "nombre": "Armario de ropero",
-        "altura": "180 cm",
-        "peso": "80 kg",
-        "tipo_madera": "Pino"
-      },
-      {
-        "nombre": "Estante de libros",
-        "altura": "150 cm",
-        "peso": "25 kg",
-        "tipo_madera": "Cedro"
-      },
-      {
-        "nombre": "Cómoda de dormitorio",
-        "altura": "80 cm",
-        "peso": "30 kg",
-        "tipo_madera": "Roble"
-      },
-      {
-        "nombre": "Silla de jardín",
-        "altura": "70 cm",
-        "peso": "8 kg",
-        "tipo_madera": "Teca"
-      }
-    ]
-  }
+  "muebles": [
+    {
+      "nombre": "Mesa de comedor",
+      "precio": 5000,
+      "altura": 75,
+      "profundidad": 20,
+      "ancho": 40,
+      "peso": 20,
+      "color": "Blanco",
+      "descripcion": "Es una mesa muy linda y muy bonita"
+    },
+    {
+      "nombre": "Silla de cocina",
+      "precio": 2000,
+      "altura": 50,
+      "profundidad": 10,
+      "ancho": 30,
+      "peso": 8,
+      "color": "Ocre",
+      "descripcion": "Una fantastica silla para sus cachas"
+    },
+    {
+      "nombre": "Sofá de cuero",
+      "precio": 50000,
+      "altura": 60,
+      "profundidad": 30,
+      "ancho": 50,
+      "peso": 40,
+      "color": "Marron claro",
+      "descripcion": "Un sillon para netflix, pelis, series, todo lo que quieras"
+    },
+    {
+      "nombre": "Cama King Size",
+      "precio": 100000,
+      "altura": 30,
+      "profundidad": 100,
+      "ancho": 40,
+      "peso": 200,
+      "color": "Verde fluor",
+      "descripcion": "Esta cama es demasiado grande y probablemente no pase por ninguna puerta"
+    },
+    {
+      "nombre": "Mesa de centro",
+      "precio": 1200,
+      "altura": 79,
+      "profundidad": 22,
+      "ancho": 20,
+      "peso": 20,
+      "color": "Negro",
+      "descripcion": "Mesa de cristal para que se pueda ver lo que hay debajo"
+    },
+    {
+      "nombre": "Silla de escritorio",
+      "precio": 20000,
+      "altura": 35,
+      "profundidad": 14,
+      "ancho": 32,
+      "peso": 304,
+      "color": "Fucsia",
+      "descripcion": "Silla ergonomica para mayor confort"
+    },
+    {
+      "nombre": "Armario de ropero",
+      "precio": 200000,
+      "altura": 120,
+      "profundidad": 20,
+      "ancho": 40,
+      "peso": 20,
+      "color": "Blanco",
+      "descripcion": "Armario increiclemente perfecto"
+    },
+    {
+      "nombre": "Estanteria",
+      "precio": 5000,
+      "altura": 70,
+      "profundidad": 26,
+      "ancho": 33,
+      "peso": 19,
+      "color": "Gris",
+      "descripcion": "Estanteria para todo tipo de usos, pesos, objetos de otros paises"
+    },
+    {
+      "nombre": "Cómoda de dormitorio",
+      "precio": 200000,
+      "altura": 45,
+      "profundidad": 20,
+      "ancho": 50,
+      "peso": 50,
+      "color": "Negro",
+      "descripcion": "Para colocar el retrato de la abuela, siempre en la comoda"
+    },
+    {
+      "nombre": "Silla de jardín",
+      "precio": 5000,
+      "altura": 30,
+      "profundidad": 12,
+      "ancho": 38,
+      "peso": 29,
+      "color": "Rojo",
+      "descripcion": "Sillas de plastico para el jardin de tu casa"
+    }
+  ]
+}

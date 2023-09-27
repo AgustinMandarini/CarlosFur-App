@@ -14,7 +14,7 @@ const postProductHandler = async (req, res) => {
   } = req.body;
 
   try {
-    const newDog = await postProductController({
+    const newProduct = await postProductController({
       name,
       price,
       height,
@@ -25,10 +25,10 @@ const postProductHandler = async (req, res) => {
       description,
       productType,
     });
-    res.status(200).json(newDog);
+    res.status(200).json(newProduct);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-module.exports = postProductController;
+module.exports = { postProductHandler };

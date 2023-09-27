@@ -1,4 +1,4 @@
-const mockDatabase = require("../../api/db.json");
+const mockDatabase = require("../../api/dbProduct.json");
 
 const getProductController = () => {
   return mockDatabase;

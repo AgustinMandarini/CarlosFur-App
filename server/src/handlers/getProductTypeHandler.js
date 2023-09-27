@@ -1,16 +1,20 @@
 const {
-  getProductTypeController,
+  getAllTypes,
 } = require("../controllers/getProductTypeController.js");
 
-const getProductTypeHandler = async (req, res) => {
+
+const getProductTypeHandler=async(req, res)=>{
   try {
-    const productType = await getProductTypeController();
-    res.status(200).send(productType);
+    const allTypes=await getAllTypes();
+    res.status(200).json(allTypes)
   } catch (error) {
-    res.status(400).json({ error: error.mesagge });
+      res.statu(400).json({error: error.message})
   }
-};
+}
+
 
 module.exports = {
   getProductTypeHandler,
 };
+
+

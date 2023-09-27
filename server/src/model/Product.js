@@ -23,27 +23,27 @@ module.exports = (sequelize) => {
       },
       height: {
         type: DataTypes.FLOAT,
-        allowNull: false,
+        allowNull: true,
         validate: { min: 0 },
       },
       depth: {
         type: DataTypes.FLOAT,
-        allowNull: false,
+        allowNull: true,
         validate: { min: 0 },
       },
       width: {
         type: DataTypes.FLOAT,
-        allowNull: false,
+        allowNull: true,
         validate: { min: 0 },
       },
       weight: {
         type: DataTypes.FLOAT,
-        allowNull: false,
+        allowNull: true,
         validate: { min: 0 },
       },
       color: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       description: {
         type: DataTypes.TEXT,

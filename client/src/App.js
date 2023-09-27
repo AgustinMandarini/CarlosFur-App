@@ -1,5 +1,6 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import About from "./views/About/About";
 import Detail from "./views/Home/Detail";
 import Home from "./views/Home/Home";
@@ -7,18 +8,27 @@ import LandingPage from "./views/LandingPage/LandingPage";
 import NavBar from "./views/Nav/NavBar";
 
 function App() {
+  const location = useLocation();
+
   return (
     <div className="App">
-      <Routes>
-        <Route exact path="/" element={<NavBar />} />
-        <Route exact path="/" element={<LandingPage />} />
-        <Route path="/home" Component={<Home />} />
-        <Route path="/detail/:detailId" Component={<Detail />} />
-        <Route path="/create" />
-        <Route path="/about" Component={<About />} />
-      </Routes>
+      {location.pathname !== "/" && <NavBar />}
+
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/home" render={() => <Home />} />
+      <Route path="/detail/:id" component={Detail} />
+      <Route path="/create" /* component={Form} */ />
+      <Route path="/about" component={About} />
     </div>
   );
 }
+
+/* <div>
+      {location.pathname !== "/" && <NavBar />}
+
+      <Route exact path="/" component={Landing} />
+      <Route exact path="/create" component={Form} />
+      <Route path="/detail/:id" component={Detail} />
+    </div> */
 
 export default App;

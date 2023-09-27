@@ -14,8 +14,8 @@ function App() {
         <Route path="/home" element={<Home />} />
 
         <Route path="/home" element={<Home />} />
-        <Route path="/detail/:detailId" component={<Detail />} />
-        <Route path="/crgeate" />
+        <Route path="/detail/:detailId" element={<Detail />} />
+        <Route path="/create" />
         <Route path="/about" element={<About />} />
       </Routes>
     </div>

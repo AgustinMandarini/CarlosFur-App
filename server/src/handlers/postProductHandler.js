@@ -1,4 +1,4 @@
-const postProductController = require("../controllers/postProductController");
+const postProductController = require("../db");
 
 const postProductHandler = async (req, res) => {
   const {

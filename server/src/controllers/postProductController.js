@@ -25,13 +25,11 @@ const postProductController = async ({
     productType,
   });
 
-  productType.forEach(async (type) => {
-    newProduct.addProductType(
-      await ProductType.findOne({
-        where: { name: type },
-      })
-    );
-  });
+  newProduct.addProductType(
+    await ProductType.findOne({
+      where: { name: productType },
+    })
+  );
 
   return newProduct;
 };

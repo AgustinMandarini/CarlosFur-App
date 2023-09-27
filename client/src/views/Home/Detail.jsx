@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./Detail.module.css";
+
 import { Link, useParams } from "react-router-dom";
 
 const Detail = () => {
@@ -14,6 +15,7 @@ const Detail = () => {
         <p>Peso: </p>
         <p>Tipo de madera: </p>
       </div>
+
     </div>
   );
 };

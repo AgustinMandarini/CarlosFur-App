@@ -1,14 +1,14 @@
 const {
-  getProductsController,
+  getProductController,
 } = require("../controllers/productsController.js");
 
-const getProductsHandler = async (req, res) => {
+const getProductHandler = async (req, res) => {
   try {
-    const products = await getProductsController();
+    const products = await getProductController();
     res.status(200).send(products);
   } catch (error) {
     res.status(400).json({ error: error.mesagge });
   }
 };
 
-module.exports = { getProductsHandler };
+module.exports = { getProductHandler };

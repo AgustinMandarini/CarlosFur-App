@@ -9,14 +9,14 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" component={<NavBar />} />
+        <Route path="/" element={<NavBar />} />
 
-        <Route path="/home" component={<Home />} />
+        <Route path="/home" element={<Home />} />
 
-        <Route path="/home" component={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/detail/:detailId" component={<Detail />} />
         <Route path="/create" />
-        <Route path="/about" component={<About />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </div>
   );

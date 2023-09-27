@@ -9,16 +9,15 @@ import NavBar from "./views/Nav/NavBar";
 function App() {
   return (
     <div className="App">
-      <NavBar />
       <Routes>
-      <Route exact path="/" element={<LandingPage />}/>
+        <Route exact path="/" element={<NavBar />} />
+        <Route exact path="/" element={<LandingPage />} />
         <Route path="/home" Component={<Home />} />
         <Route path="/detail/:detailId" Component={<Detail />} />
         <Route path="/create" />
         <Route path="/about" Component={<About />} />
       </Routes>
     </div>
-
   );
 }
 

@@ -8,7 +8,6 @@ const Home = () => {
   const [muebles, setMuebles] = useState(mueblesData);
   const [currentPage, setCurrentPage] = useState(1);
   const [mueblesPerPage] = useState(5);
-
   const indexOfLastRecipe = currentPage * mueblesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - mueblesPerPage;
   const currentMuebles = muebles.slice(indexOfFirstRecipe, indexOfLastRecipe);
@@ -19,11 +18,11 @@ const Home = () => {
     <div>
       <h1>Volvieron las Sillas 2x1!</h1>
       <Pagination
-        recipesPerPage={mueblesPerPage}
-        totalRecipes={muebles.length}
+        mueblesPerPage={mueblesPerPage}
+        totalMuebles={muebles.length}
         paginate={paginate}
       />
-      <CardsContainer></CardsContainer>
+      <CardsContainer currentMuebles={currentMuebles}></CardsContainer>
     </div>
   );
 };

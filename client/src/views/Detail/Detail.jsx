@@ -16,16 +16,20 @@ const Detail = () => {
   }, [dispatch, id]);
 
   return (
-    <div>
-      <Link to="/home">Volver</Link>
-      <div>
-        <p>Nombre: {stateDetail.nombre}</p>
-        <p>Altura: {stateDetail.altura}</p>
-        <p>Profundidad: {stateDetail.profundidad} </p>
-        <p>Ancho:{stateDetail.ancho} </p>
-        <p>Peso:{stateDetail.peso}</p>
-        <p>Color:{stateDetail.color}</p>
-        <p>Descripcion:{stateDetail.descripcion}</p>
+    <div className={style.cntnDetail}>
+      <Link to="/home" className={style.goBackLink}>
+        Volver
+      </Link>
+      <div className={style.cntnCardDetail}>
+        <div className={style.cntnP}>
+          <p className={style.p}>Nombre: {stateDetail.nombre}</p>
+          <p className={style.p}>Altura: {stateDetail.altura}</p>
+          <p className={style.p}>Profundidad: {stateDetail.profundidad} </p>
+          <p className={style.p}>Ancho: {stateDetail.ancho} </p>
+          <p className={style.p}>Peso: {stateDetail.peso}</p>
+          <p className={style.p}>Color: {stateDetail.color}</p>
+          <p className={style.p}>Descripcion: {stateDetail.descripcion}</p>
+        </div>
       </div>
     </div>
   );

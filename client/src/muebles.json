@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "nombre": "Sofá de cuero",
     "precio": 799.99,
     "altura": 36,
@@ -10,6 +11,7 @@
     "descripcion": "Un sofá de cuero elegante y cómodo para tu sala de estar."
   },
   {
+    "id": 2,
     "nombre": "Mesa de comedor",
     "precio": 299.99,
     "altura": 30,
@@ -20,6 +22,7 @@
     "descripcion": "Una mesa de comedor espaciosa con capacidad para 6 personas."
   },
   {
+    "id": 3,
     "nombre": "Cama King Size",
     "precio": 699.99,
     "altura": 48,
@@ -30,6 +33,7 @@
     "descripcion": "Una cama king size con un diseño elegante para un buen descanso."
   },
   {
+    "id": 4,
     "nombre": "Silla de oficina",
     "precio": 149.99,
     "altura": 40,
@@ -40,6 +44,7 @@
     "descripcion": "Una silla de oficina ergonómica y cómoda para largas horas de trabajo."
   },
   {
+    "id": 5,
     "nombre": "Armario de madera",
     "precio": 449.99,
     "altura": 72,
@@ -50,6 +55,7 @@
     "descripcion": "Un armario espacioso para organizar tu ropa y accesorios."
   },
   {
+    "id": 6,
     "nombre": "Mesa de centro de vidrio",
     "precio": 199.99,
     "altura": 18,
@@ -60,6 +66,7 @@
     "descripcion": "Una mesa de centro elegante con superficie de vidrio."
   },
   {
+    "id": 7,
     "nombre": "Cómoda de 6 cajones",
     "precio": 349.99,
     "altura": 36,
@@ -70,6 +77,7 @@
     "descripcion": "Una cómoda con amplio espacio de almacenamiento."
   },
   {
+    "id": 8,
     "nombre": "Sillón reclinable",
     "precio": 399.99,
     "altura": 42,
@@ -80,6 +88,7 @@
     "descripcion": "Un sillón reclinable cómodo para relajarse después de un largo día."
   },
   {
+    "id": 9,
     "nombre": "Escritorio de madera",
     "precio": 249.99,
     "altura": 30,
@@ -90,6 +99,7 @@
     "descripcion": "Un escritorio de madera resistente para tu estudio u oficina en casa."
   },
   {
+    "id": 10,
     "nombre": "Mesa de noche",
     "precio": 79.99,
     "altura": 24,
@@ -100,6 +110,7 @@
     "descripcion": "Una mesa de noche compacta con espacio de almacenamiento."
   },
   {
+    "id": 11,
     "nombre": "Sofá de cuero",
     "precio": 799.99,
     "altura": 36,
@@ -110,6 +121,7 @@
     "descripcion": "Un sofá de cuero elegante y cómodo para tu sala de estar."
   },
   {
+    "id": 12,
     "nombre": "Mesa de comedor",
     "precio": 299.99,
     "altura": 30,
@@ -120,6 +132,7 @@
     "descripcion": "Una mesa de comedor espaciosa con capacidad para 6 personas."
   },
   {
+    "id": 13,
     "nombre": "Cama King Size",
     "precio": 699.99,
     "altura": 48,
@@ -130,6 +143,7 @@
     "descripcion": "Una cama king size con un diseño elegante para un buen descanso."
   },
   {
+    "id": 14,
     "nombre": "Silla de oficina",
     "precio": 149.99,
     "altura": 40,
@@ -140,6 +154,7 @@
     "descripcion": "Una silla de oficina ergonómica y cómoda para largas horas de trabajo."
   },
   {
+    "id": 15,
     "nombre": "Armario de madera",
     "precio": 449.99,
     "altura": 72,
@@ -150,6 +165,7 @@
     "descripcion": "Un armario espacioso para organizar tu ropa y accesorios."
   },
   {
+    "id": 16,
     "nombre": "Mesa de centro de vidrio",
     "precio": 199.99,
     "altura": 18,
@@ -160,6 +176,7 @@
     "descripcion": "Una mesa de centro elegante con superficie de vidrio."
   },
   {
+    "id": 17,
     "nombre": "Cómoda de 6 cajones",
     "precio": 349.99,
     "altura": 36,
@@ -170,6 +187,7 @@
     "descripcion": "Una cómoda con amplio espacio de almacenamiento."
   },
   {
+    "id": 18,
     "nombre": "Sillón reclinable",
     "precio": 399.99,
     "altura": 42,
@@ -180,6 +198,7 @@
     "descripcion": "Un sillón reclinable cómodo para relajarse después de un largo día."
   },
   {
+    "id": 19,
     "nombre": "Escritorio de madera",
     "precio": 249.99,
     "altura": 30,
@@ -190,46 +209,7 @@
     "descripcion": "Un escritorio de madera resistente para tu estudio u oficina en casa."
   },
   {
-    "nombre": "Mesa de centro de vidrio",
-    "precio": 199.99,
-    "altura": 18,
-    "profundidad": 36,
-    "ancho": 36,
-    "peso": 40,
-    "color": "Transparente",
-    "descripcion": "Una mesa de centro elegante con superficie de vidrio."
-  },
-  {
-    "nombre": "Cómoda de 6 cajones",
-    "precio": 349.99,
-    "altura": 36,
-    "profundidad": 18,
-    "ancho": 48,
-    "peso": 80,
-    "color": "Blanco",
-    "descripcion": "Una cómoda con amplio espacio de almacenamiento."
-  },
-  {
-    "nombre": "Sillón reclinable",
-    "precio": 399.99,
-    "altura": 42,
-    "profundidad": 40,
-    "ancho": 36,
-    "peso": 75,
-    "color": "Marrón",
-    "descripcion": "Un sillón reclinable cómodo para relajarse después de un largo día."
-  },
-  {
-    "nombre": "Escritorio de madera",
-    "precio": 249.99,
-    "altura": 30,
-    "profundidad": 24,
-    "ancho": 48,
-    "peso": 60,
-    "color": "Cerezo",
-    "descripcion": "Un escritorio de madera resistente para tu estudio u oficina en casa."
-  },
-  {
+    "id": 20,
     "nombre": "Mesa de noche",
     "precio": 79.99,
     "altura": 24,
@@ -240,6 +220,7 @@
     "descripcion": "Una mesa de noche compacta con espacio de almacenamiento."
   },
   {
+    "id": 21,
     "nombre": "Sofá de cuero",
     "precio": 799.99,
     "altura": 36,
@@ -250,6 +231,7 @@
     "descripcion": "Un sofá de cuero elegante y cómodo para tu sala de estar."
   },
   {
+    "id": 22,
     "nombre": "Mesa de comedor",
     "precio": 299.99,
     "altura": 30,
@@ -260,6 +242,7 @@
     "descripcion": "Una mesa de comedor espaciosa con capacidad para 6 personas."
   },
   {
+    "id": 23,
     "nombre": "Sofá seccional",
     "precio": 899.99,
     "altura": 38,
@@ -270,6 +253,7 @@
     "descripcion": "Un sofá seccional espacioso y moderno."
   },
   {
+    "id": 24,
     "nombre": "Mesa de escritura",
     "precio": 159.99,
     "altura": 30,
@@ -280,6 +264,7 @@
     "descripcion": "Una mesa de escritura elegante y funcional."
   },
   {
+    "id": 25,
     "nombre": "Silla de comedor",
     "precio": 89.99,
     "altura": 36,
@@ -290,6 +275,7 @@
     "descripcion": "Sillas de comedor modernas y cómodas."
   },
   {
+    "id": 26,
     "nombre": "Estante de libros",
     "precio": 129.99,
     "altura": 72,
@@ -300,6 +286,7 @@
     "descripcion": "Un estante de libros con mucho espacio para tus lecturas."
   },
   {
+    "id": 27,
     "nombre": "Mesa de consola",
     "precio": 199.99,
     "altura": 30,
@@ -310,6 +297,7 @@
     "descripcion": "Una mesa de consola elegante para tu entrada o pasillo."
   },
   {
+    "id": 28,
     "nombre": "Silla de playa plegable",
     "precio": 29.99,
     "altura": 28,
@@ -320,6 +308,7 @@
     "descripcion": "Silla de playa cómoda y fácil de transportar."
   },
   {
+    "id": 29,
     "nombre": "Cómoda de 4 cajones",
     "precio": 279.99,
     "altura": 32,
@@ -330,6 +319,7 @@
     "descripcion": "Una cómoda de estilo clásico con 4 cajones."
   },
   {
+    "id": 30,
     "nombre": "Mesa de noche",
     "precio": 79.99,
     "altura": 24,

@@ -1,0 +1,342 @@
+[
+  {
+    "nombre": "Sofá de cuero",
+    "precio": 799.99,
+    "altura": 36,
+    "profundidad": 40,
+    "ancho": 84,
+    "peso": 100,
+    "color": "Negro",
+    "descripcion": "Un sofá de cuero elegante y cómodo para tu sala de estar."
+  },
+  {
+    "nombre": "Mesa de comedor",
+    "precio": 299.99,
+    "altura": 30,
+    "profundidad": 36,
+    "ancho": 72,
+    "peso": 60,
+    "color": "Marrón",
+    "descripcion": "Una mesa de comedor espaciosa con capacidad para 6 personas."
+  },
+  {
+    "nombre": "Cama King Size",
+    "precio": 699.99,
+    "altura": 48,
+    "profundidad": 80,
+    "ancho": 76,
+    "peso": 150,
+    "color": "Blanco",
+    "descripcion": "Una cama king size con un diseño elegante para un buen descanso."
+  },
+  {
+    "nombre": "Silla de oficina",
+    "precio": 149.99,
+    "altura": 40,
+    "profundidad": 24,
+    "ancho": 22,
+    "peso": 30,
+    "color": "Gris",
+    "descripcion": "Una silla de oficina ergonómica y cómoda para largas horas de trabajo."
+  },
+  {
+    "nombre": "Armario de madera",
+    "precio": 449.99,
+    "altura": 72,
+    "profundidad": 24,
+    "ancho": 36,
+    "peso": 120,
+    "color": "Roble",
+    "descripcion": "Un armario espacioso para organizar tu ropa y accesorios."
+  },
+  {
+    "nombre": "Mesa de centro de vidrio",
+    "precio": 199.99,
+    "altura": 18,
+    "profundidad": 36,
+    "ancho": 36,
+    "peso": 40,
+    "color": "Transparente",
+    "descripcion": "Una mesa de centro elegante con superficie de vidrio."
+  },
+  {
+    "nombre": "Cómoda de 6 cajones",
+    "precio": 349.99,
+    "altura": 36,
+    "profundidad": 18,
+    "ancho": 48,
+    "peso": 80,
+    "color": "Blanco",
+    "descripcion": "Una cómoda con amplio espacio de almacenamiento."
+  },
+  {
+    "nombre": "Sillón reclinable",
+    "precio": 399.99,
+    "altura": 42,
+    "profundidad": 40,
+    "ancho": 36,
+    "peso": 75,
+    "color": "Marrón",
+    "descripcion": "Un sillón reclinable cómodo para relajarse después de un largo día."
+  },
+  {
+    "nombre": "Escritorio de madera",
+    "precio": 249.99,
+    "altura": 30,
+    "profundidad": 24,
+    "ancho": 48,
+    "peso": 60,
+    "color": "Cerezo",
+    "descripcion": "Un escritorio de madera resistente para tu estudio u oficina en casa."
+  },
+  {
+    "nombre": "Mesa de noche",
+    "precio": 79.99,
+    "altura": 24,
+    "profundidad": 18,
+    "ancho": 24,
+    "peso": 25,
+    "color": "Negro",
+    "descripcion": "Una mesa de noche compacta con espacio de almacenamiento."
+  },
+  {
+    "nombre": "Sofá de cuero",
+    "precio": 799.99,
+    "altura": 36,
+    "profundidad": 40,
+    "ancho": 84,
+    "peso": 100,
+    "color": "Negro",
+    "descripcion": "Un sofá de cuero elegante y cómodo para tu sala de estar."
+  },
+  {
+    "nombre": "Mesa de comedor",
+    "precio": 299.99,
+    "altura": 30,
+    "profundidad": 36,
+    "ancho": 72,
+    "peso": 60,
+    "color": "Marrón",
+    "descripcion": "Una mesa de comedor espaciosa con capacidad para 6 personas."
+  },
+  {
+    "nombre": "Cama King Size",
+    "precio": 699.99,
+    "altura": 48,
+    "profundidad": 80,
+    "ancho": 76,
+    "peso": 150,
+    "color": "Blanco",
+    "descripcion": "Una cama king size con un diseño elegante para un buen descanso."
+  },
+  {
+    "nombre": "Silla de oficina",
+    "precio": 149.99,
+    "altura": 40,
+    "profundidad": 24,
+    "ancho": 22,
+    "peso": 30,
+    "color": "Gris",
+    "descripcion": "Una silla de oficina ergonómica y cómoda para largas horas de trabajo."
+  },
+  {
+    "nombre": "Armario de madera",
+    "precio": 449.99,
+    "altura": 72,
+    "profundidad": 24,
+    "ancho": 36,
+    "peso": 120,
+    "color": "Roble",
+    "descripcion": "Un armario espacioso para organizar tu ropa y accesorios."
+  },
+  {
+    "nombre": "Mesa de centro de vidrio",
+    "precio": 199.99,
+    "altura": 18,
+    "profundidad": 36,
+    "ancho": 36,
+    "peso": 40,
+    "color": "Transparente",
+    "descripcion": "Una mesa de centro elegante con superficie de vidrio."
+  },
+  {
+    "nombre": "Cómoda de 6 cajones",
+    "precio": 349.99,
+    "altura": 36,
+    "profundidad": 18,
+    "ancho": 48,
+    "peso": 80,
+    "color": "Blanco",
+    "descripcion": "Una cómoda con amplio espacio de almacenamiento."
+  },
+  {
+    "nombre": "Sillón reclinable",
+    "precio": 399.99,
+    "altura": 42,
+    "profundidad": 40,
+    "ancho": 36,
+    "peso": 75,
+    "color": "Marrón",
+    "descripcion": "Un sillón reclinable cómodo para relajarse después de un largo día."
+  },
+  {
+    "nombre": "Escritorio de madera",
+    "precio": 249.99,
+    "altura": 30,
+    "profundidad": 24,
+    "ancho": 48,
+    "peso": 60,
+    "color": "Cerezo",
+    "descripcion": "Un escritorio de madera resistente para tu estudio u oficina en casa."
+  },
+  {
+    "nombre": "Mesa de centro de vidrio",
+    "precio": 199.99,
+    "altura": 18,
+    "profundidad": 36,
+    "ancho": 36,
+    "peso": 40,
+    "color": "Transparente",
+    "descripcion": "Una mesa de centro elegante con superficie de vidrio."
+  },
+  {
+    "nombre": "Cómoda de 6 cajones",
+    "precio": 349.99,
+    "altura": 36,
+    "profundidad": 18,
+    "ancho": 48,
+    "peso": 80,
+    "color": "Blanco",
+    "descripcion": "Una cómoda con amplio espacio de almacenamiento."
+  },
+  {
+    "nombre": "Sillón reclinable",
+    "precio": 399.99,
+    "altura": 42,
+    "profundidad": 40,
+    "ancho": 36,
+    "peso": 75,
+    "color": "Marrón",
+    "descripcion": "Un sillón reclinable cómodo para relajarse después de un largo día."
+  },
+  {
+    "nombre": "Escritorio de madera",
+    "precio": 249.99,
+    "altura": 30,
+    "profundidad": 24,
+    "ancho": 48,
+    "peso": 60,
+    "color": "Cerezo",
+    "descripcion": "Un escritorio de madera resistente para tu estudio u oficina en casa."
+  },
+  {
+    "nombre": "Mesa de noche",
+    "precio": 79.99,
+    "altura": 24,
+    "profundidad": 18,
+    "ancho": 24,
+    "peso": 25,
+    "color": "Negro",
+    "descripcion": "Una mesa de noche compacta con espacio de almacenamiento."
+  },
+  {
+    "nombre": "Sofá de cuero",
+    "precio": 799.99,
+    "altura": 36,
+    "profundidad": 40,
+    "ancho": 84,
+    "peso": 100,
+    "color": "Negro",
+    "descripcion": "Un sofá de cuero elegante y cómodo para tu sala de estar."
+  },
+  {
+    "nombre": "Mesa de comedor",
+    "precio": 299.99,
+    "altura": 30,
+    "profundidad": 36,
+    "ancho": 72,
+    "peso": 60,
+    "color": "Marrón",
+    "descripcion": "Una mesa de comedor espaciosa con capacidad para 6 personas."
+  },
+  {
+    "nombre": "Sofá seccional",
+    "precio": 899.99,
+    "altura": 38,
+    "profundidad": 42,
+    "ancho": 120,
+    "peso": 150,
+    "color": "Gris",
+    "descripcion": "Un sofá seccional espacioso y moderno."
+  },
+  {
+    "nombre": "Mesa de escritura",
+    "precio": 159.99,
+    "altura": 30,
+    "profundidad": 24,
+    "ancho": 48,
+    "peso": 40,
+    "color": "Blanco",
+    "descripcion": "Una mesa de escritura elegante y funcional."
+  },
+  {
+    "nombre": "Silla de comedor",
+    "precio": 89.99,
+    "altura": 36,
+    "profundidad": 20,
+    "ancho": 18,
+    "peso": 15,
+    "color": "Azul",
+    "descripcion": "Sillas de comedor modernas y cómodas."
+  },
+  {
+    "nombre": "Estante de libros",
+    "precio": 129.99,
+    "altura": 72,
+    "profundidad": 12,
+    "ancho": 36,
+    "peso": 40,
+    "color": "Marrón",
+    "descripcion": "Un estante de libros con mucho espacio para tus lecturas."
+  },
+  {
+    "nombre": "Mesa de consola",
+    "precio": 199.99,
+    "altura": 30,
+    "profundidad": 12,
+    "ancho": 48,
+    "peso": 35,
+    "color": "Negro",
+    "descripcion": "Una mesa de consola elegante para tu entrada o pasillo."
+  },
+  {
+    "nombre": "Silla de playa plegable",
+    "precio": 29.99,
+    "altura": 28,
+    "profundidad": 30,
+    "ancho": 24,
+    "peso": 10,
+    "color": "Azul",
+    "descripcion": "Silla de playa cómoda y fácil de transportar."
+  },
+  {
+    "nombre": "Cómoda de 4 cajones",
+    "precio": 279.99,
+    "altura": 32,
+    "profundidad": 18,
+    "ancho": 42,
+    "peso": 65,
+    "color": "Blanco",
+    "descripcion": "Una cómoda de estilo clásico con 4 cajones."
+  },
+  {
+    "nombre": "Mesa de noche",
+    "precio": 79.99,
+    "altura": 24,
+    "profundidad": 18,
+    "ancho": 24,
+    "peso": 25,
+    "color": "Negro",
+    "descripcion": "Una mesa de noche compacta con espacio de almacenamiento."
+  }
+]

@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    width: calc(33.33% - 20px);
+    box-sizing: border-box;
+    border-radius: 8px; /* Agrega redondez a los elementos */
+    transition: background-color 0.3s, transform 0.3s; /* Transiciones suaves */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+  }
+  
+  .card:hover {
+    background-color: #ffcccc; /* Cambia el color al pasar el mouse (puedes ajustar el color) */
+    transform: scale(1.02); /* Cambia el tamaño al pasar el mouse (opcional) */
+  }

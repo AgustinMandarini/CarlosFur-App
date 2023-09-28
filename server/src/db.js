@@ -2,12 +2,26 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const { DB_CONN } = process.env;
+const {DB_USER, DB_PASSWORD,DB_HOST}=process.env;
 
-const sequelize = new Sequelize(DB_CONN, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+
+const sequelize = new Sequelize(
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/amoblamientos`,
+  {
+    logging: false, // set to console.log to see the raw SQL queries
+    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+  }
+);
+
+// const { DB_CONN } = process.env;
+
+// const sequelize = new Sequelize(DB_CONN, {
+//   logging: false, // set to console.log to see the raw SQL queries
+//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// });
+
+
+
 const basename = path.basename(__filename); // esta linea guarda el nombre del archivo actual
 
 const modelDefiners = [];

@@ -1,9 +1,11 @@
-const mockDatabase = require("../../api/dbProductType.json");
+const {productType} = require("../model/ProductType");
 
-const getProductTypeController = () => {
-  return mockDatabase;
+const findAllTypes = async() => {
+  const allTypesArray=await productType.findAll();
+  return allTypesArray;
 };
 
 module.exports = {
-  getProductTypeController,
+  findAllTypes,
 };
+

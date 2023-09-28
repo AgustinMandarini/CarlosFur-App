@@ -15,6 +15,7 @@ const CardsContainer = ({ currentMuebles }) => {
             />
           </div>
         );
+
       })}
     </div>
   );

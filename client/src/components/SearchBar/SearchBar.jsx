@@ -10,12 +10,12 @@ const SearchBar = () => {
       {location.pathname === "/home" && (
         <div className={style.divSerchBar}>
           <input
-            placeholder="mueble..."
+            placeholder="             mueble..."
             className={style.inputSearch}
             type="search"
           />
           <button type="submit" className={style.addButton}>
-            buscar
+            Buscar
           </button>
         </div>
       )}

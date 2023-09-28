@@ -25,13 +25,12 @@ const postProductController = async ({
   });
 
   // Este codigo asocia un tipo de producto a un producto
-  // Por el momento lo dejaremos comentado
 
-  // newProduct.addProductType(
-  //   await ProductType.findOne({
-  //     where: { name: productType },
-  //   })
-  // );
+  newProduct.addProductType(
+    await ProductType.findOne({
+      where: { name: productType },
+    })
+  );
 
   return newProduct;
 };

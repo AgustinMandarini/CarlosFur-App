@@ -51,7 +51,7 @@ const FormPage = () => {
    
   return (
     <form  onSubmit={submitHandler}  className={style.formContainer}>
-      <div className={style.container}>
+      <div >
         <h1>Nuevo Mueble</h1>
       </div>
       <div className={style.container}>

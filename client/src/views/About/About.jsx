@@ -4,10 +4,10 @@ import style from "./About.module.css";
 const About = () => {
   return (
     <div className={style.cntnAbout}>
-      <p className={style.title}>Quienes Somos</p>
+      <h1>Quienes Somos</h1>
       <div className={style.line}></div>
       <div className={style.divText}>
-        <p className={style.p}>
+        <p>
           ​Te presentamos a Hogar, la cadena de equipamiento y artículos para el
           hogar, pensada para vos y tu familia. Nació a fines de 2004, buscando
           satisfacer las necesidades de las familias que desean amoblar y
@@ -19,7 +19,7 @@ const About = () => {
         <p className={style.pSubtitle}>
           <strong>¿Como comprar?</strong>
         </p>
-        <p className={style.p}>
+        <p>
           ​Te presentamos a Hogar, la cadena de equipamiento y artículos para el
           hogar, pensada para vos y tu familia. Nació a fines de 2004, buscando
           satisfacer las necesidades de las familias que desean amoblar y

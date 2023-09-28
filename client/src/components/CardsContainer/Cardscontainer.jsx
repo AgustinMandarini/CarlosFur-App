@@ -308,7 +308,7 @@ const CardsContainer = () => {
       {muebles.map((m) => {
         return(
         <div  className="card">
-         <Card  id={m.id} nombre={m.nombre}
+         <Card  id={m.id} precio={m.precio} nombre={m.nombre}
         color={m.color} descripcion={m.descripcion} />
         </div>
         )

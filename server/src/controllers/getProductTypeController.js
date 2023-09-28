@@ -1,12 +1,10 @@
-const {productType} = require("../model/ProductType");
+const { ProductType } = require("../db.js");
 
-//  función asincrona que trae todos los tipos de muebles
-const getAllTypes = async () => {
-  allTypesArray= await productType.findAll();
+const findAllTypes = async () => {
+  const allTypesArray = await ProductType.findAll();
   return allTypesArray;
 };
 
 module.exports = {
-  getAllTypes,
+  findAllTypes,
 };
-

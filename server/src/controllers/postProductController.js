@@ -1,5 +1,5 @@
-const { Product } = require("../model/Product");
-const { ProductType } = require("../model/ProductType");
+const { Product } = require("../db");
+const { ProductType } = require("../db");
 
 const postProductController = async ({
   name,
@@ -22,18 +22,17 @@ const postProductController = async ({
     weight,
     color,
     description,
-    productType,
   });
 
-  productType.forEach(async (type) => {
-    newProduct.addProductType(
-      await ProductType.findOne({
-        where: { name: type },
-      })
-    );
-  });
+  // Este codigo asocia un tipo de producto a un producto
+
+  newProduct.addProductType(
+    await ProductType.findOne({
+      where: { name: productType },
+    })
+  );
 
   return newProduct;
 };
 
-module.exports = postProductController;
+module.exports = { postProductController };

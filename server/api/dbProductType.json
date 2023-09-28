@@ -1,16 +1,48 @@
 {
   "types": [
     {
-      "tipo": "Cocina"
+      "name": "Escritorio",
+      "description": "Mueble diseñado para trabajar o estudiar."
     },
     {
-      "tipo": "Electrodomestico"
+      "name": "Silla",
+      "description": "Asiento diseñado para una persona."
     },
     {
-      "tipo": "Living"
+      "name": "Mesa",
+      "description": "Superficie plana sostenida por patas, usada para diversos fines."
     },
     {
-      "tipo": "Jardin"
+      "name": "Cama",
+      "description": "Mueble para descansar o dormir."
+    },
+    {
+      "name": "Armario",
+      "description": "Mueble con compartimentos para guardar ropa y objetos."
+    },
+    {
+      "name": "Estantería",
+      "description": "Estantes para organizar y exhibir libros u objetos."
+    },
+    {
+      "name": "Cómoda",
+      "description": "Mueble con cajones para guardar ropa y accesorios."
+    },
+    {
+      "name": "Repisa",
+      "description": "Estante flotante para exhibir objetos decorativos."
+    },
+    {
+      "name": "Sillón",
+      "description": "Silla cómoda, generalmente más grande y acolchada."
+    },
+    {
+      "name": "Esquinero",
+      "description": "Mueble diseñado para aprovechar esquinas y rincones."
+    },
+    {
+      "name": "Biblioteca",
+      "description": "Mueble para organizar y almacenar libros."
     }
   ]
 }

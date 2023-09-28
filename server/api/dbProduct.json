@@ -1,0 +1,104 @@
+{
+  "muebles": [
+    {
+      "name": "Mesa de comedor",
+      "price": 5000,
+      "height": 75,
+      "depth": 20,
+      "width": 40,
+      "peso": 20,
+      "color": "Blanco",
+      "description": "Es una mesa muy linda y muy bonita"
+    },
+    {
+      "name": "Silla de cocina",
+      "price": 2000,
+      "height": 50,
+      "depth": 10,
+      "width": 30,
+      "peso": 8,
+      "color": "Ocre",
+      "description": "Una fantastica silla para sus cachas"
+    },
+    {
+      "name": "Sofá de cuero",
+      "price": 50000,
+      "height": 60,
+      "depth": 30,
+      "width": 50,
+      "peso": 40,
+      "color": "Marron claro",
+      "description": "Un sillon para netflix, pelis, series, todo lo que quieras"
+    },
+    {
+      "name": "Cama King Size",
+      "price": 100000,
+      "height": 30,
+      "depth": 100,
+      "width": 40,
+      "peso": 200,
+      "color": "Verde fluor",
+      "description": "Esta cama es demasiado grande y probablemente no pase por ninguna puerta"
+    },
+    {
+      "name": "Mesa de centro",
+      "price": 1200,
+      "height": 79,
+      "depth": 22,
+      "width": 20,
+      "peso": 20,
+      "color": "Negro",
+      "description": "Mesa de cristal para que se pueda ver lo que hay debajo"
+    },
+    {
+      "name": "Silla de escritorio",
+      "price": 20000,
+      "height": 35,
+      "depth": 14,
+      "width": 32,
+      "peso": 304,
+      "color": "Fucsia",
+      "description": "Silla ergonomica para mayor confort"
+    },
+    {
+      "name": "Armario de ropero",
+      "price": 200000,
+      "height": 120,
+      "depth": 20,
+      "width": 40,
+      "peso": 20,
+      "color": "Blanco",
+      "description": "Armario increiclemente perfecto"
+    },
+    {
+      "name": "Estanteria",
+      "price": 5000,
+      "height": 70,
+      "depth": 26,
+      "width": 33,
+      "peso": 19,
+      "color": "Gris",
+      "description": "Estanteria para todo tipo de usos, pesos, objetos de otros paises"
+    },
+    {
+      "name": "Cómoda de dormitorio",
+      "price": 200000,
+      "height": 45,
+      "depth": 20,
+      "width": 50,
+      "peso": 50,
+      "color": "Negro",
+      "description": "Para colocar el retrato de la abuela, siempre en la comoda"
+    },
+    {
+      "name": "Silla de jardín",
+      "price": 5000,
+      "height": 30,
+      "depth": 12,
+      "width": 38,
+      "peso": 29,
+      "color": "Rojo",
+      "description": "Sillas de plastico para el jardin de tu casa"
+    }
+  ]
+}

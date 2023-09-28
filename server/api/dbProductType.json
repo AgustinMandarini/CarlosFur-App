@@ -1,0 +1,16 @@
+{
+  "types": [
+    {
+      "tipo": "Cocina"
+    },
+    {
+      "tipo": "Electrodomestico"
+    },
+    {
+      "tipo": "Living"
+    },
+    {
+      "tipo": "Jardin"
+    }
+  ]
+}

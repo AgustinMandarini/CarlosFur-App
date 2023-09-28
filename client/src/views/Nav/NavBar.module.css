@@ -1,0 +1,33 @@
+.navBar {
+  background-color: rgba(117, 80, 54, 0.723);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5em;
+}
+
+.divLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.links {
+  text-decoration: none;
+  padding-right: 2em;
+  color: black;
+}
+.links:hover {
+  color: aliceblue; /* Cambia el color al pasar el mouse (puedes ajustar el color) */
+  border-radius: 2em;
+  transform: scale(1.02); /* Cambia el tamaño al pasar el mouse */
+}
+.logo {
+  display: flex;
+  height: 20px;
+  width: 100px;
+  object-fit: fill;
+  margin-right: 80px;
+}
+
+@media (max-width: 768px) {
+}

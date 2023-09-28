@@ -26,11 +26,11 @@ const postProductController = async ({
 
   // Este codigo asocia un tipo de producto a un producto
 
-  newProduct.addProductType(
-    await ProductType.findOne({
-      where: { name: productType },
-    })
-  );
+  // newProduct.addProductType(
+  //   await ProductType.findOne({
+  //     where: { name: productType },
+  //   })
+  // );
 
   return newProduct;
 };

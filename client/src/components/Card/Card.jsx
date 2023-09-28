@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import style from "./Card.module.css";
 
+
+
 const Card = (props) => {
   return (
     <div className="card-container" key={props.id}>
@@ -15,3 +17,4 @@ const Card = (props) => {
 };
 
 export default Card;
+

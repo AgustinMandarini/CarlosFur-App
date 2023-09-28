@@ -3,12 +3,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 65px;
+  padding-top:1em;
+  margin-top:0em;
+  margin-bottom: 3em;
 }
 .divText {
   margin-top: 30px;
 }
-.title {
+.cntnAbout h1 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +24,7 @@
   border-top: 1px solid black;
   height: 1px;
 }
-.p {
+.divText p {
   display: flex;
   justify-content: center;
   text-align: start;
@@ -39,3 +41,21 @@
   width: 650px;
   margin-bottom: 10px;
 }
+
+ /* Estilos responsive */
+ @media screen and (max-width: 768px) {
+  .cntnAbout h1 {
+    font-size: 2em; /* Reducimos el tamaño del título */
+    margin: 0.5em;
+  }
+  .divText {
+    width: 80%;
+    text-align: center;
+  }
+  .divText p,
+  .pSubtitle {
+    max-width: 100%; /* Ocupa todo el ancho disponible en pantallas más pequeñas */
+  }
+}
+
+

@@ -17,6 +17,6 @@
   }
   
   .card:hover {
-    background-color: #ffcccc; /* Cambia el color al pasar el mouse (puedes ajustar el color) */
+    background-color: rgba(117, 80, 54, 0.445); /* Cambia el color al pasar el mouse (puedes ajustar el color) */
     transform: scale(1.02); /* Cambia el tamaño al pasar el mouse (opcional) */
   }

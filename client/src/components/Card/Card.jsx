@@ -1,9 +1,11 @@
+
 const Card = (props) =>{
   
     return (
         <div className="card-container" key={props.id}>
-            <h1>nombre: {props.nombre}</h1>
-            <p>tipo de maderas: {props.tipo_madera}</p>
+            <h1>{props.nombre}</h1>
+            <p>Descripcion: {props.descripcion}</p>
+            <p>Color: {props.color} </p>
         </div>
     ) 
     }

@@ -1,10 +1,14 @@
-//import Cardscontainer
+import CardsContainer from "../../components/CardsContainer/Cardscontainer";
 import React from "react";
 
 const Home = () => {
-  <div>
-    <h1>Vistaaa home</h1>
-    <p>Donde iría el CardsContainer</p>
-  </div>;
+  return(
+     <div>
+    <h1>Volvieron las Sillas 2x1!</h1>
+    <CardsContainer></CardsContainer>
+  </div>
+  )
 };
+
+
 export default Home;

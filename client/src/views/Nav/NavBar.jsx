@@ -9,25 +9,23 @@ const NavBar = () => {
 
   return (
     <>
-      {location.pathname === "/home" && (
-        <div className={style.navBar}>
-          <div className={style.divLinks}>
-            <p className={style.logo}>LOGO</p>
-            <Link to="/home" className={style.links}>
-              Home
-            </Link>
-            <Link to="/create" className={style.links}>
-              Form
-            </Link>
-            <Link to="/about" className={style.links}>
-              About
-            </Link>
-          </div>
-          <div className={style.searchBar}>
-            <SearchBar />
-          </div>
+      <div className={style.navBar}>
+        <div className={style.divLinks}>
+          <p className={style.logo}>LOGO</p>
+          <Link to="/home" className={style.links}>
+            Home
+          </Link>
+          <Link to="/create" className={style.links}>
+            Form
+          </Link>
+          <Link to="/about" className={style.links}>
+            About
+          </Link>
         </div>
-      )}
+        <div className={style.searchBar}>
+          <SearchBar />
+        </div>
+      </div>
     </>
   );
 };

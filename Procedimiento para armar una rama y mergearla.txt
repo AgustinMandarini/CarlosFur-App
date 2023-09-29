@@ -1,0 +1,29 @@
+Actualizo la rama
+git pull origin develop
+
+Inicio el git flow
+git flow init
+
+Abro la rama
+git flow feature start "nombre_de_la_rama"
+
+Veo en que rama estoy 
+git branch
+
+Si estoy en la rama
+git add .
+git commit -m "comentario"
+git push
+
+luego copio y pego lo que me recomienda, como por ejemplo:
+git push --set-upstream origin feature/EPICA.BackendEscenciales.filtos
+
+me voy al github y hago
+Compare y pull request
+Create pull request (no olvidar comentar)
+
+finalizar la rama con 
+git flow feature finish
+
+sino borrar la rama
+git branch -D feature/EPICA.BackendEscenciales.filtos

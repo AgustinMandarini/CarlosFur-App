@@ -1,4 +1,4 @@
-const { findAllProducts } = require("../controllers/getProductController");
+const { findAllProducts, filterAndSortProducts } = require("../controllers/getProductController");
 
 const getProductHandler = async (req, res) => {
   try {
@@ -10,5 +10,19 @@ const getProductHandler = async (req, res) => {
   }
 };
 
-module.exports = { getProductHandler };
+
+const findFilteredAndSortedProducts = async (name, typeName, orderBy) => {
+  try {
+    const products = await filterAndSortProducts(name, typeName, orderBy);
+    return products;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+
+
+
+
+module.exports = { getProductHandler,findFilteredAndSortedProducts };
 

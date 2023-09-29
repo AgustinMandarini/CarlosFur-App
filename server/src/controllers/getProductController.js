@@ -1,4 +1,4 @@
-const { Product } = require("../db.js");
+const { Product, ProductType } = require("../db.js");
 const { Op } = require("sequelize");
 
 const findAllProducts = async (name) => {
@@ -12,12 +12,37 @@ const findAllProducts = async (name) => {
     });
     return productsByName;
   } else {
-   
     const allProductsArray = await Product.findAll();
     return allProductsArray;
-
   }
 };
 
-module.exports = { findAllProducts };
+const filterAndSortProducts = async (name, orderBy, orderDirection) => {
 
+  console.log("llegue aqui");
+  const query = {
+    where: {},
+  };
+
+  // Filtrar por nombre si se proporciona
+  if (name) {
+    query.where.name = {
+      [Op.iLike]: `%${name}%`,
+    };
+  }
+
+  // Ordenar por precio si orderBy es 'price'
+  if (orderBy === 'price') {
+    query.order = [['price', orderDirection === 'asc' ? 'ASC' : 'DESC']];
+  }
+
+  // Imprimir el contenido de query en la consola
+  console.log('Query:', query);
+
+  // Obtener productos según la consulta
+  const products = await Product.findAll(query);
+
+  return products;
+};
+
+module.exports = { findAllProducts, filterAndSortProducts };

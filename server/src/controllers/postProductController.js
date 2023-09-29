@@ -1,5 +1,5 @@
-const { Product } = require("../db");
-const { ProductType } = require("../db");
+const { Product, ProductType } = require("../db");
+const { findAllTypes } = require("./getProductTypeController");
 
 const postProductController = async ({
   name,
@@ -25,13 +25,16 @@ const postProductController = async ({
   });
 
   // Este codigo asocia un tipo de producto a un producto
-
-  newProduct.addProductType(
-    await ProductType.findOne({
-      where: { name: productType },
-    })
-  );
-
+  // newProduct.addProductType(
+  //   await ProductType.findOne({
+  //     where: { name: productType },
+  //   })
+  // );
+  await findAllTypes();
+  const type = await ProductType.findOne({
+    where: { name: productType },
+  });
+  await newProduct.setProductType(type);
   return newProduct;
 };
 

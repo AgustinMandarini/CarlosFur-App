@@ -40,8 +40,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Product, ProductType } = sequelize.models;
 
 // Aca vendrian las relaciones
-Product.belongsTo(ProductType);
-ProductType.hasMany(Product);
+Product.belongsTo(ProductType, { foreignKey: 'productTypeId' });
+ProductType.hasMany(Product, { foreignKey: 'productTypeId' });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

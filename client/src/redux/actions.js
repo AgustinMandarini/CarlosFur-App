@@ -14,7 +14,6 @@ export const getMuebles = () => {
   return async function (dispatch) {
     const apiData = await axios.get("http://localhost:3001/product");
     const muebles = apiData.data;
-
     return dispatch({
       type: GET_MUEBLES,
       payload: muebles,

@@ -9,7 +9,8 @@ import {
 
 const initialState = {
   muebles: [],
-  detail: {},
+  allMuebles: [],
+  detail: [],
   productType: [],
   sort: "notSorted",
 };
@@ -19,6 +20,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         muebles: action.payload,
+        allMuebles: action.payload,
       };
     case GET_DETAIL:
       return {

@@ -11,9 +11,9 @@ const Detail = () => {
   const dispatch = useDispatch();
   const stateDetail = useSelector((state) => state.detail);
 
-  useEffect(() => {
-    dispatch(getDetail(id));
-  }, [dispatch, id]);
+  // useEffect(() => {
+  //   dispatch(getDetail(id));
+  // }, [dispatch, id]);
 
   return (
     <div className={style.cntnDetail}>

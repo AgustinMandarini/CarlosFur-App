@@ -3,7 +3,7 @@ import style from "./Pagination.module.css";
 import { useEffect } from "react";
 import atras from "./../../imagenes/atras.png"
 import siguiente from "./../../imagenes/siguiente.png"
-
+//ss
 const Pagination = ({ mueblesPerPage, totalMuebles, paginate, currentPage }) => {
   const pageNumbers = [];
   const [selectedPage, setSelectedPage] = useState(1);

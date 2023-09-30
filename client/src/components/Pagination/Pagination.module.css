@@ -33,6 +33,7 @@
 .pagination button:hover {
   color: aliceblue;
   transform: scale(1.02);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
 }
 
 .pagination button.active {

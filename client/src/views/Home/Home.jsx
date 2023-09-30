@@ -8,10 +8,6 @@ import {
   // getProductType,
   // getMuebleName,
   setProductsCopy,
-<<<<<<< HEAD
-  getMuebleName,
-=======
->>>>>>> 60dc237c39e1a552f3507edc3e889f6a25a09374
 } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 

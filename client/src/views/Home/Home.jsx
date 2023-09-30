@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
 import Pagination from "../../components/Pagination/Pagination";
 // import mueblesData from "../../muebles.json";
+
 import {
-  getMuebles,
-  getProductType,
+  // getMuebles,
+  // getProductType,
+  // getMuebleName,
   setProductsCopy,
+<<<<<<< HEAD
   getMuebleName,
+=======
+>>>>>>> 60dc237c39e1a552f3507edc3e889f6a25a09374
 } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -24,8 +29,7 @@ const Home = () => {
   const sort = useSelector((state) => state.sort);
 
   // Paginado
-  const [muebles, setMuebles] = useState(allMuebles);
-  console.log(muebles);
+  const [muebles, setMuebles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [mueblesPerPage] = useState(5);
   const indexOfLastRecipe = currentPage * mueblesPerPage;
@@ -33,6 +37,10 @@ const Home = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const currentMuebles = muebles.slice(indexOfFirstRecipe, indexOfLastRecipe);
+
+  useEffect(() => {
+    setMuebles(globalProducts);
+  }, [globalProducts]);
 
   //Combinación de ordenamientos y filtros
   useEffect(() => {

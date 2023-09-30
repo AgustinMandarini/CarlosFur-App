@@ -40,7 +40,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_MUEBLE_NAME:
       return {
         ...state,
-        muebles: action.payload,
+        allMuebles: action.payload,
       };
 
     default:

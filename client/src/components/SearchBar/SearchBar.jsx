@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import style from "./SearchBar.module.css";
 import { useLocation } from "react-router-dom";
 import { getMuebleName } from "../../redux/actions";
@@ -6,35 +6,37 @@ import { useDispatch } from "react-redux";
 
 const SearchBar = () => {
   const location = useLocation();
-  const [characterName, setCharacterName] = useState("");
+  const [mueble, setNameMueble] = useState("");
   const dispatch = useDispatch();
 
-  const stateReset = () => {
-    setCharacterName("");
-  };
-  console.log(characterName);
-  const handleChange = (e) => {
-    setCharacterName(e.target.value);
+
+  const handleOnClick = (e) => {
+    e.preventDefault();
+    console.log("Button clicked")
+    dispatch(getMuebleName(mueble));
+    setNameMueble("")
   };
 
-  const handleOnClick = () => {
-    dispatch(getMuebleName(characterName));
-    stateReset();
-  };
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    setNameMueble(e.target.value)
+  }
+  // useEffect(() => {
+  //   dispatch(getMuebleName(mueble))
+  // }, []);
+
+
   return (
     <div>
       {location.pathname === "/home" && (
         <div className={style.divSerchBar}>
           <input
-            placeholder="             mueble..."
-            className={style.inputSearch}
             type="search"
-            onChange={handleChange}
-            onClick={handleOnClick}
+            placeholder="buscar mueble..."
+            value={mueble}
+            onChange={handleSubmit}
           />
-          <button type="submit" className={style.addButton}>
-            Buscar
-          </button>
+             <button type="submit" className={style.addButton} onClick={handleOnClick}> Buscar</button>
         </div>
       )}
     </div>

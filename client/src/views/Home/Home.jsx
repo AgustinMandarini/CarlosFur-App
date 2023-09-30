@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
 import Pagination from "../../components/Pagination/Pagination";
 // import mueblesData from "../../muebles.json";
-import { getMuebles, getProductType } from "../../redux/actions";
+import { getMuebles, getProductType, getMuebleName } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {

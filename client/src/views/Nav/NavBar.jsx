@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import style from "./NavBar.module.css";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import ToolBar from "../../components/ToolBar/ToolBar";
 
 const NavBar = () => {
   const [navResponsive, setNavResponsive] = useState(false);
@@ -59,6 +60,9 @@ const NavBar = () => {
             <SearchBar />
           </div>
         </Navbar.Collapse>
+        <div>
+          <ToolBar />
+        </div>
       </Container>
     </Navbar>
   );

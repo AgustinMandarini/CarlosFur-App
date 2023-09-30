@@ -28,6 +28,7 @@ const Home = () => {
         mueblesPerPage={mueblesPerPage}
         totalMuebles={muebles.length}
         paginate={paginate}
+        currentPage={currentPage}
       />
       <CardsContainer currentMuebles={currentMuebles}></CardsContainer>
     </div>

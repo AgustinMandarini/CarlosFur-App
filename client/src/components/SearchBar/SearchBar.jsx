@@ -8,6 +8,10 @@ const SearchBar = () => {
   const location = useLocation();
   const [characterName, setCharacterName] = useState("");
   const dispatch = useDispatch();
+
+  const stateReset = () => {
+    setCharacterName("");
+  };
   console.log(characterName);
   const handleChange = (e) => {
     setCharacterName(e.target.value);
@@ -15,6 +19,7 @@ const SearchBar = () => {
 
   const handleOnClick = () => {
     dispatch(getMuebleName(characterName));
+    stateReset();
   };
   return (
     <div>

@@ -66,6 +66,16 @@
     transform: scale(1.02); /* Cambia el tamaño al pasar el mouse */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
   }
+  .botonSubmitOff{
+    background-color: rgba(0, 0, 0, 0.598);
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 1em auto; /* Centra el botón en pantallas pequeñas */
+    display: block;
+  }
   
 
   /* Estilos responsive */

@@ -1,77 +1,70 @@
 import { useState } from "react";
-import style from "./Form.module.css"
-import validation from "./validation";
 import { useDispatch, useSelector } from "react-redux";
 import { postMueble } from "../../redux/actions";
-
-//   "id": 3,
-//   "name": "Mesa de comedoresss",
-//   "price": 5000,
-//   "height": 75,
-//   "depth": 20,
-//   "width": 40,
-//   "weight": 20,
-//   "color": "Blanco",
-//   "description": "Es una mesa muy linda y muy bonita",
-//   "productType": {
-//     "name": "mesas"}
+import style from "./Form.module.css";
+import validation from "./validation";
 
 const FormPage = () => {
   const stateProductType = useSelector((state) => state.productType);
-  console.log(stateProductType,"pepe");
-  
   const dispatch = useDispatch();
-    const [form, setForm] = useState({
-        name:"",
-        price:"",
-        height:"",
-        depth:"",
-        width:"",
-        weight:"",
-        color:"",
-        description:"",
-        productType:""
-    })
-    const [errors, setErrors] = useState({
-        name:"",
-        price:"",
-        height:"",
-        depth:"",
-        width:"",
-        weight:"",
-        color:"",
-        description:"",
-        productType:""
-    })
-    console.log(form.productType);
+  const [form, setForm] = useState({
+    name: "",
+    price: "",
+    height: "",
+    depth: "",
+    width: "",
+    weight: "",
+    color: "",
+    description: "",
+    productType: "",
+  });
+  const [errors, setErrors] = useState({
+    name: "",
+    price: "",
+    height: "",
+    depth: "",
+    width: "",
+    weight: "",
+    color: "",
+    description: "",
+    productType: "",
+  });
 
-    const changeHandler = (event) => {
-        const property = event.target.name;
-        let value = event.target.value;
+  const changeHandler = (event) => {
+    const property = event.target.name;
+    let value = event.target.value;
 
-        setErrors(validation({ ...form, [property]: value }));
-        setForm({...form, [property]: value})
-    }
+    setErrors(validation({ ...form, [property]: value }));
+    setForm({ ...form, [property]: value });
+  };
 
-    const submitHandler = (event) => {
-        event.preventDefault();
-        if(errors === true) dispatch(postMueble(form));//si errors no tiene errores dispatcha createMueble (crea nuevo mueble en la BDD)
-        else alert("No se pudo crear, por favor complete todo el formulario");
-    setForm({  name:"",
-    price:"",
-    height:"",
-    depth:"",
-    width:"",
-    weight:"",
-    color:"",
-    description:"",
-    productType:""})
-   
-    }
+  const submitHandler = (event) => {
+    event.preventDefault();
+    if (errors === true) {
+      dispatch(postMueble(form)); //si errors no tiene errores dispatcha createMueble (crea nuevo mueble en la BDD)
+    } else alert("No se pudo crear, por favor complete todo el formulario");
+    setForm({
+      name: "",
+      price: "",
+      height: "",
+      depth: "",
+      width: "",
+      weight: "",
+      color: "",
+      description: "",
+      productType: "",
+    });
+  };
+
+  const handleSelectCountries = (event) => {
+    const property = event.target.name;
+    let value = event.target.value;
+    setForm({ ...form, [property]: value });
+  };
 
   return (
-    <form  onSubmit={submitHandler}  className={style.formContainer}>
-      <div >
+    <form onSubmit={submitHandler} className={style.formContainer}>
+      <div>
         <h1>Nuevo Mueble</h1>
       </div>
       <div className={style.container}>
@@ -156,29 +149,32 @@ const FormPage = () => {
       </div>
 
       <div className={style.container}>
-      <label>
-          Selecciona el tipo de Producto:
-        </label>
-        <select  onChange={changeHandler} value={form.productType}>
-        {stateProductType.map((tipo)=> {
-          return (
-            <option
-              key={tipo.id}
-              value={tipo.id}
-              name={tipo.name}
-             
-            >
-              {tipo.name}
-            </option>
-          );
-        })}
+        <label name="productType">Selecciona el tipo de Producto:</label>
+        <select
+          onChange={handleSelectCountries}
+          value={form.productType}
+          name="productType"
+        >
+          {stateProductType &&
+            stateProductType.map((tipo, index) => {
+              return (
+                <option key={index} value={tipo.id} name={tipo.name}>
+                  {tipo.name}
+                </option>
+              );
+            })}
         </select>
         {errors.productType ? <span>{errors.productType}</span> : null}
       </div>
-
-      <button type="submit" className={style.botonSubmit}>
-        Enviar
-      </button>
+      {Object.values(errors).every((error) => error === "") ? (
+        <button type="submit" className={style.botonSubmit}>
+          Enviar
+        </button>
+      ) : (
+        <button type="submit" className={style.botonSubmitOff}>
+          Enviar
+        </button>
+      )}
     </form>
   );
 };

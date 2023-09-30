@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postMueble } from "../../redux/actions";
+import ImageUpload from "../../services/Cloudinary/index";
 import style from "./Form.module.css";
 import validation from "./validation";
 
 const FormPage = () => {
+  const imageURL = useSelector((state) => state.imageURL);
   const stateProductType = useSelector((state) => state.productType);
   const dispatch = useDispatch();
   const [form, setForm] = useState({
@@ -17,6 +19,7 @@ const FormPage = () => {
     color: "",
     description: "",
     productType: "",
+    imageURL: "",
   });
   const [errors, setErrors] = useState({
     name: "",
@@ -40,6 +43,7 @@ const FormPage = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+
     if (errors === true) {
       dispatch(postMueble(form)); //si errors no tiene errores dispatcha createMueble (crea nuevo mueble en la BDD)
     } else alert("No se pudo crear, por favor complete todo el formulario");
@@ -53,6 +57,7 @@ const FormPage = () => {
       color: "",
       description: "",
       productType: "",
+      imageURL: imageURL,
     });
   };
 
@@ -166,6 +171,7 @@ const FormPage = () => {
         </select>
         {errors.productType ? <span>{errors.productType}</span> : null}
       </div>
+      <ImageUpload />
       {Object.values(errors).every((error) => error === "") ? (
         <button type="submit" className={style.botonSubmit}>
           Enviar

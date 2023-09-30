@@ -5,6 +5,8 @@ import {
   GET_PRODUCT_TYPE,
   GET_MUEBLE_NAME,
   SET_IMAGE_URL,
+  SET_SORT,
+  SET_PRODUCTS_COPY,
 } from "./types";
 
 import axios from "axios";
@@ -14,7 +16,6 @@ export const getMuebles = () => {
   return async function (dispatch) {
     const apiData = await axios.get("http://localhost:3001/product");
     const muebles = apiData.data;
-
     return dispatch({
       type: GET_MUEBLES,
       payload: muebles,
@@ -100,4 +101,10 @@ export const getMuebleName = (name) => {
   };
 };
 
-// export { getMuebles, getDetail}
+export const setSort = (payload) => {
+  return { type: SET_SORT, payload };
+};
+
+export const setProductsCopy = (payload) => {
+  return { type: SET_PRODUCTS_COPY, payload };
+};

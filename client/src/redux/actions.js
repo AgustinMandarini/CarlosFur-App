@@ -1,5 +1,10 @@
-
-import { GET_MUEBLES, GET_DETAIL, POST_MUEBLES, GET_PRODUCT_TYPE, GET_MUEBLE_NAME } from "./types";
+import {
+  GET_MUEBLES,
+  GET_DETAIL,
+  POST_MUEBLES,
+  GET_PRODUCT_TYPE,
+  GET_MUEBLE_NAME,
+} from "./types";
 
 import axios from "axios";
 import mueblesData from "../muebles.json";
@@ -8,7 +13,6 @@ export const getMuebles = () => {
   return async function (dispatch) {
     const apiData = await axios.get("http://localhost:3001/product");
     const muebles = apiData.data;
-    console.log(muebles, "aca");
 
     return dispatch({
       type: GET_MUEBLES,
@@ -37,7 +41,6 @@ export const getDetail = (id) => {
 //   };
 // };
 
-
 export const postMueble = (payload) => {
   return async (dispatch) => {
     try {
@@ -62,15 +65,15 @@ export const getProductType = () => {
       const response = await axios.get("http://localhost:3001/productType");
       // console.log(response.data);
       const productType = response.data;
-       return dispatch({
+      return dispatch({
         type: GET_PRODUCT_TYPE,
         payload: productType,
       });
     } catch (error) {
       alert("No se encontro un tipo de producto");
     }
-  }
-}
+  };
+};
 
 export const getMuebleName = (name) => {
   return async function (dispatch) {
@@ -84,8 +87,7 @@ export const getMuebleName = (name) => {
       type: GET_MUEBLE_NAME,
       payload: nameid,
     });
-
   };
 };
-  
+
 // export { getMuebles, getDetail}

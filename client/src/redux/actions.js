@@ -1,4 +1,4 @@
-import { GET_MUEBLES, GET_DETAIL } from "./types";
+import { GET_MUEBLES, GET_DETAIL, SET_IMAGE_URL } from "./types";
 import axios from "axios";
 import mueblesData from "../muebles.json";
 
@@ -26,6 +26,13 @@ export const getDetail = (id) => {
   return {
     type: GET_DETAIL,
     payload: mueblesData.find((producto) => producto.id === parseInt(id)), // esta es la provisoria
+  };
+};
+
+export const setImageURL = (imageURL) => {
+  return {
+    type: SET_IMAGE_URL,
+    payload: imageURL,
   };
 };
 

@@ -1,8 +1,9 @@
-import { GET_MUEBLES, GET_DETAIL } from "./types";
+import { GET_MUEBLES, GET_DETAIL, SET_IMAGE_URL } from "./types";
 
 const initialState = {
   muebles: [],
   detail: {},
+  imageURL: null,
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -15,6 +16,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         detail: action.payload,
+      };
+    case SET_IMAGE_URL:
+      return {
+        ...state,
+        imageURL: action.payload,
       };
     default:
       return { ...state };

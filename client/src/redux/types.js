@@ -1,7 +1,9 @@
 const GET_MUEBLES = "GET_MUEBLES";
 const GET_DETAIL = "GET_DETAIL";
+const SET_IMAGE_URL = "SET_IMAGE_URL";
 
 module.exports = {
   GET_MUEBLES,
   GET_DETAIL,
+  SET_IMAGE_URL,
 };

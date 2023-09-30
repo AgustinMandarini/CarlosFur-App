@@ -1,57 +1,62 @@
 import { useState } from "react";
-import style from "./Form.module.css"
+import { useSelector } from "react-redux";
+import style from "./Form.module.css";
 import validation from "./validation";
+import ImageUpload from "../../services/Cloudinary/index";
 // import {useDispatch} from "react-redux"
 
 const FormPage = () => {
-    const [form, setForm] = useState({
-        nombre:"",
-        precio:"",
-        altura:"",
-        profundidad:"",
-        ancho:"",
-        peso:"",
-        color:"",
-        descripcion:""
-    })
-    const [errors, setErrors] = useState({
-        nombre:"",
-        precio:"",
-        altura:"",
-        profundidad:"",
-        ancho:"",
-        peso:"",
-        color:"",
-        descripcion:""
-    })
+  const imageURL = useSelector((state) => state.imageURL);
+  const [form, setForm] = useState({
+    nombre: "",
+    precio: "",
+    altura: "",
+    profundidad: "",
+    ancho: "",
+    peso: "",
+    color: "",
+    descripcion: "",
+    imageURL: "",
+  });
+  const [errors, setErrors] = useState({
+    nombre: "",
+    precio: "",
+    altura: "",
+    profundidad: "",
+    ancho: "",
+    peso: "",
+    color: "",
+    descripcion: "",
+  });
 
-    const changeHandler = (event) => {
-        const property = event.target.name;
-        let value = event.target.value;
+  const changeHandler = (event) => {
+    const property = event.target.name;
+    let value = event.target.value;
 
-        setErrors(validation({ ...form, [property]: value }));
-        setForm({...form, [property]: value})
-    }
+    setErrors(validation({ ...form, [property]: value }));
+    setForm({ ...form, [property]: value });
+  };
 
-    const submitHandler = (event) => {
-        event.preventDefault();
-        // if(errors === true) dispatch(createMueble(form));//si errors no tiene errores dispatcha createMueble (crea nuevo mueble en la BDD)
-        // else alert("No se pudo crear, por favor complete todo el formulario");
-    setForm({ nombre:"",
-    precio:"",
-    altura:"",
-    profundidad:"",
-    ancho:"",
-    peso:"",
-    color:"",
-    descripcion:""})
-   
-    }
+  const submitHandler = (event) => {
+    event.preventDefault();
+    // if(errors === true) dispatch(createMueble(form));//si errors no tiene errores dispatcha createMueble (crea nuevo mueble en la BDD)
+    // else alert("No se pudo crear, por favor complete todo el formulario");
+    setForm({
+      nombre: "",
+      precio: "",
+      altura: "",
+      profundidad: "",
+      ancho: "",
+      peso: "",
+      color: "",
+      descripcion: "",
+      imageURL: imageURL,
+    });
+  };
 
-   
   return (
-    <form  onSubmit={submitHandler}  className={style.formContainer}>
-      <div >
+    <form onSubmit={submitHandler} className={style.formContainer}>
+      <div>
         <h1>Nuevo Mueble</h1>
       </div>
       <div className={style.container}>
@@ -134,6 +139,7 @@ const FormPage = () => {
         />
         {errors.descripcion ? <span>{errors.descripcion}</span> : null}
       </div>
+      <ImageUpload />
       <button type="submit" className={style.botonSubmit}>
         Enviar
       </button>

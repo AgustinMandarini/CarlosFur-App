@@ -1,5 +1,5 @@
 
-import { GET_MUEBLES, GET_DETAIL, POST_MUEBLES, GET_PRODUCTTYPE, GET_MUEBLE_NAME } from "./types";
+import { GET_MUEBLES, GET_DETAIL, POST_MUEBLES, GET_PRODUCT_TYPE, GET_MUEBLE_NAME } from "./types";
 
 import axios from "axios";
 import mueblesData from "../muebles.json";
@@ -62,13 +62,15 @@ export const getProductType = () => {
       const response = await axios.get("http://localhost:3001/productType");
       // console.log(response.data);
       const productType = response.data;
-      return dispatch({
-        type: GET_PRODUCTTYPE,
+       return dispatch({
+        type: GET_PRODUCT_TYPE,
         payload: productType,
       });
     } catch (error) {
-      alert(`No se pudo crear`);
+      alert("No se encontro un tipo de producto");
     }
+  }
+}
 
 export const getMuebleName = (name) => {
   return async function (dispatch) {
@@ -85,4 +87,5 @@ export const getMuebleName = (name) => {
 
   };
 };
-// export { getMuebles, getDetail };
+  
+// export { getMuebles, getDetail}

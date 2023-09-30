@@ -18,8 +18,9 @@ import { postMueble } from "../../redux/actions";
 
 const FormPage = () => {
   const stateProductType = useSelector((state) => state.productType);
-  console.log(stateProductType);
-const dispatch = useDispatch();
+  console.log(stateProductType,"pepe");
+  
+  const dispatch = useDispatch();
     const [form, setForm] = useState({
         name:"",
         price:"",
@@ -42,6 +43,7 @@ const dispatch = useDispatch();
         description:"",
         productType:""
     })
+    console.log(form.productType);
 
     const changeHandler = (event) => {
         const property = event.target.name;
@@ -67,7 +69,6 @@ const dispatch = useDispatch();
    
     }
 
-   
   return (
     <form  onSubmit={submitHandler}  className={style.formContainer}>
       <div >
@@ -153,16 +154,28 @@ const dispatch = useDispatch();
         />
         {errors.description ? <span>{errors.description}</span> : null}
       </div>
+
       <div className={style.container}>
-        <label>Tipo de Producto:</label>
-        <input
-          type="text"
-          value={form.productType}
-          onChange={changeHandler}
-          name="productType"
-        />
+      <label>
+          Selecciona el tipo de Producto:
+        </label>
+        <select  onChange={changeHandler} value={form.productType}>
+        {stateProductType.map((tipo)=> {
+          return (
+            <option
+              key={tipo.id}
+              value={tipo.id}
+              name={tipo.name}
+             
+            >
+              {tipo.name}
+            </option>
+          );
+        })}
+        </select>
         {errors.productType ? <span>{errors.productType}</span> : null}
       </div>
+
       <button type="submit" className={style.botonSubmit}>
         Enviar
       </button>

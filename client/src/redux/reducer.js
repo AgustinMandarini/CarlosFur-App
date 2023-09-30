@@ -1,5 +1,5 @@
 
-import { GET_MUEBLES, GET_DETAIL, POST_MUEBLES, GET_PRODUCTTYPE, GET_MUEBLE_NAME } from "./types";
+import { GET_MUEBLES, GET_DETAIL, POST_MUEBLES, GET_PRODUCT_TYPE, GET_MUEBLE_NAME } from "./types";
 
 const initialState = {
   muebles: [],
@@ -24,7 +24,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         muebles: action.payload
       }
-      case GET_PRODUCTTYPE:
+      case GET_PRODUCT_TYPE:
         return {
           ...state,
           productType: action.payload

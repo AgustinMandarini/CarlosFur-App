@@ -6,6 +6,7 @@ import Form from "./views/Form/Form";
 import Home from "./views/Home/Home";
 import LandingPage from "./views/LandingPage/LandingPage";
 import NavBar from "./views/Nav/NavBar";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const location = useLocation();

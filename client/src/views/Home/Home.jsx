@@ -6,7 +6,9 @@ import {
   getMuebles,
   getProductType,
   setProductsCopy,
+  getMuebleName
 } from "../../redux/actions";
+import { getMuebles, getProductType, getMuebleName } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {

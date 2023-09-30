@@ -6,7 +6,7 @@ import style from "./Card.module.css";
 
 const Card = (props) => {
   return (
-    <div className="card-container" key={props.id}>
+    <div className={style.container} key={props.id}>
       <Link to={`/detail/${props.id}`} className={style.nameCard}>
         <h1>{props.nombre}</h1>
       </Link>

@@ -10,6 +10,7 @@ const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const stateDetail = useSelector((state) => state.detail);
+
   useEffect(() => {
     dispatch(getDetail(id));
   }, [dispatch, id]);

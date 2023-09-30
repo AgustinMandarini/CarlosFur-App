@@ -1,29 +1,49 @@
 import { useState } from "react";
 import style from "./Form.module.css"
 import validation from "./validation";
-// import {useDispatch} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
+import { postMueble } from "../../redux/actions";
+
+//   "id": 3,
+//   "name": "Mesa de comedoresss",
+//   "price": 5000,
+//   "height": 75,
+//   "depth": 20,
+//   "width": 40,
+//   "weight": 20,
+//   "color": "Blanco",
+//   "description": "Es una mesa muy linda y muy bonita",
+//   "productType": {
+//     "name": "mesas"}
 
 const FormPage = () => {
+  const stateProductType = useSelector((state) => state.productType);
+  console.log(stateProductType,"pepe");
+  
+  const dispatch = useDispatch();
     const [form, setForm] = useState({
-        nombre:"",
-        precio:"",
-        altura:"",
-        profundidad:"",
-        ancho:"",
-        peso:"",
+        name:"",
+        price:"",
+        height:"",
+        depth:"",
+        width:"",
+        weight:"",
         color:"",
-        descripcion:""
+        description:"",
+        productType:""
     })
     const [errors, setErrors] = useState({
-        nombre:"",
-        precio:"",
-        altura:"",
-        profundidad:"",
-        ancho:"",
-        peso:"",
+        name:"",
+        price:"",
+        height:"",
+        depth:"",
+        width:"",
+        weight:"",
         color:"",
-        descripcion:""
+        description:"",
+        productType:""
     })
+    console.log(form.productType);
 
     const changeHandler = (event) => {
         const property = event.target.name;
@@ -35,20 +55,20 @@ const FormPage = () => {
 
     const submitHandler = (event) => {
         event.preventDefault();
-        // if(errors === true) dispatch(createMueble(form));//si errors no tiene errores dispatcha createMueble (crea nuevo mueble en la BDD)
-        // else alert("No se pudo crear, por favor complete todo el formulario");
-    setForm({ nombre:"",
-    precio:"",
-    altura:"",
-    profundidad:"",
-    ancho:"",
-    peso:"",
+        if(errors === true) dispatch(postMueble(form));//si errors no tiene errores dispatcha createMueble (crea nuevo mueble en la BDD)
+        else alert("No se pudo crear, por favor complete todo el formulario");
+    setForm({  name:"",
+    price:"",
+    height:"",
+    depth:"",
+    width:"",
+    weight:"",
     color:"",
-    descripcion:""})
+    description:"",
+    productType:""})
    
     }
 
-   
   return (
     <form  onSubmit={submitHandler}  className={style.formContainer}>
       <div >
@@ -58,61 +78,61 @@ const FormPage = () => {
         <label>Nombre:</label>
         <input
           type="text"
-          value={form.nombre}
+          value={form.name}
           onChange={changeHandler}
-          name="nombre"
+          name="name"
         />
-        {errors.nombre ? <span>{errors.nombre}</span> : null}
+        {errors.name ? <span>{errors.name}</span> : null}
       </div>
       <div className={style.container}>
         <label>Precio:</label>
         <input
           type="number"
-          value={form.precio}
+          value={form.price}
           onChange={changeHandler}
-          name="precio"
+          name="price"
         />
-        {errors.precio ? <span>{errors.precio}</span> : null}
+        {errors.price ? <span>{errors.price}</span> : null}
       </div>
       <div className={style.container}>
         <label>Altura:</label>
         <input
           type="number"
-          value={form.altura}
+          value={form.height}
           onChange={changeHandler}
-          name="altura"
+          name="height"
         />
-        {errors.altura ? <span>{errors.altura}</span> : null}
+        {errors.height ? <span>{errors.height}</span> : null}
       </div>
       <div className={style.container}>
         <label>Profundidad:</label>
         <input
           type="number"
-          value={form.profundidad}
+          value={form.depth}
           onChange={changeHandler}
-          name="profundidad"
+          name="depth"
         />
-        {errors.profundidad ? <span>{errors.profundidad}</span> : null}
+        {errors.depth ? <span>{errors.depth}</span> : null}
       </div>
       <div className={style.container}>
         <label>Ancho:</label>
         <input
           type="number"
-          value={form.ancho}
+          value={form.width}
           onChange={changeHandler}
-          name="ancho"
+          name="width"
         />
-        {errors.ancho ? <span>{errors.ancho}</span> : null}
+        {errors.width ? <span>{errors.width}</span> : null}
       </div>
       <div className={style.container}>
         <label>Peso:</label>
         <input
           type="number"
-          value={form.peso}
+          value={form.weight}
           onChange={changeHandler}
-          name="peso"
+          name="weight"
         />
-        {errors.peso ? <span>{errors.peso}</span> : null}
+        {errors.weight ? <span>{errors.weight}</span> : null}
       </div>
       <div className={style.container}>
         <label>Color:</label>
@@ -128,12 +148,34 @@ const FormPage = () => {
         <label>Descripcion:</label>
         <input
           type="text"
-          value={form.descripcion}
+          value={form.description}
           onChange={changeHandler}
-          name="descripcion"
+          name="description"
         />
-        {errors.descripcion ? <span>{errors.descripcion}</span> : null}
+        {errors.description ? <span>{errors.description}</span> : null}
       </div>
+
+      <div className={style.container}>
+      <label>
+          Selecciona el tipo de Producto:
+        </label>
+        <select  onChange={changeHandler} value={form.productType}>
+        {stateProductType.map((tipo)=> {
+          return (
+            <option
+              key={tipo.id}
+              value={tipo.id}
+              name={tipo.name}
+             
+            >
+              {tipo.name}
+            </option>
+          );
+        })}
+        </select>
+        {errors.productType ? <span>{errors.productType}</span> : null}
+      </div>
+
       <button type="submit" className={style.botonSubmit}>
         Enviar
       </button>

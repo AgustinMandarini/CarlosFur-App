@@ -1,7 +1,9 @@
 const GET_MUEBLES = "GET_MUEBLES";
 const GET_DETAIL = "GET_DETAIL";
+const GET_MUEBLE_NAME = "GET_MUEBLE_NAME";
 
 module.exports = {
   GET_MUEBLES,
   GET_DETAIL,
+  GET_MUEBLE_NAME,
 };

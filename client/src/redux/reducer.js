@@ -1,4 +1,4 @@
-import { GET_MUEBLES, GET_DETAIL } from "./types";
+import { GET_MUEBLES, GET_DETAIL, GET_MUEBLE_NAME } from "./types";
 
 const initialState = {
   muebles: [],
@@ -15,6 +15,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         detail: action.payload,
+      };
+    case GET_MUEBLE_NAME:
+      return {
+        ...state,
+        muebles: action.payload,
       };
     default:
       return { ...state };

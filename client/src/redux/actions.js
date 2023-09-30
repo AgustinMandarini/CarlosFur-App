@@ -5,6 +5,7 @@ import {
   GET_PRODUCT_TYPE,
   GET_MUEBLE_NAME,
   SET_SORT,
+  SET_PRODUCTS_COPY,
 } from "./types";
 
 import axios from "axios";
@@ -92,4 +93,8 @@ export const getMuebleName = (name) => {
 
 export const setSort = (payload) => {
   return { type: SET_SORT, payload };
+};
+
+export const setProductsCopy = (payload) => {
+  return { type: SET_PRODUCTS_COPY, payload };
 };

@@ -10,7 +10,7 @@ const ToolBar = () => {
 
   // Acá se hace el dispatch para configurar el eventual renderizado en el estado global
   const dispatch = useDispatch();
-  const setSortRecipesHandler = (event) => {
+  const setSortProductsHandler = (event) => {
     dispatch(setSort(event.target.value));
   };
 
@@ -19,24 +19,13 @@ const ToolBar = () => {
       {location.pathname === "/home" && (
         <div className={style.container}>
           <div>
-            <select
-              /* onChange={setSortRecipesHandler} */ className="selectMain"
-            >
+            <select onChange={setSortProductsHandler} className="selectMain">
               <option value="notSorted">Ordenar...</option>
               <option value="MC">Mas caros</option>
               <option value="MB">Mas baratos </option>
               <option value="MN">Mayor Antiguedad</option>
               <option value="MV">Menor Antiguedad </option>
             </select>
-            <input
-              type="search"
-              placeholder="Recetas"
-              autoComplete="off"
-              /* onChange={setLocalNameHandler} */
-              /* value={localName} */
-            />
-
-            <button /* onClick={onSearch} */>Buscar</button>
           </div>
           <div>
             <select

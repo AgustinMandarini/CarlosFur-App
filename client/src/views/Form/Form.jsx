@@ -153,11 +153,6 @@ const FormPage = () => {
         {errors.description ? <span>{errors.description}</span> : null}
       </div>
 
-      <ImageUpload />
-      <button type="submit" className={style.botonSubmit}>
-        Enviar
-      </button>
-
       <div className={style.container}>
         <label name="productType">Selecciona el tipo de Producto:</label>
         <select
@@ -176,6 +171,7 @@ const FormPage = () => {
         </select>
         {errors.productType ? <span>{errors.productType}</span> : null}
       </div>
+      <ImageUpload />
       {Object.values(errors).every((error) => error === "") ? (
         <button type="submit" className={style.botonSubmit}>
           Enviar

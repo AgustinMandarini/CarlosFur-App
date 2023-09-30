@@ -18,7 +18,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getMuebles());
-    dispatch(getProductType())
+    dispatch(getProductType());
   }, []);
 
   return (

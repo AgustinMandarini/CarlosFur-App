@@ -4,6 +4,7 @@ import {
   POST_MUEBLES,
   GET_PRODUCT_TYPE,
   GET_MUEBLE_NAME,
+  SET_SORT,
 } from "./types";
 
 import axios from "axios";
@@ -90,4 +91,6 @@ export const getMuebleName = (name) => {
   };
 };
 
-// export { getMuebles, getDetail}
+export const setSort = (payload) => {
+  return { type: SET_SORT, payload };
+};

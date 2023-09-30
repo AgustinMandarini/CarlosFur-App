@@ -3,7 +3,7 @@ const GET_DETAIL = "GET_DETAIL";
 const POST_MUEBLES = "POST_MUEBLES";
 const GET_PRODUCT_TYPE = "GET_PRODUCT_TYPE";
 const GET_MUEBLE_NAME = "GET_MUEBLE_NAME";
-
+const SET_SORT = "SET_SORT";
 
 module.exports = {
   GET_MUEBLES,
@@ -11,4 +11,5 @@ module.exports = {
   POST_MUEBLES,
   GET_PRODUCT_TYPE,
   GET_MUEBLE_NAME,
+  SET_SORT,
 };

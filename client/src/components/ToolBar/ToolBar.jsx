@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useDispatch, useSelector } from "react-redux";
+import { setSort } from "../../redux/actions";
+
 import style from "./ToolBar.module.css";
 
 const ToolBar = () => {
   const location = useLocation();
+
+  // Acá se hace el dispatch para configurar el eventual renderizado en el estado global
+  const dispatch = useDispatch();
+  const setSortRecipesHandler = (event) => {
+    dispatch(setSort(event.target.value));
+  };
 
   return (
     <div>
@@ -14,10 +23,10 @@ const ToolBar = () => {
               /* onChange={setSortRecipesHandler} */ className="selectMain"
             >
               <option value="notSorted">Ordenar...</option>
-              <option value="A-z">Genérico</option>
-              <option value="Z-a">Genérico</option>
-              <option value="L-H">Genérico</option>
-              <option value="H-L">Genérico</option>
+              <option value="MC">Mas caros</option>
+              <option value="MB">Mas baratos </option>
+              <option value="MN">Mayor Antiguedad</option>
+              <option value="MV">Menor Antiguedad </option>
             </select>
             <input
               type="search"

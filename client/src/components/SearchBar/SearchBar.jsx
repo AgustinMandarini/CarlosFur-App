@@ -8,7 +8,7 @@ const SearchBar = () => {
   const location = useLocation();
   const [characterName, setCharacterName] = useState("");
   const dispatch = useDispatch();
-  // console.log(characterName);
+  console.log(characterName);
   const handleChange = (e) => {
     setCharacterName(e.target.value);
   };

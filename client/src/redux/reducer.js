@@ -4,6 +4,8 @@ import {
   POST_MUEBLES,
   GET_PRODUCT_TYPE,
   GET_MUEBLE_NAME,
+  SET_SORT,
+  SET_PRODUCTS_COPY,
 } from "./types";
 
 const initialState = {
@@ -11,6 +13,7 @@ const initialState = {
   allMuebles: [],
   detail: [],
   productType: [],
+  sort: "notSorted",
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -38,6 +41,15 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case GET_MUEBLE_NAME:
+      return {
+        ...state,
+        allMuebles: action.payload,
+      };
+
+    case SET_SORT:
+      return { ...state, sort: action.payload };
+
+    case SET_PRODUCTS_COPY:
       return {
         ...state,
         allMuebles: action.payload,

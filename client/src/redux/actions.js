@@ -4,7 +4,7 @@ import mueblesData from "../muebles.json";
 
 export const getMuebles = () => {
   return async function (dispatch) {
-    const apiData = await axios.get("http://localhost:3000/product");
+    const apiData = await axios.get("http://localhost:3001/product");
     const muebles = apiData.data;
     console.log(muebles, "aca");
 
@@ -16,12 +16,16 @@ export const getMuebles = () => {
 };
 export const getDetail = (id) => {
   return async function (dispatch) {
-    const apiData = await axios.get(`http://localhost:3000/product/:${id}`); // O COMO SEA LA RUTA
-    const detail = apiData.data;
-    return dispatch({
-      type: GET_DETAIL,
-      payload: detail,
-    });
+    try {
+      const apiData = await axios.get(`http://localhost:3001/product/${id}`);
+      const detail = apiData.data;
+      dispatch({
+        type: GET_DETAIL,
+        payload: detail,
+      });
+    } catch (error) {
+      console.error("Error en la acción getDetail:", error);
+    }
   };
 };
 // export const getDetail = (id) => {
@@ -34,7 +38,7 @@ export const getDetail = (id) => {
 export const getMuebleName = (name) => {
   return async function (dispatch) {
     const apiData = await axios.get(
-      `http://localhost:3000/product?name=${name}`
+      `http://localhost:3001/product?name=${name}`
     );
     const nameid = apiData.data;
     console.log(nameid);

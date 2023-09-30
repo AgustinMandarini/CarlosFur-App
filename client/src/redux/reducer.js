@@ -2,7 +2,7 @@ import { GET_MUEBLES, GET_DETAIL, GET_MUEBLE_NAME } from "./types";
 
 const initialState = {
   muebles: [],
-  detail: {},
+  detail: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {

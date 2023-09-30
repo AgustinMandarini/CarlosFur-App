@@ -75,7 +75,7 @@ export const getProductType = () => {
 export const getMuebleName = (name) => {
   return async function (dispatch) {
     const apiData = await axios.get(
-      `http://localhost:3001/product?name=${name}`
+      `http://localhost:3001/product${name ? `?name=${name}` : ""}`
     );
     const nameid = apiData.data;
     console.log(nameid);

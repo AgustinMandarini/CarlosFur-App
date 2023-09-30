@@ -10,7 +10,7 @@ const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const stateDetail = useSelector((state) => state.detail);
-
+  console.log(stateDetail);
   useEffect(() => {
     dispatch(getDetail(id));
   }, [dispatch, id]);
@@ -22,13 +22,14 @@ const Detail = () => {
       </Link>
       <div className={style.cntnCardDetail}>
         <div className={style.cntnP}>
-          <p className={style.p}>Nombre: {stateDetail.nombre}</p>
-          <p className={style.p}>Altura: {stateDetail.altura}</p>
-          <p className={style.p}>Profundidad: {stateDetail.profundidad} </p>
-          <p className={style.p}>Ancho: {stateDetail.ancho} </p>
-          <p className={style.p}>Peso: {stateDetail.peso}</p>
+          <p className={style.p}>Nombre: {stateDetail.name}</p>
+          <p className={style.p}>Precio: {stateDetail.price}</p>
+          <p className={style.p}>Altura: {stateDetail.height} </p>
+          <p className={style.p}>Profundidad: {stateDetail.depth} </p>
+          <p className={style.p}>Ancho: {stateDetail.width}</p>
+          <p className={style.p}>Peso: {stateDetail.weight}</p>
           <p className={style.p}>Color: {stateDetail.color}</p>
-          <p className={style.p}>Descripcion: {stateDetail.descripcion}</p>
+          <p className={style.p}>Descripcion: {stateDetail.description}</p>
         </div>
       </div>
     </div>

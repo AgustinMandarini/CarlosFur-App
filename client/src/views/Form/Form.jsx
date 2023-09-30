@@ -14,7 +14,7 @@ import { postMueble } from "../../redux/actions";
 //   "color": "Blanco",
 //   "description": "Es una mesa muy linda y muy bonita",
 //   "productType": {
-//     "name": "mesas"
+//     "name": "mesas"}
 
 const FormPage = () => {
   const stateProductType = useSelector((state) => state.productType);

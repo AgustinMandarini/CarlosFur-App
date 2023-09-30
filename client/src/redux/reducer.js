@@ -1,10 +1,11 @@
-import { GET_MUEBLES, GET_DETAIL, POST_MUEBLES, GET_PRODUCTTYPE } from "./types";
+
+import { GET_MUEBLES, GET_DETAIL, POST_MUEBLES, GET_PRODUCTTYPE, GET_MUEBLE_NAME } from "./types";
 
 const initialState = {
   muebles: [],
   detail: {},
   productType: [],
-};
+}
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MUEBLES:
@@ -17,6 +18,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         detail: action.payload,
       };
+
     case POST_MUEBLES:
       return {
         ...state,
@@ -27,6 +29,13 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           productType: action.payload
         }
+
+    case GET_MUEBLE_NAME:
+      return {
+        ...state,
+        muebles: action.payload,
+      };
+
     default:
       return { ...state };
   }

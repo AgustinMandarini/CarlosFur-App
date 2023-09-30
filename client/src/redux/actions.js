@@ -1,33 +1,42 @@
-import { GET_MUEBLES, GET_DETAIL, POST_MUEBLES, GET_PRODUCTTYPE } from "./types";
+
+import { GET_MUEBLES, GET_DETAIL, POST_MUEBLES, GET_PRODUCTTYPE, GET_MUEBLE_NAME } from "./types";
+
 import axios from "axios";
 import mueblesData from "../muebles.json";
 
 export const getMuebles = () => {
   return async function (dispatch) {
-    const apiData = await axios.get("http://localhost:3001/muebles");
+    const apiData = await axios.get("http://localhost:3001/product");
     const muebles = apiData.data;
+    console.log(muebles, "aca");
+
     return dispatch({
       type: GET_MUEBLES,
       payload: muebles,
     });
   };
 };
-// const getDetail = (id) => {
-//   return async function (dispatch) {
-//     const apiData = await axios.get(`http://localhost:3001/muebles/${id}`); // O COMO SEA LA RUTA
-//     const detail = apiData.data;
-//     return dispatch({
-//       type: GET_DETAIL,
-//       payload: detail,
-//     });
-//   };
-// };
 export const getDetail = (id) => {
-  return {
-    type: GET_DETAIL,
-    payload: mueblesData.find((producto) => producto.id === parseInt(id)), // esta es la provisoria
+  return async function (dispatch) {
+    try {
+      const apiData = await axios.get(`http://localhost:3001/product/${id}`);
+      const detail = apiData.data;
+      dispatch({
+        type: GET_DETAIL,
+        payload: detail,
+      });
+    } catch (error) {
+      console.error("Error en la acción getDetail:", error);
+    }
   };
 };
+// export const getDetail = (id) => {
+//   return {
+//     type: GET_DETAIL,
+//     payload: mueblesData.find((producto) => producto.id === parseInt(id)), // esta es la provisoria
+//   };
+// };
+
 
 export const postMueble = (payload) => {
   return async (dispatch) => {
@@ -60,6 +69,20 @@ export const getProductType = () => {
     } catch (error) {
       alert(`No se pudo crear`);
     }
+
+export const getMuebleName = (name) => {
+  return async function (dispatch) {
+    const apiData = await axios.get(
+      `http://localhost:3001/product?name=${name}`
+    );
+    const nameid = apiData.data;
+    console.log(nameid);
+
+    return dispatch({
+      type: GET_MUEBLE_NAME,
+      payload: nameid,
+    });
+
   };
 };
 // export { getMuebles, getDetail };

@@ -1,8 +1,9 @@
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import mueblesData from "../../muebles.json";
 import Pagination from "../../components/Pagination/Pagination";
+import { getMuebles, getProductType, getProductType } from "../../redux/actions";
 
 const Home = () => {
   const [muebles, setMuebles] = useState(mueblesData);
@@ -13,6 +14,10 @@ const Home = () => {
   const currentMuebles = muebles.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  useEffect(() => {
+    getMuebles();
+    getProductType();
+  }, []);
 
   return (
     <div>

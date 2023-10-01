@@ -51,7 +51,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_MUEBLE_NAME:
       return {
         ...state,
-        allMuebles: action.payload,
+        muebles: action.payload,
       };
 
     case SET_SORT:

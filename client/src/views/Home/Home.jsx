@@ -13,7 +13,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setProductsCopy);
+    dispatch(setProductsCopy)
     // eslint-disable-next-line
   }, []);
 

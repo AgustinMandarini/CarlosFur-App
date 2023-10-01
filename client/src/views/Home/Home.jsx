@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
 import Pagination from "../../components/Pagination/Pagination";
-import {
-  getProducts,
-  getProductType,
-  setProductsCopy,
-} from "../../redux/actions";
+import { setProductsCopy } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import ToolBar from "../../components/ToolBar/ToolBar";
 import style from "./Home.module.css";
@@ -20,7 +16,6 @@ const Home = () => {
 
   // useSelectors para observar el estado global donde haga falta
   const globalProducts = useSelector((state) => state.muebles);
-  const allProducts = useSelector((state) => state.allProducts);
   const sort = useSelector((state) => state.sort);
 
   // Paginado

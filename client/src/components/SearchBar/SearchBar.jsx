@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import style from "./SearchBar.module.css";
 import { useLocation } from "react-router-dom";
 import { getMuebleName } from "../../redux/actions";

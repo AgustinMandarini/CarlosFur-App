@@ -10,7 +10,6 @@ import {
 } from "./types";
 
 import axios from "axios";
-import mueblesData from "../muebles.json";
 
 export const getMuebles = () => {
   return async function (dispatch) {

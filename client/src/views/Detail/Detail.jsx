@@ -1,6 +1,5 @@
 import { React, useEffect } from "react";
 import style from "./Detail.module.css";
-import mueblesData from "../../muebles.json";
 import { getDetail } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
 import Pagination from "../../components/Pagination/Pagination";
-// import mueblesData from "../../muebles.json";
 import {
   getMuebles,
   getProductType,
@@ -38,26 +37,26 @@ const Home = () => {
 
   //Combinación de ordenamientos y filtros
   useEffect(() => {
-    const list = globalProducts.sort((a, b) => {
-      if (sort === "Z-a") {
-        return a.name.toUpperCase() > b.name.toUpperCase() ? -1 : 1;
+    const sortedMuebles = [...globalProducts]; // Copia de los muebles globales
+    sortedMuebles.sort((a, b) => {
+      if (sort === "MC") {
+        return a.price > b.price ? -1 : 1;
       }
-
-      if (sort === "A-z") {
-        return a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1;
+      if (sort === "MB") {
+        return a.price < b.price ? -1 : 1;
       }
-      if (sort === "H-L") {
-        return a.healthScore > b.healthScore ? -1 : 1;
+      if (sort === "MN") {
+        return a.id > b.id ? -1 : 1;
       }
-      if (sort === "L-H") {
-        return a.healthScore < b.healthScore ? -1 : 1;
+      if (sort === "MV") {
+        return a.id < b.id ? -1 : 1;
       }
       return 0;
     });
-    console.log({ list, sort });
+    console.log({ sortedMuebles, sort });
 
-    setMuebles(list);
-    dispatch(setProductsCopy(list));
+    setMuebles(sortedMuebles); // Actualizar el estado local
+    dispatch(setProductsCopy(sortedMuebles)); // Despachar la acción con la lista ordenada
     setCurrentPage(1);
     // eslint-disable-next-line
   }, [sort]);
@@ -67,7 +66,7 @@ const Home = () => {
       <h1>Volvieron las Sillas 2x1!</h1>
       <Pagination
         mueblesPerPage={mueblesPerPage}
-        totalMuebles={allMuebles.length}
+        totalMuebles={muebles.length}
         paginate={paginate}
         currentPage={currentPage}
       />

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setSort } from "../../redux/actions";
 
 import style from "./ToolBar.module.css";
@@ -23,8 +23,8 @@ const ToolBar = () => {
               <option value="notSorted">Ordenar...</option>
               <option value="MC">Mas caros</option>
               <option value="MB">Mas baratos </option>
-              <option value="MN">Mayor Antiguedad</option>
-              <option value="MV">Menor Antiguedad </option>
+              <option value="MV">Mayor Antiguedad</option>
+              <option value="MN">Menor Antiguedad </option>
             </select>
           </div>
           <div>

@@ -5,10 +5,10 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { getMuebles, getProductType } from "./redux/actions";
+import { getProducts, getProductType } from "./redux/actions";
 import { store } from "../src/redux/store";
 
-store.dispatch(getMuebles());
+store.dispatch(getProducts());
 store.dispatch(getProductType());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

@@ -12,7 +12,7 @@ const ToolBar = () => {
   const setSortProductsHandler = (event) => {
     dispatch(setSort(event.target.value));
   };
-
+//dcsc
   return (
     <div>
       {location.pathname === "/home" && (

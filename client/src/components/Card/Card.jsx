@@ -6,8 +6,8 @@ const Card = (props) => {
   return (
     <div className={style.container} key={props.id}>
       <Link to={`/detail/${props.id}`} className={style.nameCard}>
-        <h1>Name: {props.name}</h1>
-        <p>Descripcion: {props.description}</p>
+        <h1>{props.name}</h1>
+        <p>{props.description}</p>
         <p>Color: {props.color} </p>
       </Link>
     </div>

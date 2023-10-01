@@ -8,13 +8,12 @@
 
 .divLinks {
   display: flex;
-  width: 750px;
-  align-content: start;
-  align-items: start;
-  justify-content: center;
+  width: 450px;
+  margin-right: 20rem;
+  align-content: left;
+  align-items: left;
   height: 4rem;
-
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
 .divLinksResponsive {
@@ -29,7 +28,6 @@
 .links:hover {
   color: aliceblue; /* Cambia el color al pasar el mouse (puedes ajustar el color) */
   border-radius: 2em;
-  transform: scale(1.02); /* Cambia el tamaño al pasar el mouse */
 }
 .logo {
   display: flex;
@@ -57,7 +55,6 @@
 .linkResponsive:hover {
   cursor: pointer;
   font-weight: 0;
-  transform: scale(0);
 }
 .buttonResponsive {
   /* color: black; */

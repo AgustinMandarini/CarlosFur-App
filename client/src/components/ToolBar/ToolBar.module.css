@@ -1,1 +1,14 @@
-
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 2rem;
+}
+.divSelect {
+  display: flex;
+}
+.select {
+  width: 9rem;
+  margin-right: 3rem;
+  border-radius: 1.6rem;
+}

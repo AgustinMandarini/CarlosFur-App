@@ -1,18 +1,28 @@
 import React from "react";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import { useDispatch } from "react-redux";
-import { setSort } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { setProductType, setSort } from "../../redux/actions";
 import style from "./ToolBar.module.css";
 
 const ToolBar = () => {
   const location = useLocation();
 
-  // Acá se hace el dispatch para configurar el eventual renderizado en el estado global
+  const productTypeList = useSelector((state) => state.productType);
+  const productTypeNames = productTypeList.map(
+    (productType) => productType.name
+  );
+
+  // Acá se hacen los dispatchs para configurar el eventual renderizado en el estado global
   const dispatch = useDispatch();
+
   const setSortProductsHandler = (event) => {
     dispatch(setSort(event.target.value));
   };
-//dcsc
+
+  const setFilterByProductTypeHandler = (event) => {
+    dispatch(setProductType(event.target.value));
+  };
+
   return (
     <div>
       {location.pathname === "/home" && (
@@ -26,30 +36,26 @@ const ToolBar = () => {
               <option value="MN">Menor Antiguedad </option>
             </select>
           </div>
-          <div className={style.divSelect}>
+          <div>
             <select
-              /* onChange={setFilterByDietHandler} */ className={style.select}
+              onChange={setFilterByProductTypeHandler}
+              className="selectMain"
             >
-              <option value="allDiets">Producto</option>
-              {/* {dietsByName.map((diet, index) => {
-            return (
-              <option value={diet} key={index}>
-                {diet}
-              </option>
-            );
-          })} */}
+              <option value="allProductTypes">Tipo de ambiente</option>
+              {productTypeNames.map((productType, index) => {
+                return (
+                  <option value={productType} key={index}>
+                    {productType}
+                  </option>
+                );
+              })}
             </select>
-            <div className={style.divSelect}>
-              <select
-                /* onChange={setFilterBySourceHandler} */ className={
-                  style.select
-                }
-              >
-                <option value="allRecipes">Otro filtro</option>
-                <option value="apiRecipes">Genérico</option>
-                <option value="dbRecipes">Genérico</option>
-              </select>
-            </div>
+
+            {/* <select onChange={setFilterBySourceHandler} className="selectMain">
+              <option value="allRecipes">Originales o Creadas?</option>
+              <option value="apiRecipes">Recetas Originales</option>
+              <option value="dbRecipes">Recetas Creadas por Vos!</option>
+            </select> */}
           </div>
         </div>
       )}

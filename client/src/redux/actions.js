@@ -6,6 +6,7 @@ import {
   GET_PRODUCT_BY_NAME,
   SET_IMAGE_URL,
   SET_SORT,
+  SET_PRODUCT_TYPE,
   SET_PRODUCTS_COPY,
 } from "./types";
 
@@ -102,6 +103,9 @@ export const getProductByName = (name) => {
 
 export const setSort = (payload) => {
   return { type: SET_SORT, payload };
+};
+export const setProductType = (payload) => {
+  return { type: SET_PRODUCT_TYPE, payload };
 };
 
 export const setProductsCopy = (payload) => {

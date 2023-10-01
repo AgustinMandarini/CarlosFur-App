@@ -7,6 +7,7 @@ import {
   SET_IMAGE_URL,
   SET_SORT,
   SET_PRODUCTS_COPY,
+  SET_PRODUCT_TYPE,
 } from "./types";
 
 const initialState = {
@@ -15,6 +16,11 @@ const initialState = {
   detail: [],
   productType: [],
   sort: "notSorted",
+  filter: {
+    productType: "allProductTypes",
+    color: "allColors",
+    price: "allPrices",
+  },
   imageURL: null,
 };
 const rootReducer = (state = initialState, action) => {
@@ -56,6 +62,12 @@ const rootReducer = (state = initialState, action) => {
 
     case SET_SORT:
       return { ...state, sort: action.payload };
+
+    case SET_PRODUCT_TYPE:
+      return {
+        ...state,
+        filter: { ...state.filter, productType: action.payload },
+      };
 
     case SET_PRODUCTS_COPY:
       return {

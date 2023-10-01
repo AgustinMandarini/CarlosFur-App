@@ -16,6 +16,7 @@ const Home = () => {
 
   // useSelectors para observar el estado global donde haga falta
   const globalProducts = useSelector((state) => state.muebles);
+  const filters = useSelector((state) => state.filter);
   const sort = useSelector((state) => state.sort);
 
   // Paginado
@@ -35,28 +36,41 @@ const Home = () => {
   //Combinación de ordenamientos y filtros
   useEffect(() => {
     const sortedProducts = [...globalProducts]; // Copia de los muebles globales
-    sortedProducts.sort((a, b) => {
-      if (sort === "MC") {
-        return a.price > b.price ? -1 : 1;
-      }
-      if (sort === "MB") {
-        return a.price < b.price ? -1 : 1;
-      }
-      if (sort === "MN") {
-        return a.id > b.id ? -1 : 1;
-      }
-      if (sort === "MV") {
-        return a.id < b.id ? -1 : 1;
-      }
-      return 0;
-    });
-    // console.log({ sortedProducts, sort });
+    const list = sortedProducts
+      .filter((product) => {
+        if (filters.productType === "allProductTypes") {
+          return true;
+        }
 
-    setProducts(sortedProducts); // Actualizar el estado local
-    dispatch(setProductsCopy(sortedProducts)); // Despachar la acción con la lista ordenada
+        if (product.productType !== null) {
+          return product.productType.name
+            .toLowerCase()
+            .includes(filters.productType);
+        }
+        return true;
+      })
+      .sort((a, b) => {
+        if (sort === "MC") {
+          return a.price > b.price ? -1 : 1;
+        }
+        if (sort === "MB") {
+          return a.price < b.price ? -1 : 1;
+        }
+        if (sort === "MN") {
+          return a.id > b.id ? -1 : 1;
+        }
+        if (sort === "MV") {
+          return a.id < b.id ? -1 : 1;
+        }
+        return 0;
+      });
+    console.log({ list, sort, filters });
+
+    setProducts(list); // Actualizar el estado local
+    dispatch(setProductsCopy(list)); // Despachar la acción con la lista ordenada
     setCurrentPage(1);
     // eslint-disable-next-line
-  }, [sort]);
+  }, [sort, filters.productType]);
 
   return (
     <div className={style.cntnHome}>

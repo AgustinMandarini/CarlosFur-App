@@ -7,12 +7,14 @@ import {
   setProductsCopy,
 } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import ToolBar from "../../components/ToolBar/ToolBar";
+import style from "./Home.module.css";
 
 const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setProductsCopy)
+    dispatch(setProductsCopy);
     // eslint-disable-next-line
   }, []);
 
@@ -62,15 +64,18 @@ const Home = () => {
   }, [sort]);
 
   return (
-    <div>
-      <h1>Volvieron las Sillas 2x1!</h1>
+    <div className={style.cntnHome}>
+      <h1 className={style.tittle}>MSC AMOBLAMIENTOS</h1>
+      <div>
+        <ToolBar />
+      </div>
+      <CardsContainer currentMuebles={currentMuebles}></CardsContainer>
       <Pagination
         mueblesPerPage={mueblesPerPage}
         totalMuebles={muebles.length}
         paginate={paginate}
         currentPage={currentPage}
       />
-      <CardsContainer currentMuebles={currentMuebles}></CardsContainer>
     </div>
   );
 };

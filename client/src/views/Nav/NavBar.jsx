@@ -60,9 +60,6 @@ const NavBar = () => {
             <SearchBar />
           </div>
         </Navbar.Collapse>
-        <div>
-          <ToolBar />
-        </div>
       </Container>
     </Navbar>
   );

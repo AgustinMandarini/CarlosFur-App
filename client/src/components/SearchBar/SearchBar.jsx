@@ -9,22 +9,20 @@ const SearchBar = () => {
   const [mueble, setNameMueble] = useState("");
   const dispatch = useDispatch();
 
-
   const handleOnClick = (e) => {
     e.preventDefault();
-    console.log("Button clicked")
+    console.log("Button clicked");
     dispatch(getMuebleName(mueble));
-    setNameMueble("")
+    setNameMueble("");
   };
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setNameMueble(e.target.value)
-  }
+    setNameMueble(e.target.value);
+  };
   // useEffect(() => {
   //   dispatch(getMuebleName(mueble))
   // }, []);
-
 
   return (
     <div>
@@ -35,8 +33,16 @@ const SearchBar = () => {
             placeholder="buscar mueble..."
             value={mueble}
             onChange={handleSubmit}
+            className={style.inputSearch}
           />
-             <button type="submit" className={style.addButton} onClick={handleOnClick}> Buscar</button>
+          <button
+            type="submit"
+            className={style.addButton}
+            onClick={handleOnClick}
+          >
+            {" "}
+            Buscar
+          </button>
         </div>
       )}
     </div>

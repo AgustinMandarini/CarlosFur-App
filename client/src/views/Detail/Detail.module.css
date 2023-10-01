@@ -1,10 +1,11 @@
 .cntnDetail {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding-top: 2.6rem;
 }
+
 .cntnCardDetail {
   display: flex;
   flex-direction: column;
@@ -27,19 +28,7 @@
   align-items: center;
 }
 .goBackLink {
-  display: flex;
-  text-decoration: none;
-  text-align: left;
-  font-size: 13px;
-  color: black;
-  border: none;
-  padding: 0.9rem;
   position: relative;
-  right: 33rem;
-  top: 3rem;
-  background-color: rgba(117, 80, 54, 0.377);
-}
-.goBackLink:hover {
-  transform: scale(1.02);
-  color: white;
+  right: 20rem;
+  /* top: 3rem; */
 }

@@ -2,7 +2,7 @@ import { React, useEffect } from "react";
 import style from "./Detail.module.css";
 import { getDetail } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Button } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 
 const Detail = () => {
@@ -17,9 +17,15 @@ const Detail = () => {
 
   return (
     <div className={style.cntnDetail}>
-      <Link to="/home" className={style.goBackLink}>
+      <Button
+        className={style.goBackLink}
+        variant="dark"
+        href="/home"
+        size="sm"
+      >
         Volver
-      </Link>
+      </Button>
+
       <div className={style.cntnCardDetail}>
         <div className={style.cntnP}>
           <p className={style.p}>Nombre: {stateDetail.name}</p>

@@ -3,6 +3,7 @@ import style from "./SearchBar.module.css";
 import { useLocation } from "react-router-dom";
 import { getProductByName } from "../../redux/actions";
 import { useDispatch } from "react-redux";
+import { InputGroup, Form, Button } from "react-bootstrap";
 
 const SearchBar = () => {
   const location = useLocation();
@@ -25,25 +26,17 @@ const SearchBar = () => {
   // }, []);
 
   return (
-    <div>
+    <div className={style.divSerchBar}>
       {location.pathname === "/home" && (
-        <div className={style.divSerchBar}>
-          <input
-            type="search"
-            placeholder="buscar products..."
-            value={products}
+        <InputGroup size="sm">
+          <Form.Control
+            placeholder="buscar mueble..."
             onChange={handleSubmit}
-            className={style.inputSearch}
           />
-          <button
-            type="submit"
-            className={style.addButton}
-            onClick={handleOnClick}
-          >
-            {" "}
+          <Button className="ms-1" variant="dark" onClick={handleOnClick}>
             Buscar
-          </button>
-        </div>
+          </Button>
+        </InputGroup>
       )}
     </div>
   );

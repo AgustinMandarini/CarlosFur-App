@@ -4,6 +4,7 @@ import {
   POST_MUEBLES,
   GET_PRODUCT_TYPE,
   GET_MUEBLE_NAME,
+  SET_IMAGE_URL,
   SET_SORT,
   SET_PRODUCTS_COPY,
 } from "./types";
@@ -59,6 +60,15 @@ export const postMueble = (payload) => {
     }
   };
 };
+
+export const setImageURL = (imageURL) => {
+  return {
+    type: SET_IMAGE_URL,
+    payload: imageURL,
+  };
+};
+
+// export { getMuebles, getDetail };
 
 export const getProductType = () => {
   return async (dispatch) => {

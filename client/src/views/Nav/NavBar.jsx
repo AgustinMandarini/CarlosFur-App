@@ -4,7 +4,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import style from "./NavBar.module.css";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import ToolBar from "../../components/ToolBar/ToolBar";
-import { getMuebles } from "../../redux/actions";
+import { getProducts } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 
 const NavBar = () => {
@@ -38,7 +38,7 @@ const NavBar = () => {
               <Link
                 to="/home"
                 className={navResponsive ? style.linkResponsive : style.links}
-                onClick={() => dispatch(getMuebles())}
+                onClick={() => dispatch(getProducts())}
               >
                 Home
               </Link>

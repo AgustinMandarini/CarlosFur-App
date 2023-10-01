@@ -1,10 +1,10 @@
 import Card from "../Card/Card"; //correcion
 import "./Cardscontainer.style.css";
 
-const CardsContainer = ({ currentMuebles }) => {
+const CardsContainer = ({ currentProducts }) => {
   return (
     <div className="container">
-      {currentMuebles.map((m) => {
+      {currentProducts.map((m) => {
         return (
           <div className="card" key={m.id}>
             <Card

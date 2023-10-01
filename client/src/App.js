@@ -24,12 +24,5 @@ function App() {
   );
 }
 
-/* <div>
-      {location.pathname !== "/" && <NavBar />}
-
-      <Route exact path="/" component={Landing} />
-      <Route exact path="/create" component={Form} />
-      <Route path="/detail/:id" component={Detail} />
-    </div> */
 
 export default App;

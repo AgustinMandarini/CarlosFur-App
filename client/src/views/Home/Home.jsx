@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
 import Pagination from "../../components/Pagination/Pagination";
-import { setProductsCopy } from "../../redux/actions";
+import {
+  getMuebles,
+  getProductType,
+  setProductsCopy,
+} from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setProductsCopy);
+    dispatch(setProductsCopy)
     // eslint-disable-next-line
   }, []);
 

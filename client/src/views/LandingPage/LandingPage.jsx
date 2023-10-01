@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import style from "./LandingPage.module.css";
 
 const LandingPage = () => {
@@ -6,9 +6,9 @@ const LandingPage = () => {
     <div className={style.background}>
       <div className={style.container}>
         <h1 className={style.tittle}> MSC Amoblamientos</h1>
-        <NavLink to="/home" className={style.loginButton}>
+        <Button variant="dark" href="/home" size="sm">
           Ingresar
-        </NavLink>
+        </Button>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
 import Pagination from "../../components/Pagination/Pagination";
 import {
-  getMuebles,
+  getProducts,
   getProductType,
   setProductsCopy,
 } from "../../redux/actions";
@@ -14,33 +14,33 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setProductsCopy);
+    dispatch(setProductsCopy());
     // eslint-disable-next-line
   }, []);
 
   // useSelectors para observar el estado global donde haga falta
   const globalProducts = useSelector((state) => state.muebles);
-  const allMuebles = useSelector((state) => state.allMuebles);
+  const allProducts = useSelector((state) => state.allProducts);
   const sort = useSelector((state) => state.sort);
 
   // Paginado
-  const [muebles, setMuebles] = useState([]);
+  const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [mueblesPerPage] = useState(5);
-  const indexOfLastRecipe = currentPage * mueblesPerPage;
-  const indexOfFirstRecipe = indexOfLastRecipe - mueblesPerPage;
+  const [productsPerPage] = useState(5);
+  const indexOfLastRecipe = currentPage * productsPerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - productsPerPage;
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const currentMuebles = muebles.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  const currentProducts = products.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
   useEffect(() => {
-    setMuebles(globalProducts);
+    setProducts(globalProducts);
   }, [globalProducts]);
 
   //Combinación de ordenamientos y filtros
   useEffect(() => {
-    const sortedMuebles = [...globalProducts]; // Copia de los muebles globales
-    sortedMuebles.sort((a, b) => {
+    const sortedProducts = [...globalProducts]; // Copia de los muebles globales
+    sortedProducts.sort((a, b) => {
       if (sort === "MC") {
         return a.price > b.price ? -1 : 1;
       }
@@ -55,10 +55,10 @@ const Home = () => {
       }
       return 0;
     });
-    console.log({ sortedMuebles, sort });
+    // console.log({ sortedProducts, sort });
 
-    setMuebles(sortedMuebles); // Actualizar el estado local
-    dispatch(setProductsCopy(sortedMuebles)); // Despachar la acción con la lista ordenada
+    setProducts(sortedProducts); // Actualizar el estado local
+    dispatch(setProductsCopy(sortedProducts)); // Despachar la acción con la lista ordenada
     setCurrentPage(1);
     // eslint-disable-next-line
   }, [sort]);
@@ -69,10 +69,10 @@ const Home = () => {
       <div>
         <ToolBar />
       </div>
-      <CardsContainer currentMuebles={currentMuebles}></CardsContainer>
+      <CardsContainer currentProducts={currentProducts}></CardsContainer>
       <Pagination
-        mueblesPerPage={mueblesPerPage}
-        totalMuebles={muebles.length}
+        productsPerPage={productsPerPage}
+        totalProducts={products.length}
         paginate={paginate}
         currentPage={currentPage}
       />

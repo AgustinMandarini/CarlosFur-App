@@ -1,9 +1,9 @@
 import {
-  GET_MUEBLES,
+  GET_PRODUCTS,
   GET_DETAIL,
-  POST_MUEBLES,
+  POST_PRODUCT,
   GET_PRODUCT_TYPE,
-  GET_MUEBLE_NAME,
+  GET_PRODUCT_BY_NAME,
   SET_IMAGE_URL,
   SET_SORT,
   SET_PRODUCTS_COPY,
@@ -19,7 +19,7 @@ const initialState = {
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_MUEBLES:
+    case GET_PRODUCTS:
       return {
         ...state,
         muebles: action.payload,
@@ -37,7 +37,7 @@ const rootReducer = (state = initialState, action) => {
         imageURL: action.payload,
       };
 
-    case POST_MUEBLES:
+    case POST_PRODUCT:
       return {
         ...state,
         muebles: action.payload,
@@ -48,7 +48,7 @@ const rootReducer = (state = initialState, action) => {
         productType: action.payload,
       };
 
-    case GET_MUEBLE_NAME:
+    case GET_PRODUCT_BY_NAME:
       return {
         ...state,
         muebles: action.payload,

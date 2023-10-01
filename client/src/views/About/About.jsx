@@ -4,7 +4,7 @@ import style from "./About.module.css";
 const About = () => {
   return (
     <div className={style.cntnAbout}>
-      <h1>Quienes Somos</h1>
+      <h1 className={style.tittle}>Quienes Somos</h1>
       <div className={style.line}></div>
       <div className={style.divText}>
         <p>
@@ -16,8 +16,8 @@ const About = () => {
           Así, fuimos creciendo para acercarnos más a vos. Hoy estamos presentes
           en Mendoza con tres puntos de venta (esto es mentira)
         </p>
-        <p className={style.pSubtitle}>
-          <strong>¿Como comprar?</strong>
+        <p>
+          <strong className={style.pSubtitle}>¿Como comprar?</strong>
         </p>
         <p>
           ​Te presentamos a Hogar, la cadena de equipamiento y artículos para el

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postMueble } from "../../redux/actions";
+import { postProduct } from "../../redux/actions";
+
 import style from "./Form.module.css";
 import validation from "./validation";
 
@@ -49,7 +50,7 @@ const FormPage = () => {
     event.preventDefault();
 
     if (errors === true) {
-      dispatch(postMueble(form)); //si errors no tiene errores dispatcha createMueble (crea nuevo mueble en la BDD)
+      dispatch(postProduct(form)); //si errors no tiene errores dispatcha createMueble (crea nuevo mueble en la BDD)
     } else alert("No se pudo crear, por favor complete todo el formulario");
     setForm({
       name: "",

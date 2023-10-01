@@ -4,11 +4,11 @@ import { useEffect } from "react";
 import atras from "./../../imagenes/atras.png"
 import siguiente from "./../../imagenes/siguiente.png"
 //ss
-const Pagination = ({ mueblesPerPage, totalMuebles, paginate, currentPage }) => {
+const Pagination = ({ productsPerPage, totalProducts, paginate, currentPage }) => {
   const pageNumbers = [];
   const [selectedPage, setSelectedPage] = useState(1);
 
-  for (let i = 1; i <= Math.ceil(totalMuebles / mueblesPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
     pageNumbers.push(i);
   }
 

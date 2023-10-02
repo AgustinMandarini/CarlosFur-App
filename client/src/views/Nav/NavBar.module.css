@@ -1,5 +1,5 @@
 .navBar {
-  background-color: rgba(117, 80, 54, 0.723);
+  background-color: #ae9c8f;
   display: flex;
   justify-content: space-evenly !important;
   align-items: center;
@@ -7,7 +7,7 @@
 }
 .navOne {
   padding: 10px !important;
-  background-color: rgba(117, 80, 54, 0.723) !important;
+  background-color: #ae9c8f !important;
   display: flex;
   justify-content: space-evenly !important;
   align-items: center;

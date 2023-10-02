@@ -3,21 +3,25 @@
   justify-content: center;
   align-content: center;
   padding-top: 7rem;
+  background-image: url(../../imagenes/backLanding.jpg);
+  background-repeat: repeat-y;
+  background-size: cover;
 }
 
 .container {
   justify-content: center;
-  background-color: rgba(117, 80, 54, 0.445);
+  background-color: #ebe9e2;
   height: 25rem;
   width: 27rem;
   padding-top: 7rem;
   margin-bottom: 16rem;
-  border: 1px solid black;
+  border-radius: 1rem;
 }
 .tittle {
-  font-size: 2.4rem;
+  font-size: 2.1rem;
   margin-bottom: 3.5rem;
   letter-spacing: 1px;
+  color: black;
 }
 .loginButton {
   /* border-radius: 0.8rem; */

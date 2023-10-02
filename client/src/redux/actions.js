@@ -48,11 +48,11 @@ export const postProduct = (payload) => {
       const producto = response.data;
       if (response.status === 200) {
         dispatch({ type: POST_PRODUCT, payload: producto });
-        alert("Receta Creada");
+        alert("Producto Creado");
         window.location.reload();
       }
     } catch (error) {
-      alert(`No se pudo crear`);
+      alert(`No se pudo crear el producto`);
     }
   };
 };

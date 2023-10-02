@@ -64,6 +64,7 @@ const FormPage = () => {
       productType: "",
       imageBase64: "",
     });
+    window.location.reload();
   };
 
   const handleSelectMuebles = (event) => {

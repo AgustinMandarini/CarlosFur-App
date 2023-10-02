@@ -67,10 +67,10 @@ const FormPage = () => {
     if (file && isAnImageRegex.test(file.name)) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-
       reader.onload = () => {
         setPreview(reader.result);
         setForm({ ...form, imageBase64: reader.result });
+        console.log(errors);
       };
     } else {
       window.alert("No es un formato de imagen valido");
@@ -205,7 +205,6 @@ const FormPage = () => {
             accept="image/*"
           />
           <div>{preview && <img src={preview} alt="preview" />}</div>
-          {/* {errors.imageBase64 ? <span>{errors.imageBase64}</span> : null} */}
         </header>
         <div>
           <button onClick={handleResetClick}>Reset</button>
@@ -223,6 +222,7 @@ const FormPage = () => {
           )
         )}
       </div>
+      {errors.imageBase64 ? <span>{errors.imageBase64}</span> : null}
       {Object.values(errors).every((error) => error === "") ? (
         <button type="submit" className={style.botonSubmit}>
           Enviar

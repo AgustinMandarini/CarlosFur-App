@@ -1,4 +1,36 @@
 .nameCard {
   text-decoration: none;
+  font-size: 1rem;
   color: black;
+  background-color: rgba(19, 18, 18, 0.623);
+  position: absolute;
+  bottom: 85px;
+  padding: 3px;
+  color: white;
+  font-size: 16px;
+  font-weight: 300;
+  max-width: 13vw;
+  letter-spacing: 1px;
+}
+.imgCard {
+  max-height: 16rem;
+  width: 15rem;
+}
+.container {
+  max-height: 18rem;
+}
+.nameLink {
+  text-decoration: none;
+}
+.divProps {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.p {
+  color: black;
+  /* font-weight: 400; */
+  margin: 0px;
+  padding: 2px;
+  font-size: 14px;
 }

@@ -6,11 +6,11 @@
 }
 
 .card {
-  border: 0.1em solid #ccc;
+  border: 0.1em solid #363434;
   padding: 2em;
   margin: 0.6em;
   width: calc(33.33% - 20px);
-  height: 18em;
+  height: 3em;
   box-sizing: border-box;
   border-radius: 8px; /* Agrega redondez a los elementos */
   transition: background-color 0.3s, transform 0.3s; /* Transiciones suaves */

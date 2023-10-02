@@ -13,12 +13,11 @@ import {
 } from "./types";
 
 import axios from "axios";
-const { REACT_APP_API_URL } = process.env;
-console.log(REACT_APP_API_URL);
+const apiUrl = process.env.REACT_APP_API_URL;
 
 export const getProducts = () => {
   return async function (dispatch) {
-    const apiData = await axios.get("http://localhost:3001/product");
+    const apiData = await axios.get(`${apiUrl}/product`);
     const product = apiData.data;
     return dispatch({
       type: GET_PRODUCTS,
@@ -26,10 +25,11 @@ export const getProducts = () => {
     });
   };
 };
+
 export const getDetail = (id) => {
   return async function (dispatch) {
     try {
-      const apiData = await axios.get(`http://localhost:3001/product/${id}`);
+      const apiData = await axios.get(`${apiUrl}/product/${id}`);
       const detail = apiData.data;
       dispatch({
         type: GET_DETAIL,
@@ -50,10 +50,7 @@ export const getDetail = (id) => {
 export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        `http://localhost:3001/product`,
-        payload
-      ); //hacemos un post mandandole la nueva actividad
+      const response = await axios.post(`${apiUrl}/product`, payload); //hacemos un post mandandole la nueva actividad
       const producto = response.data;
       return dispatch({
         type: POST_PRODUCT,
@@ -77,7 +74,7 @@ export const setImageURL = (imageURL) => {
 export const getProductType = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("http://localhost:3001/productType");
+      const response = await axios.get(`${apiUrl}/productType`);
       // console.log(response.data);
       const productType = response.data;
       return dispatch({
@@ -93,7 +90,7 @@ export const getProductType = () => {
 export const getProductByName = (name) => {
   return async function (dispatch) {
     const apiData = await axios.get(
-      `http://localhost:3001/product${name ? `?name=${name}` : ""}`
+      `${apiUrl}/product${name ? `?name=${name}` : ""}`
     );
     const nameid = apiData.data;
 

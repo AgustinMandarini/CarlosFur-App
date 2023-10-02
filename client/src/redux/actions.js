@@ -25,6 +25,7 @@ export const getProducts = () => {
     });
   };
 };
+
 export const getDetail = (id) => {
   return async function (dispatch) {
     try {

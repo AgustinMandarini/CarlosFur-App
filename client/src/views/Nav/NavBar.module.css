@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-evenly !important;
   align-items: center;
-  /* padding: 1.5em; */
+  max-height: 90px;
 }
 
 .divLinks {
@@ -70,6 +70,10 @@
 }
 .searchBarResponsive {
   display: none;
+}
+.imgLogo {
+  width: 140px;
+  margin-left: -0.9rem;
 }
 @media (max-width: 768px) {
 }

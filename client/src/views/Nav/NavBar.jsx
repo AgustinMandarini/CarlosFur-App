@@ -6,7 +6,7 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import ToolBar from "../../components/ToolBar/ToolBar";
 import { getProducts } from "../../redux/actions";
 import { useDispatch } from "react-redux";
-
+import logo from "../../imagenes/MSC_preview_rev_1.png";
 const NavBar = () => {
   const [navResponsive, setNavResponsive] = useState(false);
   const dispatch = useDispatch();
@@ -15,9 +15,7 @@ const NavBar = () => {
     <Navbar className={style.navBar} collapseOnSelect expand="lg">
       <Container fluid>
         <Navbar.Brand>
-          <Link to="/home" className={style.links}>
-            LOGO
-          </Link>
+          <img className={style.imgLogo} src={logo} alt="Logo" />
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"

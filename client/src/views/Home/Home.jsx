@@ -41,13 +41,15 @@ const Home = () => {
         if (filters.productType === "allProductTypes") {
           return true;
         }
-
-        if (product.productType !== null) {
-          return product.productType.name
+        if (
+          product.productType !== null &&
+          product.productType.name &&
+          product.productType.name
             .toLowerCase()
-            .includes(filters.productType);
+            .includes(filters.productType.toLowerCase())
+        ) {
+          return true;
         }
-        return true;
       })
       .sort((a, b) => {
         if (sort === "MC") {

@@ -1,21 +1,28 @@
-import Card from "../Card/Card"; //correcion
+import React from "react";
+import Card from "../Card/Card"; // Corrección
 import "./Cardscontainer.style.css";
 
 const CardsContainer = ({ currentProducts }) => {
   return (
     <div className="container">
-      {currentProducts.map((m) => {
-        return (
-          <div className="card" key={m.id}>
-            <Card
-              name={m.name}
-              color={m.color}
-              description={m.description}
-              id={m.id}
-            />
-          </div>
-        );
-      })}
+      {currentProducts.length > 0 ? (
+        currentProducts.map((m) => {
+          return (
+            <div className="card" key={m.id}>
+              <Card
+                name={m.name}
+                color={m.color}
+                description={m.description}
+                id={m.id}
+              />
+            </div>
+          );
+        })
+      ) : (
+        <div className="noProducts">
+          <h1>No se encontraron muebles con esos parámetros</h1>
+        </div>
+      )}
     </div>
   );
 };

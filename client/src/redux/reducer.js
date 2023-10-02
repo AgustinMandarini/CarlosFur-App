@@ -8,6 +8,8 @@ import {
   SET_SORT,
   SET_PRODUCTS_COPY,
   SET_PRODUCT_TYPE,
+  SET_COLOR,
+  SET_PRICE_RANGE,
 } from "./types";
 
 const initialState = {
@@ -19,7 +21,7 @@ const initialState = {
   filter: {
     productType: "allProductTypes",
     color: "allColors",
-    price: "allPrices",
+    price: ["allPrices"],
   },
   imageURL: null,
 };
@@ -67,6 +69,19 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         filter: { ...state.filter, productType: action.payload },
+      };
+    case SET_COLOR:
+      return {
+        ...state,
+        filter: { ...state.filter, color: action.payload },
+      };
+    case SET_PRICE_RANGE:
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          price: action.payload.split(","),
+        },
       };
 
     case SET_PRODUCTS_COPY:

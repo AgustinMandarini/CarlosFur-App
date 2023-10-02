@@ -8,6 +8,8 @@ import {
   SET_SORT,
   SET_PRODUCT_TYPE,
   SET_PRODUCTS_COPY,
+  SET_COLOR,
+  SET_PRICE_RANGE,
 } from "./types";
 
 import axios from "axios";
@@ -92,7 +94,6 @@ export const getProductByName = (name) => {
       `http://localhost:3001/product${name ? `?name=${name}` : ""}`
     );
     const nameid = apiData.data;
-    console.log(nameid);
 
     return dispatch({
       type: GET_PRODUCT_BY_NAME,
@@ -106,6 +107,12 @@ export const setSort = (payload) => {
 };
 export const setProductType = (payload) => {
   return { type: SET_PRODUCT_TYPE, payload };
+};
+export const setColor = (payload) => {
+  return { type: SET_COLOR, payload };
+};
+export const setPriceRange = (payload) => {
+  return { type: SET_PRICE_RANGE, payload };
 };
 
 export const setProductsCopy = (payload) => {

@@ -49,7 +49,10 @@ const FormPage = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    if (errors === true) {
+    if (
+      errors === true ||
+      !form.imageBase64.includes(["jpg", "jpeg", "png", "gif", "bmp", "tiff"])
+    ) {
       dispatch(postProduct(form)); //si errors no tiene errores dispatcha createMueble (crea nuevo mueble en la BDD)
     } else alert("No se pudo crear, por favor complete todo el formulario");
     setForm({
@@ -216,8 +219,8 @@ const FormPage = () => {
             onChange={handleImageChange}
             accept="image/*"
           />
+          {errors.imageBase64 ? <span>{errors.imageBase64}</span> : null}
           <div>{preview && <img src={preview} alt="preview" />}</div>
-          {/* {errors.imageBase64 ? <span>{errors.imageBase64}</span> : null} */}
         </header>
         <div>
           <button onClick={handleResetClick}>Reset</button>
@@ -240,7 +243,7 @@ const FormPage = () => {
           Enviar
         </button>
       ) : (
-        <button type="submit" className={style.botonSubmitOff}>
+        <button type="submit" className={style.botonSubmitOff} disabled={true}>
           Enviar
         </button>
       )}

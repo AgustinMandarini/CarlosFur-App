@@ -53,10 +53,11 @@ export const postProduct = (payload) => {
         payload
       ); //hacemos un post mandandole la nueva actividad
       const producto = response.data;
-      return dispatch({
-        type: POST_PRODUCT,
-        payload: producto,
-      }); //returnamos la action type y la actividad creada
+
+      if (response.status === 200) {
+        dispatch({ type: POST_PRODUCT, payload: producto });
+        alert("Receta Creada");
+      }
     } catch (error) {
       alert(`No se pudo crear`);
     }

@@ -2,41 +2,24 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  padding-top: 7rem;
   background-image: url(../../imagenes/backLanding.jpg);
-  background-repeat: repeat-y;
-  background-size: cover;
+  height: 100vh;
 }
 
 .container {
-  justify-content: center;
-  background-color: #ebe9e2;
-  height: 25rem;
+display: flex;
+flex-direction: column; /* Alinear contenido verticalmente */
+align-items: center;
   width: 27rem;
-  padding-top: 7rem;
-  margin-bottom: 16rem;
-  border-radius: 1rem;
 }
-.tittle {
-  font-size: 2.1rem;
-  margin-bottom: 3.5rem;
-  letter-spacing: 1px;
-  color: black;
+.container img {
+  width: 60%;
+  margin: 0;
 }
-.loginButton {
-  /* border-radius: 0.8rem; */
-  /* border: 0.1em solid black; */
-  padding: 0.7rem;
-  min-width: 5em;
-  cursor: pointer;
-  /* border: 1px solid rgb(1, 1, 1); */
-  font-size: 13px;
-  text-decoration: none;
-  color: white;
-  font-size: 0.7rem;
-  background-color: rgba(17, 17, 16, 0.575);
+.container .boton {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.9);
 }
-.loginButton:hover {
-  transform: scale(1.05); /* Cambia el tamaño al pasar el mouse (opcional) */
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
-}
+
+

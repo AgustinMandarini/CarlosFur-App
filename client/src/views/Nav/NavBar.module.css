@@ -5,7 +5,14 @@
   align-items: center;
   max-height: 90px;
 }
-
+.navOne {
+  padding: 10px !important;
+  background-color: rgba(117, 80, 54, 0.723) !important;
+  display: flex;
+  justify-content: space-evenly !important;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
 .divLinks {
   display: flex;
   width: 450px;
@@ -74,6 +81,9 @@
 .imgLogo {
   width: 140px;
   margin-left: -0.9rem;
+}
+.imgLogoResponsive {
+  width: 75px;
 }
 @media (max-width: 768px) {
 }

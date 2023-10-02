@@ -12,16 +12,24 @@ const NavBar = () => {
   const dispatch = useDispatch();
 
   return (
-    <Navbar className={style.navBar} collapseOnSelect expand="lg">
+    <Navbar
+      className={navResponsive ? style.navOne : style.navBar}
+      collapseOnSelect
+      expand="lg"
+    >
       <Container fluid>
-        <Navbar.Brand>
-          <img className={style.imgLogo} src={logo} alt="Logo" />
-        </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           onClick={() => setNavResponsive(true)}
           className={style.buttonResponsive}
         />
+        <Navbar.Brand>
+          <img
+            className={navResponsive ? style.imgLogoResponsive : style.imgLogo}
+            src={logo}
+            alt="Logo"
+          />
+        </Navbar.Brand>
         {/* Botón hamburguesa */}
         <Navbar.Collapse
           id="basic-navbar-nav"

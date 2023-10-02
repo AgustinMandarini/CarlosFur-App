@@ -8,6 +8,7 @@ import {
   setSort,
 } from "../../redux/actions";
 import style from "./ToolBar.module.css";
+import Form from "react-bootstrap/Form";
 
 const ToolBar = () => {
   const location = useLocation();
@@ -53,22 +54,27 @@ const ToolBar = () => {
   };
 
   return (
-    <div>
+    <div className={style.cntnToolBar}>
       {location.pathname === "/home" && (
         <div className={style.container}>
           <div className={style.divSelect}>
-            <select onChange={setSortProductsHandler} className={style.select}>
+            <Form.Select
+              size="sm"
+              onChange={setSortProductsHandler}
+              className={style.select}
+            >
               <option value="notSorted">Ordenar...</option>
               <option value="MC">Mas caros</option>
               <option value="MB">Mas baratos </option>
               <option value="MV">Mayor Antiguedad</option>
               <option value="MN">Menor Antiguedad </option>
-            </select>
+            </Form.Select>
           </div>
-          <div>
-            <select
+          <div className={style.divSelect}>
+            <Form.Select
               onChange={setFilterByProductTypeHandler}
-              className="selectMain"
+              size="sm"
+              className={style.select}
             >
               <option value="allProductTypes">Tipo de ambiente</option>
               {productTypeNames.map((productType, index) => {
@@ -78,9 +84,14 @@ const ToolBar = () => {
                   </option>
                 );
               })}
-            </select>
-
-            <select onChange={setFilterByColorHandler} className="selectMain">
+            </Form.Select>
+          </div>
+          <div className={style.divSelect}>
+            <Form.Select
+              onChange={setFilterByColorHandler}
+              size="sm"
+              className={style.select}
+            >
               <option value="allColors">Colores</option>
               {productColors.map((color, index) => {
                 return (
@@ -89,8 +100,14 @@ const ToolBar = () => {
                   </option>
                 );
               })}
-            </select>
-            <select onChange={setFilterByPriceHandler} className="selectMain">
+            </Form.Select>
+          </div>
+          <div className={style.divSelect}>
+            <Form.Select
+              onChange={setFilterByPriceHandler}
+              size="sm"
+              className={style.select}
+            >
               <option value={[]}>Precios</option>
               <option value={cheapPrices}>
                 Precios entre {cheapPrices[0]} y{" "}
@@ -104,7 +121,7 @@ const ToolBar = () => {
                 Precios entre {highPrices[0]} y{" "}
                 {highPrices[highPrices.length - 1]}
               </option>
-            </select>
+            </Form.Select>
           </div>
         </div>
       )}

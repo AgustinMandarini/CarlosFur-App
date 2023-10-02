@@ -10,6 +10,7 @@ const CardsContainer = ({ currentProducts }) => {
           return (
             <div className="card" key={m.id}>
               <Card
+                imagePath={m.imagePath}
                 name={m.name}
                 color={m.color}
                 description={m.description}

@@ -27,7 +27,7 @@ const Detail = () => {
 
       <div className={style.cntnCardDetail}>
         <div className={style.cntnP}>
-          <img src={stateDetail.imagePath} />
+          <img src={stateDetail.imagePath} alt="image" />
           <p className={style.p}>Nombre: {stateDetail.name}</p>
           <p className={style.p}>Precio: {stateDetail.price}</p>
           <p className={style.p}>Altura: {stateDetail.height} </p>

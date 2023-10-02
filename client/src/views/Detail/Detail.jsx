@@ -3,13 +3,12 @@ import style from "./Detail.module.css";
 import { getDetail } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const stateDetail = useSelector((state) => state.detail);
-
 
   useEffect(() => {
     dispatch(getDetail(id));

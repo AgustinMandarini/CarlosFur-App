@@ -37,17 +37,44 @@ const Home = () => {
   useEffect(() => {
     const sortedProducts = [...globalProducts]; // Copia de los muebles globales
     const list = sortedProducts
+      // eslint-disable-next-line
       .filter((product) => {
         if (filters.productType === "allProductTypes") {
           return true;
         }
-
-        if (product.productType !== null) {
-          return product.productType.name
+        if (
+          product.productType !== null &&
+          product.productType.name &&
+          product.productType.name
             .toLowerCase()
-            .includes(filters.productType);
+            .includes(filters.productType.toLowerCase())
+        ) {
+          return true;
         }
-        return true;
+      })
+      // eslint-disable-next-line
+      .filter((product) => {
+        if (filters.color === "allColors") {
+          return true;
+        }
+        if (
+          product.color !== null &&
+          product.color.toLowerCase().includes(filters.color.toLowerCase())
+        ) {
+          return true;
+        }
+      })
+      // eslint-disable-next-line
+      .filter((product) => {
+        if (filters.price.length === 1) {
+          return true;
+        }
+        if (
+          product.price !== null &&
+          filters.price.includes(product.price.toString())
+        ) {
+          return true;
+        }
       })
       .sort((a, b) => {
         if (sort === "MC") {
@@ -70,7 +97,7 @@ const Home = () => {
     dispatch(setProductsCopy(list)); // Despachar la acción con la lista ordenada
     setCurrentPage(1);
     // eslint-disable-next-line
-  }, [sort, filters.productType]);
+  }, [sort, filters.productType, filters.color, filters.price]);
 
   return (
     <div className={style.cntnHome}>

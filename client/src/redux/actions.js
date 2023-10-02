@@ -108,4 +108,4 @@ export const setPriceRange = (payload) => {
 
 export const setProductsCopy = (payload) => {
   return { type: SET_PRODUCTS_COPY, payload };
-};
+}

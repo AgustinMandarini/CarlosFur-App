@@ -26,24 +26,15 @@ const ToolBar = () => {
   ];
   // Armado de opciones "Precios Baratos", "Precios Medios", "Precios Altos"
   const productPrices = productList.map((product) => product.price);
-  const cheapPrices = [];
-  const middlePrices = [];
-  const highPrices = [];
+
   const sortedProductPrices = productPrices.sort(function (a, b) {
     return a - b;
   });
-  const higherPrice = sortedProductPrices[sortedProductPrices.length - 1];
-  const dividedByThree = higherPrice / 3;
-  const dividedByThreeTimesTwo = dividedByThree * 2;
-  productPrices.forEach(function (price) {
-    if (price >= 0 && price < dividedByThree) {
-      cheapPrices.push(price);
-    } else if (price >= dividedByThree && price < dividedByThreeTimesTwo) {
-      middlePrices.push(price);
-    } else {
-      highPrices.push(price);
-    }
-  });
+  const chunkSize = Math.ceil(sortedProductPrices.length / 3);
+
+  const cheapPrices = sortedProductPrices.slice(0, chunkSize);
+  const middlePrices = sortedProductPrices.slice(chunkSize, 2 * chunkSize);
+  const highPrices = sortedProductPrices.slice(2 * chunkSize);
   // Acá se hacen los dispatchs para configurar el eventual renderizado en el estado global
   const dispatch = useDispatch();
 

@@ -40,24 +40,19 @@ export const getDetail = (id) => {
     }
   };
 };
-// export const getDetail = (id) => {
-//   return {
-//     type: GET_DETAIL,
-//     payload: mueblesData.find((producto) => producto.id === parseInt(id)), // esta es la provisoria
-//   };
-// };
 
 export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${apiUrl}/product`, payload); //hacemos un post mandandole la nueva actividad
+      const response = await axios.post(`${apiUrl}/product`, payload);
       const producto = response.data;
-      return dispatch({
-        type: POST_PRODUCT,
-        payload: producto,
-      }); //returnamos la action type y la actividad creada
+      if (response.status === 200) {
+        dispatch({ type: POST_PRODUCT, payload: producto });
+        alert("Producto Creado");
+        window.location.reload();
+      }
     } catch (error) {
-      alert(`No se pudo crear`);
+      alert(`No se pudo crear el producto`);
     }
   };
 };
@@ -69,13 +64,10 @@ export const setImageURL = (imageURL) => {
   };
 };
 
-// export { getProducts, getDetail };
-
 export const getProductType = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(`${apiUrl}/productType`);
-      // console.log(response.data);
       const productType = response.data;
       return dispatch({
         type: GET_PRODUCT_TYPE,

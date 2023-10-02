@@ -13,7 +13,7 @@ const Detail = () => {
   useEffect(() => {
     dispatch(getDetail(id));
   }, [dispatch, id]);
-
+  console.log(stateDetail);
   return (
     <div className={style.cntnDetail}>
       <Button
@@ -27,7 +27,14 @@ const Detail = () => {
 
       <div className={style.cntnCardDetail}>
         <div className={style.cntnP}>
-          <img src={stateDetail.imagePath} alt="image" />
+          <div>
+            <img
+              src={stateDetail.imagePath}
+              className={style.imgDetail}
+              alt="image"
+            />
+          </div>
+
           <p className={style.p}>Nombre: {stateDetail.name}</p>
           <p className={style.p}>Precio: {stateDetail.price}</p>
           <p className={style.p}>Altura: {stateDetail.height} </p>

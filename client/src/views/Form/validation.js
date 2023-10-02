@@ -52,7 +52,6 @@ const validation = (formState) => {
   if (!formState.description)
     errors.description = "Por favor completa este campo";
 
-  console.log(formState.imageBase64);
   if (!formState.imageBase64)
     errors.imageBase64 = "Por favor adjunte una imagen";
   else if (!/\.(jpg|jpeg|png|gif|bmp|tiff)$/i.test(formState.imageBase64)) {

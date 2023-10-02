@@ -49,25 +49,31 @@ const FormPage = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    if (
-      errors === true ||
-      !form.imageBase64.includes(["jpg", "jpeg", "png", "gif", "bmp", "tiff"])
-    ) {
-      dispatch(postProduct(form)); //si errors no tiene errores dispatcha createMueble (crea nuevo mueble en la BDD)
-    } else alert("No se pudo crear, por favor complete todo el formulario");
-    setForm({
-      name: "",
-      price: "",
-      height: "",
-      depth: "",
-      width: "",
-      weight: "",
-      color: "",
-      description: "",
-      productType: "",
-      imageBase64: "",
-    });
-    window.location.reload();
+    // if (
+    //   errors === true ||
+    //   !form.imageBase64.includes(["jpg", "jpeg", "png", "gif", "bmp", "tiff"])
+    // ) {
+    //   dispatch(postProduct(form)); //si errors no tiene errores dispatcha createMueble (crea nuevo mueble en la BDD)
+    // } else alert("No se pudo crear, por favor complete todo el formulario");
+    // setForm({
+    //   name: "",
+    //   price: "",
+    //   height: "",
+    //   depth: "",
+    //   width: "",
+    //   weight: "",
+    //   color: "",
+    //   description: "",
+    //   productType: "",
+    //   imageBase64: "",
+    // });
+    // window.location.reload();
+
+    const validationErrors = validation(form);
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      dispatch(postProduct(form));
+    }
   };
 
   const handleSelectMuebles = (event) => {

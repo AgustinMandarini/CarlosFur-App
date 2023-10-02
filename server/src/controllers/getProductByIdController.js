@@ -6,7 +6,7 @@ const getProductByIdController = async (id) => {
         where: {
           id: id,
         },
-        attributes: ['id', 'name', 'price', 'height', 'depth', 'width', 'weight', 'color', 'description'],
+        attributes: ['id', 'name', 'price', 'height', 'depth', 'width', 'weight', 'color', 'description', "imagePath"],
       });
       
       return product; 

@@ -5,7 +5,7 @@ const LandingPage = () => {
   return (
     <div className={style.background}>
       <div className={style.container}>
-        <h1 className={style.tittle}> MSC Amoblamientos</h1>
+        <h1 className={style.tittle}> MSC AMOBLAMIENTOS</h1>
         <Button variant="dark" href="/home" size="sm">
           Ingresar
         </Button>

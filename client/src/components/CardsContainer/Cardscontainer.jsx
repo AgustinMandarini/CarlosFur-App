@@ -12,8 +12,8 @@ const CardsContainer = ({ currentProducts }) => {
               <Card
                 imagePath={m.imagePath}
                 name={m.name}
-                color={m.color}
                 description={m.description}
+                price={m.price}
                 id={m.id}
               />
             </div>

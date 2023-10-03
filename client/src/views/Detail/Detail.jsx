@@ -4,6 +4,7 @@ import { getDetail } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import imagenDefault from "./../../imagenes/default.png"
 
 const Detail = () => {
   const { id } = useParams();
@@ -27,12 +28,22 @@ const Detail = () => {
 
       <div className={style.cntnCardDetail}>
         <div className={style.cntnP}>
-        <div className={style.imgContainer}>
-            <img
-              src={stateDetail.imagePath}
-              className={style.imgDetail}
-              alt="image"
-            />
+          <div className={style.imgContainer}>
+            {stateDetail.imagePath ? (
+              <>
+                <img
+                  src={stateDetail.imagePath}
+                  className={style.imgDetail}
+                  alt="image"
+                />
+              </>
+            ) : (
+              <img
+                src={imagenDefault}
+                className={style.imgDetail}
+                alt="image"
+              />
+            )}
           </div>
 
           <p className={style.p}>Nombre: {stateDetail.name}</p>

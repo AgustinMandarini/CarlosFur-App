@@ -39,9 +39,9 @@
 .logo {
   display: flex;
   height: 20px;
-  width: 100px;
+  width: 70px;
   object-fit: fill;
-  margin-right: 80px;
+  margin-right: 90px;
 }
 .active {
   margin-top: 8px;
@@ -79,8 +79,8 @@
   display: none;
 }
 .imgLogo {
-  width: 140px;
-  margin-left: -0.9rem;
+  width: 120px;
+  margin-left: 0.1rem;
 }
 .imgLogoResponsive {
   width: 75px;

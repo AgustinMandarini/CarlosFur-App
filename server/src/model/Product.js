@@ -37,14 +37,15 @@ module.exports = (sequelize) => {
         type: DataTypes.FLOAT,
         validate: { min: 0 },
       },
-      color: {
-        type: DataTypes.STRING,
-      },
       description: {
         type: DataTypes.TEXT,
       },
       imagePath: {
         type: DataTypes.STRING,
+      },
+      stock: {
+        type: DataTypes.INTEGER,
+        validate: {min : 0}
       },
     },
     { timestamps: false }

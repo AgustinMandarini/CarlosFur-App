@@ -2,11 +2,6 @@ const { Product, ProductType } = require("../db");
 const { findAllTypes } = require("./getProductTypeController");
 const { cloudUploadImage } = require("../services/cloudinary/index.js");
 
-<<<<<<< HEAD
-const postProductController = async ({name,price,height,depth,width,weight,color,description,productTypeId}) => {
-  // Crea un nuevo producto, sin agregar aun el tipo de producto, que sera una relacion manyToMany con la tabla productType
-  const newProduct = await Product.create({name,price,height,depth,width,weight,color,description,productTypeId});
-=======
 const postProductController = async ({
   name,
   price,
@@ -17,9 +12,10 @@ const postProductController = async ({
   color,
   description,
   imagePath,
-  productType,
+  productTypeId,
+  stock,
 }) => {
-  const cloudImageURL = await cloudUploadImage(imagePath);
+  // const cloudImageURL = await cloudUploadImage(imagePath);
   // Crea un nuevo producto, sin agregar aun el tipo de producto, que sera una relacion manyToMany con la tabla productType
   const newProduct = await Product.create({
     name,
@@ -30,9 +26,11 @@ const postProductController = async ({
     weight,
     color,
     description,
-    imagePath: cloudImageURL,
+    imagePath,
+    productTypeId,
+    stock,
+    // imagePath: cloudImageURL,
   });
->>>>>>> 60dc237c39e1a552f3507edc3e889f6a25a09374
 
   // Este codigo asocia un tipo de producto a un producto
 
@@ -46,10 +44,8 @@ const postProductController = async ({
   // const type = await ProductType.findOne({
   //   where: { name: productType },
   // });
-  
-  // await newProduct.setProductType(type);
-return newProduct
-  
+  // await newProduct.setProduct_Type(type);
+  return newProduct;
 };
 
 module.exports = { postProductController };

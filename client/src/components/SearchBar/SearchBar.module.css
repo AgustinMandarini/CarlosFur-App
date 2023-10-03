@@ -1,21 +1,10 @@
-.inputSearch {
-  border-radius:0.7em;
-  margin-right:1em;
-  border: 0.1em solid black;
-  padding:1em 0.1em;
-  height:2em;
+.divSerchBar {
+  margin-right: 1rem;
 }
-.addButton {
-  border-radius:0.7em;
-  border: 0.1em solid black;
-  padding:0.3em 0.1em;
-  min-width:5em;
-  cursor: pointer;
-  border: 1px solid rgb(1, 1, 1);
+.inputSearch {
   font-size: 14px;
 }
-.addButton:hover {
-  transform: scale(1.05); /* Cambia el tamaño al pasar el mouse (opcional) */
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+.inputSearch:focus {
+  border-color: #000 !important;
+  box-shadow: none !important;
 }
-

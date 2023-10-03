@@ -8,6 +8,9 @@ const sequelize = new Sequelize(DB_CONN, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
+
+
+
 const basename = path.basename(__filename); // esta linea guarda el nombre del archivo actual
 
 const modelDefiners = [];
@@ -37,8 +40,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Product, ProductType } = sequelize.models;
 
 // Aca vendrian las relaciones
-Product.belongsTo(ProductType);
-ProductType.hasMany(Product);
+Product.belongsTo(ProductType, { foreignKey: 'productTypeId' });
+ProductType.hasMany(Product, { foreignKey: 'productTypeId' });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

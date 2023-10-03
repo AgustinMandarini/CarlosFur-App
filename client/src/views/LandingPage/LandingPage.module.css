@@ -1,17 +1,25 @@
 .background {
-    margin: 0;
-    padding: 3%;
-    background-color: antiquewhite;
-    background-size: cover;
-    background-position: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background-image: url(../../imagenes/backLanding.jpg);
+  height: 100vh;
 }
 
 .container {
-    border: solid 4px #000000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    height: 85vh;
+display: flex;
+flex-direction: column; /* Alinear contenido verticalmente */
+align-items: center;
+  width: 27rem;
 }
+.container img {
+  width: 60%;
+  margin: 0;
+}
+.container .boton {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.9);
+}
+
+

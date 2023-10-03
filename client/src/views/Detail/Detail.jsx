@@ -1,10 +1,10 @@
 import { React, useEffect } from "react";
 import style from "./Detail.module.css";
-import mueblesData from "../../muebles.json";
 import { getDetail } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-
-import { Link, useParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import imagenDefault from "./../../imagenes/default.png"
 
 const Detail = () => {
   const { id } = useParams();
@@ -14,21 +14,46 @@ const Detail = () => {
   useEffect(() => {
     dispatch(getDetail(id));
   }, [dispatch, id]);
-
+  console.log(stateDetail);
   return (
     <div className={style.cntnDetail}>
-      <Link to="/home" className={style.goBackLink}>
+      <Button
+        className={style.goBackLink}
+        variant="dark"
+        href="/home"
+        size="sm"
+      >
         Volver
-      </Link>
+      </Button>
+
       <div className={style.cntnCardDetail}>
         <div className={style.cntnP}>
-          <p className={style.p}>Nombre: {stateDetail.nombre}</p>
-          <p className={style.p}>Altura: {stateDetail.altura}</p>
-          <p className={style.p}>Profundidad: {stateDetail.profundidad} </p>
-          <p className={style.p}>Ancho: {stateDetail.ancho} </p>
-          <p className={style.p}>Peso: {stateDetail.peso}</p>
+          <div className={style.imgContainer}>
+            {stateDetail.imagePath ? (
+              <>
+                <img
+                  src={stateDetail.imagePath}
+                  className={style.imgDetail}
+                  alt="image"
+                />
+              </>
+            ) : (
+              <img
+                src={imagenDefault}
+                className={style.imgDetail}
+                alt="image"
+              />
+            )}
+          </div>
+
+          <p className={style.p}>Nombre: {stateDetail.name}</p>
+          <p className={style.p}>Precio: {stateDetail.price}</p>
+          <p className={style.p}>Altura: {stateDetail.height} </p>
+          <p className={style.p}>Profundidad: {stateDetail.depth} </p>
+          <p className={style.p}>Ancho: {stateDetail.width}</p>
+          <p className={style.p}>Peso: {stateDetail.weight}</p>
           <p className={style.p}>Color: {stateDetail.color}</p>
-          <p className={style.p}>Descripcion: {stateDetail.descripcion}</p>
+          <p className={style.p}>Descripcion: {stateDetail.description}</p>
         </div>
       </div>
     </div>

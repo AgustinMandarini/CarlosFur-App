@@ -6,6 +6,7 @@ import Form from "./views/Form/Form";
 import Home from "./views/Home/Home";
 import LandingPage from "./views/LandingPage/LandingPage";
 import NavBar from "./views/Nav/NavBar";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const location = useLocation();
@@ -23,12 +24,5 @@ function App() {
   );
 }
 
-/* <div>
-      {location.pathname !== "/" && <NavBar />}
-
-      <Route exact path="/" component={Landing} />
-      <Route exact path="/create" component={Form} />
-      <Route path="/detail/:id" component={Detail} />
-    </div> */
 
 export default App;

@@ -6,7 +6,7 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import ToolBar from "../../components/ToolBar/ToolBar";
 import { getProducts } from "../../redux/actions";
 import { useDispatch } from "react-redux";
-import logo from "../../imagenes/MSC_preview_rev_1.png";
+import logo from "../../imagenes/MSC.png";
 const NavBar = () => {
   const [navResponsive, setNavResponsive] = useState(false);
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const NavBar = () => {
     <Navbar
       className={navResponsive ? style.navOne : style.navBar}
       collapseOnSelect
-      expand="lg"
+      expand="sm"
     >
       <Container fluid>
         <Navbar.Toggle

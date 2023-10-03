@@ -4,22 +4,24 @@
   align-content: center;
   background-image: url(../../imagenes/backLanding.jpg);
   height: 100vh;
+  padding-top: 8%;
 }
 
 .container {
-display: flex;
-flex-direction: column; /* Alinear contenido verticalmente */
-align-items: center;
+  display: flex;
+  flex-direction: column; /* Alinear contenido verticalmente */
+  align-items: center;
   width: 27rem;
+  height: 80%;
 }
 .container img {
-  width: 60%;
-  margin: 0;
+  width: 80%;
+  margin-bottom: 0px;
 }
 .container .boton {
   background-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
   box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  margin-top: 35px;
 }
-
-

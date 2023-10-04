@@ -1,12 +1,13 @@
-const { Color } = require("../db");
+const { Color } = require("../db.js");
 
-const createColor = async (name, description) => {
-  const newColor = await Color.create({
-    name,
-    description,
+const findAllTypes = async () => {
+  const allColorsArray = await Color.findAll({
+    model: Color,
+    attributes: ["id","name"],
   });
-
-  return newColor;
+  return allColorsArray;
 };
 
-module.exports = { createColor };
+module.exports = {
+  findAllTypes,
+};

@@ -1,8 +1,8 @@
-const { findAllColors } = require("../controllers/getColorsController.js");
+const { findAllTypes } = require("../controllers/getColorController.js");
 
-const getColorsHandler = async (req, res) => {
+const getColorHandler = async (req, res) => {
   try {
-    const allColors = await findAllColors();
+    const allColors = await findAllTypes();
     res.status(200).send(allColors);
   } catch (error) {
     res.status(400).json({ error: error.mesagge });
@@ -10,5 +10,5 @@ const getColorsHandler = async (req, res) => {
 };
 
 module.exports = {
-  getColorsHandler,
+  getColorHandler,
 };

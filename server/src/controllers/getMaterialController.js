@@ -1,12 +1,14 @@
-const { Material } = require("../db");
+const { Material } = require("../db.js");
 
-const createMaterial = async (name, description) => {
-  const newMaterial = await Material.create({
-    name,
-    description,
+const findAllTypes = async () => {
+  const allMaterialsArray = await Material.findAll({
+    model: Material,
+    attributes: ["id","name"],
   });
-
-  return newMaterial;
+  return allMaterialsArray;
 };
 
-module.exports = { createMaterial };
+module.exports = {
+  findAllTypes,
+};
+

@@ -1,10 +1,10 @@
 const {
-  findAllMaterials,
-} = require("../controllers/getMaterialsController.js");
+  findAllTypes,
+} = require("../controllers/getMaterialController.js");
 
-const getMaterialsHandler = async (req, res) => {
+const getMaterialHandler = async (req, res) => {
   try {
-    const allMaterials = await findAllMaterials();
+    const allMaterials = await findAllTypes();
     res.status(200).send(allMaterials);
   } catch (error) {
     res.status(400).json({ error: error.mesagge });
@@ -12,5 +12,5 @@ const getMaterialsHandler = async (req, res) => {
 };
 
 module.exports = {
-  getMaterialsHandler,
+  getMaterialHandler,
 };

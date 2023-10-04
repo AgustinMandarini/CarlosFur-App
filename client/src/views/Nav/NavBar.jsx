@@ -3,9 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import style from "./NavBar.module.css";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import ToolBar from "../../components/ToolBar/ToolBar";
+import { getProducts } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 
 const NavBar = () => {
   const [navResponsive, setNavResponsive] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <Navbar className={style.navBar} collapseOnSelect expand="lg">
@@ -34,6 +38,7 @@ const NavBar = () => {
               <Link
                 to="/home"
                 className={navResponsive ? style.linkResponsive : style.links}
+                onClick={() => dispatch(getProducts())}
               >
                 Home
               </Link>

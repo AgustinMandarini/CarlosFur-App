@@ -1,21 +1,20 @@
 import Card from "../Card/Card"; //correcion
 import "./Cardscontainer.style.css";
 
-const CardsContainer = ({ currentMuebles }) => {
+const CardsContainer = ({ currentProducts }) => {
   return (
     <div className="container">
-      {currentMuebles.map((m) => {
+      {currentProducts.map((m) => {
         return (
-          <div className="card">
+          <div className="card" key={m.id}>
             <Card
-              id={m.id}
-              nombre={m.nombre}
+              name={m.name}
               color={m.color}
-              descripcion={m.descripcion}
+              description={m.description}
+              id={m.id}
             />
           </div>
         );
-
       })}
     </div>
   );

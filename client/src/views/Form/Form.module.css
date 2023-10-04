@@ -1,115 +1,253 @@
-.formContainer {
-    background-color: rgba(249, 249, 249, 0.675); 
-    padding: 10px;
-    border-radius: 1.5em;
-    width: 45%; 
-    margin: 3em auto;
-    border: 0.13em solid rgb(0, 0, 0);
-    text-align: center;
+.cntnForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  flex-direction: column;
+}
+.formConteiner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 28rem;
+  border: 1px solid black;
+  padding-top: 2.3rem;
+  background-color: white;
+  box-shadow: 8px 0px 10px rgba(148, 133, 122, 0.8);
+}
+.formGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.6rem !important;
+}
+.input {
+  height: 0.1rem !important;
+  width: 190px !important; /* Ancho fijo para los inputs */
+}
+.input:focus {
+  border: 2px solid #ae9c8f !important;
+  box-shadow: none !important;
+}
+
+.divinputErrorType {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+  margin-left: 2rem !important;
+}
+.divinputError {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+  margin-left: 2rem !important;
+}
+.error {
+  font-size: 0.7rem !important;
+  justify-content: center;
+  align-items: center;
+  color: red !important;
+}
+.tittle {
+  font-size: 2.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  margin-bottom: 1.2rem;
+}
+.label {
+  font-size: 1.1rem !important;
+  font-weight: 400;
+  width: 90px; /* Ancho fijo para los labels */
+  text-align: start;
+  margin-right: 5px;
+}
+.button {
+  justify-content: center;
+  margin: 1rem;
+}
+.buttonReset {
+  justify-content: center;
+  font-size: 0.1rem;
+}
+.select {
+  height: 1.9rem !important;
+  width: 190px !important; /* Ancho fijo para los inputs */
+  margin-top: -0.9rem !important;
+}
+.select:focus {
+  border-color: #ae9c8f !important;
+  box-shadow: none !important;
+}
+.divSelectImage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+}
+.tittleSelectImage {
+  font-weight: 500;
+  margin: 0.6rem;
+}
+.inputSelectImage {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+.botonReset {
+  color: white;
+  padding: 2px 13px 2px 13px;
+  border: 2px solid black;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 1rem;
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+}
+.botonReset:hover {
+  background-color: white !important;
+  border: 1px solid black;
+  color: black;
+}
+.botonSubmit {
+  color: white;
+  padding: 8px 25px 8px 25px;
+  border: 2px solid black;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 1rem;
+  background-color: rgb(0, 0, 0);
+}
+.botonSubmit:hover {
+  background-color: white !important;
+  border: 1px solid black;
+  color: black;
+}
+.botonSubmitOff {
+  background-color: black;
+  color: white;
+  padding: 8px 25px 8px 25px;
+  border: 2px solid black;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 1rem;
+}
+.botonSubmitOff:hover {
+  background-color: white !important;
+  border: 1px solid black;
+  color: black;
+}
+.imageForm {
+  max-width: 320px;
+}
+/* .formContainer {
+  background-color: rgba(249, 249, 249, 0.675);
+  padding: 10px;
+  border-radius: 1.5em;
+  width: 45%;
+  margin: 3em auto;
+  border: 0.13em solid rgb(0, 0, 0);
+  text-align: center;
+}
+
+.container {
+  margin: 0.5em auto;
+  background-color: rgb(243, 236, 236);
+  padding: 2em;
+  border-radius: 1.5em;
+  border: 0.1em solid rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  width: 70%;
+  box-sizing: border-box;
+  text-align: center;
+}
+.container:hover {
+  background-color: rgba(117, 80, 54, 0.445);
+  transform: scale(1.02);
+}
+
+.container label {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.container input,
+.container select {
+  width: 60%;
+  padding: 5px;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 3px;
+  background-color: transparent;
+  color: rgb(0, 0, 0);
+}
+
+.container span {
+  color: rgb(223, 9, 9);
+  font-size: 0.8em;
+  display: block;
+}
+
+.botonSubmit {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 1em auto;
+  display: block;
+}
+.botonSubmit:hover {
+  background-color: rgba(117, 80, 54, 0.814);
+  transform: scale(1.02);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+}
+.botonSubmitOff {
+  background-color: rgba(0, 0, 0, 0.598);
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 1em auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .formContainer {
+    width: 90%;
+    margin: 1em auto;
   }
-  
-  /* Estilos para los contenedores */
+
   .container {
-    margin: 0.5em auto; /* Reduce el margen en pantallas pequeñas */
-    background-color: rgb(243, 236, 236); 
-    padding: 2em;
-    border-radius: 1.5em;
-    border: 0.1em solid rgb(0, 0, 0);
-    color: rgb(0, 0, 0);
-    width:70%; 
-    box-sizing: border-box; /* Evita que los bordes afecten al ancho total */
-    text-align: center;
+    width: 90%;
+    margin: 0.15 auto;
+    padding: 1em;
   }
-  .container:hover {
-    background-color: rgba(117, 80, 54, 0.445); /* Cambia el color al pasar el mouse (puedes ajustar el color) */
-    transform: scale(1.02); /* Cambia el tamaño al pasar el mouse */
-  }
-  
-  /* Estilos para los elementos dentro de los contenedores */
+
   .container label {
     color: rgb(0, 0, 0);
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
   }
-  
-  .container input,
-  .container select {
-    width: 60%;
-    padding: 5px;
-    border: 1px solid rgb(0, 0, 0); 
-    border-radius: 3px;
-    background-color: transparent;
-    color: rgb(0, 0, 0); 
-  }
-  
-  /* Estilos para el mensaje de error */
-  .container span {
-    color: rgb(223, 9, 9);
-    font-size: 0.8em;
-    display: block;
-  }
-  
-  /* Estilos para el botón */
-  .botonSubmit {
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 1em auto; /* Centra el botón en pantallas pequeñas */
-    display: block;
-  }
-  .botonSubmit:hover {
-    background-color: rgba(117, 80, 54, 0.814); /* Cambia el color al pasar el mouse (puedes ajustar el color) */
-    transform: scale(1.02); /* Cambia el tamaño al pasar el mouse */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
-  }
-  .botonSubmitOff{
-    background-color: rgba(0, 0, 0, 0.598);
-    color: rgb(255, 255, 255);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 1em auto; /* Centra el botón en pantallas pequeñas */
-    display: block;
-  }
-  
 
-  /* Estilos responsive */
-  @media (max-width: 768px) {
-    .formContainer {
-      width: 90%; /* Cambia el ancho para adaptarse a pantallas más pequeñas */
-      margin: 1em auto;
-    }
-  
-    .container {
-      width: 90%; /* Haz que los contenedores ocupen todo el ancho en pantallas pequeñas */
-      margin: 0.15 auto; /* Elimina el margen en pantallas pequeñas */
-      padding: 1em;
-    }
-  
-    .container label {
-      color: rgb(0, 0, 0);
-      font-weight: bold;
-      display: block;
-      margin-bottom: 5px;
-    }
-    
-    .container input,
-    .container select,
-    .container span,
-    .container label {
-      padding: 5px;
-      font-size:0.8em;
-    }
-  
-    .container h1 {
-      font-size: 1.2em;
-    }
-   
+  .container input,
+  .container select,
+  .container span,
+  .container label {
+    padding: 5px;
+    font-size: 0.8em;
   }
-  
-  
+
+  .container h1 {
+    font-size: 1.2em;
+  }
+} */

@@ -32,6 +32,7 @@ const SearchBar = () => {
           <Form.Control
             placeholder="buscar mueble..."
             onChange={handleSubmit}
+            className={style.inputSearch}
           />
           <Button className="ms-1" variant="dark" onClick={handleOnClick}>
             Buscar

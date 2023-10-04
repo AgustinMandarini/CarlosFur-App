@@ -1,4 +1,49 @@
 .nameCard {
   text-decoration: none;
+  font-size: 1rem;
   color: black;
+  background-color: rgba(19, 18, 18, 0.873);
+  position: absolute;
+  bottom: 85px;
+  left: 22px;
+  padding: 3px;
+  color: white;
+  font-size: 16px;
+  font-weight: 300;
+  max-width: 14vw;
+  letter-spacing: 1px;
+  justify-content: center;
+}
+.imgCard {
+  height: 16rem;
+  width: 15rem;
+  margin-bottom: 4px;
+}
+.container {
+  height: 18.3rem;
+  justify-content: center;
+  align-items: center;
+}
+.nameLink {
+  text-decoration: none;
+}
+.divProps {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.description {
+  color: black;
+  font-weight: 300;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+.price {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  height: 10px;
+  margin-bottom: 18px;
+  font-size: 17px;
+  letter-spacing: 1px;
 }

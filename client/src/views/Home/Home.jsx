@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
 import Pagination from "../../components/Pagination/Pagination";
-import {
-  getProducts,
-  getProductType,
-  setProductsCopy,
-} from "../../redux/actions";
+import { setProductsCopy } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import ToolBar from "../../components/ToolBar/ToolBar";
 import style from "./Home.module.css";
@@ -20,7 +16,7 @@ const Home = () => {
 
   // useSelectors para observar el estado global donde haga falta
   const globalProducts = useSelector((state) => state.muebles);
-  const allProducts = useSelector((state) => state.allProducts);
+  const filters = useSelector((state) => state.filter);
   const sort = useSelector((state) => state.sort);
 
   // Paginado
@@ -40,28 +36,68 @@ const Home = () => {
   //Combinación de ordenamientos y filtros
   useEffect(() => {
     const sortedProducts = [...globalProducts]; // Copia de los muebles globales
-    sortedProducts.sort((a, b) => {
-      if (sort === "MC") {
-        return a.price > b.price ? -1 : 1;
-      }
-      if (sort === "MB") {
-        return a.price < b.price ? -1 : 1;
-      }
-      if (sort === "MN") {
-        return a.id > b.id ? -1 : 1;
-      }
-      if (sort === "MV") {
-        return a.id < b.id ? -1 : 1;
-      }
-      return 0;
-    });
-    // console.log({ sortedProducts, sort });
+    const list = sortedProducts
+      // eslint-disable-next-line
+      .filter((product) => {
+        if (filters.productType === "allProductTypes") {
+          return true;
+        }
+        if (
+          product.productType !== null &&
+          product.productType.name &&
+          product.productType.name
+            .toLowerCase()
+            .includes(filters.productType.toLowerCase())
+        ) {
+          return true;
+        }
+      })
+      // eslint-disable-next-line
+      .filter((product) => {
+        if (filters.color === "allColors") {
+          return true;
+        }
+        if (
+          product.color !== null &&
+          product.color.toLowerCase().includes(filters.color.toLowerCase())
+        ) {
+          return true;
+        }
+      })
+      // eslint-disable-next-line
+      .filter((product) => {
+        if (filters.price.length === 1) {
+          return true;
+        }
+        if (
+          product.price !== null &&
+          filters.price.includes(product.price.toString())
+        ) {
+          return true;
+        }
+      })
+      .sort((a, b) => {
+        if (sort === "MC") {
+          return a.price > b.price ? -1 : 1;
+        }
+        if (sort === "MB") {
+          return a.price < b.price ? -1 : 1;
+        }
+        if (sort === "MN") {
+          return a.id > b.id ? -1 : 1;
+        }
+        if (sort === "MV") {
+          return a.id < b.id ? -1 : 1;
+        }
+        return 0;
+      });
+    console.log({ list, sort, filters });
 
-    setProducts(sortedProducts); // Actualizar el estado local
-    dispatch(setProductsCopy(sortedProducts)); // Despachar la acción con la lista ordenada
+    setProducts(list); // Actualizar el estado local
+    dispatch(setProductsCopy(list)); // Despachar la acción con la lista ordenada
     setCurrentPage(1);
     // eslint-disable-next-line
-  }, [sort]);
+  }, [sort, filters.productType, filters.color, filters.price]);
 
   return (
     <div className={style.cntnHome}>

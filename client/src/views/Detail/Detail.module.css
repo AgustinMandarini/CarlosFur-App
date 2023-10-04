@@ -3,32 +3,51 @@
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 2.6rem;
+ 
 }
 
 .cntnCardDetail {
+  margin: 1em;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 25rem;
-  height: 26rem;
-  /* border: 1px solid black; */
-  border-radius: 1rem;
+  width: 60%;
+  height: auto;
+  border-radius: 0.5rem;
+  border: 0.1em solid black;
   padding: 1rem;
-  background-color: rgba(117, 80, 54, 0.315);
+  background-color: #ffffff;
+  text-align: center;
 }
-.p {
-  text-align: left;
-  font-size: 16px;
+.imgContainer {
+  margin: 1em;
+  display:flex;
+  flex-direction: column;
+  background-color: #88641b00;
+  border-radius:1em;
+  display: inline-block;
 }
-.cntnP {
-  padding-left: 6.5rem;
-  justify-content: center;
-  align-items: center;
+.imgDetail {
+  width: 200px; /* Establece un ancho fijo para todas las imágenes */
+  height: 200px; /* Establece una altura fija para todas las imágenes */
+  max-width: 100%; /* Asegura que las imágenes no se amplíen más allá de 200px */
+  max-height: 100%; /* Asegura que las imágenes no se amplíen más allá de 200px */
+  border-radius:1em;
+  border: 0.1em solid black;
 }
+.imgContainer p {
+  margin-top:0.8em;
+  font-weight: bold;
+  
+
+}
+.texto {
+  display:flex;
+  flex-direction: column;
+}
+
 .goBackLink {
-  position: relative;
-  right: 20rem;
-  /* top: 3rem; */
+  margin:2em;
 }
+

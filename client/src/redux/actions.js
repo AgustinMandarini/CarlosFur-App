@@ -6,14 +6,18 @@ import {
   GET_PRODUCT_BY_NAME,
   SET_IMAGE_URL,
   SET_SORT,
+  SET_PRODUCT_TYPE,
   SET_PRODUCTS_COPY,
+  SET_COLOR,
+  SET_PRICE_RANGE,
 } from "./types";
 
 import axios from "axios";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 export const getProducts = () => {
   return async function (dispatch) {
-    const apiData = await axios.get("http://localhost:3001/product");
+    const apiData = await axios.get(`${apiUrl}/product`);
     const product = apiData.data;
     return dispatch({
       type: GET_PRODUCTS,
@@ -21,10 +25,11 @@ export const getProducts = () => {
     });
   };
 };
+
 export const getDetail = (id) => {
   return async function (dispatch) {
     try {
-      const apiData = await axios.get(`http://localhost:3001/product/${id}`);
+      const apiData = await axios.get(`${apiUrl}/product/${id}`);
       const detail = apiData.data;
       dispatch({
         type: GET_DETAIL,
@@ -35,27 +40,19 @@ export const getDetail = (id) => {
     }
   };
 };
-// export const getDetail = (id) => {
-//   return {
-//     type: GET_DETAIL,
-//     payload: mueblesData.find((producto) => producto.id === parseInt(id)), // esta es la provisoria
-//   };
-// };
 
 export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        `http://localhost:3001/product`,
-        payload
-      ); //hacemos un post mandandole la nueva actividad
+      const response = await axios.post(`${apiUrl}/product`, payload);
       const producto = response.data;
-      return dispatch({
-        type: POST_PRODUCT,
-        payload: producto,
-      }); //returnamos la action type y la actividad creada
+      if (response.status === 200) {
+        dispatch({ type: POST_PRODUCT, payload: producto });
+        alert("Producto Creado");
+        window.location.reload();
+      }
     } catch (error) {
-      alert(`No se pudo crear`);
+      alert(`No se pudo crear el producto`);
     }
   };
 };
@@ -67,13 +64,10 @@ export const setImageURL = (imageURL) => {
   };
 };
 
-// export { getProducts, getDetail };
-
 export const getProductType = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("http://localhost:3001/productType");
-      // console.log(response.data);
+      const response = await axios.get(`${apiUrl}/productType`);
       const productType = response.data;
       return dispatch({
         type: GET_PRODUCT_TYPE,
@@ -88,10 +82,9 @@ export const getProductType = () => {
 export const getProductByName = (name) => {
   return async function (dispatch) {
     const apiData = await axios.get(
-      `http://localhost:3001/product${name ? `?name=${name}` : ""}`
+      `${apiUrl}/product${name ? `?name=${name}` : ""}`
     );
     const nameid = apiData.data;
-    console.log(nameid);
 
     return dispatch({
       type: GET_PRODUCT_BY_NAME,
@@ -103,7 +96,16 @@ export const getProductByName = (name) => {
 export const setSort = (payload) => {
   return { type: SET_SORT, payload };
 };
+export const setProductType = (payload) => {
+  return { type: SET_PRODUCT_TYPE, payload };
+};
+export const setColor = (payload) => {
+  return { type: SET_COLOR, payload };
+};
+export const setPriceRange = (payload) => {
+  return { type: SET_PRICE_RANGE, payload };
+};
 
 export const setProductsCopy = (payload) => {
   return { type: SET_PRODUCTS_COPY, payload };
-};
+}

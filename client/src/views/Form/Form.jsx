@@ -48,6 +48,8 @@ const FormPage = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    console.log(form.productType);
+              
     const validationErrors = validation(form);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
@@ -183,6 +185,7 @@ const FormPage = () => {
         >
           {stateProductType &&
             stateProductType.map((tipo, index) => {
+              
               return (
                 <option key={index} value={tipo.id} name={tipo.name}>
                   {tipo.name}

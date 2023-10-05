@@ -26,8 +26,8 @@ const FormPage = () => {
     width: "",
     weight: "",
     stock: "",
-    colorId: "",
-    materialId: "",
+    color: "",
+    material:"",
     description: "",
     productType: "",
     imageBase64: "",
@@ -41,12 +41,15 @@ const FormPage = () => {
     width: "",
     weight: "",
     stock: "",
-    colorId: "",
-    materialId: "",
+    color: "",
+    material: "",
     description: "",
     productType: "",
     imageBase64: "",
   });
+
+  console.log(color);
+
   const changeHandler = (event) => {
     const property = event.target.name;
     let value = event.target.value;
@@ -69,20 +72,9 @@ const FormPage = () => {
   const handleSelectMuebles = (event) => {
     const property = event.target.name;
     let value = event.target.value;
-
     setForm({ ...form, [property]: value });
-
-    if (
-      value !== "Seleccionar Tipo de Producto" &&
-      property === "productType"
-    ) {
-      setErrors({ ...errors, productType: "" });
-    } else if (value !== "Seleccionar material" && property === "material") {
-      setErrors({ ...errors, material: "" });
-    } else if (value !== "Seleccionar color" && property === "color") {
-      setErrors({ ...errors, color: "" });
-    }
   };
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     const isAnImageRegex = /\.(jpg|jpeg|png|gif|bmp|tiff)$/i;
@@ -227,6 +219,7 @@ const FormPage = () => {
               name="stock"
               className={style.input}
             />
+
             <Form.Text className={style.error}>
               {errors.stock ? <span>{errors.stock}</span> : ""}
             </Form.Text>
@@ -234,15 +227,15 @@ const FormPage = () => {
         </Form.Group>
 
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
-          <Form.Label className={style.label} name="colorId">
+          <Form.Label className={style.label} name="color">
             Color:
           </Form.Label>
           <div className={style.divinputErrorType}>
             <Form.Select
               size="sm"
               onChange={handleSelectMuebles}
-              value={form.colorId}
-              name="colorId"
+              value={form.color}
+              name="color"
               className={style.select}
             >
               <option>Seleccionar color</option>
@@ -257,20 +250,21 @@ const FormPage = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.colorId ? <span>{errors.colorId}</span> : ""}
+              {errors.color ? <span>{errors.color}</span> : ""}
             </Form.Text>
           </div>
         </Form.Group>
+                {/* //Material */}
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
-          <Form.Label className={style.label} name="materialId">
+          <Form.Label className={style.label} name="material">
             Material:
           </Form.Label>
           <div className={style.divinputErrorType}>
             <Form.Select
               size="sm"
               onChange={handleSelectMuebles}
-              value={form.materialId}
-              name="materialId"
+              value={form.material}
+              name="material"
               className={style.select}
             >
               <option>Seleccionar material</option>
@@ -285,7 +279,7 @@ const FormPage = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.materialId ? <span>{errors.materialId}</span> : ""}
+              {errors.material ? <span>{errors.material}</span> : ""}
             </Form.Text>
           </div>
         </Form.Group>
@@ -320,7 +314,7 @@ const FormPage = () => {
         </Form.Group>
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
           <Form.Label className={style.label}>Descripcion:</Form.Label>
-          <div className={style.divinputErrorType}>
+          <div className={style.divinputError}>
             <Form.Control
               size="sm"
               type="text"

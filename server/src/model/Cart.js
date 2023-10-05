@@ -11,10 +11,12 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      
       sale_date: {
         type: DataTypes.DATE,
         allowNull: false,
       },
+      
       total_amount: {
         type: DataTypes.FLOAT,
         allowNull: false,

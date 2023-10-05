@@ -19,6 +19,10 @@ const validation = (formState) => {
   if (!formState.price) errors.price = "Por favor completa este campo";
   else if (isNaN(formState.price))
     errors.price = "Por favor, ingrese solo números.";
+  //stock
+  if (!formState.stock) errors.stock = "Por favor completa este campo";
+  else if (isNaN(formState.price))
+    errors.price = "Por favor, ingrese solo números.";
 
   //Altura
   if (!formState.height) errors.height = "Por favor completa este campo";
@@ -39,14 +43,26 @@ const validation = (formState) => {
   if (!formState.weight) errors.weight = "Por favor completa este campo";
   else if (isNaN(formState.weight))
     errors.weight = "Por favor, ingrese solo números.";
+  // Validar Tipo de Producto
+  if (
+    !formState.productType ||
+    formState.productType === "Seleccionar Tipo de Producto"
+  ) {
+    errors.productType = "Por favor seleccione un Tipo de Producto";
+  }
 
-  //Color
-  // if (!formState.color ) errors.color = "Por favor completa este campo";
-  // if (formState.color == "Seleccionar color") errors.color = "Por favor completa este campo";
-  // else if (formState.color.length > 20)
-  //   errors.color = "El color del mueble no puede superar los 20 caracteres ";
-  // else if (/\d/.test(formState.color))
-  //   errors.color = "El color del mueble no puede contener numeros";
+  // Validar Material
+  if (
+    !formState.materialId ||
+    formState.materialId === "Seleccionar material"
+  ) {
+    errors.materialId = "Por favor seleccione un Material";
+  }
+
+  // Validar Color
+  if (!formState.colorId || formState.colorId === "Seleccionar color") {
+    errors.colorId = "Por favor seleccione un Color";
+  }
 
   //Descripcion
   if (!formState.description)
@@ -58,9 +74,9 @@ const validation = (formState) => {
   const hasErrors = Object.keys(errors).length === 0; //si el objeto errors tiene propiedades-->true, por lo tanto no habria errores
 
   if (hasErrors) {
-    return true; // No hay errores
+    return true;
   } else {
-    return errors; // Devolver el objeto de errores
+    return errors;
   }
 };
 export default validation;

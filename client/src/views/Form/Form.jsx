@@ -50,6 +50,8 @@ const FormPage = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    console.log(form.productType);
+              
     const validationErrors = validation(form);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
@@ -111,6 +113,43 @@ const FormPage = () => {
           </div>
         </Form.Group>
 
+<<<<<<< HEAD
+      <div className={style.container}>
+        <label name="productType">Selecciona el tipo de Producto:</label>
+        <select
+          onChange={handleSelectMuebles}
+          value={form.productType}
+          name="productType"
+        >
+          {stateProductType &&
+            stateProductType.map((tipo, index) => {
+              
+              return (
+                <option key={index} value={tipo.id} name={tipo.name}>
+                  {tipo.name}
+                </option>
+              );
+            })}
+        </select>
+        {errors.productType ? <span>{errors.productType}</span> : null}
+      </div>
+      <div>
+        <header>
+          <p>
+            <span>Click en seleccionar archivo</span>&nbsp;
+          </p>
+          <input
+            id="hidden-input"
+            type="file"
+            className="hidden"
+            onChange={handleImageChange}
+            accept="image/*"
+          />
+          <div>{preview && <img src={preview} alt="preview" />}</div>
+        </header>
+        <div>
+          <button onClick={handleResetClick}>Reset</button>
+=======
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
           <Form.Label className={style.label}>Precio:</Form.Label>
           <div className={style.divinputError}>
@@ -283,6 +322,7 @@ const FormPage = () => {
           <button className={style.botonReset} onClick={handleResetClick}>
             Reset
           </button>
+>>>>>>> 5d2aa4012aab31e5446dba795bcf4ce59b7136e4
         </div>
         {loading ? (
           <div>

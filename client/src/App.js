@@ -8,8 +8,8 @@ import {
   LandingPage,
   NavBar,
   ShoppingCart,
-  LoginForm,
   RegisterForm,
+  LoginForm,
 } from "./views";
 
 import "bootstrap/dist/css/bootstrap.min.css";

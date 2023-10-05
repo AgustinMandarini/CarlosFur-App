@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 
 import style from "./Form.module.css";
 import validation from "./validation";
-
+//mili
 const FormPage = () => {
   const stateProductType = useSelector((state) => state.productType);
   const [image, setImage] = useState(null);

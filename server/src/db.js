@@ -47,7 +47,7 @@ const {
   PaymentType,
   CartSaleState,
 } = sequelize.models;
-  
+    
 // Aca vendrian las relaciones
 Product.belongsTo(ProductType, { foreignKey: "productTypeId" });
 ProductType.hasMany(Product, { foreignKey: "productTypeId" });

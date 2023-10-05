@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { getProducts, getProductType } from "./redux/actions";
 import { store } from "../src/redux/store";
+import { Auth0ProviderWithNavigate } from "./services/auth0-provider-with-navigate";
 
 store.dispatch(getProducts());
 store.dispatch(getProductType());
@@ -16,7 +17,9 @@ root.render(
   <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
-        <App />
+        <Auth0ProviderWithNavigate>
+          <App />
+        </Auth0ProviderWithNavigate>
       </BrowserRouter>
     </React.StrictMode>
   </Provider>

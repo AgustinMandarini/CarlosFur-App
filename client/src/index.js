@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../src/redux/store";
+import { Auth0ProviderWithNavigate } from "./services/auth0-provider-with-navigate";
 import App from "./App";
 import "./index.css";
 import {
@@ -23,7 +24,9 @@ root.render(
   <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
-        <App />
+        <Auth0ProviderWithNavigate>
+          <App />
+        </Auth0ProviderWithNavigate>
       </BrowserRouter>
     </React.StrictMode>
   </Provider>

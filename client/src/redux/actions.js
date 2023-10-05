@@ -1,15 +1,17 @@
 import {
-  GET_PRODUCTS,
+  GET_COLOR,
   GET_DETAIL,
-  POST_PRODUCT,
-  GET_PRODUCT_TYPE,
+  GET_MATERIAL,
+  GET_PRODUCTS,
   GET_PRODUCT_BY_NAME,
-  SET_IMAGE_URL,
-  SET_SORT,
-  SET_PRODUCT_TYPE,
-  SET_PRODUCTS_COPY,
+  GET_PRODUCT_TYPE,
+  POST_PRODUCT,
   SET_COLOR,
+  SET_IMAGE_URL,
   SET_PRICE_RANGE,
+  SET_PRODUCTS_COPY,
+  SET_PRODUCT_TYPE,
+  SET_SORT
 } from "./types";
 
 import axios from "axios";
@@ -79,6 +81,36 @@ export const getProductType = () => {
   };
 };
 
+export const getColor = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/color`);
+      const color = response.data;
+      return dispatch({
+        type: GET_COLOR,
+        payload: color,
+      });
+    } catch (error) {
+      alert("No se encontro color");
+    }
+  };
+};
+
+export const getMaterial = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/material`);
+      const material = response.data;
+      return dispatch({
+        type: GET_MATERIAL,
+        payload: material,
+      });
+    } catch (error) {
+      alert("No se encontro el material");
+    }
+  };
+};
+
 export const getProductByName = (name) => {
   return async function (dispatch) {
     const apiData = await axios.get(
@@ -108,4 +140,4 @@ export const setPriceRange = (payload) => {
 
 export const setProductsCopy = (payload) => {
   return { type: SET_PRODUCTS_COPY, payload };
-}
+};

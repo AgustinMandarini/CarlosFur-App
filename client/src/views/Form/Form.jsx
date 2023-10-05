@@ -2,12 +2,16 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postProduct } from "../../redux/actions";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 import style from "./Form.module.css";
 import validation from "./validation";
-//mili
+
 const FormPage = () => {
   const stateProductType = useSelector((state) => state.productType);
+  const stateColor = useSelector((state) => state.colorState);
+  const stateMaterial = useSelector((state) => state.materialState);
+
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,11 +25,14 @@ const FormPage = () => {
     depth: "",
     width: "",
     weight: "",
+    stock: "",
     color: "",
+    material:"",
     description: "",
     productType: "",
     imageBase64: "",
   });
+
   const [errors, setErrors] = useState({
     name: "",
     price: "",
@@ -33,7 +40,9 @@ const FormPage = () => {
     depth: "",
     width: "",
     weight: "",
+    stock: "",
     color: "",
+    material: "",
     description: "",
     productType: "",
     imageBase64: "",
@@ -50,7 +59,7 @@ const FormPage = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     console.log(form.productType);
-              
+
     const validationErrors = validation(form);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
@@ -112,43 +121,6 @@ const FormPage = () => {
           </div>
         </Form.Group>
 
-<<<<<<< HEAD
-      <div className={style.container}>
-        <label name="productType">Selecciona el tipo de Producto:</label>
-        <select
-          onChange={handleSelectMuebles}
-          value={form.productType}
-          name="productType"
-        >
-          {stateProductType &&
-            stateProductType.map((tipo, index) => {
-              
-              return (
-                <option key={index} value={tipo.id} name={tipo.name}>
-                  {tipo.name}
-                </option>
-              );
-            })}
-        </select>
-        {errors.productType ? <span>{errors.productType}</span> : null}
-      </div>
-      <div>
-        <header>
-          <p>
-            <span>Click en seleccionar archivo</span>&nbsp;
-          </p>
-          <input
-            id="hidden-input"
-            type="file"
-            className="hidden"
-            onChange={handleImageChange}
-            accept="image/*"
-          />
-          <div>{preview && <img src={preview} alt="preview" />}</div>
-        </header>
-        <div>
-          <button onClick={handleResetClick}>Reset</button>
-=======
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
           <Form.Label className={style.label}>Precio:</Form.Label>
           <div className={style.divinputError}>
@@ -233,20 +205,108 @@ const FormPage = () => {
             </Form.Text>
           </div>
         </Form.Group>
+
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
-          <Form.Label className={style.label}>Color:</Form.Label>
+          <Form.Label className={style.label}>Stock:</Form.Label>
           <div className={style.divinputError}>
             <Form.Control
               size="sm"
-              type="text"
-              value={form.color}
+              type="number"
+              value={form.stock}
               onChange={changeHandler}
-              name="color"
+              name="stock"
               className={style.input}
             />
 
             <Form.Text className={style.error}>
+              {errors.stock ? <span>{errors.stock}</span> : ""}
+            </Form.Text>
+          </div>
+        </Form.Group>
+
+        <Form.Group className={style.formGroup} controlId="formBasicPassword">
+          <Form.Label className={style.label} name="color">
+            Color:
+          </Form.Label>
+          <div className={style.divinputErrorType}>
+            <Form.Select
+              size="sm"
+              onChange={handleSelectMuebles}
+              value={form.color}
+              name="color"
+              className={style.select}
+            >
+              <option>Seleccionar color</option>
+              {stateColor &&
+                stateColor.map((tipo, index) => {
+                  return (
+                    <option key={index} value={tipo.id} name={tipo.name}>
+                      {tipo.name}
+                    </option>
+                  );
+                })}
+            </Form.Select>
+
+            <Form.Text className={style.error}>
               {errors.color ? <span>{errors.color}</span> : ""}
+            </Form.Text>
+          </div>
+        </Form.Group>
+                {/* //Material */}
+        <Form.Group className={style.formGroup} controlId="formBasicPassword">
+          <Form.Label className={style.label} name="material">
+            Material:
+          </Form.Label>
+          <div className={style.divinputErrorType}>
+            <Form.Select
+              size="sm"
+              onChange={handleSelectMuebles}
+              value={form.material}
+              name="material"
+              className={style.select}
+            >
+              <option>Seleccionar material</option>
+              {stateMaterial &&
+                stateMaterial.map((tipo, index) => {
+                  return (
+                    <option key={index} value={tipo.id} name={tipo.name}>
+                      {tipo.name}
+                    </option>
+                  );
+                })}
+            </Form.Select>
+
+            <Form.Text className={style.error}>
+              {errors.material ? <span>{errors.material}</span> : ""}
+            </Form.Text>
+          </div>
+        </Form.Group>
+
+        <Form.Group className={style.formGroup} controlId="formBasicPassword">
+          <Form.Label className={style.label} name="productType">
+            Tipo de Producto:
+          </Form.Label>
+          <div className={style.divinputErrorType}>
+            <Form.Select
+              size="sm"
+              onChange={handleSelectMuebles}
+              value={form.productType}
+              name="productType"
+              className={style.select}
+            >
+              <option>Seleccionar Tipo de Producto</option>
+              {stateProductType &&
+                stateProductType.map((tipo, index) => {
+                  return (
+                    <option key={index} value={tipo.id} name={tipo.name}>
+                      {tipo.name}
+                    </option>
+                  );
+                })}
+            </Form.Select>
+
+            <Form.Text className={style.error}>
+              {errors.productType ? <span>{errors.productType}</span> : ""}
             </Form.Text>
           </div>
         </Form.Group>
@@ -264,33 +324,6 @@ const FormPage = () => {
 
             <Form.Text className={style.error}>
               {errors.description ? <span>{errors.description}</span> : ""}
-            </Form.Text>
-          </div>
-        </Form.Group>
-        <Form.Group className={style.formGroup} controlId="formBasicPassword">
-          <Form.Label className={style.label} name="productType">
-            Tipo de Producto:
-          </Form.Label>
-          <div className={style.divinputErrorType}>
-            <Form.Select
-              size="sm"
-              onChange={handleSelectMuebles}
-              value={form.productType}
-              name="productType"
-              className={style.select}
-            >
-              {stateProductType &&
-                stateProductType.map((tipo, index) => {
-                  return (
-                    <option key={index} value={tipo.id} name={tipo.name}>
-                      {tipo.name}
-                    </option>
-                  );
-                })}
-            </Form.Select>
-
-            <Form.Text className={style.error}>
-              {errors.productType ? <span>{errors.productType}</span> : ""}
             </Form.Text>
           </div>
         </Form.Group>
@@ -321,7 +354,6 @@ const FormPage = () => {
           <button className={style.botonReset} onClick={handleResetClick}>
             Reset
           </button>
->>>>>>> 5d2aa4012aab31e5446dba795bcf4ce59b7136e4
         </div>
         {loading ? (
           <div>

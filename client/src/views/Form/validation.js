@@ -41,11 +41,12 @@ const validation = (formState) => {
     errors.weight = "Por favor, ingrese solo números.";
 
   //Color
-  if (!formState.color) errors.color = "Por favor completa este campo";
-  else if (formState.color.length > 20)
-    errors.color = "El color del mueble no puede superar los 20 caracteres ";
-  else if (/\d/.test(formState.color))
-    errors.color = "El color del mueble no puede contener numeros";
+  // if (!formState.color ) errors.color = "Por favor completa este campo";
+  // if (formState.color == "Seleccionar color") errors.color = "Por favor completa este campo";
+  // else if (formState.color.length > 20)
+  //   errors.color = "El color del mueble no puede superar los 20 caracteres ";
+  // else if (/\d/.test(formState.color))
+  //   errors.color = "El color del mueble no puede contener numeros";
 
   //Descripcion
   if (!formState.description)

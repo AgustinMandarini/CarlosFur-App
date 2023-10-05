@@ -12,9 +12,10 @@ const postProductController = async ({
   description,
   imagePath,
   productTypeId,
-colorId,
-materialId,
+  colorId,
+  materialId,
   stock,
+  enabled_product
 }) => {
    const cloudImageURL = await cloudUploadImage(imagePath);
   // Crea un nuevo producto, sin agregar aun el tipo de producto, que sera una relacion manyToMany con la tabla productType
@@ -31,7 +32,8 @@ materialId,
     colorId,
     materialId,
     stock,
-     imagePath: cloudImageURL,
+    enabled_product,
+    imagePath: cloudImageURL,
   });
 
   // Este codigo asocia un tipo de producto a un producto

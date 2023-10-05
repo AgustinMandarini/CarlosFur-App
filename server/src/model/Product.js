@@ -47,6 +47,10 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         validate: {min : 0}
       },
+      enabled_product: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+    }
     },
     { timestamps: false }
   );

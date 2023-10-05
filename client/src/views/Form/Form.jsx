@@ -2,11 +2,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postProduct } from "../../redux/actions";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 
 import style from "./Form.module.css";
 import validation from "./validation";
-
+//mili
 const FormPage = () => {
   const stateProductType = useSelector((state) => state.productType);
   const [image, setImage] = useState(null);

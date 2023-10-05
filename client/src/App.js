@@ -1,11 +1,14 @@
 import { Route, useLocation } from "react-router-dom";
 import "./App.css";
-import About from "./views/About/About";
-import Detail from "./views/Detail/Detail";
-import Form from "./views/Form/Form";
-import Home from "./views/Home/Home";
-import LandingPage from "./views/LandingPage/LandingPage";
-import NavBar from "./views/Nav/NavBar";
+import {
+  About,
+  Detail,
+  Form,
+  Home,
+  LandingPage,
+  NavBar,
+  ShoppingCart,
+} from "./views";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -20,9 +23,9 @@ function App() {
       <Route path="/detail/:id" component={Detail} />
       <Route path="/create" component={Form} />
       <Route path="/about" component={About} />
+      <Route path="/shoppingcart" component={ShoppingCart} />
     </div>
   );
 }
-
 
 export default App;

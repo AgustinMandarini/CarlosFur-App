@@ -1,16 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { getProducts, getProductType } from "./redux/actions";
+import { BrowserRouter } from "react-router-dom";
 import { store } from "../src/redux/store";
 import { Auth0ProviderWithNavigate } from "./services/auth0-provider-with-navigate";
+import App from "./App";
+import "./index.css";
+import {
+  getColor,
+  getMaterial,
+  getProducts,
+  getProductType,
+} from "./redux/actions";
+import reportWebVitals from "./reportWebVitals";
 
 store.dispatch(getProducts());
 store.dispatch(getProductType());
+store.dispatch(getColor());
+store.dispatch(getMaterial());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

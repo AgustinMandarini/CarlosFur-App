@@ -33,6 +33,10 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         allowNull: false,
       },
+      enabled_user: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+    }
     },
     { timestamps: false }
   );

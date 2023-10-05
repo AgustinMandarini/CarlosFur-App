@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
-import Pagination from "../../components/Pagination/Pagination";
+import Paginacion from "../../components/Paginacion/Paginacion";
 import { setProductsCopy } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import ToolBar from "../../components/ToolBar/ToolBar";
@@ -106,7 +106,7 @@ const Home = () => {
         <ToolBar />
       </div>
       <CardsContainer currentProducts={currentProducts}></CardsContainer>
-      <Pagination
+      <Paginacion
         productsPerPage={productsPerPage}
         totalProducts={products.length}
         paginate={paginate}

@@ -102,7 +102,7 @@ const FormPage = () => {
 
   return (
     <div className={style.cntnForm}>
-      <p className={style.tittle}>Nuevo mueble</p>
+      <p className={style.tittle}>Nuevo Producto</p>
       <Form className={style.formConteiner} onSubmit={submitHandler}>
         <Form.Group className={style.formGroup} controlId="formBasicEmail">
           <Form.Label className={style.label}>Nombre: </Form.Label>

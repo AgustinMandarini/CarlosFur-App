@@ -11,6 +11,7 @@ const postProductController = async ({
   weight,
   color,
   description,
+  material,
   productType,
   imageBase64,
 }) => {
@@ -28,6 +29,7 @@ const postProductController = async ({
     weight,
     color,
     description,
+    material,
     imagePath: imageRemoteURL,
   });
 

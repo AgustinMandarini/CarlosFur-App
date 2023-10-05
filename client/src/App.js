@@ -8,7 +8,10 @@ import {
   LandingPage,
   NavBar,
   ShoppingCart,
+  LoginForm,
+  RegisterForm,
 } from "./views";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -24,6 +27,8 @@ function App() {
       <Route path="/create" component={Form} />
       <Route path="/about" component={About} />
       <Route path="/shoppingcart" component={ShoppingCart} />
+      <Route path="/register" component={RegisterForm} />
+      <Route path="/logIn" component={LoginForm} />
     </div>
   );
 }

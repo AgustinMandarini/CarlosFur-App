@@ -1,8 +1,9 @@
 import style from "./ShoppingCart.module.css";
+import CartProductContainer from "../../components/CartProductContainer/CartProductContainer";
 const ShoppingCart = () => {
   return (
     <div className={style.background}>
-      <h1>Acá va el carrito</h1>
+      <CartProductContainer />
     </div>
   );
 };

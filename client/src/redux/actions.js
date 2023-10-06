@@ -1,17 +1,19 @@
 import {
+  DELETE_CART_PRODUCT,
   GET_COLOR,
   GET_DETAIL,
   GET_MATERIAL,
   GET_PRODUCTS,
   GET_PRODUCT_BY_NAME,
   GET_PRODUCT_TYPE,
+  POST_CART_PRODUCT,
   POST_PRODUCT,
   SET_COLOR,
   SET_IMAGE_URL,
   SET_PRICE_RANGE,
   SET_PRODUCTS_COPY,
   SET_PRODUCT_TYPE,
-  SET_SORT
+  SET_SORT,
 } from "./types";
 
 import axios from "axios";
@@ -123,6 +125,12 @@ export const getProductByName = (name) => {
       payload: nameid,
     });
   };
+};
+export const postCartProduct = (payload) => {
+  return { type: POST_CART_PRODUCT, payload: payload };
+};
+export const deleteCartProduct = (payload) => {
+  return { type: DELETE_CART_PRODUCT, payload: payload };
 };
 
 export const setSort = (payload) => {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
 import Paginacion from "../../components/Paginacion/Paginacion";
-import { setProductsCopy } from "../../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
 import ToolBar from "../../components/ToolBar/ToolBar";
+import { setProductsCopy } from "../../redux/actions";
 import style from "./Home.module.css";
 
 const Home = () => {
@@ -55,15 +55,14 @@ const Home = () => {
       // eslint-disable-next-line
       .filter((product) => {
         if (filters.color === "allColors") {
+          //(payload)
           return true;
         }
-        if (
-          product.color !== null &&
-          product.color.toLowerCase().includes(filters.color.toLowerCase())
-        ) {
+        if (product.colorId !== null && product.colorId == filters.color) {
           return true;
         }
-      })
+    })
+    
       // eslint-disable-next-line
       .filter((product) => {
         if (filters.price.length === 1) {
@@ -97,7 +96,7 @@ const Home = () => {
     dispatch(setProductsCopy(list)); // Despachar la acción con la lista ordenada
     setCurrentPage(1);
     // eslint-disable-next-line
-  }, [sort, filters.productType, filters.color, filters.price]);
+  }, [sort, filters.productType, filters.color, filters.price, dispatch]);
 
   return (
     <div className={style.cntnHome}>

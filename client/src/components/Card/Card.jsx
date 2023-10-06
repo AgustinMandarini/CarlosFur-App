@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import style from "./Card.module.css";
 import defaultImage from "./../../imagenes/default.png";
+import { postCartProduct } from "../../redux/actions";
 
 const Card = (props) => {
+  const dispatch = useDispatch();
+  const cartProducts = useSelector((state) => state.cartProducts);
+
+  /* Contador */
   const [counter, setCounter] = useState(0);
+  const [product, setProduct] = useState(0);
 
   const increaseCounter = () => {
     setCounter(counter + 1);
+    setProduct(1);
+    dispatch(postCartProduct(props.id));
+    setProduct(0);
   };
 
   const decreaseCounter = () => {
@@ -16,6 +26,11 @@ const Card = (props) => {
     }
   };
 
+  /* Estado product */
+
+  useEffect(() => {
+    console.log("Productos en el carrito", cartProducts);
+  }, [cartProducts]);
   return (
     <div className={style.container} key={props.id}>
       <Link to={`/detail/${props.id}`} className={style.nameLink}>

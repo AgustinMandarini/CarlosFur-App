@@ -12,6 +12,7 @@ import {
   SET_PRODUCT_TYPE,
   SET_COLOR,
   SET_PRICE_RANGE,
+  POST_CART_PRODUCT,
 } from "./types";
 
 const initialState = {
@@ -26,8 +27,9 @@ const initialState = {
     price: ["allPrices"],
   },
   imageURL: null,
-  colorState:[],
-  materialState:[],
+  colorState: [],
+  materialState: [],
+  cartProducts: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -59,21 +61,30 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         productType: action.payload,
       };
-      case GET_COLOR:
-        return {
-          ...state,
-          colorState: action.payload
-        }
-      case GET_MATERIAL:
-        return {
-          ...state,
-          materialState: action.payload
-        }
+    case GET_COLOR:
+      return {
+        ...state,
+        colorState: action.payload,
+      };
+    case GET_MATERIAL:
+      return {
+        ...state,
+        materialState: action.payload,
+      };
 
     case GET_PRODUCT_BY_NAME:
       return {
         ...state,
         muebles: action.payload,
+      };
+    case POST_CART_PRODUCT:
+      const productToAdd = state.muebles.find(
+        (mueble) => mueble.id === action.payload
+      );
+
+      return {
+        ...state,
+        cartProducts: [...state.cartProducts, productToAdd],
       };
 
     case SET_SORT:

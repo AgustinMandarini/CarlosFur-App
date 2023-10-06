@@ -8,7 +8,12 @@ import { deleteCartProduct, postCartProduct } from "../../redux/actions";
 const Card = (props) => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
-
+  const countForProductID = cartProducts.reduce((count, product) => {
+    if (product.id === props.id) {
+      return count + 1;
+    }
+    return count;
+  }, 0);
   const [counter, setCounter] = useState(0);
   const [product, setProduct] = useState(0);
 
@@ -33,7 +38,7 @@ const Card = (props) => {
     dispatch(deleteCartProduct(props.id));
     setProduct(0);
   };
-
+  console.log(cartProducts);
   return (
     <div className={style.container} key={props.id}>
       <Link to={`/detail/${props.id}`} className={style.nameLink}>
@@ -52,7 +57,7 @@ const Card = (props) => {
       </Link>
       <div className={style.counterContainer}>
         <button onClick={decreaseCounter}>-</button>
-        <span className={style.counterValue}>{counter}</span>
+        <span className={style.counterValue}>{countForProductID}</span>
         <button onClick={increaseCounter}>+</button>
       </div>
     </div>

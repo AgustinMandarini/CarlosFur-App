@@ -26,8 +26,8 @@ const initialState = {
     price: ["allPrices"],
   },
   imageURL: null,
-  colorState:[],
-  materialState:[],
+  colorState: [],
+  materialState: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -59,16 +59,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         productType: action.payload,
       };
-      case GET_COLOR:
-        return {
-          ...state,
-          colorState: action.payload
-        }
-      case GET_MATERIAL:
-        return {
-          ...state,
-          materialState: action.payload
-        }
+    case GET_COLOR:
+      return {
+        ...state,
+        colorState: action.payload,
+      };
+    case GET_MATERIAL:
+      return {
+        ...state,
+        materialState: action.payload,
+      };
 
     case GET_PRODUCT_BY_NAME:
       return {

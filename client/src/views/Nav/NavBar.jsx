@@ -55,7 +55,7 @@ const NavBar = () => {
                 to="/create"
                 className={navResponsive ? style.linkResponsive : style.links}
               >
-                Form
+                Crear Producto
               </Link>
               <Link
                 to="/about"

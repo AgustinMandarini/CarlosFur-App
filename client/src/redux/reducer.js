@@ -31,6 +31,7 @@ const initialState = {
   colorState: [],
   materialState: [],
   cartProducts: [],
+
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {

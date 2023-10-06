@@ -4,50 +4,36 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "product",
+    "user",
     {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      name: {
+      user_name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
       },
-      price: {
-        type: DataTypes.FLOAT,
+      password: {
+        type: DataTypes.STRING,
         allowNull: false,
-        validate: { min: 0 },
       },
-      height: {
-        type: DataTypes.FLOAT,
-        validate: { min: 0 },
-      },
-      depth: {
-        type: DataTypes.FLOAT,
-        validate: { min: 0 },
-      },
-      width: {
-        type: DataTypes.FLOAT,
-        validate: { min: 0 },
-      },
-      weight: {
-        type: DataTypes.FLOAT,
-        validate: { min: 0 },
-      },
-      description: {
-        type: DataTypes.TEXT,
-      },
-      imagePath: {
+      e_mail: {
         type: DataTypes.STRING,
       },
-      stock: {
-        type: DataTypes.INTEGER,
-        validate: {min : 0}
+      first_name: {
+        type: DataTypes.STRING,
       },
-      enabled_product: {
+      last_name: {
+        type: DataTypes.STRING,
+      },
+      is_admin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      enabled_user: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
     }

@@ -9,16 +9,15 @@ const postProductController = async ({
   depth,
   width,
   weight,
-  color,
   description,
-  material,
-  productType,
-  imageBase64,
+  imagePath,
+  productTypeId,
+  colorId,
+  materialId,
+  stock,
+  enabled_product,
 }) => {
-  // console.log(productType);
-  productType = Number(productType);
-  // console.log(typeof productType);
-  const imageRemoteURL = await uploadImage(imageBase64); // Envia la imagen en base64 desde el front a la nube de cloudinary y retrona la URL remota
+  const cloudImageURL = await uploadImage(imagePath);
   // Crea un nuevo producto, sin agregar aun el tipo de producto, que sera una relacion manyToMany con la tabla productType
   const newProduct = await Product.create({
     name,
@@ -27,10 +26,14 @@ const postProductController = async ({
     depth,
     width,
     weight,
-    color,
     description,
-    material,
-    imagePath: imageRemoteURL,
+    imagePath,
+    productTypeId,
+    colorId,
+    materialId,
+    stock,
+    enabled_product,
+    imagePath: cloudImageURL,
   });
 
   // Este codigo asocia un tipo de producto a un producto
@@ -41,11 +44,11 @@ const postProductController = async ({
   //   })
   // );
 
-  await findAllTypes();
-  const type = await ProductType.findOne({
-    where: { id: productType },
-  });
-  await newProduct.setProductType(type);
+  // await findAllTypes();
+  // const type = await ProductType.findOne({
+  //   where: { name: productType },
+  // });
+  // await newProduct.setProduct_Type(type);
   return newProduct;
 };
 

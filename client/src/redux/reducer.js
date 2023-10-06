@@ -13,6 +13,7 @@ import {
   SET_COLOR,
   SET_PRICE_RANGE,
   POST_CART_PRODUCT,
+  DELETE_CART_PRODUCT,
 } from "./types";
 
 const initialState = {
@@ -86,6 +87,22 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cartProducts: [...state.cartProducts, productToAdd],
       };
+    case DELETE_CART_PRODUCT:
+      const indexToRemove = state.cartProducts.findIndex(
+        (product) => product.id === action.payload
+      );
+
+      if (indexToRemove !== -1) {
+        const newCartProducts = [...state.cartProducts];
+        newCartProducts.splice(indexToRemove, 1);
+
+        return {
+          ...state,
+          cartProducts: newCartProducts,
+        };
+      } else {
+        return state;
+      }
 
     case SET_SORT:
       return { ...state, sort: action.payload };

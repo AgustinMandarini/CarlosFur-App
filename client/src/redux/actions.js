@@ -1,4 +1,5 @@
 import {
+  DELETE_CART_PRODUCT,
   GET_COLOR,
   GET_DETAIL,
   GET_MATERIAL,
@@ -127,6 +128,9 @@ export const getProductByName = (name) => {
 };
 export const postCartProduct = (payload) => {
   return { type: POST_CART_PRODUCT, payload: payload };
+};
+export const deleteCartProduct = (payload) => {
+  return { type: DELETE_CART_PRODUCT, payload: payload };
 };
 
 export const setSort = (payload) => {

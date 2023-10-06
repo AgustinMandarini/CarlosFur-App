@@ -38,7 +38,6 @@ const Card = (props) => {
     dispatch(deleteCartProduct(props.id));
     setProduct(0);
   };
-  console.log(cartProducts);
   return (
     <div className={style.container} key={props.id}>
       <Link to={`/detail/${props.id}`} className={style.nameLink}>

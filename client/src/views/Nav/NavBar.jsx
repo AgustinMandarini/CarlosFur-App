@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import style from "./NavBar.module.css";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import ToolBar from "../../components/ToolBar/ToolBar";
+import LoginRegisterBar from "../../components/LoginRegisterBar/LoginRegisterBar";
 import { getProducts } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import logo from "../../imagenes/MSC.png";
@@ -12,33 +12,36 @@ const NavBar = () => {
   const dispatch = useDispatch();
 
   return (
-    <Navbar
-      className={navResponsive ? style.navOne : style.navBar}
-      collapseOnSelect
-      expand="sm"
-    >
-      <Container fluid>
-        <Navbar.Toggle
-          aria-controls="responsive-navbar-nav"
-          onClick={() => setNavResponsive(true)}
-          className={style.buttonResponsive}
-        />
-        <Navbar.Brand>
-          <img
-            className={navResponsive ? style.imgLogoResponsive : style.imgLogo}
-            src={logo}
-            alt="Logo"
+    <>
+      <LoginRegisterBar />
+      <Navbar
+        className={navResponsive ? style.navOne : style.navBar}
+        collapseOnSelect
+        expand="sm"
+      >
+        <Container fluid>
+          <Navbar.Toggle
+            aria-controls="responsive-navbar-nav"
+            onClick={() => setNavResponsive(true)}
+            className={style.buttonResponsive}
           />
-        </Navbar.Brand>
-        {/* Botón hamburguesa */}
-        <Navbar.Collapse
-          id="basic-navbar-nav"
-          className={navResponsive ? style.active : ""}
-        >
-          <Nav className="ms-auto">
+          <Navbar.Brand>
+            <img
+              className={
+                navResponsive ? style.imgLogoResponsive : style.imgLogo
+              }
+              src={logo}
+              alt="Logo"
+            />
+          </Navbar.Brand>
+          {/* Botón hamburguesa */}
+          <Navbar.Collapse
+            id="basic-navbar-nav"
+            className={navResponsive ? style.active : ""}
+          >
             <div
               className={
-                navResponsive ? style.divLinksResponsive : style.divLinks
+                navResponsive ? style.searchBarResponsive : style.searchBar
               }
             >
               <Link
@@ -76,17 +79,11 @@ const NavBar = () => {
                 </svg>
               </Link>
             </div>
-          </Nav>
-          <div
-            className={
-              navResponsive ? style.searchBarResponsive : style.searchBar
-            }
-          >
-            <SearchBar />
-          </div>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+          </Navbar.Collapse>
+        </Container>
+        <SearchBar />
+      </Navbar>
+    </>
   );
 };
 

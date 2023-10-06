@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import style from "./NavBar.module.css";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import LoginRegisterBar from "../../components/LoginRegisterBar/LoginRegisterBar";
 import { getProducts } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import logo from "../../imagenes/MSC.png";
@@ -13,7 +12,6 @@ const NavBar = () => {
 
   return (
     <>
-      <LoginRegisterBar />
       <Navbar
         className={navResponsive ? style.navOne : style.navBar}
         collapseOnSelect

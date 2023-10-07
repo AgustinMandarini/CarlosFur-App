@@ -1,0 +1,98 @@
+.containerReg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.containerData {
+  background-color: #ae9c8f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+  height: 500px;
+  border-radius: 10px;
+  box-shadow: 0 35px 60px -15px #1c1b1b;
+  padding: 20px;
+  margin-top: 0px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.inputSection {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.cInput {
+  margin-top: 20px;
+}
+
+.inputField {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: none; /* Quita el borde */
+  border-radius: 8px; /* Agrega esquinas redondeadas */
+}
+
+.errorText {
+  color: red;
+}
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 300px;
+  margin: auto;
+  margin-top: 2rem;
+}
+
+.submitButton {
+  width: 80%;
+  height: 40px;
+  border-radius: 8px;
+  padding: 8px;
+  background-color: #4024db;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: white;
+}
+
+.text {
+  color: white;
+  margin-top: 6px;
+}
+
+.link {
+  color: #ff0000;
+}
+
+.googleButton {
+  margin-top: 5px;
+  background-color: white;
+  color: black;
+  border: 0px solid black;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.googleLogo {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}

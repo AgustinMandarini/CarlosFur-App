@@ -1,15 +1,21 @@
 import {
-  GET_PRODUCTS,
+  DELETE_CART_PRODUCT,
+  GET_COLOR,
   GET_DETAIL,
-  POST_PRODUCT,
-  GET_PRODUCT_TYPE,
+  GET_MATERIAL,
+  GET_PRODUCTS,
   GET_PRODUCT_BY_NAME,
-  SET_IMAGE_URL,
-  SET_SORT,
-  SET_PRODUCT_TYPE,
-  SET_PRODUCTS_COPY,
+  GET_PRODUCT_TYPE,
+  POST_CART_PRODUCT,
+  POST_PRODUCT,
   SET_COLOR,
+  SET_IMAGE_URL,
   SET_PRICE_RANGE,
+  SET_PRODUCTS_COPY,
+  SET_PRODUCT_TYPE,
+  SET_SORT,
+  POST_USER,
+  LOGIN_USER,
 } from "./types";
 
 import axios from "axios";
@@ -79,6 +85,36 @@ export const getProductType = () => {
   };
 };
 
+export const getColor = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/color`);
+      const color = response.data;
+      return dispatch({
+        type: GET_COLOR,
+        payload: color,
+      });
+    } catch (error) {
+      alert("No se encontro color");
+    }
+  };
+};
+
+export const getMaterial = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/material`);
+      const material = response.data;
+      return dispatch({
+        type: GET_MATERIAL,
+        payload: material,
+      });
+    } catch (error) {
+      alert("No se encontro el material");
+    }
+  };
+};
+
 export const getProductByName = (name) => {
   return async function (dispatch) {
     const apiData = await axios.get(
@@ -91,6 +127,39 @@ export const getProductByName = (name) => {
       payload: nameid,
     });
   };
+};
+
+export const postUser = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/user`, payload);
+      const user = response.data;
+      if (response.status === 200) {
+        dispatch({ type: POST_USER, payload: user });
+        alert("Usuario Creado");
+      }
+    } catch (error) {
+      alert(`Error: ${error}. No se pudo crear el usuario!`);
+    }
+  };
+};
+
+export const login = () => {
+  return async function (dispatch) {
+    const apiData = await axios.get(`${apiUrl}/user/login`);
+    const user = apiData.data;
+    return dispatch({
+      type: LOGIN_USER,
+      payload: user,
+    });
+  };
+};
+
+export const postCartProduct = (payload) => {
+  return { type: POST_CART_PRODUCT, payload: payload };
+};
+export const deleteCartProduct = (payload) => {
+  return { type: DELETE_CART_PRODUCT, payload: payload };
 };
 
 export const setSort = (payload) => {
@@ -108,4 +177,4 @@ export const setPriceRange = (payload) => {
 
 export const setProductsCopy = (payload) => {
   return { type: SET_PRODUCTS_COPY, payload };
-}
+};

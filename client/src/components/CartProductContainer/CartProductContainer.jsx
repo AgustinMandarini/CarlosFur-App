@@ -7,6 +7,13 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const CartProductContainer = () => {
   const cartProducts = useSelector((state) => state.cartProducts);
+  const [cartData, setCartData] = useState([]);
+
+  useEffect(() => {
+    // Obtener datos del carrito desde el localStorage al montar el componente
+    const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartData(cartFromLocalStorage);
+  }, []);
 
   const cartProductCards = cartProducts.reduce((result, product) => {
     const existingProduct = result.find((item) => item.id === product.id);
@@ -38,18 +45,28 @@ const CartProductContainer = () => {
   return (
     <div className="container">
       {cartProductCards.length > 0 ? (
-        cartProductCards.map((m) => {
-          return (
-            <div className="card" key={m.id}>
-              <CartProductCard
-                id={m.id}
-                name={m.name}
-                totalPrice={m.totalPrice}
-                count={m.count}
-              />
-            </div>
-          );
-        })
+        cartProductCards.map((m) => (
+          <div className="card" key={m.id}>
+            <CartProductCard
+              id={m.id}
+              name={m.name}
+              totalPrice={m.totalPrice}
+              count={m.count}
+            />
+          </div>
+        ))
+      ) : cartData.length > 0 ? (
+        cartData.map((m) => (
+          <div className="card" key={m.id}>
+            <CartProductCard
+              id={m.id}
+              name={m.name}
+              totalPrice={m.totalPrice}
+              count={m.count}
+            />
+            {console.log(m)}
+          </div>
+        ))
       ) : (
         <div className={style.p}>
           <Link className={style.link} to="/home">
@@ -60,8 +77,8 @@ const CartProductContainer = () => {
       {shouldRenderTotalPrice && (
         <p className={style.p}>Precio Total de la compra: {totalPriceSum}</p>
       )}{" "}
+
     </div>
   );
 };
-
 export default CartProductContainer;

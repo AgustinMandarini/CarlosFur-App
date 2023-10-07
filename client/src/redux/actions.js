@@ -136,10 +136,9 @@ export const postUser = (payload) => {
       if (response.status === 200) {
         dispatch({ type: POST_USER, payload: user });
         alert("Usuario Creado");
-        window.location.reload();
       }
     } catch (error) {
-      alert(`No se pudo crear el producto`);
+      alert(`Error: ${error}. No se pudo crear el usuario!`);
     }
   };
 };

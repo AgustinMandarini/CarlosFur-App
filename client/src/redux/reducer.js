@@ -15,6 +15,7 @@ import {
   POST_CART_PRODUCT,
   DELETE_CART_PRODUCT,
   POST_USER,
+  LOGIN_USER,
 } from "./types";
 
 const initialState = {
@@ -32,6 +33,7 @@ const initialState = {
   colorState: [],
   materialState: [],
   cartProducts: [],
+  loggedUser: null,
   newUser: null,
 };
 const rootReducer = (state = initialState, action) => {
@@ -137,6 +139,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         newUser: action.payload,
+      };
+    case LOGIN_USER:
+      return {
+        ...state,
+        loggedUser: action.payload,
       };
 
     default:

@@ -39,33 +39,6 @@ const NavBar = () => {
             id="basic-navbar-nav"
             className={navResponsive ? style.active : ""}
           >
-            <Nav className="ms-auto">
-              <div
-                className={
-                  navResponsive ? style.divLinksResponsive : style.divLinks
-                }
-              >
-                <Link
-                  to="/home"
-                  className={navResponsive ? style.linkResponsive : style.links}
-                  onClick={() => dispatch(getProducts())}
-                >
-                  Home
-                </Link>
-                <Link
-                  to="/create"
-                  className={navResponsive ? style.linkResponsive : style.links}
-                >
-                  Form
-                </Link>
-                <Link
-                  to="/about"
-                  className={navResponsive ? style.linkResponsive : style.links}
-                >
-                  About
-                </Link>
-              </div>
-            </Nav>
             <div
               className={
                 navResponsive ? style.searchBarResponsive : style.searchBar

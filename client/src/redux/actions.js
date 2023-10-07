@@ -15,6 +15,7 @@ import {
   SET_PRODUCT_TYPE,
   SET_SORT,
   POST_USER,
+  GET_USER,
 } from "./types";
 
 import axios from "axios";
@@ -140,6 +141,17 @@ export const postUser = (payload) => {
     } catch (error) {
       alert(`Error: ${error}. No se pudo crear el usuario!`);
     }
+  };
+};
+
+export const getUser = (payload) => {
+  return async function (dispatch) {
+    const apiData = await axios.get(`${apiUrl}/user?email=${payload}`);
+    const user = apiData.data;
+    return dispatch({
+      type: GET_USER,
+      payload: user,
+    });
   };
 };
 export const postCartProduct = (payload) => {

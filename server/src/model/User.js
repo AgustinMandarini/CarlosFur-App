@@ -39,6 +39,7 @@ module.exports = (sequelize) => {
       },
       enabled_user: {
         type: DataTypes.BOOLEAN,
+        allowNull: false,
         defaultValue: true,
       },
     },

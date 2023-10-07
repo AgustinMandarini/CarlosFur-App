@@ -15,6 +15,13 @@ const getCart = async () => {
 const createCart = async (req) => {
   try {
 
+    // const { userId, products } = req.body;
+    // try {
+    //   const user = await User.findByPk(userId);
+    //   if (!user) {
+    //     throw new Error("User not found");
+    //   }
+
     const { products, sale_date } = req.body;
 
     if (!Array.isArray(products) || products.length === 0) {

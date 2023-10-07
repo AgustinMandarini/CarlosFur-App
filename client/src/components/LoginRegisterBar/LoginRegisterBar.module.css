@@ -1,0 +1,17 @@
+.nav {
+  display: flex;
+  justify-content: right !important;
+}
+.button {
+  font-size: 13.6px !important;
+  padding: 7px;
+  margin-right: 1.3rem;
+}
+.container {
+  justify-content: center;
+}
+.buttonLogin {
+  font-size: 13.6px !important;
+  padding: 7px;
+  margin-right: 0.5rem;
+}

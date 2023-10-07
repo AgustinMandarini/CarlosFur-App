@@ -1,6 +1,10 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import style from "./Detail.module.css";
-import { getDetail } from "../../redux/actions";
+import {
+  getDetail,
+  postCartProduct,
+  deleteCartProduct,
+} from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
@@ -9,12 +13,45 @@ import imagenDefault from "./../../imagenes/default.png";
 const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const stateDetail = useSelector((state) => state.detail);
 
   useEffect(() => {
     dispatch(getDetail(id));
   }, [dispatch, id]);
-  console.log(stateDetail);
+
+  const stateDetail = useSelector((state) => state.detail);
+  const cartProducts = useSelector((state) => state.cartProducts);
+
+  const countForProductID = cartProducts.reduce((count, product) => {
+    if (product.id === Number(id)) {
+      return count + 1;
+    }
+    return count;
+  }, 0);
+  const [counter, setCounter] = useState(0);
+  const [product, setProduct] = useState(0);
+
+  const increaseCounter = () => {
+    /* Contador */
+    setCounter(counter + 1);
+
+    /* Se suma el producto al carrito */
+    setProduct(1);
+    dispatch(postCartProduct(Number(id)));
+    setProduct(0);
+  };
+
+  const decreaseCounter = () => {
+    /* Contador */
+    if (counter > 0) {
+      setCounter(counter - 1);
+    }
+
+    /* Se quita el producto del carrito */
+    setProduct(-1);
+    dispatch(deleteCartProduct(Number(id)));
+    setProduct(0);
+  };
+
   return (
     <div className={style.cntnDetail}>
       <Button
@@ -50,6 +87,11 @@ const Detail = () => {
           <p className={style.p}>Peso: {stateDetail.weight}</p>
           <p className={style.p}>Color: {stateDetail.color}</p>
         </div>
+      </div>
+      <div className={style.counterContainer}>
+        <button onClick={decreaseCounter}>-</button>
+        <span className={style.counterValue}>{countForProductID}</span>
+        <button onClick={increaseCounter}>+</button>
       </div>
     </div>
   );

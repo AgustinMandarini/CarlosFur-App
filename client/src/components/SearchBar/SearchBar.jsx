@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { getProductByName } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import { InputGroup, Form, Button } from "react-bootstrap";
-
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 const SearchBar = () => {
   const location = useLocation();
   const [products, setNameProducts] = useState("");

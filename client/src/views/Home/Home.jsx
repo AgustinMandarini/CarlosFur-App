@@ -69,7 +69,6 @@ const Home = () => {
   useEffect(() => {
     setProducts(globalProducts);
   }, [globalProducts]);
-
   //Combinación de ordenamientos y filtros
   useEffect(() => {
     const sortedProducts = [...globalProducts]; // Copia de los muebles globales
@@ -134,7 +133,6 @@ const Home = () => {
     setCurrentPage(1);
     // eslint-disable-next-line
   }, [sort, filters.productType, filters.color, filters.price, dispatch]);
-
   return (
     <div className={style.cntnHome}>
       <h1 className={style.tittle}>MSC AMOBLAMIENTOS</h1>

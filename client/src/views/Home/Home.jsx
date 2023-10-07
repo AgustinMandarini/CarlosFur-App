@@ -10,7 +10,7 @@ import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-const Home = () => {
+const Home = ({ cartRef }) => {
   const dispatch = useDispatch();
   const { user } = useAuth0();
 

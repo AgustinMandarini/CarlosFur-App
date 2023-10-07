@@ -2,6 +2,8 @@ import { Route, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { PageLoader } from "./components/PageLoader/pageLoader";
 import LoginRegisterBar from "./components/LoginRegisterBar/LoginRegisterBar";
+import { useEffect } from "react";
+
 import "./App.css";
 import {
   About,
@@ -20,6 +22,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const location = useLocation();
   const { isLoading } = useAuth0();
+
+  // useEffect(() => {
+  //   const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+  //   cartRef.current = cartData;
+  // }, []);
 
   if (isLoading) {
     return (

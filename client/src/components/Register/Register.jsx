@@ -15,7 +15,6 @@
 
 // export default Register;
 
-
 // En el componente Register.js
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -83,7 +82,9 @@ export const Register = () => {
                     <span className={styles.label}>Nombre</span>
                   </div>
                 </div>
-                <div className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}>
+                <div
+                  className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}
+                >
                   <div className={styles.data}>
                     <input
                       type="text"
@@ -99,7 +100,9 @@ export const Register = () => {
                     <span className={styles.label}>E-mail</span>
                   </div>
                 </div>
-                <div className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}>
+                <div
+                  className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}
+                >
                   <div className={styles.data}>
                     <input
                       type="password"
@@ -133,7 +136,9 @@ export const Register = () => {
                     <span className={styles.label}>Apellido</span>
                   </div>
                 </div>
-                <div className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}>
+                <div
+                  className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}
+                >
                   <div className={styles.data}>
                     <input
                       type="text"
@@ -149,7 +154,9 @@ export const Register = () => {
                     <span className={styles.label}>Celular</span>
                   </div>
                 </div>
-                <div className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}>
+                <div
+                  className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}
+                >
                   <div className={styles.data}>
                     <input
                       type="password"
@@ -191,12 +198,12 @@ export const Register = () => {
                 Registrarme
               </button>
             </div>
-              <span className={styles.text}>
-                ¿Ya tienes una cuenta?{" "}
-                <Link to="/login" className={styles.link}>
-                  Inicia sesión
-                </Link>
-              </span>
+            <span className={styles.text}>
+              ¿Ya tienes una cuenta?{" "}
+              <Link to="/login" className={styles.link}>
+                Inicia sesión
+              </Link>
+            </span>
           </form>
         </div>
       </div>

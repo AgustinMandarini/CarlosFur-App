@@ -7,7 +7,7 @@ import { setProductsCopy, postUser } from "../../redux/actions";
 import style from "./Home.module.css";
 import { useCheckUserExists } from "../../helpers/checkUserExist";
 
-const Home = () => {
+const Home = ({ cartRef }) => {
   const dispatch = useDispatch();
   const checkUserExist = useCheckUserExists();
 

@@ -6,6 +6,13 @@ import CartProductCard from "../CartProductCard/CartProductCard";
 
 const CartProductContainer = () => {
   const cartProducts = useSelector((state) => state.cartProducts);
+  const [cartData, setCartData] = useState([]);
+
+  useEffect(() => {
+    // Obtener datos del carrito desde el localStorage al montar el componente
+    const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartData(cartFromLocalStorage);
+  }, []);
 
   const cartProductCards = cartProducts.reduce((result, product) => {
     const existingProduct = result.find((item) => item.id === product.id);
@@ -37,18 +44,28 @@ const CartProductContainer = () => {
   return (
     <div className="container">
       {cartProductCards.length > 0 ? (
-        cartProductCards.map((m) => {
-          return (
-            <div className="card" key={m.id}>
-              <CartProductCard
-                id={m.id}
-                name={m.name}
-                totalPrice={m.totalPrice}
-                count={m.count}
-              />
-            </div>
-          );
-        })
+        cartProductCards.map((m) => (
+          <div className="card" key={m.id}>
+            <CartProductCard
+              id={m.id}
+              name={m.name}
+              totalPrice={m.totalPrice}
+              count={m.count}
+            />
+          </div>
+        ))
+      ) : cartData.length > 0 ? (
+        cartData.map((m) => (
+          <div className="card" key={m.id}>
+            <CartProductCard
+              id={m.id}
+              name={m.name}
+              totalPrice={m.totalPrice}
+              count={m.count}
+            />
+            {console.log(m)}
+          </div>
+        ))
       ) : (
         <div className="noProducts">
           <h1>No se ha añadido nada al carrito</h1>
@@ -56,9 +73,8 @@ const CartProductContainer = () => {
       )}
       {shouldRenderTotalPrice && (
         <h1>Precio Total de la compra: {totalPriceSum}</h1>
-      )}{" "}
+      )}
     </div>
   );
 };
-
 export default CartProductContainer;

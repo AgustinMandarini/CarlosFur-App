@@ -57,7 +57,7 @@ const FormPage = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(form.productType);
+    console.log(form);
 
     const validationErrors = validation(form);
     setErrors(validationErrors);

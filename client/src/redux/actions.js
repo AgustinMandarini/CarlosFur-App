@@ -14,6 +14,7 @@ import {
   SET_PRODUCTS_COPY,
   SET_PRODUCT_TYPE,
   SET_SORT,
+  POST_USER,
 } from "./types";
 
 import axios from "axios";
@@ -124,6 +125,22 @@ export const getProductByName = (name) => {
       type: GET_PRODUCT_BY_NAME,
       payload: nameid,
     });
+  };
+};
+
+export const postUser = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/user`, payload);
+      const user = response.data;
+      if (response.status === 200) {
+        dispatch({ type: POST_USER, payload: user });
+        alert("Usuario Creado");
+        window.location.reload();
+      }
+    } catch (error) {
+      alert(`No se pudo crear el producto`);
+    }
   };
 };
 export const postCartProduct = (payload) => {

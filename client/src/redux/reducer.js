@@ -14,6 +14,7 @@ import {
   SET_PRICE_RANGE,
   POST_CART_PRODUCT,
   DELETE_CART_PRODUCT,
+  POST_USER,
 } from "./types";
 
 const initialState = {
@@ -31,7 +32,7 @@ const initialState = {
   colorState: [],
   materialState: [],
   cartProducts: [],
-
+  newUser: null,
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -83,11 +84,11 @@ const rootReducer = (state = initialState, action) => {
       const productToAdd = state.muebles.find(
         (mueble) => mueble.id === action.payload
       );
-
       return {
         ...state,
         cartProducts: [...state.cartProducts, productToAdd],
       };
+
     case DELETE_CART_PRODUCT:
       const indexToRemove = state.cartProducts.findIndex(
         (product) => product.id === action.payload
@@ -131,6 +132,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allMuebles: action.payload,
+      };
+    case POST_USER:
+      return {
+        ...state,
+        newUser: action.payload,
       };
 
     default:

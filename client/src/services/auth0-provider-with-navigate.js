@@ -3,7 +3,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 export const Auth0ProviderWithNavigate = ({ children }) => {
-  const navigate = useHistory();
+  const history = useHistory();
 
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;
   const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
@@ -11,7 +11,7 @@ export const Auth0ProviderWithNavigate = ({ children }) => {
   const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
 
   const onRedirectCallback = (appState) => {
-    navigate(appState?.returnTo || window.location.pathname);
+    history.push(appState?.returnTo || window.location.pathname);
   };
 
   if (!(domain && clientId && redirectUri && audience)) {

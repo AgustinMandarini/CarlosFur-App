@@ -19,9 +19,12 @@ module.exports = (sequelize) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: "88OMUqK0NLVJQAD",
       },
       e_mail: {
         type: DataTypes.STRING,
+        unique: true,
+        allowNull: false,
       },
       first_name: {
         type: DataTypes.STRING,
@@ -32,13 +35,13 @@ module.exports = (sequelize) => {
       is_admin: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue:false,
+        defaultValue: false,
       },
       enabled_user: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: true,
-    }
+      },
     },
     { timestamps: false }
   );

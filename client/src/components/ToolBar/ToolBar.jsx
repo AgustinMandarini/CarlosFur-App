@@ -15,6 +15,7 @@ const ToolBar = () => {
 
   const productTypeList = useSelector((state) => state.productType);
   const productList = useSelector((state) => state.muebles);
+  const coloresList = useSelector((state)=>state.colorState);
 
   // Armado de opciones por tipo de producto
   const productTypeNames = productTypeList.map(
@@ -22,9 +23,9 @@ const ToolBar = () => {
   );
 
   // Armado de opciones por color
-  const productColors = [
-    ...new Set(productList.map((product) => product.color)),
-  ];
+  // const productColors = [
+  //   ...new Set(productList.map((product) => product.color)),
+  // ];
   // Armado de opciones "Precios Baratos", "Precios Medios", "Precios Altos"
   const productPrices = productList.map((product) => product.price);
 
@@ -70,6 +71,7 @@ const ToolBar = () => {
               <option value="MN">Menor Antiguedad </option>
             </Form.Select>
           </div>
+
           <div className={style.divSelect}>
             <Form.Select
               onChange={setFilterByProductTypeHandler}
@@ -77,7 +79,7 @@ const ToolBar = () => {
               className={style.select}
             >
               <option value="allProductTypes">Tipo de ambiente</option>
-              {productTypeNames.map((productType, index) => {
+              {productTypeNames && productTypeNames.map((productType, index) => {
                 return (
                   <option value={productType} key={index}>
                     {productType}
@@ -86,22 +88,25 @@ const ToolBar = () => {
               })}
             </Form.Select>
           </div>
+
           <div className={style.divSelect}>
             <Form.Select
               onChange={setFilterByColorHandler}
               size="sm"
               className={style.select}
             >
-              <option value="allColors">Colores</option>
-              {productColors.map((color, index) => {
+              <option value="allColors">Todos los Colores</option>
+              {coloresList.map((color) => {
                 return (
-                  <option value={color} key={index}>
-                    {color}
+                  <option value={color.id} key={color.id}>
+                    {color.name}
                   </option>
                 );
               })}
             </Form.Select>
           </div>
+
+
           <div className={style.divSelect}>
             <Form.Select
               onChange={setFilterByPriceHandler}

@@ -1,6 +1,6 @@
 const { Product, ProductType } = require("../db");
 const { findAllTypes } = require("./getProductTypeController");
-const { cloudUploadImage } = require("../services/Cloudinary/index");
+const { uploadImage } = require("../services/Cloudinary/index");
 
 const postProductController = async ({
   name,
@@ -17,7 +17,7 @@ const postProductController = async ({
   stock,
   enabled_product,
 }) => {
-  const cloudImageURL = await cloudUploadImage(imagePath);
+  const cloudImageURL = await uploadImage(imagePath);
   // Crea un nuevo producto, sin agregar aun el tipo de producto, que sera una relacion manyToMany con la tabla productType
   const newProduct = await Product.create({
     name,

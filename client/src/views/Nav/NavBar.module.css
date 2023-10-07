@@ -16,7 +16,7 @@
 .divLinks {
   display: flex;
   width: 450px;
-  margin-right: 20rem;
+  margin-left: 4rem;
   align-content: left;
   align-items: left;
   height: 4rem;
@@ -29,7 +29,7 @@
 }
 .links {
   text-decoration: none;
-  padding-right: 2em;
+  padding-right: 1.9em;
   color: black;
 }
 .links:hover {
@@ -41,7 +41,7 @@
   height: 20px;
   width: 70px;
   object-fit: fill;
-  margin-right: 90px;
+  margin-right: 110px;
 }
 .active {
   margin-top: 8px;

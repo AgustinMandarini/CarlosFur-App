@@ -1,5 +1,6 @@
 .divSerchBar {
-  margin-right: 1rem;
+  margin-right: 1.3rem;
+  width: 26rem;
 }
 .inputSearch {
   font-size: 14px;
@@ -7,4 +8,9 @@
 .inputSearch:focus {
   border-color: #000 !important;
   box-shadow: none !important;
+}
+.links {
+  text-decoration: none;
+  color: black;
+  margin-left: 0.6rem !important;
 }

@@ -3,13 +3,50 @@ import { useDispatch, useSelector } from "react-redux";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
 import Paginacion from "../../components/Paginacion/Paginacion";
 import ToolBar from "../../components/ToolBar/ToolBar";
-import { setProductsCopy } from "../../redux/actions";
+import { setProductsCopy, postUser } from "../../redux/actions";
 import style from "./Home.module.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const Home = () => {
   const dispatch = useDispatch();
+  const { user } = useAuth0();
+
+  const checkUserExist = async () => {
+    if (user) {
+      // Si hay usuario autenticado con auth0
+      axios
+        .get(`${apiUrl}/user?email=${user.email}`) //Pide al back si existe un usuario con ese mail
+        .then((response) => {
+          const data = response.data;
+
+          if (data.length && data[0].e_mail === user.email) {
+            //Si el usuario ya esta creado, redirige a login
+            console.log("EXISTE!!");
+          } else {
+            //Si no esta creado, crea uno nuevo
+            console.log("NO EXISTE!!");
+            const newUser = { user_name: user.name, e_mail: user.email };
+            dispatch(postUser(newUser));
+          }
+        })
+        .catch((error) => {
+          console.log("ERROR!!");
+        });
+      // if (response.data.e_mail === user.email) {
+      //   console.log("EXISTE!!");
+      // } else {
+      //   const newUser = { user_name: user.name, e_mail: user.email };
+      //   dispatch(postUser(newUser));
+      //   alert("Usuario creado exitosamente!");
+      // }
+    }
+  };
 
   useEffect(() => {
+    checkUserExist();
     dispatch(setProductsCopy());
     // eslint-disable-next-line
   }, []);
@@ -32,7 +69,6 @@ const Home = () => {
   useEffect(() => {
     setProducts(globalProducts);
   }, [globalProducts]);
-
   //Combinación de ordenamientos y filtros
   useEffect(() => {
     const sortedProducts = [...globalProducts]; // Copia de los muebles globales
@@ -61,8 +97,8 @@ const Home = () => {
         if (product.colorId !== null && product.colorId == filters.color) {
           return true;
         }
-    })
-    
+      })
+
       // eslint-disable-next-line
       .filter((product) => {
         if (filters.price.length === 1) {
@@ -97,7 +133,6 @@ const Home = () => {
     setCurrentPage(1);
     // eslint-disable-next-line
   }, [sort, filters.productType, filters.color, filters.price, dispatch]);
-
   return (
     <div className={style.cntnHome}>
       <h1 className={style.tittle}>MSC AMOBLAMIENTOS</h1>

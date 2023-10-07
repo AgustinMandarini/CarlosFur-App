@@ -3,14 +3,21 @@ const { Product } = require("../db");
 const putProductController = async (id) => {
     // Busca el producto por su id
     const product = await Product.findByPk(id);
-    if (!product) {
-    return { success: false };
-    }
+    let message = ""
     // Actualiza el atributo enabled_product a false
-    product.enabled_product = false;
-    // Guarda los cambios en la base de datos
+    
+    if (product.enabled_product){
+      product.enabled_product = false;
+      message = "message: Producto deshabilitado correctamente"
+    } else {
+      product.enabled_product = true;
+      message = "message: Producto habilitado correctamente"
+    }
     await product.save();
-    return { success: true };
+      return message
+    // Guarda los cambios en la base de datos
+    
+    
   }
 
 module.exports = { putProductController };

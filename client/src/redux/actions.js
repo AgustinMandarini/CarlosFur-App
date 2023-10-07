@@ -1,17 +1,20 @@
 import {
+  DELETE_CART_PRODUCT,
   GET_COLOR,
   GET_DETAIL,
   GET_MATERIAL,
   GET_PRODUCTS,
   GET_PRODUCT_BY_NAME,
   GET_PRODUCT_TYPE,
+  POST_CART_PRODUCT,
   POST_PRODUCT,
   SET_COLOR,
   SET_IMAGE_URL,
   SET_PRICE_RANGE,
   SET_PRODUCTS_COPY,
   SET_PRODUCT_TYPE,
-  SET_SORT
+  SET_SORT,
+  POST_USER,
 } from "./types";
 
 import axios from "axios";
@@ -123,6 +126,27 @@ export const getProductByName = (name) => {
       payload: nameid,
     });
   };
+};
+
+export const postUser = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/user`, payload);
+      const user = response.data;
+      if (response.status === 200) {
+        dispatch({ type: POST_USER, payload: user });
+        alert("Usuario Creado");
+      }
+    } catch (error) {
+      alert(`Error: ${error}. No se pudo crear el usuario!`);
+    }
+  };
+};
+export const postCartProduct = (payload) => {
+  return { type: POST_CART_PRODUCT, payload: payload };
+};
+export const deleteCartProduct = (payload) => {
+  return { type: DELETE_CART_PRODUCT, payload: payload };
 };
 
 export const setSort = (payload) => {

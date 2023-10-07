@@ -82,9 +82,13 @@ const Card = (props) => {
         </div>
       </Link>
       <div className={style.counterContainer}>
-        <button onClick={decreaseCounter}>-</button>
+        <button className={style.buttonCount} onClick={decreaseCounter}>
+          -
+        </button>
         <span className={style.counterValue}>{countForProductID}</span>
-        <button onClick={increaseCounter}>+</button>
+        <button className={style.buttonCount} onClick={increaseCounter}>
+          +
+        </button>
       </div>
     </div>
   );

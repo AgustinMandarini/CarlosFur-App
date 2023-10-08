@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import style from "./ShoppingCart.module.css";
 import CartProductContainer from "../../components/CartProductContainer/CartProductContainer";
 import { React, useEffect } from "react";
 

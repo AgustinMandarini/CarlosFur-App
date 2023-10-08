@@ -6,6 +6,10 @@ import GuardedRoute from "./helpers/GuardComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { loadCartFromLocalStorage } from "./redux/actions";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import "./App.css";
 import {
   About,
   Detail,
@@ -44,7 +48,7 @@ function App() {
     <div className="App">
       {location.pathname !== "/" && <LoginRegisterBar />}
       {location.pathname !== "/" && <NavBar />}
-
+      <ToastContainer />
       <Route exact path="/" component={LandingPage} />
       <Route path="/home" render={() => <Home />} />
       <Route path="/detail/:id" component={Detail} />

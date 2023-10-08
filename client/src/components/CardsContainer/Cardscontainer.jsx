@@ -15,6 +15,7 @@ const CardsContainer = ({ currentProducts }) => {
                 description={m.description}
                 price={m.price}
                 id={m.id}
+                count={m.count}
               />
             </div>
           );

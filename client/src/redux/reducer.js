@@ -16,6 +16,7 @@ import {
   DELETE_CART_PRODUCT,
   POST_USER,
   GET_USER,
+  LOAD_CART_FROM_LOCAL_STORAGE,
 } from "./types";
 
 const initialState = {
@@ -86,6 +87,8 @@ const rootReducer = (state = initialState, action) => {
       const productToAdd = state.muebles.find(
         (mueble) => mueble.id === action.payload
       );
+      productToAdd.count = 1;
+
       return {
         ...state,
         cartProducts: [...state.cartProducts, productToAdd],
@@ -107,7 +110,11 @@ const rootReducer = (state = initialState, action) => {
       } else {
         return state;
       }
-
+    case LOAD_CART_FROM_LOCAL_STORAGE:
+      return {
+        ...state,
+        cartProducts: action.payload, // Carga los productos del localStorage
+      };
     case SET_SORT:
       return { ...state, sort: action.payload };
 

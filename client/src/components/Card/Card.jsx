@@ -20,23 +20,26 @@ const Card = (props) => {
   const increaseCounter = () => {
     /* Contador */
     setCounter(counter + 1);
-
-    /* Se suma el producto al carrito */
-    setProduct(1);
     dispatch(postCartProduct(props.id));
-    setProduct(0);
+
+    updateLocalStorage([...cartProducts, props]);
   };
 
   const decreaseCounter = () => {
     /* Contador */
     if (counter > 0) {
       setCounter(counter - 1);
+      dispatch(deleteCartProduct(props.id));
+
+      updateLocalStorage([...cartProducts, props]);
     }
 
     /* Se quita el producto del carrito */
     setProduct(-1);
-    dispatch(deleteCartProduct(props.id));
     setProduct(0);
+  };
+  const updateLocalStorage = (cart) => {
+    localStorage.setItem("cart", JSON.stringify(cart));
   };
   return (
     <div className={style.container} key={props.id}>
@@ -55,9 +58,13 @@ const Card = (props) => {
         </div>
       </Link>
       <div className={style.counterContainer}>
-        <button onClick={decreaseCounter}>-</button>
+        <button className={style.buttonCount} onClick={decreaseCounter}>
+          -
+        </button>
         <span className={style.counterValue}>{countForProductID}</span>
-        <button onClick={increaseCounter}>+</button>
+        <button className={style.buttonCount} onClick={increaseCounter}>
+          +
+        </button>
       </div>
     </div>
   );

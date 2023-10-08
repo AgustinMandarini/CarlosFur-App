@@ -21,6 +21,30 @@ const RegisterForm = () => {
     });
   };
 
+  const handleLocalSignUp = () => {
+    
+      if (Object.keys(errors)) {
+        try {
+          const response = await axios.get(`${apiUrl}/user?email=${user.email}`);
+          const data = response.data;
+  
+          if (data.length && data[0].e_mail === user.email) {
+            // Si el usuario ya está creado, lo tiene que logear
+            console.log("Usuario existente!!");
+            dispatch(getUser(user.email));
+          } else {
+            // Si no está creado, crea uno nuevo
+            console.log("Usuario nuevo. Creando usuario...");
+            const newUser = { user_name: user.name, e_mail: user.email };
+            dispatch(postUser(newUser));
+          }
+        } catch (error) {
+          console.log(`${error}`);
+        }
+  
+    };
+  }
+
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({

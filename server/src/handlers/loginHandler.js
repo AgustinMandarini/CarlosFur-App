@@ -1,10 +1,10 @@
 //getUserHandler.js
-const { findUser } = require("../controllers/getUserController");
+const { loginUser } = require("../controllers/loginController");
 
-const getUserHandler = async (req, res) => {
+const loginHandler = async (req, res) => {
   try {
-    const { userName, email, password } = req.query;
-    const user = await findUser(userName, email, password);
+    const { email, password } = req.body;
+    const user = await loginUser(email, password);
     if (user.length === 0) {
       res.status(404).send({ error: "El usuario no esta registrado" });
     } else {
@@ -15,4 +15,4 @@ const getUserHandler = async (req, res) => {
   }
 };
 
-module.exports = { getUserHandler };
+module.exports = { loginHandler };

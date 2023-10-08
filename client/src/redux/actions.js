@@ -18,7 +18,7 @@ import {
   GET_USER,
   LOAD_CART_FROM_LOCAL_STORAGE,
 } from "./types";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -70,17 +70,17 @@ export const postProduct = (payload) => {
       const producto = response.data;
       if (response.status === 200) {
         dispatch({ type: POST_PRODUCT, payload: producto });
-        toast.success('Producto Creado', {
+        toast.success("Producto Creado", {
           position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000, // Tiempo en milisegundos que la notificación estará visible 
-        })
+          autoClose: 3000, // Tiempo en milisegundos que la notificación estará visible
+        });
         setTimeout(() => {
           window.location.reload();
         }, 3000);
       }
     } catch (error) {
       // Mostrar notificación de error
-      toast.error('No se pudo crear el producto', {
+      toast.error("No se pudo crear el producto", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,
       });
@@ -171,12 +171,16 @@ export const postUser = (payload) => {
 
 export const getUser = (payload) => {
   return async function (dispatch) {
-    const apiData = await axios.get(`${apiUrl}/user?email=${payload}`);
-    const user = apiData.data;
-    return dispatch({
-      type: GET_USER,
-      payload: user,
-    });
+    try {
+      const apiData = await axios.get(`${apiUrl}/user?email=${payload.e_mail}`);
+      const user = apiData.data;
+      return dispatch({
+        type: GET_USER,
+        payload: user,
+      });
+    } catch (error) {
+      return alert("Usuario no registrado");
+    }
   };
 };
 export const postCartProduct = (payload) => {

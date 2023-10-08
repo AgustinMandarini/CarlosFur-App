@@ -3,8 +3,8 @@ const { User } = require("../db.js");
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 
-const findUser = async (userName, email, password) => {
-  console.log("Nombre de usuario:", userName);
+const findUser = async (email, password) => {
+  console.log("Nombre de usuario:", email);
   console.log("Contraseña:", password);
 
   const query = {
@@ -14,13 +14,7 @@ const findUser = async (userName, email, password) => {
     },
   };
 
-  if (userName) {
-    query.where.user_name = {
-      [Op.eq]: userName,
-    };
-  }
-
-  if (email) {
+  if (email && password) {
     query.where.e_mail = {
       [Op.iLike]: `%${email}%`,
     };

@@ -1,15 +1,19 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { getUser } from "../../../redux/actions";
 import googleLogo from "../../../imagenes/logoGoogle.png";
-
 import styles from "./LoginForm.module.css";
 import validation from "./validation";
+import axios from "axios";
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const { loginWithRedirect } = useAuth0();
+  const loggedUser = useSelector((state) => state.loggedUser);
 
   const handleLogin = async () => {
     await loginWithRedirect({
@@ -21,6 +25,30 @@ const LoginForm = () => {
       },
     });
   };
+
+  const handleLocalLogin = async () => {
+    const userInfo = { e_mail: form.e_mail };
+    if (form.e_mail && form.password) {
+      try {
+        const response = await axios.get(`${apiUrl}/user/login`, userInfo);
+        const data = response.data;
+
+        if (data.length) {
+          // Si el usuario está creado, lo tiene que logear
+          dispatch(getUser(form.e_mail));
+          console.log("data: " + data);
+          //Falta redireccionar a home
+        }
+      } catch (error) {
+        alert("El usuario no esta registrado o la contraseña es incorrecta");
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Este efecto se ejecutará cada vez que loggedUser cambie
+    console.log(loggedUser);
+  }, [loggedUser]);
 
   const [form, setForm] = useState({
     e_mail: "",
@@ -91,7 +119,11 @@ const LoginForm = () => {
 
           {/* Buttons */}
           <div className={styles.buttonContainer}>
-            <button className={styles.button} type="submit">
+            <button
+              className={styles.button}
+              type="submit"
+              onClick={handleLocalLogin}
+            >
               Iniciar sesión
             </button>
             {/* Botón "Acceder con Google" */}

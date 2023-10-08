@@ -1,3 +1,5 @@
+//postUserHandler.js
+
 const { createUser } = require("../controllers/postUserController");
 
 const postUserHandler = async (req, res) => {

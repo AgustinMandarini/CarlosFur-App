@@ -15,7 +15,7 @@ import {
   SET_PRODUCT_TYPE,
   SET_SORT,
   POST_USER,
-  LOGIN_USER,
+  GET_USER,
 } from "./types";
 
 import axios from "axios";
@@ -144,17 +144,16 @@ export const postUser = (payload) => {
   };
 };
 
-export const login = () => {
+export const getUser = (payload) => {
   return async function (dispatch) {
-    const apiData = await axios.get(`${apiUrl}/user/login`);
+    const apiData = await axios.get(`${apiUrl}/user?email=${payload}`);
     const user = apiData.data;
     return dispatch({
-      type: LOGIN_USER,
+      type: GET_USER,
       payload: user,
     });
   };
 };
-
 export const postCartProduct = (payload) => {
   return { type: POST_CART_PRODUCT, payload: payload };
 };

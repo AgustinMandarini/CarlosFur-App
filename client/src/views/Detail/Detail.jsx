@@ -64,34 +64,44 @@ const Detail = () => {
       </Button>
 
       <div className={style.cntnCardDetail}>
-        <div className={style.imgContainer}>
-          {stateDetail.imagePath ? (
-            <>
+        <div className={style.ImgandData}>
+          <div className={style.imgContainer}>
+            {stateDetail.imagePath ? (
+              <>
+                <img
+                  src={stateDetail.imagePath}
+                  className={style.imgDetail}
+                  alt="image"
+                />
+              </>
+            ) : (
               <img
-                src={stateDetail.imagePath}
+                src={imagenDefault}
                 className={style.imgDetail}
                 alt="image"
               />
-            </>
-          ) : (
-            <img src={imagenDefault} className={style.imgDetail} alt="image" />
-          )}
-          <p className={style.p}>{stateDetail.name}</p>
-          <p className={style.p}>${stateDetail.price}</p>
+            )}
+            <p className={style.p2}>{stateDetail.name}</p>
+            <p className={style.p2}>${stateDetail.price}</p>
+          </div>
+          <div className={style.texto}>
+            <p className={style.p}>{stateDetail.description}</p>
+            <p className={style.p}>Altura: {stateDetail.height} </p>
+            <p className={style.p}>Profundidad: {stateDetail.depth} </p>
+            <p className={style.p}>Ancho: {stateDetail.width}</p>
+            <p className={style.p}>Peso: {stateDetail.weight}</p>
+            <p className={style.p}>Color: {stateDetail.color}</p>
+            <div className={style.counterContainer}>
+              <button className={style.buttonCount} onClick={decreaseCounter}>
+                -
+              </button>
+              <p className={style.counterValue}>{countForProductID}</p>
+              <button className={style.buttonCount} onClick={increaseCounter}>
+                +
+              </button>
+            </div>
+          </div>
         </div>
-        <div className={style.texto}>
-          <p className={style.p}>{stateDetail.description}</p>
-          <p className={style.p}>Altura: {stateDetail.height} </p>
-          <p className={style.p}>Profundidad: {stateDetail.depth} </p>
-          <p className={style.p}>Ancho: {stateDetail.width}</p>
-          <p className={style.p}>Peso: {stateDetail.weight}</p>
-          <p className={style.p}>Color: {stateDetail.color}</p>
-        </div>
-      </div>
-      <div className={style.counterContainer}>
-        <button onClick={decreaseCounter}>-</button>
-        <span className={style.counterValue}>{countForProductID}</span>
-        <button onClick={increaseCounter}>+</button>
       </div>
     </div>
   );

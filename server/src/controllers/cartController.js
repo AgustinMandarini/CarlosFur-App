@@ -1,9 +1,10 @@
 const { Cart, Product } = require('../db');
-const Sequelize = require('sequelize');
 
 const createCart = async (req) => {
   try {
     const { products } = req.body;
+
+    console.log(products)
 
     if (!Array.isArray(products) || products.length === 0) {
       return { status: 400, data: { error: 'Invalid or empty product list' } };
@@ -16,7 +17,7 @@ const createCart = async (req) => {
       where: { id: productIds },
     });
 
-    console.log("AAAA", databaseProducts)
+    // console.log("AAAA", databaseProducts)
 
     let totalAmount = 0.0;
     for (const product of products) {
@@ -30,14 +31,24 @@ const createCart = async (req) => {
       const cart = await Cart.create({ 
         total_amount: totalAmount, // Total calculado
     });
-    
-      await cart.addProducts(products.map((product) => product.id), { // Asocia los productos con sus cantidades al carrito
-      through: { quantity: Sequelize.col('quantity') }, // Asocia la cantidad del producto
+
+     
+    const productQuantities = products.map((product) => product.quantity); // Obtener solo las cantidades de los productos
+
+
+    for (let i = 0; i < products.length; i++) { // Asociar los productos con sus cantidades al carrito
+    await cart.addProducts([products[i].id], {
+    through: { product_quantity: productQuantities[i] }, // Asocia la cantidad del producto
+  });
+}
+
+
+
+    const updatedCart = await Cart.findByPk(cart.id, {
+      include: [{ model: Product, as: 'products', attributes: ['id'] }],
+      
     });
-    
-      const updatedCart = await Cart.findByPk(cart.id, {
-      include: [{ model: Product, as: 'products' }],
-    });
+    console.log(products)
     
     return { status: 201, data: updatedCart };
   } catch (error) {

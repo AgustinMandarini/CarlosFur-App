@@ -6,14 +6,8 @@ import CartProductCard from "../CartProductCard/CartProductCard";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const CartProductContainer = () => {
-  const cartProducts = useSelector((state) => state.cartProducts);
-  const [cartData, setCartData] = useState([]);
-
-  useEffect(() => {
-    // Obtener datos del carrito desde el localStorage al montar el componente
-    const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart")) || [];
-    setCartData(cartFromLocalStorage);
-  }, []);
+  const initialCart = JSON.parse(localStorage.getItem('cart')) || [];
+  const [cartProducts, setCartProducts] = useState(initialCart);
 
   const cartProductCards = cartProducts.reduce((result, product) => {
     const existingProduct = result.find((item) => item.id === product.id);
@@ -42,6 +36,7 @@ const CartProductContainer = () => {
 
   const shouldRenderTotalPrice = cartProductCards.length > 0;
 
+
   return (
     <div className="container">
       {cartProductCards.length > 0 ? (
@@ -53,18 +48,6 @@ const CartProductContainer = () => {
               totalPrice={m.totalPrice}
               count={m.count}
             />
-          </div>
-        ))
-      ) : cartData.length > 0 ? (
-        cartData.map((m) => (
-          <div className="card" key={m.id}>
-            <CartProductCard
-              id={m.id}
-              name={m.name}
-              totalPrice={m.totalPrice}
-              count={m.count}
-            />
-            {console.log(m)}
           </div>
         ))
       ) : (

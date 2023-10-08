@@ -48,7 +48,7 @@ const FormPage = () => {
     imageBase64: "",
   });
 
-  console.log(color);
+
 
   const changeHandler = (event) => {
     const property = event.target.name;

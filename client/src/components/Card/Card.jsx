@@ -8,31 +8,6 @@ import { deleteCartProduct, postCartProduct } from "../../redux/actions";
 const Card = (props) => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
-
-  //LOCALSTORAGE
-  const postProduct = (productId) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const updatedCart = [...cart, { id: productId, count: 1 }];
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-  };
-
-  const deleteProduct = (productId) => {
-    // Obtén el carrito del localStorage
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    // Encuentra el índice del producto que deseas eliminar
-    const indexToDelete = cart.findIndex((product) => product.id === productId);
-
-    if (indexToDelete !== -1) {
-      // Elimina el producto específico del carrito en el array
-      cart.splice(indexToDelete, 1);
-
-      // Actualiza el carrito en el localStorage con el array modificado
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
-  };
-  //
-
   const countForProductID = cartProducts.reduce((count, product) => {
     if (product.id === props.id) {
       return count + 1;
@@ -45,25 +20,26 @@ const Card = (props) => {
   const increaseCounter = () => {
     /* Contador */
     setCounter(counter + 1);
-
-    /* Se suma el producto al carrito */
-    setProduct(1);
     dispatch(postCartProduct(props.id));
-    setProduct(0);
-    postProduct(props.id);
+
+    updateLocalStorage([...cartProducts, props]);
   };
 
   const decreaseCounter = () => {
     /* Contador */
     if (counter > 0) {
       setCounter(counter - 1);
+   
+       const updatedCart = cartProducts.filter((product) => product.id !== props.id);
+      updateLocalStorage(updatedCart);
     }
 
     /* Se quita el producto del carrito */
     setProduct(-1);
-    dispatch(deleteCartProduct(props.id));
     setProduct(0);
-    deleteProduct(props.id);
+  };
+  const updateLocalStorage = (cart) => {
+    localStorage.setItem('cart', JSON.stringify(cart));
   };
   return (
     <div className={style.container} key={props.id}>

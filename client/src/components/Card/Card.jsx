@@ -17,6 +17,9 @@ const Card = (props) => {
   const [counter, setCounter] = useState(0);
   const [product, setProduct] = useState(0);
 
+  const updateLocalStorage = (cart) => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
   const increaseCounter = () => {
     /* Contador */
     setCounter(counter + 1);
@@ -30,7 +33,6 @@ const Card = (props) => {
     if (counter > 0) {
       setCounter(counter - 1);
       dispatch(deleteCartProduct(props.id));
-
       updateLocalStorage([...cartProducts, props]);
     }
 
@@ -38,9 +40,7 @@ const Card = (props) => {
     setProduct(-1);
     setProduct(0);
   };
-  const updateLocalStorage = (cart) => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  };
+
   return (
     <div className={style.container} key={props.id}>
       <Link to={`/detail/${props.id}`} className={style.nameLink}>

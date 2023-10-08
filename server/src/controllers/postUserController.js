@@ -1,11 +1,18 @@
+//postUserController.js
 const { User } = require("../db");
+const {encryptPassword } = require("../controllers/passwordUtils")
 
 const createUser = async (user_name, password, e_mail, first_name, last_name) => {
+
+    // Encriptar la contraseña antes de crear el usuario
+    const hashedPassword = await encryptPassword(password);
+
+
   try {
     // Crea un nuevo usuario en la base de datos
     const newUser = await User.create({
       user_name,
-      password,
+      password: hashedPassword,
       e_mail,
       first_name,
       last_name,
@@ -21,3 +28,4 @@ const createUser = async (user_name, password, e_mail, first_name, last_name) =>
 };
 
 module.exports = { createUser };
+

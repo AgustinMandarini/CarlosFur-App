@@ -1,40 +1,64 @@
+// getUserController.js
 const { User } = require("../db.js");
 const { Op } = require("sequelize");
+const bcrypt = require("bcrypt");
 
 const findUser = async (userName, email, password) => {
+  console.log("Nombre de usuario:", userName);
+  console.log("Contraseña:", password);
+
   const query = {
-    attributes: {
-      exclude: ["password"], // Excluir la contraseña por razones de seguridad
-    },
+    attributes: { exclude: ["createdAt", "updatedAt"] },
     where: {
       enabled_user: true,
     },
   };
 
-  // Filtrar por nombre de usuario si se proporciona
   if (userName) {
     query.where.user_name = {
-      [Op.iLike]: `%${userName}%`,
+      [Op.eq]: userName,
     };
   }
 
-  // Filtrar por email si se proporciona
   if (email) {
     query.where.e_mail = {
       [Op.iLike]: `%${email}%`,
     };
   }
 
-  // Filtrar por contraseña si se proporciona
+  const users = await User.findAll(query);
+
+  // Verificar la contraseña si se proporciona
   if (password) {
-    query.where.password = {
-      [Op.iLike]: `%${password}%`,
-    };
+    const authenticatedUsers = await Promise.all(users.map(async (user) => {
+      try {
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        console.log("Contraseña almacenada:", user.password);
+
+        return passwordMatch ? { user_name: user.user_name, e_mail: user.e_mail, first_name: user.first_name, last_name: user.last_name } : null;
+      } catch (error) {
+        console.error(`Error al comparar contraseñas para el usuario ${user.user_name}:`, error.message);
+        return null;
+      }
+    }));
+
+    // Filtrar usuarios autenticados
+    const filteredUsers = authenticatedUsers.filter(user => user !== null);
+
+    if (filteredUsers.length === 0) {
+      throw new Error(`Usuario no encontrado o contraseña incorrecta para ${userName}`);
+    }
+
+    return filteredUsers;
   }
 
-  // Obtener usuarios según la consulta
-  const users = await User.findAll(query);
-  return users;
+  // Excluir la contraseña en la respuesta final
+  return users.map(user => ({
+    user_name: user.user_name,
+    e_mail: user.e_mail,
+    first_name: user.first_name,
+    last_name: user.last_name,
+  }));
 };
 
 module.exports = { findUser };

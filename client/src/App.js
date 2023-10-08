@@ -6,8 +6,8 @@ import GuardedRoute from "./helpers/GuardComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { loadCartFromLocalStorage } from "./redux/actions";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
 import {

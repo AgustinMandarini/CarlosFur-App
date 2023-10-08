@@ -10,14 +10,15 @@ const postProductController = async ({
   width,
   weight,
   description,
-  imagePath,
+  imageBase64,
   productTypeId,
   colorId,
   materialId,
   stock,
   enabled_product,
 }) => {
-  const cloudImageURL = await uploadImage(imagePath);
+  const cloudImageURL = await uploadImage(imageBase64);
+
   // Crea un nuevo producto, sin agregar aun el tipo de producto, que sera una relacion manyToMany con la tabla productType
   const newProduct = await Product.create({
     name,
@@ -27,7 +28,6 @@ const postProductController = async ({
     width,
     weight,
     description,
-    imagePath,
     productTypeId,
     colorId,
     materialId,

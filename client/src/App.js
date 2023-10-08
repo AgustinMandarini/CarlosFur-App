@@ -2,7 +2,9 @@ import { Route, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { PageLoader } from "./components/PageLoader/pageLoader";
 import LoginRegisterBar from "./components/LoginRegisterBar/LoginRegisterBar";
-import { useEffect } from "react";
+import GuardedRoute from "./helpers/GuardComponent";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import "./App.css";
 import {
@@ -21,7 +23,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const location = useLocation();
-  const { isLoading } = useAuth0();
+  const { isLoading, isAuthenticated } = useAuth0();
 
   // useEffect(() => {
   //   const cartData = JSON.parse(localStorage.getItem("cart")) || [];
@@ -40,13 +42,17 @@ function App() {
     <div className="App">
       {location.pathname !== "/" && <LoginRegisterBar />}
       {location.pathname !== "/" && <NavBar />}
-
+      <ToastContainer />
       <Route exact path="/" component={LandingPage} />
       <Route path="/home" render={() => <Home />} />
       <Route path="/detail/:id" component={Detail} />
       <Route path="/create" component={Form} />
       <Route path="/about" component={About} />
-      <Route path="/shoppingcart" component={ShoppingCart} />
+      <GuardedRoute
+        path="/shoppingcart"
+        component={ShoppingCart}
+        auth={isAuthenticated}
+      />
       <Route path="/register" component={RegisterForm} />
       <Route path="/logIn" component={LoginForm} />
     </div>

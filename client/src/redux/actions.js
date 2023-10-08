@@ -16,8 +16,9 @@ import {
   SET_SORT,
   POST_USER,
   GET_USER,
+  LOAD_CART_FROM_LOCAL_STORAGE,
 } from "./types";
-
+import { toast } from 'react-toastify';
 import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -47,6 +48,21 @@ export const getDetail = (id) => {
   };
 };
 
+// export const postProduct = (payload) => {
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios.post(`${apiUrl}/product`, payload);
+//       const producto = response.data;
+//       if (response.status === 200) {
+//         dispatch({ type: POST_PRODUCT, payload: producto });
+//         alert("Producto Creado");
+//         window.location.reload();
+//       }
+//     } catch (error) {
+//       alert(`No se pudo crear el producto`);
+//     }
+//   };
+// };
 export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
@@ -54,11 +70,20 @@ export const postProduct = (payload) => {
       const producto = response.data;
       if (response.status === 200) {
         dispatch({ type: POST_PRODUCT, payload: producto });
-        alert("Producto Creado");
-        window.location.reload();
+        toast.success('Producto Creado', {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000, // Tiempo en milisegundos que la notificación estará visible 
+        })
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       }
     } catch (error) {
-      alert(`No se pudo crear el producto`);
+      // Mostrar notificación de error
+      toast.error('No se pudo crear el producto', {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
     }
   };
 };
@@ -160,7 +185,12 @@ export const postCartProduct = (payload) => {
 export const deleteCartProduct = (payload) => {
   return { type: DELETE_CART_PRODUCT, payload: payload };
 };
-
+export const loadCartFromLocalStorage = (savedCart) => {
+  return {
+    type: LOAD_CART_FROM_LOCAL_STORAGE,
+    payload: savedCart,
+  };
+};
 export const setSort = (payload) => {
   return { type: SET_SORT, payload };
 };

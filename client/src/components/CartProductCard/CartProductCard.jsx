@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCartProduct, postCartProduct } from "../../redux/actions";
 import React, { useState } from "react";
+import style from "./CartProductCard.module.css";
 
 const CartProductCard = (props) => {
   const dispatch = useDispatch();
@@ -41,13 +42,20 @@ const CartProductCard = (props) => {
   };
 
   return (
-    <div>
-      <h1>Nombre: {props.name}</h1>
-      <h3>Cantidad:{countForProductID}</h3>
-      <h3>Precio Total: {props.totalPrice}</h3>
-      <h3>ID: {props.id}</h3>
-      <button onClick={decreaseCounter}>-</button>
-      <button onClick={increaseCounter}>+</button>
+    <div className={style.divCard}>
+      <p className={style.prop}>
+        <strong>{props.name}</strong>
+      </p>
+      <p className={style.prop}>Cantidad: {countForProductID}</p>
+      <p className={style.prop}>Precio Total:$ {props.totalPrice}</p>
+      <div className={style.counterContainer}>
+        {/* <button className={style.buttonCount} onClick={decreaseCounter}>
+          -
+        </button>
+        <button className={style.buttonCount} onClick={increaseCounter}>
+          +
+        </button> */}
+      </div>
     </div>
   );
 };

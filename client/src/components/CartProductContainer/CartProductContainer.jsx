@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import style from "./CartProductContainer.module.css";
 import CartProductCard from "../CartProductCard/CartProductCard";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-
+import style from "./CartProductContainer.module.css";
 const CartProductContainer = () => {
   const initialCart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -31,7 +30,7 @@ const CartProductContainer = () => {
       result.push({
         id: product.id,
         count: 1,
-        totalPrice: product.price,
+        totalPrice:  product.price,
         name: product.name,
       });
     }
@@ -49,14 +48,14 @@ const CartProductContainer = () => {
   const shouldRenderTotalPrice = cartProductCards.length > 0;
 
   return (
-    <div className="container">
+    <div className={style.cntnCart}>
       {cartProductCards.length > 0 ? (
         cartProductCards.map((m) => (
-          <div className="card" key={m.id}>
+          <div className={style.cntnCard} key={m.id}>
             <CartProductCard
               id={m.id}
               name={m.name}
-              totalPrice={m.totalPrice}
+              totalPrice= {m.totalPrice}
               count={m.count}
             />
           </div>
@@ -69,7 +68,7 @@ const CartProductContainer = () => {
         </div>
       )}
       {shouldRenderTotalPrice && (
-        <p className={style.p}>Precio Total de la compra: {totalPriceSum}</p>
+        <p className={style.p}>Precio Total de la compra: ${totalPriceSum}</p>
       )}
     </div>
   );

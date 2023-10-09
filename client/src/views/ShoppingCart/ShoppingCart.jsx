@@ -1,18 +1,18 @@
 import style from "./ShoppingCart.module.css";
 import CartProductContainer from "../../components/CartProductContainer/CartProductContainer";
-import { React, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { postCart } from "../../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
   const localStorage = useSelector((state) => state.localStorage);
 
-  /*   useEffect(() => {
-    // Intenta obtener los datos del carrito desde el localStorage
-    const cartDataFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
-  }, []); */
+  // useEffect(() => {
+  //   // Intenta obtener los datos del carrito desde el localStorage
+  //   const cartDataFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+  // }, []);
 
   const cartArray = cartProducts.reduce((result, product) => {
     const existingProduct = result.find((item) => item.id === product.id);
@@ -34,7 +34,9 @@ const ShoppingCart = () => {
   return (
     <div className={style.background}>
       <CartProductContainer />
-      <button onClick={postCartHandler}>Comprar!</button>
+      <button className={style.buttonComprar} onClick={postCartHandler}>
+        Comprar!
+      </button>
     </div>
   );
 };

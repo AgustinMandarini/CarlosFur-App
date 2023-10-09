@@ -12,12 +12,7 @@ module.exports = (sequelize) => {
         autoIncrement: true,
       },
       
-      sale_date: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-      
-      total_amount: {
+        total_amount: {
         type: DataTypes.FLOAT,
         allowNull: false,
         validate: { min: 0 },

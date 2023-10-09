@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 const ShoppingCart = () => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
+  const localStorage = useSelector((state) => state.localStorage);
 
   /*   useEffect(() => {
     // Intenta obtener los datos del carrito desde el localStorage
@@ -16,11 +17,11 @@ const ShoppingCart = () => {
   const cartArray = cartProducts.reduce((result, product) => {
     const existingProduct = result.find((item) => item.id === product.id);
     if (existingProduct) {
-      existingProduct.product_quantity += 1;
+      existingProduct.quantity += 1;
     } else {
       result.push({
         id: product.id,
-        product_quantity: 1,
+        quantity: 1,
       });
     }
     return result;
@@ -29,7 +30,7 @@ const ShoppingCart = () => {
   const postCartHandler = () => {
     dispatch(postCart(cartToDispatch));
   };
-
+  console.log(localStorage);
   return (
     <div className={style.background}>
       <CartProductContainer />

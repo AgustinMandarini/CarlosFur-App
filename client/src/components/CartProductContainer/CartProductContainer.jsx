@@ -1,25 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import style from "./CartProductContainer.module.css";
+
+import Card from "../Card/Card";
 import CartProductCard from "../CartProductCard/CartProductCard";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const CartProductContainer = () => {
-  const initialCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  const [cartProducts, setCartProducts] = useState(initialCart);
-
-  useEffect(() => {
-    // Intenta obtener los datos del carrito desde el localStorage
-    const cartDataFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
-
-    // Verifica si hay datos en el localStorage
-    if (cartDataFromLocalStorage && Array.isArray(cartDataFromLocalStorage)) {
-      // Si hay datos en el localStorage, cárgalos en el estado local
-      setCartProducts(cartDataFromLocalStorage);
-    }
-  }, []);
+  const cartProducts = useSelector((state) => state.cartProducts);
 
   const cartProductCards = cartProducts.reduce((result, product) => {
     const existingProduct = result.find((item) => item.id === product.id);
@@ -36,7 +23,7 @@ const CartProductContainer = () => {
       });
     }
 
-    return result;
+    return result.sort((a, b) => a.id - b.id);
   }, []);
 
   const sumTotalPrices = (cartProductCards) => {
@@ -49,23 +36,23 @@ const CartProductContainer = () => {
   const shouldRenderTotalPrice = cartProductCards.length > 0;
 
   return (
-    <div className="container">
+    <div className={style.cntnCart}>
       {cartProductCards.length > 0 ? (
-        cartProductCards.map((m) => (
-          <div className="card" key={m.id}>
-            <CartProductCard
-              id={m.id}
-              name={m.name}
-              totalPrice={m.totalPrice}
-              count={m.count}
-            />
-          </div>
-        ))
+        cartProductCards.map((m) => {
+          return (
+            <div className={style.cntnCard} key={m.id}>
+              <CartProductCard
+                id={m.id}
+                name={m.name}
+                totalPrice={m.totalPrice}
+                count={m.count}
+              />
+            </div>
+          );
+        })
       ) : (
-        <div className={style.p}>
-          <Link className={style.link} to="/home">
-            <p>Añadir al carrito</p>
-          </Link>
+        <div className="noProducts">
+          <h1>No se ha añadido nada al carrito</h1>
         </div>
       )}
       {shouldRenderTotalPrice && (
@@ -74,4 +61,5 @@ const CartProductContainer = () => {
     </div>
   );
 };
+
 export default CartProductContainer;

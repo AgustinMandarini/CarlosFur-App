@@ -30,6 +30,7 @@ const findUser = async (userName, email) => {
   users.forEach((user) => (user.dataValues.password = null));
 
   return users;
+
 };
 
 module.exports = { findUser };

@@ -17,6 +17,7 @@ import {
   POST_USER,
   LOGIN,
   LOAD_CART_FROM_LOCAL_STORAGE,
+  POST_CART,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -191,12 +192,29 @@ export const postCartProduct = (payload) => {
 export const deleteCartProduct = (payload) => {
   return { type: DELETE_CART_PRODUCT, payload: payload };
 };
+export const postCart = (cart) => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.post(`${apiUrl}/cart`, cart);
+      const payload = data.data;
+
+      return dispatch({
+        type: POST_CART,
+        payload: payload,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const loadCartFromLocalStorage = (savedCart) => {
   return {
     type: LOAD_CART_FROM_LOCAL_STORAGE,
     payload: savedCart,
   };
 };
+
 export const setSort = (payload) => {
   return { type: SET_SORT, payload };
 };

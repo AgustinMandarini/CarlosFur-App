@@ -21,7 +21,7 @@ const {getCart, createCart} = require('../controllers/cartController')
     }
   }
 
-const getCartByUserIdHandler = async (req, res) => {
+const getCartByUserIdHandler = async (req, res) => {  // Falta controller
     try {
       const cart = await cartController.getCartByUserId(req);
       res.status(200).json(cart);

@@ -17,6 +17,7 @@ import {
   POST_USER,
   LOGIN,
   LOAD_CART_FROM_LOCAL_STORAGE,
+  POST_CART,
 } from "./types";
 
 const initialState = {
@@ -34,6 +35,7 @@ const initialState = {
   colorState: [],
   materialState: [],
   cartProducts: [],
+  localStorage: [],
   loggedUser: null,
   newUser: null,
 };
@@ -151,6 +153,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         loggedUser: action.payload,
+      };
+    case POST_CART:
+      return {
+        ...state,
+        localStorage: action.payload,
       };
 
     default:

@@ -1,19 +1,12 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import CartProductContainer from "../../components/CartProductContainer/CartProductContainer";
 import style from "./ShoppingCart.module.css";
-const ShoppingCart = () => {
+import CartProductContainer from "../../components/CartProductContainer/CartProductContainer";
+import { React, useEffect } from "react";
 
- const stateCartProducts =  useSelector((state)=> state.cartProducts);
-//  console.log(stateCartProducts);
- const updateLocalStorage = (cart) => {
-  const carrito = [];
-carrito = [...carrito, cart];
-  localStorage.setItem('cart', JSON.stringify(carrito));
-};
- useEffect(() => {
-  updateLocalStorage(stateCartProducts);
-}, [stateCartProducts]);
+const ShoppingCart = () => {
+  useEffect(() => {
+    // Intenta obtener los datos del carrito desde el localStorage
+    const cartDataFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+  }, []);
   return (
     <div className={style.background}>
       <CartProductContainer />

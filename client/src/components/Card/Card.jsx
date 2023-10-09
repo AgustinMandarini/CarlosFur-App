@@ -29,9 +29,9 @@ const Card = (props) => {
     /* Contador */
     if (counter > 0) {
       setCounter(counter - 1);
-   
-       const updatedCart = cartProducts.filter((product) => product.id !== props.id);
-      updateLocalStorage(updatedCart);
+      dispatch(deleteCartProduct(props.id));
+
+      updateLocalStorage([...cartProducts, props]);
     }
 
     /* Se quita el producto del carrito */
@@ -39,7 +39,7 @@ const Card = (props) => {
     setProduct(0);
   };
   const updateLocalStorage = (cart) => {
-    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart));
   };
   return (
     <div className={style.container} key={props.id}>

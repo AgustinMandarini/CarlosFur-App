@@ -3,6 +3,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { PageLoader } from "./components/PageLoader/pageLoader";
 import LoginRegisterBar from "./components/LoginRegisterBar/LoginRegisterBar";
 import GuardedRoute from "./helpers/GuardComponent";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { loadCartFromLocalStorage } from "./redux/actions";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,12 +26,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const location = useLocation();
+  const dispatch = useDispatch();
   const { isLoading, isAuthenticated } = useAuth0();
+  const cartProducts = useSelector((state) => state.cartProducts);
 
-  // useEffect(() => {
-  //   const cartData = JSON.parse(localStorage.getItem("cart")) || [];
-  //   cartRef.current = cartData;
-  // }, []);
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    dispatch(loadCartFromLocalStorage(savedCart));
+  }, [dispatch]);
 
   if (isLoading) {
     return (

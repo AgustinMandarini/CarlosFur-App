@@ -6,8 +6,25 @@ import CartProductCard from "../CartProductCard/CartProductCard";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const CartProductContainer = () => {
+<<<<<<< HEAD
   const initialCart = JSON.parse(localStorage.getItem('cart')) || [];
   const [cartProducts, setCartProducts] = useState(initialCart);
+=======
+  const initialCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const [cartProducts, setCartProducts] = useState(initialCart);
+
+  useEffect(() => {
+    // Intenta obtener los datos del carrito desde el localStorage
+    const cartDataFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+
+    // Verifica si hay datos en el localStorage
+    if (cartDataFromLocalStorage && Array.isArray(cartDataFromLocalStorage)) {
+      // Si hay datos en el localStorage, cárgalos en el estado local
+      setCartProducts(cartDataFromLocalStorage);
+    }
+  }, []);
+>>>>>>> 14f501a8820cb819ed60f5dc0c72f730ed4bcbb4
 
   const cartProductCards = cartProducts.reduce((result, product) => {
     const existingProduct = result.find((item) => item.id === product.id);
@@ -24,7 +41,7 @@ const CartProductContainer = () => {
       });
     }
 
-    return result.sort((a, b) => a.id - b.id);
+    return result;
   }, []);
 
   const sumTotalPrices = (cartProductCards) => {
@@ -59,8 +76,7 @@ const CartProductContainer = () => {
       )}
       {shouldRenderTotalPrice && (
         <p className={style.p}>Precio Total de la compra: {totalPriceSum}</p>
-      )}{" "}
-
+      )}
     </div>
   );
 };

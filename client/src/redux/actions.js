@@ -16,6 +16,7 @@ import {
   SET_SORT,
   POST_USER,
   GET_USER,
+  LOAD_CART_FROM_LOCAL_STORAGE,
 } from "./types";
 import { toast } from 'react-toastify';
 import axios from "axios";
@@ -184,7 +185,12 @@ export const postCartProduct = (payload) => {
 export const deleteCartProduct = (payload) => {
   return { type: DELETE_CART_PRODUCT, payload: payload };
 };
-
+export const loadCartFromLocalStorage = (savedCart) => {
+  return {
+    type: LOAD_CART_FROM_LOCAL_STORAGE,
+    payload: savedCart,
+  };
+};
 export const setSort = (payload) => {
   return { type: SET_SORT, payload };
 };

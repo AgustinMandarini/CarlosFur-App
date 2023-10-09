@@ -1,24 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import CartProductCard from "../CartProductCard/CartProductCard";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import style from "./CartProductContainer.module.css";
+
+import Card from "../Card/Card";
+import CartProductCard from "../CartProductCard/CartProductCard";
+
 const CartProductContainer = () => {
-  const initialCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  const [cartProducts, setCartProducts] = useState(initialCart);
-
-  useEffect(() => {
-    // Intenta obtener los datos del carrito desde el localStorage
-    const cartDataFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
-
-    // Verifica si hay datos en el localStorage
-    if (cartDataFromLocalStorage && Array.isArray(cartDataFromLocalStorage)) {
-      // Si hay datos en el localStorage, cárgalos en el estado local
-      setCartProducts(cartDataFromLocalStorage);
-    }
-  }, []);
+  const cartProducts = useSelector((state) => state.cartProducts);
 
   const cartProductCards = cartProducts.reduce((result, product) => {
     const existingProduct = result.find((item) => item.id === product.id);
@@ -30,12 +18,12 @@ const CartProductContainer = () => {
       result.push({
         id: product.id,
         count: 1,
-        totalPrice:  product.price,
+        totalPrice: product.price,
         name: product.name,
       });
     }
 
-    return result;
+    return result.sort((a, b) => a.id - b.id);
   }, []);
 
   const sumTotalPrices = (cartProductCards) => {
@@ -50,27 +38,28 @@ const CartProductContainer = () => {
   return (
     <div className={style.cntnCart}>
       {cartProductCards.length > 0 ? (
-        cartProductCards.map((m) => (
-          <div className={style.cntnCard} key={m.id}>
-            <CartProductCard
-              id={m.id}
-              name={m.name}
-              totalPrice= {m.totalPrice}
-              count={m.count}
-            />
-          </div>
-        ))
+        cartProductCards.map((m) => {
+          return (
+            <div className={style.cntnCard} key={m.id}>
+              <CartProductCard
+                id={m.id}
+                name={m.name}
+                totalPrice={m.totalPrice}
+                count={m.count}
+              />
+            </div>
+          );
+        })
       ) : (
-        <div className={style.p}>
-          <Link className={style.link} to="/home">
-            <p>Añadir al carrito</p>
-          </Link>
+        <div className="noProducts">
+          <h1>No se ha añadido nada al carrito</h1>
         </div>
       )}
       {shouldRenderTotalPrice && (
-        <p className={style.p}>Precio Total de la compra: ${totalPriceSum}</p>
+        <p className={style.p}>Precio Total de la compra: {totalPriceSum}</p>
       )}
     </div>
   );
 };
+
 export default CartProductContainer;

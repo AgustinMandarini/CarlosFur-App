@@ -15,11 +15,11 @@ function LoginBar() {
   const cartArray = cartProducts.reduce((result, product) => {
     const existingProduct = result.find((item) => item.id === product.id);
     if (existingProduct) {
-      existingProduct.product_quantity += 1;
+      existingProduct.quantity += 1;
     } else {
       result.push({
         id: product.id,
-        product_quantity: 1,
+        quantity: 1,
       });
     }
     return result;

@@ -3,13 +3,22 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
-const { ACCES_CONTROL_URL } = process.env;
+const EventEmitter = require("events");
+const { ACCES_CONTROL_URL, MP_ACCESS_TOKEN } = process.env;
+const mercadopago = require("mercadopago");
 
 require("./db.js");
 
 const server = express();
 
+mercadopago.configure({
+  access_token: MP_ACCESS_TOKEN,
+});
+
 server.name = "API";
+
+const bus = new EventEmitter();
+bus.setMaxListeners(20);
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));

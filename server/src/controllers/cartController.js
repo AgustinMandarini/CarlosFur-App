@@ -1,64 +1,82 @@
 const { Cart, Product } = require('../db');
 
-const getCart = async () => {
-  try {
-
-    const carts = await Cart.findAll();
-    return carts;
-
-  } catch (error) {
-    console.error('Error in getCart:', error);
-    throw error; // Error al handler
-  }
-};
-
 const createCart = async (req) => {
   try {
+    const { products } = req.body;
 
-    const { products, sale_date } = req.body;
+    console.log(products)
 
     if (!Array.isArray(products) || products.length === 0) {
       return { status: 400, data: { error: 'Invalid or empty product list' } };
     }
 
     
-    
     const productIds = products.map((product) => product.id);
     
-    const databaseProducts = await Product.findAll({
-        where: { id: productIds },
-        attributes: ['id', 'price']
+      const databaseProducts = await Product.findAll({
+      where: { id: productIds },
     });
-    
-    const totalAmount = databaseProducts.reduce((total, product) => {
-        
-    return total + (product.price * product.quantity);
-    }, 0.0); 
 
-    const filteredProductIds = productIds.filter(
-      (productId) => !databaseProducts.some((product) => product.id === productId)
-    );
+    // console.log("AAAA", databaseProducts)
 
-    if (filteredProductIds.length > 0) {
-      return {
-        status: 400,
-        data: { error: `The following product IDs do not exist: ${filteredProductIds.join(', ')}` },
-      };
+    let totalAmount = 0.0;
+    for (const product of products) {
+      const databaseProduct = databaseProducts.find((dbProduct) => dbProduct.id === product.id);
+      if (!databaseProduct) {
+        continue; 
+      }
+      totalAmount += databaseProduct.price * product.quantity;
     }
 
-    const cart = await Cart.create({ 
-      sale_date: sale_date || new Date(), // metodo para obtener la fecha actual si no se proporciona
-      total_amount: totalAmount,
-      products: products 
+      const cart = await Cart.create({ 
+        total_amount: totalAmount, // Total calculado
     });
 
-    return { status: 201, data: cart };
+     
+    const productQuantities = products.map((product) => product.quantity); // Obtener solo las cantidades de los productos
+
+
+    for (let i = 0; i < products.length; i++) { // Asociar los productos con sus cantidades al carrito
+    await cart.addProducts([products[i].id], {
+    through: { product_quantity: productQuantities[i] }, // Asocia la cantidad del producto
+  });
+}
+
+
+
+    const updatedCart = await Cart.findByPk(cart.id, {
+      include: [{ model: Product, as: 'products', attributes: ['id'] }],
+      
+    });
+    console.log(products)
+    
+    return { status: 201, data: updatedCart };
   } catch (error) {
     console.error('Error in createCart:', error);
     return { status: 500, data: { error: 'Internal server error' } };
   }
+};
 
-  
+
+const getCart = async () => {
+  try {
+
+    const carts = await Cart.findAll({
+      include: [
+        {
+          model: Product,
+          as: 'products',
+          attributes: ['id'],
+        },
+      ],
+    });
+    
+    return carts;
+
+  } catch (error) {
+    console.error('Error in getCart:', error);
+    throw error; // Error al handler
+  }
 };
 
 module.exports = { createCart, getCart };

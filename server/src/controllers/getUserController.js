@@ -54,6 +54,7 @@ const findUser = async (userName, email, password) => {
 
   // Excluir la contraseña en la respuesta final
   return users.map(user => ({
+    id: user.id, //! cambio delfi
     user_name: user.user_name,
     e_mail: user.e_mail,
     first_name: user.first_name,

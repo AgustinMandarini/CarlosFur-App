@@ -2,6 +2,7 @@
 const { User } = require("../db.js");
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
+const { generateUserToken } = require("../middleware/generateUserToken.js");
 
 const loginUser = async (e_mail, password, auth0Email, auth0UserName) => {
   if (auth0Email && auth0UserName) {
@@ -16,7 +17,20 @@ const loginUser = async (e_mail, password, auth0Email, auth0UserName) => {
     };
     const user = await User.findOne(query);
 
-    return user;
+    const token = generateUserToken({
+      is_admin: user.is_admin,
+      e_mail: user.e_mail,
+      user_name: user.user_name,
+    });
+
+    return {
+      accessToken: token,
+      user: {
+        email: user.email,
+        name: user.name,
+        role: user.role,
+      },
+    };
   }
 
   if (e_mail && password) {
@@ -72,6 +86,20 @@ const loginUser = async (e_mail, password, auth0Email, auth0UserName) => {
           `Usuario no encontrado o contraseña incorrecta para ${userName}`
         );
       }
+      const token = generateUserToken({
+        is_admin: filteredUsers[0].is_admin,
+        e_mail: filteredUsers[0].e_mail,
+        user_name: filteredUsers[0].user_name,
+      });
+
+      return {
+        accessToken: token,
+        user: {
+          email: filteredUsers[0].email,
+          name: filteredUsers[0].name,
+          role: filteredUsers[0].role,
+        },
+      };
 
       return filteredUsers[0];
     }

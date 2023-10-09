@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { postUser, getUser } from "../redux/actions";
+import { postUser, login } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 
@@ -12,13 +12,16 @@ export const useCheckUserExists = () => {
   const checkUser = async () => {
     if (isAuthenticated && user) {
       try {
-        const response = await axios.get(`${apiUrl}/user?email=${user.email}`);
+        const response = await axios.get(`${apiUrl}/user?e_mail=${user.email}`);
         const data = response.data;
 
-        if (data.length && data[0].e_mail === user.email) {
+        if (data && data[0].e_mail === user.email) {
           // Si el usuario ya está creado, lo tiene que logear
           console.log("Usuario existente!!");
-          dispatch(getUser(user.email));
+          console.log(user);
+          dispatch(
+            login({ auth0Email: user.email, auth0UserName: user.nickname })
+          );
         } else {
           // Si no está creado, crea uno nuevo
           console.log("Usuario nuevo. Creando usuario...");

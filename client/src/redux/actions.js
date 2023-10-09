@@ -15,7 +15,7 @@ import {
   SET_PRODUCT_TYPE,
   SET_SORT,
   POST_USER,
-  GET_USER,
+  LOGIN,
   LOAD_CART_FROM_LOCAL_STORAGE,
   POST_CART,
 } from "./types";
@@ -170,14 +170,20 @@ export const postUser = (payload) => {
   };
 };
 
-export const getUser = (payload) => {
+export const login = (payload) => {
   return async function (dispatch) {
-    const apiData = await axios.get(`${apiUrl}/user?email=${payload}`);
-    const user = apiData.data;
-    return dispatch({
-      type: GET_USER,
-      payload: user,
-    });
+    try {
+      const response = await axios.post(`${apiUrl}/user/login`, payload);
+      const user = response.data;
+      if (response.status === 200) {
+        dispatch({
+          type: LOGIN,
+          payload: user,
+        });
+      }
+    } catch (error) {
+      return alert("Usuario no registrado");
+    }
   };
 };
 export const postCartProduct = (payload) => {

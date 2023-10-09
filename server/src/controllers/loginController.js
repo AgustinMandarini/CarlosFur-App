@@ -4,8 +4,6 @@ const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 
 const loginUser = async (e_mail, password, auth0Email, auth0UserName) => {
-  console.log("DESDE EL LOGIN CONTROLLER: " + auth0Email);
-  console.log("DESDE EL LOGIN CONTROLLER: " + auth0UserName);
   if (auth0Email && auth0UserName) {
     const query = {
       attributes: { exclude: ["createdAt", "updatedAt"] },

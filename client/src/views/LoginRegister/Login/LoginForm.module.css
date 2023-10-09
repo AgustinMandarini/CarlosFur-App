@@ -18,7 +18,7 @@
 
 .title {
   font-size: 2rem;
-  color: #faebd7;
+  color: black;
   margin-top: 8px;
 }
 
@@ -42,7 +42,7 @@
 
 .label {
   margin-top: 4px;
-  color: #faebd7;
+  color: black;
 }
 
 .buttonContainer {
@@ -56,16 +56,17 @@
 }
 
 .button {
-  width: 100%;
+  width: 85%;
   height: 40px;
   border-radius: 8px;
   padding: 8px;
-  background-color: #4163d3;
+  background-color: black;
   color: white;
   font-weight: bold;
   cursor: pointer;
   outline: none;
   border: none;
+  margin-bottom: 1rem;
 }
 
 .text {
@@ -91,6 +92,7 @@
   align-items: center;
   cursor: pointer;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .googleLogo {

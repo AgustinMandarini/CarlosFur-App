@@ -1,15 +1,20 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { login } from "../../../redux/actions";
 import googleLogo from "../../../imagenes/logoGoogle.png";
-
 import styles from "./LoginForm.module.css";
 import validation from "./validation";
+import axios from "axios";
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const { loginWithRedirect } = useAuth0();
+  const history = useHistory();
+  const loggedUser = useSelector((state) => state.loggedUser);
 
   const handleLogin = async () => {
     await loginWithRedirect({
@@ -21,6 +26,37 @@ const LoginForm = () => {
       },
     });
   };
+
+  // Maneja el login desde el formulario (login local de nuestro server)
+  const handleLocalLogin = async () => {
+    const userInfo = { e_mail: form.e_mail, password: form.password };
+    if (form.e_mail && form.password) {
+      try {
+        const response = await axios.get(
+          `${apiUrl}/user?e_mail=${form.e_mail}`
+        );
+        const data = response.data;
+
+        if (data.length > 0 && data[0].e_mail === form.e_mail) {
+          // Si el usuario está creado, lo tiene que logear
+          dispatch(login(userInfo));
+        }
+      } catch (error) {
+        alert("El usuario no esta registrado o la contraseña es incorrecta");
+      }
+    }
+  };
+
+  // Este efecto se ejecutará cada vez que loggedUser cambie
+  useEffect(() => {
+    // Redirigir al usuario a la página de inicio después de iniciar sesión
+    if (loggedUser !== null) {
+      // Realiza acciones adicionales aquí, por ejemplo, redireccionar
+      // Puedes utilizar la navegación de React Router para redirigir al usuario
+      // reemplace "/home" con la ruta correcta a la página de inicio
+      history.push("/home");
+    }
+  }, [loggedUser]);
 
   const [form, setForm] = useState({
     e_mail: "",
@@ -44,7 +80,7 @@ const LoginForm = () => {
     const validationErrors = validation(form);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
-      // dispatch(postProduct(form));
+      handleLocalLogin();
     }
   };
 

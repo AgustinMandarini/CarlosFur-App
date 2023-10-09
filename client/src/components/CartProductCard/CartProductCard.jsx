@@ -1,6 +1,7 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteCartProduct, postCartProduct } from "../../redux/actions";
+import style from "./CartProductCard.module.css";
 
 const CartProductCard = (props) => {
   const dispatch = useDispatch();
@@ -13,13 +14,20 @@ const CartProductCard = (props) => {
     dispatch(postCartProduct(props.id));
   };
   return (
-    <div>
-      <h1>Nombre: {props.name}</h1>
-      <h3>Cantidad: {props.count}</h3>
-      <h3>Precio Total: {props.totalPrice}</h3>
-      <h3>ID: {props.id}</h3>
-      <button onClick={deleteProduct}>-</button>
-      <button onClick={postProduct}>+</button>
+    <div className={style.divCard}>
+      <p className={style.prop}>
+        <strong>{props.name}</strong>
+      </p>
+      <p className={style.prop}>Cantidad: {props.count}</p>
+      <p className={style.prop}>Precio Total: {props.totalPrice}</p>
+      <div className={style.counterContainer}>
+        <button className={style.buttonCount} onClick={deleteProduct}>
+          -
+        </button>
+        <button className={style.buttonCount} onClick={postProduct}>
+          +
+        </button>
+      </div>
     </div>
   );
 };

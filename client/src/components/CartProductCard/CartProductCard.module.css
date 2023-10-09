@@ -1,0 +1,36 @@
+.divCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  margin: 6px;
+}
+.counterContainer {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  height: 2.6rem;
+}
+.buttonCount {
+  color: white;
+  padding: 1px 9px 1px 9px;
+  border: 2px solid black;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 1rem;
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.7rem;
+  margin-top: 0.7rem;
+}
+.buttonCount:hover {
+  background-color: #b1ada2a9;
+  font-weight: 600;
+  border: none;
+  color: black;
+}
+.prop {
+  height: 0.5rem;
+  font-size: 14px;
+}

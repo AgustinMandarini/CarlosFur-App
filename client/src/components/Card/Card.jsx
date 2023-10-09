@@ -4,8 +4,10 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import style from "./Card.module.css";
 import defaultImage from "./../../imagenes/default.png";
 import { deleteCartProduct, postCartProduct } from "../../redux/actions";
-
+import { updateLocalStorage, getLocalStorageCart } from "../LocalStorage/LocalStorageFunctions";
 const Card = (props) => {
+  const cart = getLocalStorageCart();
+
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
   const countForProductID = cartProducts.reduce((count, product) => {
@@ -20,26 +22,26 @@ const Card = (props) => {
   const increaseCounter = () => {
     /* Contador */
     setCounter(counter + 1);
+
+    /* Se suma el producto al carrito */
+    setProduct(1);
     dispatch(postCartProduct(props.id));
-
-    updateLocalStorage([...cartProducts, props]);
+    setProduct(0);
+    updateLocalStorage([...cart, props]);
   };
-
   const decreaseCounter = () => {
     /* Contador */
     if (counter > 0) {
       setCounter(counter - 1);
-      dispatch(deleteCartProduct(props.id));
-
-      updateLocalStorage([...cartProducts, props]);
     }
 
     /* Se quita el producto del carrito */
     setProduct(-1);
+    dispatch(deleteCartProduct(props.id));
     setProduct(0);
-  };
-  const updateLocalStorage = (cart) => {
-    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // Actualiza el localStorage eliminando el producto
+    updateLocalStorage(cart.filter((product) => product.id !== props.id));
   };
   return (
     <div className={style.container} key={props.id}>

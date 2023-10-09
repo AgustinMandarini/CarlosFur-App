@@ -15,10 +15,11 @@ import {
   SET_PRODUCT_TYPE,
   SET_SORT,
   POST_USER,
-  GET_USER,
+  LOGIN,
   LOAD_CART_FROM_LOCAL_STORAGE,
+  POST_CART,
 } from "./types";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -70,17 +71,17 @@ export const postProduct = (payload) => {
       const producto = response.data;
       if (response.status === 200) {
         dispatch({ type: POST_PRODUCT, payload: producto });
-        toast.success('Producto Creado', {
+        toast.success("Producto Creado", {
           position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000, // Tiempo en milisegundos que la notificación estará visible 
-        })
+          autoClose: 3000, // Tiempo en milisegundos que la notificación estará visible
+        });
         setTimeout(() => {
           window.location.reload();
         }, 3000);
       }
     } catch (error) {
       // Mostrar notificación de error
-      toast.error('No se pudo crear el producto', {
+      toast.error("No se pudo crear el producto", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,
       });
@@ -169,14 +170,20 @@ export const postUser = (payload) => {
   };
 };
 
-export const getUser = (payload) => {
+export const login = (payload) => {
   return async function (dispatch) {
-    const apiData = await axios.get(`${apiUrl}/user?email=${payload}`);
-    const user = apiData.data;
-    return dispatch({
-      type: GET_USER,
-      payload: user,
-    });
+    try {
+      const response = await axios.post(`${apiUrl}/user/login`, payload);
+      const user = response.data;
+      if (response.status === 200) {
+        dispatch({
+          type: LOGIN,
+          payload: user,
+        });
+      }
+    } catch (error) {
+      return alert("Usuario no registrado");
+    }
   };
 };
 export const postCartProduct = (payload) => {
@@ -185,12 +192,29 @@ export const postCartProduct = (payload) => {
 export const deleteCartProduct = (payload) => {
   return { type: DELETE_CART_PRODUCT, payload: payload };
 };
+export const postCart = (cart) => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.post(`${apiUrl}/cart`, cart);
+      const payload = data.data;
+
+      return dispatch({
+        type: POST_CART,
+        payload: payload,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const loadCartFromLocalStorage = (savedCart) => {
   return {
     type: LOAD_CART_FROM_LOCAL_STORAGE,
     payload: savedCart,
   };
 };
+
 export const setSort = (payload) => {
   return { type: SET_SORT, payload };
 };

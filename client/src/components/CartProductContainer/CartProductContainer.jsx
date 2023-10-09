@@ -30,7 +30,7 @@ const CartProductContainer = () => {
       result.push({
         id: product.id,
         count: 1,
-        totalPrice: product.price,
+        totalPrice:  product.price,
         name: product.name,
       });
     }
@@ -55,7 +55,7 @@ const CartProductContainer = () => {
             <CartProductCard
               id={m.id}
               name={m.name}
-              totalPrice={m.totalPrice}
+              totalPrice= {m.totalPrice}
               count={m.count}
             />
           </div>
@@ -68,7 +68,7 @@ const CartProductContainer = () => {
         </div>
       )}
       {shouldRenderTotalPrice && (
-        <p className={style.p}>Precio Total de la compra: {totalPriceSum}</p>
+        <p className={style.p}>Precio Total de la compra: ${totalPriceSum}</p>
       )}
     </div>
   );

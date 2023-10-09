@@ -47,14 +47,14 @@ const CartProductCard = (props) => {
         <strong>{props.name}</strong>
       </p>
       <p className={style.prop}>Cantidad: {countForProductID}</p>
-      <p className={style.prop}>Precio Total: {props.totalPrice}</p>
+      <p className={style.prop}>Precio Total:$ {props.totalPrice}</p>
       <div className={style.counterContainer}>
-        <button className={style.buttonCount} onClick={decreaseCounter}>
+        {/* <button className={style.buttonCount} onClick={decreaseCounter}>
           -
         </button>
         <button className={style.buttonCount} onClick={increaseCounter}>
           +
-        </button>
+        </button> */}
       </div>
     </div>
   );

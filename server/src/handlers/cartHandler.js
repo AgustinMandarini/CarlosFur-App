@@ -1,4 +1,4 @@
-const {getCart, createCart} = require('../controllers/cartController')
+const {getCart, createCart, getCartByUserId} = require('../controllers/cartController')
 
    const createCartHandler = async (req, res) => {
     try {
@@ -23,13 +23,18 @@ const {getCart, createCart} = require('../controllers/cartController')
 
 const getCartByUserIdHandler = async (req, res) => {  // Falta controller
     try {
-      const cart = await cartController.getCartByUserId(req);
-      res.status(200).json(cart);
+      const {userId} = req.params;
+      const user = await getCartByUserId(userId);
+      if (!user) {
+        res.status(404).json({ message: 'Usuario no encontrado' });
+        return;
+      }
+      res.status(200).json(user);
     } catch (error) {
       console.error('Error in getCartByUserId:', error);
       res.status(500).json({ error: 'Internal server error' });
     }  
   }
-
+  
 
     module.exports = { getCartHandler, getCartByUserIdHandler, createCartHandler }

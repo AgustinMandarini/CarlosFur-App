@@ -87,4 +87,25 @@ const getCart = async () => {
   }
 };
 
-module.exports = { createCart, getCart };
+const getCartByUserId = async (userId)=>{
+  const user = await User.findOne({
+    where: {
+      id: userId,
+      enabled_user: true
+    },
+     attributes:["id"],
+    include: [{model:Cart
+    ,include: [
+      {
+        model: Product,
+        attributes:["id"],
+      },],}
+    ],
+
+    order: [[{ model: Cart, as: 'carts' }, 'id', 'DESC']], // esto ordena de mayor a menor, de manera que el primer carrito de la lista, es el ultimo creado por el usuario
+    
+  });
+  return user;
+}
+
+module.exports = { createCart, getCart, getCartByUserId};

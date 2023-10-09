@@ -3,18 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import style from "./Card.module.css";
 import defaultImage from "./../../imagenes/default.png";
-import { deleteCartProduct, postCartProduct, loadCartFromLocalStorage } from "../../redux/actions";
+import { deleteCartProduct, postCartProduct } from "../../redux/actions";
 
 const Card = (props) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    // Actualiza el estado local 'counter' con la cantidad de productos cargados desde el localStorage
-    setCounter(savedCart.length);
-    dispatch(loadCartFromLocalStorage(savedCart));
-  }, [dispatch]);
-
   const cartProducts = useSelector((state) => state.cartProducts);
   const countForProductID = cartProducts.reduce((count, product) => {
     if (product.id === props.id) {
@@ -25,57 +17,27 @@ const Card = (props) => {
   const [counter, setCounter] = useState(0);
   const [product, setProduct] = useState(0);
 
-  const updateLocalStorage = (cart) => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  };
-    //LOCALSTORAGE
-    const postProduct = (productId) => {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const updatedCart = [...cart, { id: productId, count: 1 }];
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-    };
-  
-    const deleteProduct = (productId) => {
-      // Obtén el carrito del localStorage
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      // Encuentra el índice del producto que deseas eliminar
-      const indexToDelete = cart.findIndex((product) => product.id === productId);
-      if (indexToDelete !== -1) {
-        // Elimina el producto específico del carrito en el array
-        cart.splice(indexToDelete, 1);
-        // Actualiza el carrito en el localStorage con el array modificado
-        localStorage.setItem("cart", JSON.stringify(cart));
-      }
-    };
-    //
-  
   const increaseCounter = () => {
     /* Contador */
-    setCounter(counter + 1); // Actualiza el estado local 'counter'
+    setCounter(counter + 1);
+
+    /* Se suma el producto al carrito */
+    setProduct(1);
     dispatch(postCartProduct(props.id));
-    // Actualizar el localStorage después de agregar un producto
-    postProduct(props.id);
-    updateLocalStorage([...cartProducts, props]);
+    setProduct(0);
   };
 
   const decreaseCounter = () => {
     /* Contador */
     if (counter > 0) {
       setCounter(counter - 1);
-      dispatch(deleteCartProduct(props.id));
-
-      updateLocalStorage([...cartProducts, props]);
     }
 
-    // Elimina el producto del carrito cuando la cantidad llega a 0
-    if (counter === 1) {
-      const updatedCart = cartProducts.filter((product) => product.id !== props.id);
-      dispatch(deleteCartProduct(props.id));
-      updateLocalStorage(updatedCart);
-    }
+    /* Se quita el producto del carrito */
+    setProduct(-1);
+    dispatch(deleteCartProduct(props.id));
+    setProduct(0);
   };
-
-
   return (
     <div className={style.container} key={props.id}>
       <Link to={`/detail/${props.id}`} className={style.nameLink}>

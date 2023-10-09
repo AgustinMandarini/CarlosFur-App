@@ -1,8 +1,8 @@
-const { Cart, Product } = require('../db');
+const { Cart, Product, User } = require('../db');
 
 const createCart = async (req) => {
   try {
-    const { products } = req.body;
+    const { products, userId } = req.body;
 
     console.log(products)
 
@@ -10,6 +10,16 @@ const createCart = async (req) => {
       return { status: 400, data: { error: 'Invalid or empty product list' } };
     }
 
+    const cartData = {};
+
+    if (userId) { // busca usuario existente por userId
+      const user = await User.findByPk(userId);
+      if (!user) {
+         return { status: 400, data: { error: 'User not found' } };
+      }
+
+      cartData.userId = userId;
+    }
     
     const productIds = products.map((product) => product.id);
     
@@ -28,8 +38,10 @@ const createCart = async (req) => {
       totalAmount += databaseProduct.price * product.quantity;
     }
 
+    
       const cart = await Cart.create({ 
         total_amount: totalAmount, // Total calculado
+        userId: cartData.userId, // Asocia el userId al carrito si existe
     });
 
      
@@ -42,14 +54,10 @@ const createCart = async (req) => {
   });
 }
 
-
-
     const updatedCart = await Cart.findByPk(cart.id, {
       include: [{ model: Product, as: 'products', attributes: ['id'] }],
-      
     });
-    console.log(products)
-    
+        
     return { status: 201, data: updatedCart };
   } catch (error) {
     console.error('Error in createCart:', error);

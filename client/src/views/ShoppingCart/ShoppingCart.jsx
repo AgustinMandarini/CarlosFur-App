@@ -3,16 +3,19 @@ import CartProductContainer from "../../components/CartProductContainer/CartProd
 import { useSelector, useDispatch } from "react-redux";
 import { postCart } from "../../redux/actions";
 import React, { useEffect } from "react";
+import { getLocalStorageCart } from "../../components/LocalStorage/LocalStorageFunctions";
+import { useState } from "react";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
   const localStorage = useSelector((state) => state.localStorage);
+  const [localStorageCart, setLocalStorageCart] = useState([]);
 
-  // useEffect(() => {
-  //   // Intenta obtener los datos del carrito desde el localStorage
-  //   const cartDataFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
-  // }, []);
+  useEffect(() => {
+    const cartFromLocalStorage = getLocalStorageCart();
+    setLocalStorageCart(cartFromLocalStorage);
+  }, []);
 
   const cartArray = cartProducts.reduce((result, product) => {
     const existingProduct = result.find((item) => item.id === product.id);

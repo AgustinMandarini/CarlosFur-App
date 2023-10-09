@@ -7,7 +7,7 @@ const { loginHandler } = require("../handlers/loginHandler");
 const userRouter = Router();
 
 userRouter.get("/", getUserHandler);
-userRouter.get("/login", loginHandler);
+userRouter.post("/login", loginHandler);
 userRouter.post("/", postUserHandler);
 userRouter.put("/:id", putUserHandler);
 

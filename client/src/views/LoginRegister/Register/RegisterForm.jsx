@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import googleLogo from "../../../imagenes/logoGoogle.png";
 import styles from "./RegisterForm.module.css";
 import validation from "./validation";
+import axios from "axios";
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const RegisterForm = () => {
   const { loginWithRedirect } = useAuth0();
+  const history = useHistory();
 
   const handleSignUp = async () => {
     await loginWithRedirect({
@@ -20,32 +23,6 @@ const RegisterForm = () => {
       },
     });
   };
-
-  const handleLocalSignUp = () => {
-    
-      if (Object.keys(errors)) {
-        try {
-          const response = await axios.get(`${apiUrl}/user?email=${user.email}`);
-          const data = response.data;
-  
-          if (data.length && data[0].e_mail === user.email) {
-            // Si el usuario ya está creado, lo tiene que logear
-            console.log("Usuario existente!!");
-            dispatch(getUser(user.email));
-          } else {
-            // Si no está creado, crea uno nuevo
-            console.log("Usuario nuevo. Creando usuario...");
-            const newUser = { user_name: user.name, e_mail: user.email };
-            dispatch(postUser(newUser));
-          }
-        } catch (error) {
-          console.log(`${error}`);
-        }
-  
-    };
-  }
-
-  const dispatch = useDispatch();
 
   const [form, setForm] = useState({
     user_name: "",
@@ -68,12 +45,43 @@ const RegisterForm = () => {
     setForm({ ...form, [property]: value });
   };
 
+  const handleLocalSignUp = async () => {
+    const newUser = {
+      user_name: form.user_name,
+      e_mail: form.e_mail,
+      password: form.password,
+      lastName: form.lastName,
+    };
+    try {
+      const response = await axios.get(`${apiUrl}/user?e_mail=${form.e_mail}`);
+      if (response.status === 200) {
+        console.log(response.status);
+        const data = response.data;
+
+        if (data.length && data[0].e_mail === form.e_mail) {
+          alert("Ya existe un usuario con ese nombre o email");
+        }
+      }
+    } catch {
+      try {
+        const response = await axios.post(`${apiUrl}/user`, newUser);
+
+        if (response.status === 201) {
+          alert("Usuario creado exitosamente!");
+          history.push("/home");
+        }
+      } catch (error) {
+        alert("Errors desde front: " + error);
+      }
+    }
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
     const validationErrors = validation(form);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
-      // dispatch(postProduct(form));
+      handleLocalSignUp();
     }
   };
 
@@ -82,7 +90,7 @@ const RegisterForm = () => {
       <div className={styles.containerReg}>
         <div className={styles.containerData}>
           <h2>Crear una cuenta</h2>
-          <form onSubmit={submitHandler}>
+          <form onSubmit={submitHandler} noValidate>
             <div className={styles.inputContainer}>
               <div className={styles.inputSection}>
                 <div className={`${styles.cInput} ${styles["c-input"]}`}>

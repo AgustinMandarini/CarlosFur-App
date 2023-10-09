@@ -15,7 +15,7 @@ import {
   POST_CART_PRODUCT,
   DELETE_CART_PRODUCT,
   POST_USER,
-  GET_USER,
+  LOGIN,
   LOAD_CART_FROM_LOCAL_STORAGE,
 } from "./types";
 
@@ -147,7 +147,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         newUser: action.payload,
       };
-    case GET_USER:
+    case LOGIN:
       return {
         ...state,
         loggedUser: action.payload,

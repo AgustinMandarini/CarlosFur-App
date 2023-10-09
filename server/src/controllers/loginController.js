@@ -3,70 +3,81 @@ const { User } = require("../db.js");
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 
-const findUser = async (email, password) => {
-  console.log("Nombre de usuario:", email);
-  console.log("Contraseña:", password);
-
-  const query = {
-    attributes: { exclude: ["createdAt", "updatedAt"] },
-    where: {
-      enabled_user: true,
-    },
-  };
-
-  if (email && password) {
-    query.where.e_mail = {
-      [Op.iLike]: `%${email}%`,
+const loginUser = async (e_mail, password, auth0Email, auth0UserName) => {
+  console.log("DESDE EL LOGIN CONTROLLER: " + auth0Email);
+  console.log("DESDE EL LOGIN CONTROLLER: " + auth0UserName);
+  if (auth0Email && auth0UserName) {
+    const query = {
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+      where: {
+        enabled_user: true,
+      },
     };
+    query.where.e_mail = {
+      [Op.iLike]: `%${auth0Email}%`,
+    };
+    const user = await User.findOne(query);
+
+    return user;
   }
 
-  const users = await User.findAll(query);
+  if (e_mail && password) {
+    console.log("Nombre de usuario:", e_mail);
+    console.log("Contraseña:", password);
 
-  // Verificar la contraseña si se proporciona
-  if (password) {
-    const authenticatedUsers = await Promise.all(
-      users.map(async (user) => {
-        try {
-          const passwordMatch = await bcrypt.compare(password, user.password);
-          console.log("Contraseña almacenada:", user.password);
+    const query = {
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+      where: {
+        enabled_user: true,
+      },
+    };
 
-          return passwordMatch
-            ? {
-                user_name: user.user_name,
-                e_mail: user.e_mail,
-                first_name: user.first_name,
-                last_name: user.last_name,
-              }
-            : null;
-        } catch (error) {
-          console.error(
-            `Error al comparar contraseñas para el usuario ${user.user_name}:`,
-            error.message
-          );
-          return null;
-        }
-      })
-    );
-
-    // Filtrar usuarios autenticados
-    const filteredUsers = authenticatedUsers.filter((user) => user !== null);
-
-    if (filteredUsers.length === 0) {
-      throw new Error(
-        `Usuario no encontrado o contraseña incorrecta para ${userName}`
-      );
+    if (e_mail && password) {
+      query.where.e_mail = {
+        [Op.iLike]: `%${e_mail}%`,
+      };
     }
 
-    return filteredUsers;
-  }
+    const users = await User.findAll(query);
 
-  // Excluir la contraseña en la respuesta final
-  return users.map((user) => ({
-    user_name: user.user_name,
-    e_mail: user.e_mail,
-    first_name: user.first_name,
-    last_name: user.last_name,
-  }));
+    // Verificar la contraseña si se proporciona
+    if (password) {
+      const authenticatedUsers = await Promise.all(
+        users.map(async (user) => {
+          try {
+            const passwordMatch = await bcrypt.compare(password, user.password);
+            console.log("Contraseña almacenada:", user.password);
+
+            return passwordMatch
+              ? {
+                  user_name: user.user_name,
+                  e_mail: user.e_mail,
+                  first_name: user.first_name,
+                  last_name: user.last_name,
+                }
+              : null;
+          } catch (error) {
+            console.error(
+              `Error al comparar contraseñas para el usuario ${user.user_name}:`,
+              error.message
+            );
+            return null;
+          }
+        })
+      );
+
+      // Filtrar usuarios autenticados
+      const filteredUsers = authenticatedUsers.filter((user) => user !== null);
+
+      if (filteredUsers.length === 0) {
+        throw new Error(
+          `Usuario no encontrado o contraseña incorrecta para ${userName}`
+        );
+      }
+
+      return filteredUsers[0];
+    }
+  }
 };
 
-module.exports = { findUser };
+module.exports = { loginUser };

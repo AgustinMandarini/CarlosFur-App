@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import { getUser } from "../../../redux/actions";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { login } from "../../../redux/actions";
 import googleLogo from "../../../imagenes/logoGoogle.png";
 import styles from "./LoginForm.module.css";
 import validation from "./validation";
@@ -13,6 +13,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 const LoginForm = () => {
   const dispatch = useDispatch();
   const { loginWithRedirect } = useAuth0();
+  const history = useHistory();
   const loggedUser = useSelector((state) => state.loggedUser);
 
   const handleLogin = async () => {
@@ -26,18 +27,19 @@ const LoginForm = () => {
     });
   };
 
+  // Maneja el login desde el formulario (login local de nuestro server)
   const handleLocalLogin = async () => {
-    const userInfo = { e_mail: form.e_mail };
+    const userInfo = { e_mail: form.e_mail, password: form.password };
     if (form.e_mail && form.password) {
       try {
-        const response = await axios.get(`${apiUrl}/user/login`, userInfo);
+        const response = await axios.get(
+          `${apiUrl}/user?e_mail=${form.e_mail}`
+        );
         const data = response.data;
 
-        if (data.length) {
+        if (data.length > 0 && data[0].e_mail === form.e_mail) {
           // Si el usuario está creado, lo tiene que logear
-          dispatch(getUser(form.e_mail));
-          console.log("data: " + data);
-          //Falta redireccionar a home
+          dispatch(login(userInfo));
         }
       } catch (error) {
         alert("El usuario no esta registrado o la contraseña es incorrecta");
@@ -45,9 +47,15 @@ const LoginForm = () => {
     }
   };
 
+  // Este efecto se ejecutará cada vez que loggedUser cambie
   useEffect(() => {
-    // Este efecto se ejecutará cada vez que loggedUser cambie
-    console.log(loggedUser);
+    // Redirigir al usuario a la página de inicio después de iniciar sesión
+    if (loggedUser !== null) {
+      // Realiza acciones adicionales aquí, por ejemplo, redireccionar
+      // Puedes utilizar la navegación de React Router para redirigir al usuario
+      // reemplace "/home" con la ruta correcta a la página de inicio
+      history.push("/home");
+    }
   }, [loggedUser]);
 
   const [form, setForm] = useState({
@@ -72,7 +80,7 @@ const LoginForm = () => {
     const validationErrors = validation(form);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
-      // dispatch(postProduct(form));
+      handleLocalLogin();
     }
   };
 
@@ -119,11 +127,7 @@ const LoginForm = () => {
 
           {/* Buttons */}
           <div className={styles.buttonContainer}>
-            <button
-              className={styles.button}
-              type="submit"
-              onClick={handleLocalLogin}
-            >
+            <button className={styles.button} type="submit">
               Iniciar sesión
             </button>
             {/* Botón "Acceder con Google" */}

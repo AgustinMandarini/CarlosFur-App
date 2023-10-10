@@ -4,10 +4,12 @@ const { postUserHandler } = require("../handlers/postUserHandler");
 const { putUserHandler } = require("../handlers/putUserHandler");
 const { loginHandler } = require("../handlers/loginHandler");
 
+const { authenticateJWT } = require("../middleware/authenticateJWT");
+
 const userRouter = Router();
 
 userRouter.get("/", getUserHandler);
-userRouter.post("/login", loginHandler);
+userRouter.post("/login", authenticateJWT, loginHandler);
 userRouter.post("/", postUserHandler);
 userRouter.put("/:id", putUserHandler);
 

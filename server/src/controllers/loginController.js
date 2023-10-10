@@ -3,7 +3,30 @@ const { User } = require("../db.js");
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 
-const loginUser = async (e_mail, password, auth0Email, auth0UserName) => {
+const loginUser = async (
+  e_mail,
+  password,
+  auth0Email,
+  auth0UserName,
+  userAutolog
+) => {
+  if (userAutolog) {
+    const query = {
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+      where: {
+        enabled_user: true,
+      },
+    };
+    query.where.user_name = {
+      [Op.iLike]: `%${userAutolog.user_name}%`,
+    };
+
+    const user = User.findOne(query);
+
+    if (user) {
+      return user;
+    }
+  }
   if (auth0Email && auth0UserName) {
     const query = {
       attributes: { exclude: ["createdAt", "updatedAt"] },
@@ -52,6 +75,7 @@ const loginUser = async (e_mail, password, auth0Email, auth0UserName) => {
                   e_mail: user.e_mail,
                   first_name: user.first_name,
                   last_name: user.last_name,
+                  is_admin: user.is_admin,
                 }
               : null;
           } catch (error) {

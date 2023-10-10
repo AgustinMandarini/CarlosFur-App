@@ -1,116 +1,126 @@
 [
-  {
-    "name": "Escritorio clásico",
-    "price": 300,
-    "height": 70,
-    "depth": 15,
-    "width": 30,
-    "weight": 15,
-    "color": "Marrón",
-    "description": "Un escritorio elegante con acabado clásico.",
-    "productType": "Escritorio"
-  },
-  {
-    "name": "Escritorio moderno",
-    "price": 400,
-    "height": 65,
-    "depth": 18,
-    "width": 35,
-    "weight": 18,
-    "color": "Negro",
-    "description": "Un escritorio minimalista y moderno para tu espacio de trabajo.",
-    "productType": "Escritorio"
-  },
-  {
-    "name": "Escritorio juvenil",
-    "price": 250,
-    "height": 60,
-    "depth": 12,
-    "width": 28,
-    "weight": 12,
-    "color": "Azul",
-    "description": "Perfecto para habitaciones juveniles, con un toque de color vibrante.",
-    "productType": "Escritorio"
-  },
-  {
-    "name": "Escritorio rústico",
-    "price": 350,
-    "height": 72,
-    "depth": 16,
-    "width": 32,
-    "weight": 16,
-    "color": "Madera natural",
-    "description": "Un escritorio con encanto rústico, ideal para espacios acogedores.",
-    "productType": "Escritorio"
-  },
-  {
-    "name": "Escritorio plegable",
-    "price": 200,
-    "height": 68,
-    "depth": 14,
-    "width": 26,
-    "weight": 14,
-    "color": "Blanco",
-    "description": "Compacto y versátil, perfecto para espacios pequeños.",
-    "productType": "Escritorio"
-  },
-  {
-    "name": "Escritorio de esquina",
-    "price": 450,
-    "height": 75,
-    "depth": 20,
-    "width": 40,
-    "weight": 20,
-    "color": "Gris",
-    "description": "Diseñado para aprovechar esquinas y ofrecer más superficie de trabajo.",
-    "productType": "Escritorio"
-  },
-  {
-    "name": "Escritorio industrial",
-    "price": 380,
-    "height": 70,
-    "depth": 15,
-    "width": 30,
-    "weight": 15,
-    "color": "Negro mate",
-    "description": "Con un toque de estilo industrial, perfecto para entornos modernos.",
-    "productType": "Escritorio"
-  },
-  {
-    "name": "Escritorio de pie",
-    "price": 320,
-    "height": 90,
-    "depth": 14,
-    "width": 28,
-    "weight": 14,
-    "color": "Blanco",
-    "description": "Promueve un estilo de trabajo más activo con este escritorio de pie.",
-    "productType": "Escritorio"
-  },
-  {
-    "name": "Escritorio flotante",
-    "price": 280,
-    "height": 60,
-    "depth": 12,
-    "width": 28,
-    "weight": 12,
-    "color": "Madera clara",
-    "description": "Montado en la pared para un diseño limpio y moderno.",
-    "productType": "Escritorio"
-  },
-  {
-    "name": "Escritorio con estantería",
-    "price": 420,
-    "height": 75,
-    "depth": 18,
-    "width": 36,
-    "weight": 18,
-    "color": "Cerezo",
-    "description": "Incluye estanterías incorporadas para una mayor organización.",
-    "productType": "Escritorio"
-  },
-
-  {
+    {
+      "name": "Escritorio clásico",
+      "price": 300,
+      "height": 70,
+      "depth": 15,
+      "width": 30,
+      "weight": 15,
+      "color": "Marrón",
+      "description": "Un escritorio elegante con acabado clásico.",
+      "productType": "Escritorios",
+      "material": "Madera"
+    },
+    {
+      "name": "Escritorio moderno",
+      "price": 400,
+      "height": 65,
+      "depth": 18,
+      "width": 35,
+      "weight": 18,
+      "color": "Negro",
+      "description": "Un escritorio minimalista y moderno para tu espacio de trabajo.",
+      "productType": "Escritorios",
+      "material": "Metal"
+    },
+    {
+      "name": "Escritorio juvenil",
+      "price": 250,
+      "height": 60,
+      "depth": 12,
+      "width": 28,
+      "weight": 12,
+      "color": "Azul",
+      "description": "Perfecto para habitaciones juveniles, con un toque de color vibrante.",
+      "productType": "Escritorios",
+      "material": "Plástico"
+    },
+    {
+      "name": "Escritorio rústico",
+      "price": 350,
+      "height": 72,
+      "depth": 16,
+      "width": 32,
+      "weight": 16,
+      "color": "Madera natural",
+      "description": "Un escritorio con encanto rústico, ideal para espacios acogedores.",
+      "productType": "Escritorios",
+      "material": "Madera"
+    },
+    {
+      "name": "Escritorio plegable",
+      "price": 200,
+      "height": 68,
+      "depth": 14,
+      "width": 26,
+      "weight": 14,
+      "color": "Blanco",
+      "description": "Compacto y versátil, perfecto para espacios pequeños.",
+      "productType": "Escritorios",
+      "material": "Metal"
+    },
+    {
+      "name": "Escritorio de esquina",
+      "price": 450,
+      "height": 75,
+      "depth": 20,
+      "width": 40,
+      "weight": 20,
+      "color": "Gris",
+      "description": "Diseñado para aprovechar esquinas y ofrecer más superficie de trabajo.",
+      "productType": "Escritorios",
+      "material": "Metal"
+    },
+    {
+      "name": "Escritorio industrial",
+      "price": 380,
+      "height": 70,
+      "depth": 15,
+      "width": 30,
+      "weight": 15,
+      "color": "Negro mate",
+      "description": "Con un toque de estilo industrial, perfecto para entornos modernos.",
+      "productType": "Escritorios",
+      "material": "Metal"
+    },
+    {
+      "name": "Escritorio de pie",
+      "price": 320,
+      "height": 90,
+      "depth": 14,
+      "width": 28,
+      "weight": 14,
+      "color": "Blanco",
+      "description": "Promueve un estilo de trabajo más activo con este escritorio de pie.",
+      "productType": "Escritorios",
+      "material": "Metal"
+    },
+    {
+      "name": "Escritorio flotante",
+      "price": 280,
+      "height": 60,
+      "depth": 12,
+      "width": 28,
+      "weight": 12,
+      "color": "Madera clara",
+      "description": "Montado en la pared para un diseño limpio y moderno.",
+      "productType": "Escritorios",
+      "material": "Madera"
+    },
+    {
+      "name": "Escritorio con estantería",
+      "price": 420,
+      "height": 75,
+      "depth": 18,
+      "width": 36,
+      "weight": 18,
+      "color": "Cerezo",
+      "description": "Incluye estanterías incorporadas para una mayor organización.",
+      "productType": "Escritorios",
+      "material": "Madera"
+    },
+  
+{
     "name": "Silla de comedor clásica",
     "price": 150,
     "height": 90,
@@ -119,7 +129,8 @@
     "weight": 5,
     "color": "Marrón",
     "description": "Una silla elegante y cómoda para el comedor.",
-    "productType": "Silla"
+    "productType": "Sillas",
+    "material": "Madera"
   },
   {
     "name": "Silla de oficina ergonómica",
@@ -130,7 +141,8 @@
     "weight": 7,
     "color": "Negro",
     "description": "Diseñada para brindar comodidad y soporte durante largas horas de trabajo.",
-    "productType": "Silla"
+    "productType": "Sillas",
+    "material": "Metal"
   },
   {
     "name": "Silla plegable para exteriores",
@@ -141,7 +153,8 @@
     "weight": 3,
     "color": "Verde",
     "description": "Ideal para picnics y actividades al aire libre.",
-    "productType": "Silla"
+    "productType": "Sillas",
+    "material": "Plástico"
   },
   {
     "name": "Silla moderna de salón",
@@ -152,7 +165,8 @@
     "weight": 6,
     "color": "Gris",
     "description": "Un toque contemporáneo para tu sala de estar.",
-    "productType": "Silla"
+    "productType": "Sillas",
+    "material": "Metal"
   },
   {
     "name": "Silla de estudio juvenil",
@@ -163,7 +177,8 @@
     "weight": 4,
     "color": "Azul",
     "description": "Perfecta para el área de estudio de los más jóvenes.",
-    "productType": "Silla"
+    "productType": "Sillas",
+    "material": "Plástico"
   },
   {
     "name": "Silla vintage de cocina",
@@ -174,7 +189,8 @@
     "weight": 5,
     "color": "Blanco roto",
     "description": "Aporta encanto vintage a tu cocina.",
-    "productType": "Silla"
+    "productType": "Sillas",
+    "material": "Metal"
   },
   {
     "name": "Silla de bar ajustable",
@@ -185,7 +201,8 @@
     "weight": 6,
     "color": "Rojo",
     "description": "Perfecta para barras y mesas altas, con altura ajustable.",
-    "productType": "Silla"
+    "productType": "Sillas",
+    "material": "Metal"
   },
   {
     "name": "Silla acolchada de lectura",
@@ -196,7 +213,8 @@
     "weight": 7,
     "color": "Beige",
     "description": "Cómoda y acolchada, ideal para tu rincón de lectura.",
-    "productType": "Silla"
+    "productType": "Sillas",
+    "material": "Tela"
   },
   {
     "name": "Silla infantil temática",
@@ -207,7 +225,8 @@
     "weight": 3,
     "color": "Multicolor",
     "description": "Con divertidos diseños para los más pequeños de la casa.",
-    "productType": "Silla"
+    "productType": "Sillas",
+    "material": "Metal"
   },
   {
     "name": "Silla de jardín con reposabrazos",
@@ -218,10 +237,11 @@
     "weight": 6,
     "color": "Verde oscuro",
     "description": "Perfecta para relajarse en el jardín con comodidad.",
-    "productType": "Silla"
+    "productType": "Sillas",
+    "material": "Metal"
   },
 
-  {
+{
     "name": "Mesa de comedor clásica",
     "price": 500,
     "height": 75,
@@ -230,7 +250,8 @@
     "weight": 20,
     "color": "Marrón",
     "description": "Una mesa elegante y resistente para cenas familiares.",
-    "productType": "Mesa"
+    "productType": "Mesas",
+    "material": "Madera"
   },
   {
     "name": "Mesa de cocina extensible",
@@ -241,7 +262,8 @@
     "weight": 15,
     "color": "Blanco",
     "description": "Perfecta para espacios pequeños y ajustable según tus necesidades.",
-    "productType": "Mesa"
+    "productType": "Mesas",
+    "material": "Metal"
   },
   {
     "name": "Mesa de centro moderna",
@@ -252,7 +274,8 @@
     "weight": 10,
     "color": "Negro",
     "description": "Un punto focal elegante para tu sala de estar.",
-    "productType": "Mesa"
+    "productType": "Mesas",
+    "material": "Metal"
   },
   {
     "name": "Mesa de estudio juvenil",
@@ -263,7 +286,8 @@
     "weight": 12,
     "color": "Azul",
     "description": "Diseñada para inspirar la concentración y la creatividad.",
-    "productType": "Mesa"
+    "productType": "Mesas",
+    "material": "Plástico"
   },
   {
     "name": "Mesa de jardín plegable",
@@ -274,7 +298,8 @@
     "weight": 18,
     "color": "Verde",
     "description": "Ideal para picnics y eventos al aire libre.",
-    "productType": "Mesa"
+    "productType": "Mesas",
+    "material": "Metal"
   },
   {
     "name": "Mesa de café minimalista",
@@ -285,7 +310,8 @@
     "weight": 8,
     "color": "Blanco roto",
     "description": "Un diseño sencillo para un ambiente relajado.",
-    "productType": "Mesa"
+    "productType": "Mesas",
+    "material": "Metal"
   },
   {
     "name": "Mesa de bar con taburetes",
@@ -296,7 +322,8 @@
     "weight": 25,
     "color": "Rojo",
     "description": "Perfecta para pequeños espacios y reuniones informales.",
-    "productType": "Mesa"
+    "productType": "Mesas",
+    "material": "Metal"
   },
   {
     "name": "Mesa de noche con cajones",
@@ -307,7 +334,8 @@
     "weight": 14,
     "color": "Madera natural",
     "description": "Con espacio de almacenamiento para tus objetos personales.",
-    "productType": "Mesa"
+    "productType": "Mesas",
+    "material": "Madera"
   },
   {
     "name": "Mesa de escritorio para computadora",
@@ -318,7 +346,8 @@
     "weight": 22,
     "color": "Gris",
     "description": "Con compartimentos para organizar cables y accesorios.",
-    "productType": "Mesa"
+    "productType": "Mesas",
+    "material": "Metal"
   },
   {
     "name": "Mesa de picnic de madera",
@@ -329,120 +358,16 @@
     "weight": 30,
     "color": "Marrón oscuro",
     "description": "Resistente y duradera para disfrutar de comidas al aire libre.",
-    "productType": "Mesa"
+    "productType": "Mesas",
+    "material": "Madera"
   },
-
-  {
-    "name": "Cama King Size con cabecero tapizado",
-    "price": 1200,
-    "height": 100,
-    "depth": 200,
-    "width": 180,
-    "weight": 50,
-    "color": "Gris",
-    "description": "Una cama espaciosa y cómoda para noches de descanso profundo.",
-    "productType": "Cama"
-  },
-  {
-    "name": "Cama individual de madera maciza",
-    "price": 600,
-    "height": 80,
-    "depth": 190,
-    "width": 90,
-    "weight": 30,
-    "color": "Marrón",
-    "description": "Perfecta para habitaciones juveniles o espacios más reducidos.",
-    "productType": "Cama"
-  },
-  {
-    "name": "Cama nido con cajones",
-    "price": 800,
-    "height": 60,
-    "depth": 190,
-    "width": 90,
-    "weight": 35,
-    "color": "Blanco",
-    "description": "Solución práctica para espacios compartidos o habitaciones de invitados.",
-    "productType": "Cama"
-  },
-  {
-    "name": "Cama plegable de pared",
-    "price": 1000,
-    "height": 150,
-    "depth": 40,
-    "width": 200,
-    "weight": 40,
-    "color": "Negro",
-    "description": "Ideal para maximizar el espacio en habitaciones multifuncionales.",
-    "productType": "Cama"
-  },
-  {
-    "name": "Cama litera con escritorio integrado",
-    "price": 1500,
-    "height": 160,
-    "depth": 200,
-    "width": 100,
-    "weight": 45,
-    "color": "Azul",
-    "description": "Diseñada para habitaciones juveniles con necesidades de espacio adicionales.",
-    "productType": "Cama"
-  },
-  {
-    "name": "Cama redonda con dosel",
-    "price": 2000,
-    "height": 120,
-    "depth": 220,
-    "width": 200,
-    "weight": 55,
-    "color": "Blanco roto",
-    "description": "Un estilo elegante y romántico para un dormitorio de lujo.",
-    "productType": "Cama"
-  },
-  {
-    "name": "Cama infantil temática de princesa",
-    "price": 500,
-    "height": 70,
-    "depth": 150,
-    "width": 70,
-    "weight": 20,
-    "color": "Rosa",
-    "description": "Perfecta para niñas que sueñan con ser princesas.",
-    "productType": "Cama"
-  },
-  {
-    "name": "Cama de palets estilo bohemio",
-    "price": 700,
-    "height": 40,
-    "depth": 190,
-    "width": 160,
-    "weight": 35,
-    "color": "Natural",
-    "description": "Una opción sostenible y con un toque artesanal.",
-    "productType": "Cama"
-  },
-  {
-    "name": "Cama ajustable con control remoto",
-    "price": 1800,
-    "height": 90,
-    "depth": 200,
-    "width": 160,
-    "weight": 50,
-    "color": "Gris oscuro",
-    "description": "Perfecta para personalizar tu posición de descanso.",
-    "productType": "Cama"
-  },
-  {
-    "name": "Cama futon de estilo japonés",
-    "price": 900,
-    "height": 30,
-    "depth": 200,
-    "width": 150,
-    "weight": 40,
-    "color": "Negro",
-    "description": "Sencillez y elegancia en un diseño inspirado en la tradición japonesa.",
-    "productType": "Cama"
-  },
-
+  
+  
+  
+  
+  
+  
+  
   {
     "name": "Armario ropero de madera",
     "price": 800,

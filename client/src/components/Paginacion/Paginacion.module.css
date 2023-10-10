@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 7vh;
+  margin-top: 4rem;
+  margin-bottom: 1em;
+}
+
+/* .botonActivo{
+  background-color:black;
+  color:black;
+}
+.botonInactivo {
+  color: black;
+  background:black !important;
+}
+.numberPaginado {
+  color: black !important;
+  background:black !important;
+} */
+
+@media screen and (max-width: 768px) {
+  .container button {
+    padding: 3px 8px;
+  }
+}

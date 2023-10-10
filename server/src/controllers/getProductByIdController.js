@@ -5,6 +5,7 @@ const getProductByIdController = async (id) => {
     const product = await Product.findOne({
       where: {
         id: id,
+        enabled_product: true
       },
       attributes: [
         "id",
@@ -14,9 +15,13 @@ const getProductByIdController = async (id) => {
         "depth",
         "width",
         "weight",
-        "color",
         "description",
         "imagePath",
+        "stock",
+        "enabled_product",
+        "productTypeId",
+        "colorId",
+        "materialId",
       ],
     });
 

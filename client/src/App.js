@@ -30,6 +30,9 @@ function App() {
   const { isLoading, isAuthenticated } = useAuth0();
   const cartProducts = useSelector((state) => state.cartProducts);
 
+  const userIsAuthenticated =
+    isAuthenticated || localStorage.getItem("token") != null;
+
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -57,7 +60,7 @@ function App() {
       <GuardedRoute
         path="/shoppingcart"
         component={ShoppingCart}
-        auth={isAuthenticated}
+        auth={userIsAuthenticated}
       />
       <Route path="/register" component={RegisterForm} />
       <Route path="/logIn" component={LoginForm} />

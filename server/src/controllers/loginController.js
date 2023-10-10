@@ -2,9 +2,31 @@
 const { User } = require("../db.js");
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
-const { generateUserToken } = require("../middleware/generateUserToken.js");
 
-const loginUser = async (e_mail, password, auth0Email, auth0UserName) => {
+const loginUser = async (
+  e_mail,
+  password,
+  auth0Email,
+  auth0UserName,
+  userAutolog
+) => {
+  if (userAutolog) {
+    const query = {
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+      where: {
+        enabled_user: true,
+      },
+    };
+    query.where.user_name = {
+      [Op.iLike]: `%${userAutolog.user_name}%`,
+    };
+
+    const user = User.findOne(query);
+
+    if (user) {
+      return user;
+    }
+  }
   if (auth0Email && auth0UserName) {
     const query = {
       attributes: { exclude: ["createdAt", "updatedAt"] },
@@ -17,20 +39,7 @@ const loginUser = async (e_mail, password, auth0Email, auth0UserName) => {
     };
     const user = await User.findOne(query);
 
-    const token = generateUserToken({
-      is_admin: user.is_admin,
-      e_mail: user.e_mail,
-      user_name: user.user_name,
-    });
-
-    return {
-      accessToken: token,
-      user: {
-        email: user.email,
-        name: user.name,
-        role: user.role,
-      },
-    };
+    return user;
   }
 
   if (e_mail && password) {
@@ -66,6 +75,7 @@ const loginUser = async (e_mail, password, auth0Email, auth0UserName) => {
                   e_mail: user.e_mail,
                   first_name: user.first_name,
                   last_name: user.last_name,
+                  is_admin: user.is_admin,
                 }
               : null;
           } catch (error) {
@@ -86,20 +96,6 @@ const loginUser = async (e_mail, password, auth0Email, auth0UserName) => {
           `Usuario no encontrado o contraseña incorrecta para ${userName}`
         );
       }
-      const token = generateUserToken({
-        is_admin: filteredUsers[0].is_admin,
-        e_mail: filteredUsers[0].e_mail,
-        user_name: filteredUsers[0].user_name,
-      });
-
-      return {
-        accessToken: token,
-        user: {
-          email: filteredUsers[0].email,
-          name: filteredUsers[0].name,
-          role: filteredUsers[0].role,
-        },
-      };
 
       return filteredUsers[0];
     }

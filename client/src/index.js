@@ -13,11 +13,17 @@ import {
   getProductType,
 } from "./redux/actions";
 import reportWebVitals from "./reportWebVitals";
+import { getToken } from "./components/LocalStorage/LocalStorageFunctions";
+import { fetchUserData } from "./redux/actions";
 
 store.dispatch(getProducts());
 store.dispatch(getProductType());
 store.dispatch(getColor());
 store.dispatch(getMaterial());
+
+if (getToken()) {
+  store.dispatch(fetchUserData());
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -8,8 +8,8 @@ const { authenticateJWT } = require("../middleware/authenticateJWT");
 
 const userRouter = Router();
 
-userRouter.get("/", authenticateJWT, getUserHandler);
-userRouter.post("/login", loginHandler);
+userRouter.get("/", getUserHandler);
+userRouter.post("/login", authenticateJWT, loginHandler);
 userRouter.post("/", postUserHandler);
 userRouter.put("/:id", putUserHandler);
 

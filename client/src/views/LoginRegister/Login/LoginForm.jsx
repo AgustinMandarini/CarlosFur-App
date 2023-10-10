@@ -32,14 +32,19 @@ const LoginForm = () => {
     const userInfo = { e_mail: form.e_mail, password: form.password };
     if (form.e_mail && form.password) {
       try {
+        // La ruta get genera valida si el usuario existe, y si existe genera un token de sesion
         const response = await axios.get(
           `${apiUrl}/user?e_mail=${form.e_mail}`
         );
         const data = response.data;
+        const userInfoWithToken = {
+          ...userInfo,
+          accessToken: response.data.accessToken,
+        };
 
-        if (data.length > 0 && data[0].e_mail === form.e_mail) {
+        if (Object.keys(data).length > 0 && data.user.e_mail === form.e_mail) {
           // Si el usuario está creado, lo tiene que logear
-          dispatch(login(userInfo));
+          dispatch(login(userInfoWithToken));
         }
       } catch (error) {
         alert("El usuario no esta registrado o la contraseña es incorrecta");
@@ -50,7 +55,7 @@ const LoginForm = () => {
   // Este efecto se ejecutará cada vez que loggedUser cambie
   useEffect(() => {
     // Redirigir al usuario a la página de inicio después de iniciar sesión
-    if (loggedUser !== null) {
+    if (loggedUser) {
       // Realiza acciones adicionales aquí, por ejemplo, redireccionar
       // Puedes utilizar la navegación de React Router para redirigir al usuario
       // reemplace "/home" con la ruta correcta a la página de inicio

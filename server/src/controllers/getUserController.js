@@ -1,7 +1,7 @@
 // getUserController.js
 const { User } = require("../db.js");
 const { Op } = require("sequelize");
-const bcrypt = require("bcrypt");
+const { generateUserToken } = require("../middleware/generateUserToken.js");
 
 const findUser = async (userName, email) => {
   console.log("Nombre de usuario:", userName);
@@ -29,8 +29,24 @@ const findUser = async (userName, email) => {
 
   users.forEach((user) => (user.dataValues.password = null));
 
-  return users;
+  if (users.length === 1) {
+    const token = generateUserToken({
+      is_admin: users[0].is_admin,
+      e_mail: users[0].e_mail,
+      user_name: users[0].user_name,
+    });
 
+    return {
+      accessToken: token,
+      user: {
+        e_mail: users[0].e_mail,
+        user_name: users[0].user_name,
+        is_admin: users[0].is_admin,
+      },
+    };
+  } else {
+    return users;
+  }
 };
 
 module.exports = { findUser };

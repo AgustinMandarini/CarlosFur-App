@@ -3,8 +3,18 @@ const { loginUser } = require("../controllers/loginController");
 
 const loginHandler = async (req, res) => {
   try {
+    const userAutolog = req.userAutolog;
+    console.log(
+      "DESDE EL CONTROLLER, HAY AUTOLOG?: " + JSON.stringify(userAutolog)
+    );
     const { e_mail, password, auth0Email, auth0UserName } = req.body;
-    const user = await loginUser(e_mail, password, auth0Email, auth0UserName);
+    const user = await loginUser(
+      e_mail,
+      password,
+      auth0Email,
+      auth0UserName,
+      userAutolog
+    );
     if (user.length === 0) {
       res.status(404).send({ error: "El usuario no esta registrado" });
     } else {

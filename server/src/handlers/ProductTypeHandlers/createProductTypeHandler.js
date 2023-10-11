@@ -1,6 +1,6 @@
 const {
   createProductType,
-} = require("../controllers/createProductTypeController");
+} = require("../../controllers/createProductTypeController");
 
 const createProductTypeHandler = async (req, res) => {
   try {

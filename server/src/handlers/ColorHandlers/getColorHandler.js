@@ -1,4 +1,4 @@
-const { findAllTypes } = require("../controllers/getColorController.js");
+const { findAllTypes } = require("../../controllers/getColorController.js");
 
 const getColorHandler = async (req, res) => {
   try {

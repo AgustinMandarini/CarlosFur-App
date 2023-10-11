@@ -1,5 +1,5 @@
 //getUserHandler.js
-const { findUser } = require("../controllers/getUserController");
+const { findUser } = require("../../controllers/getUserController");
 
 const getUserHandler = async (req, res) => {
   try {

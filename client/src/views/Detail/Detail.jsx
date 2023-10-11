@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import imagenDefault from "./../../imagenes/default.png";
+import { updateLocalStorage } from "../../components/LocalStorage/LocalStorageFunctions";
 
 const Detail = () => {
   const { id } = useParams();
@@ -51,6 +52,14 @@ const Detail = () => {
     dispatch(deleteCartProduct(Number(id)));
     setProduct(0);
   };
+
+  useEffect(() => {
+    if (cartProducts.length === 0) {
+      localStorage.clear();
+    } else {
+      updateLocalStorage(cartProducts);
+    }
+  }, [cartProducts]);
 
   return (
     <div className={style.cntnDetail}>

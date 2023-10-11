@@ -1,11 +1,10 @@
 // getUserController.js
 const { User } = require("../db.js");
 const { Op } = require("sequelize");
-const bcrypt = require("bcrypt");
+const { generateUserToken } = require("../middleware/generateUserToken.js");
 
-const findUser = async (userName, email, password) => {
+const findUser = async (userName, email) => {
   console.log("Nombre de usuario:", userName);
-  console.log("Contraseña:", password);
 
   const query = {
     attributes: { exclude: ["createdAt", "updatedAt"] },
@@ -28,37 +27,26 @@ const findUser = async (userName, email, password) => {
 
   const users = await User.findAll(query);
 
-  // Verificar la contraseña si se proporciona
-  if (password) {
-    const authenticatedUsers = await Promise.all(users.map(async (user) => {
-      try {
-        const passwordMatch = await bcrypt.compare(password, user.password);
-        console.log("Contraseña almacenada:", user.password);
+  users.forEach((user) => (user.dataValues.password = null));
 
-        return passwordMatch ? { user_name: user.user_name, e_mail: user.e_mail, first_name: user.first_name, last_name: user.last_name } : null;
-      } catch (error) {
-        console.error(`Error al comparar contraseñas para el usuario ${user.user_name}:`, error.message);
-        return null;
-      }
-    }));
+  if (users.length === 1) {
+    const token = generateUserToken({
+      is_admin: users[0].is_admin,
+      e_mail: users[0].e_mail,
+      user_name: users[0].user_name,
+    });
 
-    // Filtrar usuarios autenticados
-    const filteredUsers = authenticatedUsers.filter(user => user !== null);
-
-    if (filteredUsers.length === 0) {
-      throw new Error(`Usuario no encontrado o contraseña incorrecta para ${userName}`);
-    }
-
-    return filteredUsers;
+    return {
+      accessToken: token,
+      user: {
+        e_mail: users[0].e_mail,
+        user_name: users[0].user_name,
+        is_admin: users[0].is_admin,
+      },
+    };
+  } else {
+    return users;
   }
-
-  // Excluir la contraseña en la respuesta final
-  return users.map(user => ({
-    user_name: user.user_name,
-    e_mail: user.e_mail,
-    first_name: user.first_name,
-    last_name: user.last_name,
-  }));
 };
 
 module.exports = { findUser };

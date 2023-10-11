@@ -15,7 +15,9 @@ import {
   POST_CART_PRODUCT,
   DELETE_CART_PRODUCT,
   POST_USER,
-  GET_USER,
+  LOGIN,
+  LOGOUT,
+  FETCH_USER_DATA,
   LOAD_CART_FROM_LOCAL_STORAGE,
   POST_CART,
 } from "./types";
@@ -36,6 +38,7 @@ const initialState = {
   materialState: [],
   cartProducts: [],
   localStorage: [],
+  userToken: null,
   loggedUser: null,
   newUser: null,
 };
@@ -149,11 +152,28 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         newUser: action.payload,
       };
-    case GET_USER:
+    case LOGIN: {
+      const { accessToken, user } = action.payload;
       return {
         ...state,
-        loggedUser: action.payload,
+        userToken: accessToken,
+        loggedUser: user,
       };
+    }
+    case LOGOUT:
+      return {
+        ...state,
+        userToken: action.payload,
+      };
+    case FETCH_USER_DATA: {
+      const { accessToken, user } = action.payload;
+      return {
+        ...state,
+        userToken: accessToken,
+        loggedUser: user,
+      };
+    }
+
     case POST_CART:
       return {
         ...state,

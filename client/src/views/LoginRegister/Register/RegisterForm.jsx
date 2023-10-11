@@ -1,13 +1,19 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { login } from "../../../redux/actions";
 import googleLogo from "../../../imagenes/logoGoogle.png";
 import styles from "./RegisterForm.module.css";
 import validation from "./validation";
+import axios from "axios";
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const RegisterForm = () => {
   const { loginWithRedirect } = useAuth0();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSignUp = async () => {
     await loginWithRedirect({
@@ -20,8 +26,6 @@ const RegisterForm = () => {
       },
     });
   };
-
-  const dispatch = useDispatch();
 
   const [form, setForm] = useState({
     user_name: "",
@@ -44,12 +48,65 @@ const RegisterForm = () => {
     setForm({ ...form, [property]: value });
   };
 
+  const handleLocalSignUp = async () => {
+    const newUser = {
+      user_name: form.user_name,
+      e_mail: form.e_mail,
+      password: form.password,
+      lastName: form.lastName,
+    };
+    try {
+      const response = await axios.get(`${apiUrl}/user?e_mail=${form.e_mail}`);
+      if (response.status === 200) {
+        console.log(response.status);
+        const data = response.data;
+
+        if (data.length && data[0].e_mail === form.e_mail) {
+          alert("Ya existe un usuario con ese nombre o email");
+        }
+      }
+    } catch {
+      // Esta funcion es casi la misma que esta en login. Luego de iniciar sesion, loguea
+      // generando un token desde la ruta /get
+      try {
+        const response = await axios.post(`${apiUrl}/user`, newUser);
+
+        if (response.status === 201) {
+          alert("Usuario creado exitosamente!");
+          try {
+            const response = await axios.get(
+              `${apiUrl}/user?e_mail=${form.e_mail}`
+            );
+            const data = response.data;
+            const userInfoWithToken = {
+              ...newUser,
+              accessToken: response.data.accessToken,
+            };
+
+            if (
+              Object.keys(data).length > 0 &&
+              data.user.e_mail === form.e_mail
+            ) {
+              // Si el usuario está creado, lo tiene que logear
+              dispatch(login(userInfoWithToken));
+              history.push("/home");
+            }
+          } catch (error) {
+            alert("Error al loguear el nuevo usuario");
+          }
+        }
+      } catch (error) {
+        alert("Errors desde front: " + error);
+      }
+    }
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
     const validationErrors = validation(form);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
-      // dispatch(postProduct(form));
+      handleLocalSignUp();
     }
   };
 
@@ -58,7 +115,7 @@ const RegisterForm = () => {
       <div className={styles.containerReg}>
         <div className={styles.containerData}>
           <h2>Crear una cuenta</h2>
-          <form onSubmit={submitHandler}>
+          <form onSubmit={submitHandler} noValidate>
             <div className={styles.inputContainer}>
               <div className={styles.inputSection}>
                 <div className={`${styles.cInput} ${styles["c-input"]}`}>

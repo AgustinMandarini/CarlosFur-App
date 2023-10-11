@@ -30,11 +30,14 @@ function App() {
   const { isLoading, isAuthenticated } = useAuth0();
   const cartProducts = useSelector((state) => state.cartProducts);
 
-  // useEffect(() => {
-  //   const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+  const userIsAuthenticated =
+    isAuthenticated || localStorage.getItem("token") != null;
 
-  //   dispatch(loadCartFromLocalStorage(savedCart));
-  // }, [dispatch]);
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    dispatch(loadCartFromLocalStorage(savedCart));
+  }, [dispatch]);
 
   if (isLoading) {
     return (
@@ -57,7 +60,7 @@ function App() {
       <GuardedRoute
         path="/shoppingcart"
         component={ShoppingCart}
-        auth={isAuthenticated}
+        auth={userIsAuthenticated}
       />
       <Route path="/register" component={RegisterForm} />
       <Route path="/logIn" component={LoginForm} />

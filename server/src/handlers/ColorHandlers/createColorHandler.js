@@ -1,4 +1,4 @@
-const { createColor } = require("../controllers/createColorController");
+const { createColor } = require("../../controllers/createColorController");
 
 const createColorHandler = async (req, res) => {
   try {

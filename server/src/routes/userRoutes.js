@@ -1,8 +1,8 @@
 const { Router } = require("express");
-const { getUserHandler } = require("../handlers/getUserHandler");
-const { postUserHandler } = require("../handlers/postUserHandler");
-const { putUserHandler } = require("../handlers/putUserHandler");
-const { loginHandler } = require("../handlers/loginHandler");
+const { getUserHandler } = require("../handlers/UserHandlers/getUserHandler");
+const { postUserHandler } = require("../handlers/UserHandlers/postUserHandler");
+const { putUserHandler } = require("../handlers/UserHandlers/putUserHandler");
+const { loginHandler } = require("../handlers/LoginHandlers/loginHandler");
 
 const { authenticateJWT } = require("../middleware/authenticateJWT");
 

@@ -4,30 +4,34 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import style from "./LoginRegisterBar.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { postCart } from "../../redux/actions";
+import { postCart, logOut } from "../../redux/actions";
 
 function LoginBar() {
   const { logout, isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
 
+  const userIsAuthenticated =
+    isAuthenticated || localStorage.getItem("token") != null;
+
   const cartProducts = useSelector((state) => state.cartProducts);
-  const localStorage = useSelector((state) => state.localStorage);
+  // const localStorage = useSelector((state) => state.localStorage);
   const cartArray = cartProducts.reduce((result, product) => {
     const existingProduct = result.find((item) => item.id === product.id);
     if (existingProduct) {
-      existingProduct.product_quantity += 1;
+      existingProduct.quantity += 1;
     } else {
       result.push({
         id: product.id,
-        product_quantity: 1,
+        quantity: 1,
       });
     }
     return result;
   }, []);
   const cartToDispatch = { products: cartArray };
 
-  console.log(localStorage);
+  // console.log(localStorage);
   const handleLogout = () => {
+    dispatch(logOut());
     dispatch(postCart(cartToDispatch));
     logout({
       logoutParams: {
@@ -41,7 +45,7 @@ function LoginBar() {
       <div className={style.container}>
         <Nav className="mr-auto"></Nav>
         <Nav style={{ marginLeft: "auto" }}>
-          {!isAuthenticated && (
+          {!userIsAuthenticated && (
             <>
               <Link to="/register">
                 <Button variant="dark" className={style.buttonLogin}>
@@ -55,7 +59,7 @@ function LoginBar() {
               </Link>
             </>
           )}
-          {isAuthenticated && (
+          {userIsAuthenticated && (
             <Button onClick={handleLogout} variant="dark">
               Log Out
             </Button>

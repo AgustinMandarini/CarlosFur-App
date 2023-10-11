@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./CartProductContainer.module.css";
-
-import Card from "../Card/Card";
+import { updateLocalStorage } from "../LocalStorage/LocalStorageFunctions";
 import CartProductCard from "../CartProductCard/CartProductCard";
 
 const CartProductContainer = () => {
@@ -34,6 +33,14 @@ const CartProductContainer = () => {
   const totalPriceSum = sumTotalPrices(cartProductCards);
 
   const shouldRenderTotalPrice = cartProductCards.length > 0;
+
+  useEffect(() => {
+    if (cartProducts.length === 0) {
+      localStorage.clear();
+    } else {
+      updateLocalStorage(cartProducts);
+    }
+  }, [cartProducts]);
 
   return (
     <div className={style.cntnCart}>

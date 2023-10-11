@@ -4,7 +4,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import style from "./Card.module.css";
 import defaultImage from "./../../imagenes/default.png";
 import { deleteCartProduct, postCartProduct } from "../../redux/actions";
-
+import { updateLocalStorage } from "../LocalStorage/LocalStorageFunctions";
 const Card = (props) => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
@@ -26,7 +26,6 @@ const Card = (props) => {
     dispatch(postCartProduct(props.id));
     setProduct(0);
   };
-
   const decreaseCounter = () => {
     /* Contador */
     if (counter > 0) {
@@ -38,6 +37,15 @@ const Card = (props) => {
     dispatch(deleteCartProduct(props.id));
     setProduct(0);
   };
+
+  useEffect(() => {
+    if (cartProducts.length === 0) {
+      localStorage.clear();
+    } else {
+      updateLocalStorage(cartProducts);
+    }
+  }, [cartProducts]);
+
   return (
     <div className={style.container} key={props.id}>
       <Link to={`/detail/${props.id}`} className={style.nameLink}>

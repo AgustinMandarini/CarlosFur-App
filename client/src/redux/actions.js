@@ -15,12 +15,20 @@ import {
   SET_PRODUCT_TYPE,
   SET_SORT,
   POST_USER,
-  GET_USER,
+  LOGIN,
+  LOGOUT,
+  FETCH_USER_DATA,
   LOAD_CART_FROM_LOCAL_STORAGE,
   POST_CART,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
+import {
+  getToken,
+  removeToken,
+  setToken,
+} from "../components/LocalStorage/LocalStorageFunctions";
+
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export const getProducts = () => {
@@ -170,14 +178,63 @@ export const postUser = (payload) => {
   };
 };
 
-export const getUser = (payload) => {
+export const login = (payload) => {
+  const accessToken = payload.accessToken;
   return async function (dispatch) {
-    const apiData = await axios.get(`${apiUrl}/user?email=${payload}`);
-    const user = apiData.data;
-    return dispatch({
-      type: GET_USER,
-      payload: user,
+    try {
+      const response = await axios.post(`${apiUrl}/user/login`, payload, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Asegúrate de tener el token aquí
+        },
+      });
+      const user = response.data;
+      setToken(accessToken);
+      if (response.status === 200) {
+        dispatch({
+          type: LOGIN,
+          payload: { userToken: accessToken, user: user },
+        });
+      }
+    } catch (error) {
+      return alert("Usuario no registrado");
+    }
+  };
+};
+
+export const logOut = () => {
+  return async (dispatch) => {
+    removeToken();
+    dispatch({
+      type: LOGOUT,
+      payload: null,
     });
+  };
+};
+
+export const fetchUserData = () => {
+  return async (dispatch) => {
+    const accessToken = getToken();
+    axios.defaults.headers.Authorization = `Bearer ${accessToken}`;
+    try {
+      const response = await axios.post(
+        `${apiUrl}/user/login`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, // Asegúrate de tener el token aquí
+          },
+        }
+      );
+
+      const user = response.data;
+      return dispatch({
+        type: FETCH_USER_DATA,
+        payload: { userToken: accessToken, user: user },
+      });
+    } catch (error) {
+      removeToken();
+      // Puedes manejar el error aquí si lo deseas.
+    }
   };
 };
 export const postCartProduct = (payload) => {

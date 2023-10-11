@@ -1,4 +1,4 @@
-const { createCart } = require('../../controllers/cartController')
+const { createCart } = require('../../controllers/CartController/cartController')
 
 
 const createCartHandler = async (req, res) => {

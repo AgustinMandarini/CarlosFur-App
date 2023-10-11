@@ -1,6 +1,6 @@
 const {
   findAllTypes,
-} = require("../../controllers/getProductTypeController.js");
+} = require("../../controllers/ProductTypeController/getProductTypeController.js");
 
 const getProductTypeHandler = async (req, res) => {
   try {

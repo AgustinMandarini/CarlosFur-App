@@ -1,4 +1,4 @@
-const { createMaterial } = require("../../controllers/createMaterialController");
+const { createMaterial } = require("../../controllers/MaterialController/createMaterialController");
 
 const createMaterialHandler = async (req, res) => {
   try {

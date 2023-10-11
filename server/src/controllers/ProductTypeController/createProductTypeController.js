@@ -1,4 +1,4 @@
-const { ProductType} = require("../db");
+const { ProductType} = require("../../db");
 
 const createProductType = async (
   name,

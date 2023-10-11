@@ -91,7 +91,6 @@ const deleteCart = async (req) => {
   try {
     const { cartId } = req.params;
 
-    // Verifica que el cartId sea un número entero válido
     if (isNaN(cartId)) {
       return { status: 400, data: { error: 'Invalid cart ID' } };
     }

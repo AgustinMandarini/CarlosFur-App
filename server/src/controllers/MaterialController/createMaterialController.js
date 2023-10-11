@@ -1,4 +1,4 @@
-const { Material } = require("../db");
+const { Material } = require("../../db");
 
 const createMaterial = async (name, description) => {
   const newMaterial = await Material.create({

@@ -1,6 +1,6 @@
 //postUserController.js
-const { User } = require("../db");
-const { encryptPassword } = require("../controllers/passwordUtils");
+const { User } = require("../../db");
+const { encryptPassword } = require("../Utils/passwordUtils");
 
 const createUser = async (
   user_name,

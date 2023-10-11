@@ -1,4 +1,4 @@
-const { ProductType } = require("../db.js");
+const { ProductType } = require("../../db.js");
 
 const findAllTypes = async () => {
   const allTypesArray = await ProductType.findAll({

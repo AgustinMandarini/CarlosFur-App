@@ -1,4 +1,4 @@
-const { User } = require("../db");
+const { User } = require("../../db");
 
 const putUserController = async (id) => {
     // Busca el user por su id

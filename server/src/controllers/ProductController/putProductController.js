@@ -1,4 +1,4 @@
-const { Product } = require("../db");
+const { Product } = require("../../db");
 
 const putProductController = async (id) => {
     // Busca el producto por su id

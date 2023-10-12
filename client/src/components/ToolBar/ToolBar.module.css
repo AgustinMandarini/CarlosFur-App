@@ -3,7 +3,7 @@
   justify-content: center;
   flex-direction: row;
   /* width: 80rem; */
-  margin: 0.5em;
+  margin: 0.1em;
 }
 .container {
   display: flex;

@@ -63,10 +63,10 @@ const Card = (props) => {
         </div>
       </Link>
       <div className={style.counterContainer}>
-        <span className={style.counterValue}>{countForProductID}</span>
         <button className={style.buttonCount} onClick={increaseCounter}>
-          +
+          Agregar
         </button>
+        <span className={style.counterValue}>{countForProductID}</span>
       </div>
     </div>
   );

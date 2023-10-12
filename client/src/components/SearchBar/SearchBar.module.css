@@ -4,6 +4,7 @@
 }
 .inputSearch {
   font-size: 14px;
+  
 }
 .inputSearch:focus {
   border-color: #000 !important;

@@ -11,7 +11,7 @@ const FormPage = () => {
   const stateProductType = useSelector((state) => state.productType);
   const stateColor = useSelector((state) => state.colorState);
   const stateMaterial = useSelector((state) => state.materialState);
-
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -60,12 +60,15 @@ const FormPage = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(form);
-
+    setFormSubmitted(true);
     const validationErrors = validation(form);
-    setErrors(validationErrors);
+
     if (Object.keys(validationErrors).length === 0) {
+      // Los datos son válidos, puedes enviar el formulario
       dispatch(postProduct(form));
+    } else {
+      // Mostrar errores en los campos
+      setErrors(validationErrors);
     }
   };
 
@@ -118,7 +121,7 @@ const FormPage = () => {
               className={style.input}
             />
             <Form.Text className={style.error}>
-              {errors.name ? <span>{errors.name}</span> : ""}
+              {errors.name && formSubmitted ? <span>{errors.name}</span> : ""}{" "}
             </Form.Text>
           </div>
         </Form.Group>
@@ -136,7 +139,7 @@ const FormPage = () => {
             />
 
             <Form.Text className={style.error}>
-              {errors.price ? <span>{errors.price}</span> : ""}
+              {errors.price && formSubmitted ? <span>{errors.price}</span> : ""}{" "}
             </Form.Text>
           </div>
         </Form.Group>
@@ -153,7 +156,11 @@ const FormPage = () => {
             />
 
             <Form.Text className={style.error}>
-              {errors.height ? <span>{errors.height}</span> : ""}
+              {errors.height && formSubmitted ? (
+                <span>{errors.height}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
         </Form.Group>
@@ -169,7 +176,7 @@ const FormPage = () => {
               className={style.input}
             />
             <Form.Text className={style.error}>
-              {errors.depth ? <span>{errors.depth}</span> : ""}
+              {errors.depth && formSubmitted ? <span>{errors.depth}</span> : ""}
             </Form.Text>
           </div>
         </Form.Group>
@@ -186,7 +193,7 @@ const FormPage = () => {
             />
 
             <Form.Text className={style.error}>
-              {errors.width ? <span>{errors.width}</span> : ""}
+              {errors.width && formSubmitted ? <span>{errors.width}</span> : ""}
             </Form.Text>
           </div>
         </Form.Group>
@@ -203,7 +210,11 @@ const FormPage = () => {
             />
 
             <Form.Text className={style.error}>
-              {errors.weight ? <span>{errors.weight}</span> : ""}
+              {errors.weight && formSubmitted ? (
+                <span>{errors.weight}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
         </Form.Group>
@@ -221,7 +232,7 @@ const FormPage = () => {
             />
 
             <Form.Text className={style.error}>
-              {errors.stock ? <span>{errors.stock}</span> : ""}
+              {errors.stock && formSubmitted ? <span>{errors.stock}</span> : ""}
             </Form.Text>
           </div>
         </Form.Group>
@@ -250,7 +261,11 @@ const FormPage = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.color ? <span>{errors.color}</span> : ""}
+              {errors.color && formSubmitted ? (
+                <span>{errors.color}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
         </Form.Group>
@@ -279,7 +294,11 @@ const FormPage = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.material ? <span>{errors.material}</span> : ""}
+              {errors.materialId && formSubmitted ? (
+                <span>{errors.materialId}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
         </Form.Group>
@@ -308,7 +327,11 @@ const FormPage = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.productType ? <span>{errors.productType}</span> : ""}
+              {errors.productType && formSubmitted ? (
+                <span>{errors.productType}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
         </Form.Group>
@@ -325,7 +348,11 @@ const FormPage = () => {
             />
 
             <Form.Text className={style.error}>
-              {errors.description ? <span>{errors.description}</span> : ""}
+              {errors.description && formSubmitted ? (
+                <span>{errors.description}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
         </Form.Group>

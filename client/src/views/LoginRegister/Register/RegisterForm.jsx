@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { login } from "../../../redux/actions";
 import googleLogo from "../../../imagenes/logoGoogle.png";
 import styles from "./RegisterForm.module.css";
 import validation from "./validation";
@@ -10,6 +12,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 const RegisterForm = () => {
   const { loginWithRedirect } = useAuth0();
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const handleSignUp = async () => {
@@ -63,12 +66,34 @@ const RegisterForm = () => {
         }
       }
     } catch {
+      // Esta funcion es casi la misma que esta en login. Luego de iniciar sesion, loguea
+      // generando un token desde la ruta /get
       try {
         const response = await axios.post(`${apiUrl}/user`, newUser);
 
         if (response.status === 201) {
           alert("Usuario creado exitosamente!");
-          history.push("/home");
+          try {
+            const response = await axios.get(
+              `${apiUrl}/user?e_mail=${form.e_mail}`
+            );
+            const data = response.data;
+            const userInfoWithToken = {
+              ...newUser,
+              accessToken: response.data.accessToken,
+            };
+
+            if (
+              Object.keys(data).length > 0 &&
+              data.user.e_mail === form.e_mail
+            ) {
+              // Si el usuario está creado, lo tiene que logear
+              dispatch(login(userInfoWithToken));
+              history.push("/home");
+            }
+          } catch (error) {
+            alert("Error al loguear el nuevo usuario");
+          }
         }
       } catch (error) {
         alert("Errors desde front: " + error);

@@ -3,10 +3,9 @@ const { loginUser } = require("../../controllers/LoginController/loginController
 
 const loginHandler = async (req, res) => {
   try {
+    // req.userAutolog se crea en el middleware que usa esta ruta: authenticateJWT
     const userAutolog = req.userAutolog;
-    console.log(
-      "DESDE EL CONTROLLER, HAY AUTOLOG?: " + JSON.stringify(userAutolog)
-    );
+
     const { e_mail, password, auth0Email, auth0UserName } = req.body;
     const user = await loginUser(
       e_mail,

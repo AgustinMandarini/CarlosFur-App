@@ -3,16 +3,18 @@
   justify-content: center;
   flex-direction: row;
   /* width: 80rem; */
-  margin: 1rem;
+  margin: 0.5em;
 }
 .container {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente */
+  text-align: center;
   margin: 0.8rem;
 }
 .divSelect {
   display: flex;
+  margin-bottom: 10px; /* Espacio entre los selects */
 }
 .select {
   font-size: 0.8rem;
@@ -23,3 +25,23 @@
   border-color: #000 !important;
   box-shadow: none !important;
 }
+
+.filterIcon {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px; /* Espacio entre el ícono y el texto "Filtrados" */
+}
+.filter{
+  display: flex;
+  flex-direction: row;
+  width: 2.3em;
+
+}
+.filter:hover {
+  background-color: #ffffffa9; /* Cambia el color al pasar el mouse (puedes ajustar el color) */
+  border-radius: 0.5em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.778);
+}
+

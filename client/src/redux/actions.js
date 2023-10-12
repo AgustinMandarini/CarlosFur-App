@@ -284,7 +284,6 @@ export const postCart = (cart) => {
         payload: payload,
       });
     };
-    // eslint-disable-next-line no-unreachable
   } catch (error) {
     console.log(error);
   }

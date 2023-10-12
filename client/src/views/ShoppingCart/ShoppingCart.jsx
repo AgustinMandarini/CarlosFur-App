@@ -74,9 +74,9 @@ const ShoppingCart = () => {
 
   const cartToDispatch = { products: cartArray };
 
-  const postCartHandler = () => {
-    dispatch(postCart(cartToDispatch));
-  };
+  // const postCartHandler = () => {
+  //   dispatch(postCart(cartToDispatch));
+  // };
 
   return (
     <div className={style.background}>

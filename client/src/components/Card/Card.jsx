@@ -19,7 +19,7 @@ const Card = (props) => {
 
   const increaseCounter = () => {
     /* Contador */
-    setCounter(counter + 1);
+    setCounter(counter);
 
     /* Se suma el producto al carrito */
     setProduct(1);
@@ -63,9 +63,6 @@ const Card = (props) => {
         </div>
       </Link>
       <div className={style.counterContainer}>
-        <button className={style.buttonCount} onClick={decreaseCounter}>
-          -
-        </button>
         <span className={style.counterValue}>{countForProductID}</span>
         <button className={style.buttonCount} onClick={increaseCounter}>
           +

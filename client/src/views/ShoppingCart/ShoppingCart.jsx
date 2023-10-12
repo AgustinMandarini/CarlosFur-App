@@ -12,6 +12,7 @@ const ShoppingCart = () => {
   const dispatch = useDispatch();
 
   const cartProducts = useSelector((state) => state.cartProducts);
+  console.log(cartProducts);
   const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
   const [preferenceId, setPreferenceId] = useState(null);
 
@@ -56,18 +57,21 @@ const ShoppingCart = () => {
     }
   }, []);
 
-  const cartArray = cartProducts.reduce((result, product) => {
-    const existingProduct = result.find((item) => item.id === product.id);
-    if (existingProduct) {
-      existingProduct.quantity += 1;
-    } else {
-      result.push({
-        id: product.id,
-        quantity: 1,
-      });
-    }
-    return result;
-  }, []);
+  const cartArray = Array.isArray(cartProducts)
+    ? cartProducts.reduce((result, product) => {
+        const existingProduct = result.find((item) => item.id === product.id);
+        if (existingProduct) {
+          existingProduct.quantity += 1;
+        } else {
+          result.push({
+            id: product.id,
+            quantity: 1,
+          });
+        }
+        return result;
+      }, [])
+    : [];
+
   const cartToDispatch = { products: cartArray };
 
   const postCartHandler = () => {

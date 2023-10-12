@@ -14,12 +14,14 @@ import {
   SET_PRICE_RANGE,
   POST_CART_PRODUCT,
   DELETE_CART_PRODUCT,
+  DELETE_CART,
   POST_USER,
   LOGIN,
   LOGOUT,
   FETCH_USER_DATA,
   LOAD_CART_FROM_LOCAL_STORAGE,
   POST_CART,
+  GET_CART,
 } from "./types";
 
 const initialState = {
@@ -88,10 +90,22 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         muebles: action.payload,
       };
+    case GET_CART:
+      return {
+        ...state,
+        cartProducts: action.payload,
+      };
     case POST_CART_PRODUCT:
       const productToAdd = state.muebles.find(
         (mueble) => mueble.id === action.payload
       );
+
+      // Verifica si cartProducts es un array
+      if (!Array.isArray(state.cartProducts)) {
+        // Si no es un array, inicialízalo como un array vacío
+        state.cartProducts = [];
+      }
+
       productToAdd.count = 1;
 
       return {
@@ -107,6 +121,7 @@ const rootReducer = (state = initialState, action) => {
       if (indexToRemove !== -1) {
         const newCartProducts = [...state.cartProducts];
         newCartProducts.splice(indexToRemove, 1);
+        localStorage.setItem("cart", JSON.stringify(newCartProducts));
 
         return {
           ...state,
@@ -115,6 +130,12 @@ const rootReducer = (state = initialState, action) => {
       } else {
         return state;
       }
+    case DELETE_CART:
+      localStorage.clear();
+      return {
+        ...state,
+        cartProducts: [],
+      };
     case LOAD_CART_FROM_LOCAL_STORAGE:
       return {
         ...state,

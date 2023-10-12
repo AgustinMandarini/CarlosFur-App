@@ -8,12 +8,15 @@ import { updateLocalStorage } from "../LocalStorage/LocalStorageFunctions";
 const Card = (props) => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
-  const countForProductID = cartProducts.reduce((count, product) => {
-    if (product.id === props.id) {
-      return count + 1;
-    }
-    return count;
-  }, 0);
+  const countForProductID = Array.isArray(cartProducts)
+    ? cartProducts.reduce((count, product) => {
+        if (product.id === props.id) {
+          return count + 1;
+        }
+        return count;
+      }, 0)
+    : 0;
+
   const [counter, setCounter] = useState(0);
   const [product, setProduct] = useState(0);
 
@@ -63,8 +66,10 @@ const Card = (props) => {
         </div>
       </Link>
       <div className={style.counterContainer}>
+        {/* <span className={style.counterValue}>{countForProductID}</span> */}
         <button className={style.buttonCount} onClick={increaseCounter}>
-          Agregar
+          Agregar al carrito
+
         </button>
         <span className={style.counterValue}>{countForProductID}</span>
       </div>

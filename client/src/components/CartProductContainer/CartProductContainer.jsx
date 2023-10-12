@@ -6,12 +6,7 @@ import Card from "../Card/Card";
 import CartProductCard from "../CartProductCard/CartProductCard";
 
 const CartProductContainer = () => {
-<<<<<<< HEAD
-  const initialCart = JSON.parse(localStorage.getItem('cart')) || [];
-  const [cartProducts, setCartProducts] = useState(initialCart);
-=======
   const cartProducts = useSelector((state) => state.cartProducts);
->>>>>>> 14f501a8820cb819ed60f5dc0c72f730ed4bcbb4
 
   const cartProductCards = cartProducts.reduce((result, product) => {
     const existingProduct = result.find((item) => item.id === product.id);
@@ -39,7 +34,6 @@ const CartProductContainer = () => {
   const totalPriceSum = sumTotalPrices(cartProductCards);
 
   const shouldRenderTotalPrice = cartProductCards.length > 0;
-
 
   return (
     <div className={style.cntnCart}>

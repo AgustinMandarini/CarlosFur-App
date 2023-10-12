@@ -21,7 +21,7 @@ const Card = (props) => {
 
   const increaseCounter = () => {
     /* Contador */
-    setCounter(counter + 1);
+    setCounter(counter);
 
     /* Se suma el producto al carrito */
     setProduct(1);
@@ -29,20 +29,7 @@ const Card = (props) => {
     setProduct(0);
     updateLocalStorage([...cart, props]);
   };
-  const decreaseCounter = () => {
-    /* Contador */
-    if (counter > 0) {
-      setCounter(counter - 1);
-    }
 
-    /* Se quita el producto del carrito */
-    setProduct(-1);
-    dispatch(deleteCartProduct(props.id));
-    setProduct(0);
-
-    // Actualiza el localStorage eliminando el producto
-    updateLocalStorage(cart.filter((product) => product.id !== props.id));
-  };
   return (
     <div className={style.container} key={props.id}>
       <Link to={`/detail/${props.id}`} className={style.nameLink}>
@@ -60,9 +47,6 @@ const Card = (props) => {
         </div>
       </Link>
       <div className={style.counterContainer}>
-        <button className={style.buttonCount} onClick={decreaseCounter}>
-          -
-        </button>
         <span className={style.counterValue}>{countForProductID}</span>
         <button className={style.buttonCount} onClick={increaseCounter}>
           +

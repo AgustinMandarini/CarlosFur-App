@@ -10,24 +10,12 @@ const loginUser = async (
   auth0UserName,
   userAutolog
 ) => {
-  if (userAutolog) {
-    const query = {
-      attributes: { exclude: ["createdAt", "updatedAt"] },
-      where: {
-        enabled_user: true,
-      },
-    };
-    query.where.user_name = {
-      [Op.iLike]: `%${userAutolog.user_name}%`,
-    };
-
-    const user = User.findOne(query);
-
-    if (user) {
-      return user;
-    }
+  // Si el usuario ingresa estrictamente a traves de autologin por token. Es decir, solo a traves de token, sin ningun otro tipo de informacion
+  if (userAutolog && !e_mail && !password && !auth0Email && !auth0UserName) {
+    return userAutolog;
   }
   if (auth0Email && auth0UserName) {
+    // Si el usuario esta logueando desde auth0
     const query = {
       attributes: { exclude: ["createdAt", "updatedAt"] },
       where: {
@@ -43,9 +31,7 @@ const loginUser = async (
   }
 
   if (e_mail && password) {
-    console.log("Nombre de usuario:", e_mail);
-    console.log("Contraseña:", password);
-
+    // Si el usuario esta logueando desde el formulario
     const query = {
       attributes: { exclude: ["createdAt", "updatedAt"] },
       where: {
@@ -53,11 +39,9 @@ const loginUser = async (
       },
     };
 
-    if (e_mail && password) {
-      query.where.e_mail = {
-        [Op.iLike]: `%${e_mail}%`,
-      };
-    }
+    query.where.e_mail = {
+      [Op.iLike]: `%${e_mail}%`,
+    };
 
     const users = await User.findAll(query);
 
@@ -67,7 +51,6 @@ const loginUser = async (
         users.map(async (user) => {
           try {
             const passwordMatch = await bcrypt.compare(password, user.password);
-            console.log("Contraseña almacenada:", user.password);
 
             return passwordMatch
               ? {

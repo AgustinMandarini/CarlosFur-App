@@ -69,7 +69,9 @@ const Card = (props) => {
         {/* <span className={style.counterValue}>{countForProductID}</span> */}
         <button className={style.buttonCount} onClick={increaseCounter}>
           Agregar al carrito
+
         </button>
+        <span className={style.counterValue}>{countForProductID}</span>
       </div>
     </div>
   );

@@ -44,6 +44,22 @@ export const getProducts = () => {
     });
   };
 };
+
+export const getDetail = (id) => {
+  return async function (dispatch) {
+    try {
+      const apiData = await axios.get(`${apiUrl}/product/${id}`);
+      const detail = apiData.data;
+      dispatch({
+        type: GET_DETAIL,
+        payload: detail,
+      });
+    } catch (error) {
+      console.error("Error en la acción getDetail:", error);
+    }
+  };
+};
+
 export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
@@ -180,7 +196,7 @@ export const postUser = (payload) => {
         alert("Usuario Creado");
       }
     } catch (error) {
-      alert(`Error: ${error}. No se pudo crear el usuario!`);
+      console.log(`Error: ${error}. Ya existe un usuario con ese email`);
     }
   };
 };
@@ -203,7 +219,10 @@ export const login = (payload) => {
         });
       }
     } catch (error) {
-      return alert("Usuario no registrado");
+      toast.error("La contraseña es incorrecta", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+      });
     }
   };
 };

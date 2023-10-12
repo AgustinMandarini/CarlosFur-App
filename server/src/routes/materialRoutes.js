@@ -1,6 +1,6 @@
 const { Router } = require("express");
-const { getMaterialHandler } = require("../handlers/getMaterialHandler");
-const { createMaterialHandler } = require("../handlers/createMaterialHandler");
+const { getMaterialHandler } = require("../handlers/MaterialHandlers/getMaterialHandler");
+const { createMaterialHandler } = require("../handlers/MaterialHandlers/createMaterialHandler");
 
 const materialRouter = Router();
 

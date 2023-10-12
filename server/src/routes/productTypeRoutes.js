@@ -1,8 +1,8 @@
 const { Router } = require("express");
-const { getProductTypeHandler } = require("../handlers/getProductTypeHandler");
+const { getProductTypeHandler } = require("../handlers/ProductTypeHandlers/getProductTypeHandler");
 const {
   createProductTypeHandler,
-} = require("../handlers/createProductTypeHandler");
+} = require("../handlers/ProductTypeHandlers/createProductTypeHandler");
 
 const productTypeRouter = Router();
 

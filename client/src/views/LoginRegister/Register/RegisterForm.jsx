@@ -79,9 +79,10 @@ const RegisterForm = () => {
               `${apiUrl}/user?e_mail=${form.e_mail}`
             );
             const data = response.data;
+            const accessToken = response.data.accessToken;
             const userInfoWithToken = {
               ...newUser,
-              accessToken: response.data.accessToken,
+              accessToken: accessToken,
             };
 
             if (
@@ -90,6 +91,7 @@ const RegisterForm = () => {
             ) {
               // Si el usuario está creado, lo tiene que logear
               dispatch(login(userInfoWithToken));
+
               toast.success("Usuario creado exitosamente!", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 3000,

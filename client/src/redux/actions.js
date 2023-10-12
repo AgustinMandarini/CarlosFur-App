@@ -45,21 +45,6 @@ export const getProducts = () => {
   };
 };
 
-export const getDetail = (id) => {
-  return async function (dispatch) {
-    try {
-      const apiData = await axios.get(`${apiUrl}/product/${id}`);
-      const detail = apiData.data;
-      dispatch({
-        type: GET_DETAIL,
-        payload: detail,
-      });
-    } catch (error) {
-      console.error("Error en la acción getDetail:", error);
-    }
-  };
-};
-
 export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
@@ -97,6 +82,7 @@ export const getProductByName = (name) => {
     });
   };
 };
+
 export const getDetail = (id) => {
   return async function (dispatch) {
     try {
@@ -170,7 +156,6 @@ export const setColor = (payload) => {
 export const setPriceRange = (payload) => {
   return { type: SET_PRICE_RANGE, payload };
 };
-
 export const setProductsCopy = (payload) => {
   return { type: SET_PRODUCTS_COPY, payload };
 };

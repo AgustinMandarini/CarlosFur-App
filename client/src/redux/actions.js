@@ -57,21 +57,6 @@ export const getDetail = (id) => {
   };
 };
 
-// export const postProduct = (payload) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await axios.post(`${apiUrl}/product`, payload);
-//       const producto = response.data;
-//       if (response.status === 200) {
-//         dispatch({ type: POST_PRODUCT, payload: producto });
-//         alert("Producto Creado");
-//         window.location.reload();
-//       }
-//     } catch (error) {
-//       alert(`No se pudo crear el producto`);
-//     }
-//   };
-// };
 export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
@@ -173,7 +158,7 @@ export const postUser = (payload) => {
         alert("Usuario Creado");
       }
     } catch (error) {
-      alert(`Error: ${error}. No se pudo crear el usuario!`);
+      console.log(`Error: ${error}. Ya existe un usuario con ese email`);
     }
   };
 };
@@ -196,7 +181,10 @@ export const login = (payload) => {
         });
       }
     } catch (error) {
-      return alert("Usuario no registrado");
+      toast.error("La contraseña es incorrecta", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+      });
     }
   };
 };

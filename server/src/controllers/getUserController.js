@@ -1,9 +1,10 @@
 // getUserController.js
 const { User } = require("../db.js");
 const { Op } = require("sequelize");
-const { generateUserToken } = require("../middleware/generateUserToken.js");
+const { generateUserToken } = require("../utils/generateUserToken.js");
 
 const findUser = async (userName, email) => {
+  console.log("Nombre de usuario:", email);
   console.log("Nombre de usuario:", userName);
 
   const query = {

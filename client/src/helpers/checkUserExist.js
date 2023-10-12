@@ -14,7 +14,6 @@ export const useCheckUserExists = () => {
       try {
         const response = await axios.get(`${apiUrl}/user?e_mail=${user.email}`);
         const data = response.data;
-
         if (data && data[0].e_mail === user.email) {
           // Si el usuario ya está creado, lo tiene que logear
           console.log("Usuario existente!!");
@@ -22,14 +21,16 @@ export const useCheckUserExists = () => {
           dispatch(
             login({ auth0Email: user.email, auth0UserName: user.nickname })
           );
-        } else {
-          // Si no está creado, crea uno nuevo
-          console.log("Usuario nuevo. Creando usuario...");
-          const newUser = { user_name: user.name, e_mail: user.email };
-          dispatch(postUser(newUser));
         }
       } catch (error) {
-        console.log(`${error}`);
+        // Si no está creado, crea uno nuevo
+        console.log("Usuario nuevo. Creando usuario...");
+        const newUser = {
+          user_name: user.name,
+          e_mail: user.email,
+          auth0: true,
+        };
+        dispatch(postUser(newUser));
       }
     }
   };

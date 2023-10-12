@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { toast } from "react-toastify";
 import { login } from "../../../redux/actions";
 import googleLogo from "../../../imagenes/logoGoogle.png";
 import styles from "./RegisterForm.module.css";
@@ -58,11 +59,12 @@ const RegisterForm = () => {
     try {
       const response = await axios.get(`${apiUrl}/user?e_mail=${form.e_mail}`);
       if (response.status === 200) {
-        console.log(response.status);
         const data = response.data;
-
-        if (data.length && data[0].e_mail === form.e_mail) {
-          alert("Ya existe un usuario con ese nombre o email");
+        if (Object.keys(data).length > 0 && data.user.e_mail === form.e_mail) {
+          toast.error("Ya existe un usuario con ese nombre o email", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000,
+          });
         }
       }
     } catch {
@@ -72,7 +74,6 @@ const RegisterForm = () => {
         const response = await axios.post(`${apiUrl}/user`, newUser);
 
         if (response.status === 201) {
-          alert("Usuario creado exitosamente!");
           try {
             const response = await axios.get(
               `${apiUrl}/user?e_mail=${form.e_mail}`
@@ -89,6 +90,10 @@ const RegisterForm = () => {
             ) {
               // Si el usuario está creado, lo tiene que logear
               dispatch(login(userInfoWithToken));
+              toast.success("Usuario creado exitosamente!", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 3000,
+              });
               history.push("/home");
             }
           } catch (error) {

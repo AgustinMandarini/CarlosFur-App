@@ -1,13 +1,13 @@
-const { Product, ProductType } = require("../../db.js");
+const { Product, ProductType, Color, Material } = require("../../db.js");
 const { Op } = require("sequelize");
 
 
 const findAllProducts = async (name, type, color, material, orderBy, orderDirection, enabled_product) => { 
 
   const query = {
-    include: [{ model: ProductType, attributes: ["name"] }],
+    include: [{ model: ProductType, attributes: ["name"] }, { model: Color, attributes: ["name"] }, { model: Material, attributes: ["name"] }],
     attributes: {
-      exclude: ["productTypeId"],
+      exclude: ["productTypeId", "colorId", "materialId"],
     },
     where: {
       enabled_product: true

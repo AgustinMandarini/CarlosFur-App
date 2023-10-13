@@ -100,6 +100,7 @@ const LoginForm = () => {
         <form className={styles.form} onSubmit={submitHandler}>
           {/* E_mail input */}
           <div className={styles.inputContainer}>
+          <span className={styles.label}>E-mail</span>
             <div className={styles.data}>
               <input
                 type="text"
@@ -111,12 +112,13 @@ const LoginForm = () => {
                 required
               />
             </div>
-            <span className={styles.label}>E-mail</span>
+          
           </div>
           {errors.e_mail && <p className={styles.errorText}>{errors.e_mail}</p>}
 
           {/* Password input */}
           <div className={`${styles.inputContainer} ${styles.mt2}`}>
+          <span className={styles.label}>Contraseña</span>
             <div className={styles.data}>
               <input
                 type="password"
@@ -127,7 +129,7 @@ const LoginForm = () => {
                 onChange={changeHandler}
                 required
               />
-              <span className={styles.label}>Contraseña</span>
+             
             </div>
           </div>
           {errors.password && (

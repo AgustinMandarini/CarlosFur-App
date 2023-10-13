@@ -1,3 +1,5 @@
+//Home.jsx
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
@@ -6,11 +8,10 @@ import ToolBar from "../../components/ToolBar/ToolBar";
 import { setProductsCopy } from "../../redux/actions";
 import style from "./Home.module.css";
 import { useCheckUserExists } from "../../helpers/checkUserExist";
-import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-const Home = ({ cartRef }) => {
+const Home = () => {
   const dispatch = useDispatch();
   const checkUserExist = useCheckUserExists();
 
@@ -21,9 +22,10 @@ const Home = ({ cartRef }) => {
   }, []);
 
   // useSelectors para observar el estado global donde haga falta
-  const globalProducts = useSelector((state) => state.muebles);
-  const filters = useSelector((state) => state.filter);
+  const globalProducts = useSelector((state) => state.muebles); //trae todos los muebles
+  const filters = useSelector((state) => state.filter); //
   const sort = useSelector((state) => state.sort);
+  // const materialList = useSelector((state) => state.materialState);
 
   // Paginado
   const [products, setProducts] = useState([]);
@@ -36,22 +38,41 @@ const Home = ({ cartRef }) => {
   const currentProducts = products.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const apiData = await axios.get();
-        const list = apiData.data;
+    setProducts(globalProducts);
+  }, [globalProducts]);
 
+  //Combinación de ordenamientos y filtros
+  useEffect(() => {
+    const comb = [
+      filters.productType,
+      filters.color,
+      filters.material,
+      filters.price[0],
+      filters.price[filters.price.length - 1],
+      sort,
+    ];
+    console.log(comb);
+    const uri = `http://localhost:3001/product?colorId=${comb[1]}`;
+    console.log(uri);
+
+    axios
+      .get(uri)
+      .then((response) => {
+        const list = response.data; // Array con el resultado del filtro
         setProducts(list); // Actualizar el estado local
         setCurrentPage(1);
-      } catch (error) {
-        console.error("Error en la acción getDetail:", error);
-      }
-    }
-
-    fetchData();
-
-    // eslint-disable-next-line
-  }, [sort, filters.productType, filters.color, filters.price]);
+      })
+      .catch((error) => {
+        console.error("Error al hacer la solicitud:", error);
+      });
+  }, [
+    sort,
+    filters.productType,
+    filters.color,
+    filters.material,
+    filters.price,
+    dispatch,
+  ]);
 
   return (
     <div className={style.cntnHome}>

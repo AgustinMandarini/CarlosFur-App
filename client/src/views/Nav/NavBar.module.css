@@ -90,5 +90,25 @@
 .imgLogoResponsive {
   width: 75px;
 }
+.linkCart{
+  margin: 0.5em;
+}
+.shoppingCart{
+ width: 2em;
+}
+
+.cartItemCount{
+  margin-left: 0.2em;
+  color: aliceblue;
+  background-color: #de1f1fcf;
+  border: 0.1em solid black;
+  font-size: 0.65em;
+  text-align: center;
+  border-radius: 50%; 
+  display: inline-block; /* Para asegurarse de que el ancho y alto sean consistentes */
+  width: 1.5em; /* Ajusta el ancho deseado */
+  height: 1.5em; /* Ajusta el alto deseado */
+
+}
 @media (max-width: 768px) {
 }

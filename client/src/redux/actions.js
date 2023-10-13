@@ -22,6 +22,10 @@ import {
   LOAD_CART_FROM_LOCAL_STORAGE,
   POST_CART,
   SET_MATERIAL
+
+  GET_CART,
+  DELETE_CART,
+
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -33,6 +37,10 @@ import {
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
+
+
+
+//products
 export const getProducts = () => {
   return async function (dispatch) {
     const apiData = await axios.get(`${apiUrl}/product`);
@@ -45,36 +53,6 @@ export const getProducts = () => {
   };
 };
 
-export const getDetail = (id) => {
-  return async function (dispatch) {
-    try {
-      const apiData = await axios.get(`${apiUrl}/product/${id}`);
-      const detail = apiData.data;
-      dispatch({
-        type: GET_DETAIL,
-        payload: detail,
-      });
-    } catch (error) {
-      console.error("Error en la acción getDetail:", error);
-    }
-  };
-};
-
-// export const postProduct = (payload) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await axios.post(`${apiUrl}/product`, payload);
-//       const producto = response.data;
-//       if (response.status === 200) {
-//         dispatch({ type: POST_PRODUCT, payload: producto });
-//         alert("Producto Creado");
-//         window.location.reload();
-//       }
-//     } catch (error) {
-//       alert(`No se pudo crear el producto`);
-//     }
-//   };
-// };
 export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
@@ -99,13 +77,35 @@ export const postProduct = (payload) => {
     }
   };
 };
+export const getProductByName = (name) => {
+  return async function (dispatch) {
+    const apiData = await axios.get(
+      `${apiUrl}/product${name ? `?name=${name}` : ""}`
+    );
+    const nameid = apiData.data;
 
-export const setImageURL = (imageURL) => {
-  return {
-    type: SET_IMAGE_URL,
-    payload: imageURL,
+    return dispatch({
+      type: GET_PRODUCT_BY_NAME,
+      payload: nameid,
+    });
   };
 };
+export const getDetail = (id) => {
+  return async function (dispatch) {
+    try {
+      const apiData = await axios.get(`${apiUrl}/product/${id}`);
+      const detail = apiData.data;
+      dispatch({
+        type: GET_DETAIL,
+        payload: detail,
+      });
+    } catch (error) {
+      console.error("Error en la acción getDetail:", error);
+    }
+  };
+};
+
+//types
 
 export const getProductType = () => {
   return async (dispatch) => {
@@ -151,20 +151,33 @@ export const getMaterial = () => {
     }
   };
 };
+export const setSort = (payload) => {
+  return { type: SET_SORT, payload };
+};
+export const setProductType = (payload) => {
+  return { type: SET_PRODUCT_TYPE, payload };
+};
+export const setColor = (payload) => {
+  return { type: SET_COLOR, payload };
+};
+export const setPriceRange = (payload) => {
+  return { type: SET_PRICE_RANGE, payload };
+};
 
-export const getProductByName = (name) => {
-  return async function (dispatch) {
-    const apiData = await axios.get(
-      `${apiUrl}/product${name ? `?name=${name}` : ""}`
-    );
-    const nameid = apiData.data;
+export const setProductsCopy = (payload) => {
+  return { type: SET_PRODUCTS_COPY, payload };
+};
 
-    return dispatch({
-      type: GET_PRODUCT_BY_NAME,
-      payload: nameid,
-    });
+//img
+
+export const setImageURL = (imageURL) => {
+  return {
+    type: SET_IMAGE_URL,
+    payload: imageURL,
   };
 };
+
+//user
 
 export const postUser = (payload) => {
   return async (dispatch) => {
@@ -176,7 +189,7 @@ export const postUser = (payload) => {
         alert("Usuario Creado");
       }
     } catch (error) {
-      alert(`Error: ${error}. No se pudo crear el usuario!`);
+      console.log(`Error: ${error}. Ya existe un usuario con ese email`);
     }
   };
 };
@@ -191,15 +204,18 @@ export const login = (payload) => {
         },
       });
       const user = response.data;
-      setToken(accessToken);
       if (response.status === 200) {
+        setToken(accessToken);
         dispatch({
           type: LOGIN,
           payload: { userToken: accessToken, user: user },
         });
       }
     } catch (error) {
-      return alert("Usuario no registrado");
+      toast.error("La contraseña es incorrecta", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+      });
     }
   };
 };
@@ -240,6 +256,24 @@ export const fetchUserData = () => {
     }
   };
 };
+
+//carrito
+export const getCart = () => {
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.post(`${apiUrl}/cart`);
+      const payload = data.data;
+
+      return dispatch({
+        type: GET_CART,
+        payload: payload,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const postCartProduct = (payload) => {
   return { type: POST_CART_PRODUCT, payload: payload };
 };
@@ -262,25 +296,31 @@ export const postCart = (cart) => {
     console.log(error);
   }
 };
+export const deleteCart = (cartId) => {
+  // borra todo el carro
+  try {
+    return async (dispatch) => {
+      const { data } = await axios.post(`${apiUrl}/${cartId}`);
+      const payload = data.data;
+
+      return dispatch({
+        type: DELETE_CART,
+        payload: payload,
+      });
+    };
+    // eslint-disable-next-line no-unreachable
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const loadCartFromLocalStorage = (savedCart) => {
   return {
     type: LOAD_CART_FROM_LOCAL_STORAGE,
     payload: savedCart,
   };
+
 };
 
-export const setSort = (payload) => {
-  return { type: SET_SORT, payload };
-};
-export const setProductType = (payload) => {
-  return { type: SET_PRODUCT_TYPE, payload };
-};
-export const setColor = (payload) => {
-  return { type: SET_COLOR, payload };
-};
-export const setPriceRange = (payload) => {
-  return { type: SET_PRICE_RANGE, payload };
-};
 
 export const setProductsCopy = (payload) => {
   return { type: SET_PRODUCTS_COPY, payload };
@@ -289,3 +329,6 @@ export const setProductsCopy = (payload) => {
 export const setMaterial = (payload) => {
   return { type: SET_MATERIAL, payload };
 };
+
+
+

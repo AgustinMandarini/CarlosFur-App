@@ -7,6 +7,7 @@ import logo from "../../imagenes/MSC.png";
 import { getProducts } from "../../redux/actions";
 import style from "./NavBar.module.css";
 import shoppingCart from "./../../imagenes/shoppingCart.png";
+import TextoDesplazante from './../../components/TextoDesplazante/TextoDesplazante';
 
 const NavBar = () => {
   const cartProducts = useSelector((state) => state.cartProducts);
@@ -80,6 +81,7 @@ const NavBar = () => {
           </Link>
         </Container>
       </Navbar>
+      <TextoDesplazante />
     </>
   );
 };

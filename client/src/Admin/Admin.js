@@ -1,23 +1,23 @@
-import { Route} from "react-router-dom";
-import Home from "./views/Home/Home";
-import Crear from "./views/Crear/Crear"
-import Users from "./views/Users/Users"
-import  NavBar from "./components/NavBar/NavBar";
+import { Route } from "react-router-dom";
+import Productos from "./views/Productos/Productos";
+import Ventas from "./views/Ventas/Ventas";
+import Usuarios from "./views/Usuarios/Usuarios";
+import NavBar from "./components/NavBar/NavBar";
 import "./Admin.css";
 
 function Admin() {
- 
   return (
     <div className="Admin">
-     <Route path="/admin" component={NavBar} />
-      <Route path="/admin/home" component={Home} />
-      <Route path="/admin/crear" component={Crear} />
-      <Route path="/admin/users" component={Users} />
-
-      
+      <nav className="AdminNav">
+        <NavBar />
+      </nav>
+      <div className="AdminContent">
+        <Route path="/admin/productos" component={Productos} />
+        <Route path="/admin/ventas" component={Ventas} />
+        <Route path="/admin/usuarios" component={Usuarios} />
+      </div>
     </div>
   );
 }
-
 
 export default Admin;

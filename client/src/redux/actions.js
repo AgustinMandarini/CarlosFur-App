@@ -1,3 +1,4 @@
+//actions.js
 import {
   DELETE_CART_PRODUCT,
   GET_COLOR,
@@ -6,6 +7,7 @@ import {
   GET_PRODUCTS,
   GET_PRODUCT_BY_NAME,
   GET_PRODUCT_TYPE,
+  GET_USERS,
   POST_CART_PRODUCT,
   POST_PRODUCT,
   SET_COLOR,
@@ -20,8 +22,11 @@ import {
   FETCH_USER_DATA,
   LOAD_CART_FROM_LOCAL_STORAGE,
   POST_CART,
+  SET_MATERIAL
+
   GET_CART,
   DELETE_CART,
+
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -33,14 +38,12 @@ import {
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-
-
-
 //products
 export const getProducts = () => {
   return async function (dispatch) {
     const apiData = await axios.get(`${apiUrl}/product`);
     const product = apiData.data;
+    console.log(product);
     return dispatch({
       type: GET_PRODUCTS,
       payload: product,
@@ -172,7 +175,22 @@ export const setImageURL = (imageURL) => {
   };
 };
 
-//user
+//
+
+export const getUsers = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/user`);
+      const users = response.data;
+      return dispatch({
+        type: GET_USERS,
+        payload: users,
+      });
+    } catch (error) {
+      alert("No se encontraron usuarios");
+    }
+  };
+};
 
 export const postUser = (payload) => {
   return async (dispatch) => {
@@ -313,7 +331,17 @@ export const loadCartFromLocalStorage = (savedCart) => {
     type: LOAD_CART_FROM_LOCAL_STORAGE,
     payload: savedCart,
   };
-
 };
+
+
+export const setProductsCopy = (payload) => {
+  return { type: SET_PRODUCTS_COPY, payload };
+};
+
+export const setMaterial = (payload) => {
+  return { type: SET_MATERIAL, payload };
+};
+
+
 
 

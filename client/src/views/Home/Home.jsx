@@ -1,3 +1,5 @@
+//Home.jsx
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
@@ -7,7 +9,7 @@ import { setProductsCopy } from "../../redux/actions";
 import style from "./Home.module.css";
 import { useCheckUserExists } from "../../helpers/checkUserExist";
 
-const Home = ({ cartRef }) => {
+const Home = () => {
   const dispatch = useDispatch();
   const checkUserExist = useCheckUserExists();
 
@@ -18,9 +20,10 @@ const Home = ({ cartRef }) => {
   }, []);
 
   // useSelectors para observar el estado global donde haga falta
-  const globalProducts = useSelector((state) => state.muebles);
-  const filters = useSelector((state) => state.filter);
+  const globalProducts = useSelector((state) => state.muebles); //trae todos los muebles
+  const filters = useSelector((state) => state.filter); //
   const sort = useSelector((state) => state.sort);
+  // const materialList = useSelector((state) => state.materialState);
 
   // Paginado
   const [products, setProducts] = useState([]);
@@ -35,70 +38,28 @@ const Home = ({ cartRef }) => {
   useEffect(() => {
     setProducts(globalProducts);
   }, [globalProducts]);
+
   //Combinación de ordenamientos y filtros
   useEffect(() => {
-    const sortedProducts = [...globalProducts]; // Copia de los muebles globales
-    const list = sortedProducts
-      // eslint-disable-next-line
-      .filter((product) => {
-        if (filters.productType === "allProductTypes") {
-          return true;
-        }
-        if (
-          product.productType !== null &&
-          product.productType.name &&
-          product.productType.name
-            .toLowerCase()
-            .includes(filters.productType.toLowerCase())
-        ) {
-          return true;
-        }
-      })
-      // eslint-disable-next-line
-      .filter((product) => {
-        if (filters.color === "allColors") {
-          //(payload)
-          return true;
-        }
-        if (product.colorId !== null && product.colorId == filters.color) {
-          return true;
-        }
-      })
+    const comb=[filters.productType, filters.color, filters.material, filters.price[0], filters.price[filters.price.length - 1],sort];
+    console.log(comb);
+    const uri=`http://localhost:3001/product?colorId=${comb[1]}`;
+    console.log(uri);
 
-      // eslint-disable-next-line
-      .filter((product) => {
-        if (filters.price.length === 1) {
-          return true;
-        }
-        if (
-          product.price !== null &&
-          filters.price.includes(product.price.toString())
-        ) {
-          return true;
-        }
+    axios.get(uri)
+      .then(response => {
+      const list = response.data; // Array con el resultado del filtro
+      setProducts(list); // Actualizar el estado local
+      setCurrentPage(1);
       })
-      .sort((a, b) => {
-        if (sort === "MC") {
-          return a.price > b.price ? -1 : 1;
-        }
-        if (sort === "MB") {
-          return a.price < b.price ? -1 : 1;
-        }
-        if (sort === "MN") {
-          return a.id > b.id ? -1 : 1;
-        }
-        if (sort === "MV") {
-          return a.id < b.id ? -1 : 1;
-        }
-        return 0;
+      .catch(error => {
+        console.error('Error al hacer la solicitud:', error);
       });
-    console.log({ list, sort, filters });
 
-    setProducts(list); // Actualizar el estado local
-    dispatch(setProductsCopy(list)); // Despachar la acción con la lista ordenada
-    setCurrentPage(1);
-    // eslint-disable-next-line
-  }, [sort, filters.productType, filters.color, filters.price, dispatch]);
+
+  }, [sort, filters.productType, filters.color,  filters.material, filters.price, dispatch]);
+
+  
   return (
     <div className={style.cntnHome}>
       <h1 className={style.tittle}>MSC AMOBLAMIENTOS</h1>

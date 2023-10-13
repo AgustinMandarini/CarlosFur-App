@@ -196,8 +196,8 @@ export const login = (payload) => {
         },
       });
       const user = response.data;
-      setToken(accessToken);
       if (response.status === 200) {
+        setToken(accessToken);
         dispatch({
           type: LOGIN,
           payload: { userToken: accessToken, user: user },

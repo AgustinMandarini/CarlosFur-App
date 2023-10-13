@@ -12,15 +12,19 @@ export const useCheckUserExists = () => {
   const checkUser = async () => {
     if (isAuthenticated && user) {
       try {
+        const userInfo = {
+          auth0Email: user.email,
+          auth0UserName: user.nickname,
+        };
         const response = await axios.get(`${apiUrl}/user?e_mail=${user.email}`);
         const data = response.data;
-        if (data && data[0].e_mail === user.email) {
+        const userInfoWithToken = {
+          ...userInfo,
+          accessToken: response.data.accessToken,
+        };
+        if (data && data.user.e_mail === user.email) {
           // Si el usuario ya está creado, lo tiene que logear
-          console.log("Usuario existente!!");
-          console.log(user);
-          dispatch(
-            login({ auth0Email: user.email, auth0UserName: user.nickname })
-          );
+          dispatch(login(userInfoWithToken));
         }
       } catch (error) {
         // Si no está creado, crea uno nuevo

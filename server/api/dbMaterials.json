@@ -1,0 +1,12 @@
+[
+    { "name": "Madera", "description": "Material clásico y duradero, perfecto para muebles tradicionales." },
+    { "name": "Metal", "description": "Material resistente y moderno, ideal para estilos contemporáneos." },
+    { "name": "Plástico", "description": "Material ligero y versátil, adecuado para muebles prácticos y modernos." },
+    { "name": "Tela", "description": "Material suave y cómodo, ideal para asientos y mobiliario acogedor." },
+    { "name": "Vidrio", "description": "Material transparente y elegante, perfecto para mesas y superficies modernas." },
+    { "name": "Cerámica", "description": "Material resistente y decorativo, ideal para detalles en mobiliario." },
+    { "name": "Cuero", "description": "Material lujoso y duradero, adecuado para asientos y detalles elegantes." },
+    { "name": "Bambú", "description": "Material sostenible y ligero, perfecto para muebles ecológicos." },
+    { "name": "Piedra", "description": "Material robusto y natural, ideal para mesas y detalles de diseño." },
+    { "name": "Acrílico", "description": "Material moderno y transparente, ideal para muebles contemporáneos y minimalistas." }
+  ]

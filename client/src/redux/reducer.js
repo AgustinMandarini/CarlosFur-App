@@ -1,3 +1,4 @@
+//reducer.js
 import {
   GET_PRODUCTS,
   GET_DETAIL,
@@ -20,6 +21,7 @@ import {
   FETCH_USER_DATA,
   LOAD_CART_FROM_LOCAL_STORAGE,
   POST_CART,
+  SET_MATERIAL
 } from "./types";
 
 const initialState = {
@@ -32,6 +34,7 @@ const initialState = {
     productType: "allProductTypes",
     color: "allColors",
     price: ["allPrices"],
+    material:"allMaterials",
   },
   imageURL: null,
   colorState: [],
@@ -44,6 +47,13 @@ const initialState = {
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case GET_MATERIAL:
+      return {
+        ...state,
+        materialState: action.payload,
+      };
+
     case GET_PRODUCTS:
       return {
         ...state,
@@ -76,11 +86,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         colorState: action.payload,
-      };
-    case GET_MATERIAL:
-      return {
-        ...state,
-        materialState: action.payload,
       };
 
     case GET_PRODUCT_BY_NAME:
@@ -133,6 +138,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filter: { ...state.filter, color: action.payload },
       };
+    case SET_MATERIAL:
+      return {
+        ...state,
+        filter: { ...state.filter, material: action.payload },
+      };
+
     case SET_PRICE_RANGE:
       return {
         ...state,

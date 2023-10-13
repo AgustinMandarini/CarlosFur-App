@@ -1,3 +1,4 @@
+//actions.js
 import {
   DELETE_CART_PRODUCT,
   GET_COLOR,
@@ -21,8 +22,11 @@ import {
   FETCH_USER_DATA,
   LOAD_CART_FROM_LOCAL_STORAGE,
   POST_CART,
+  SET_MATERIAL
+
   GET_CART,
   DELETE_CART,
+
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -39,6 +43,7 @@ export const getProducts = () => {
   return async function (dispatch) {
     const apiData = await axios.get(`${apiUrl}/product`);
     const product = apiData.data;
+    console.log(product);
     return dispatch({
       type: GET_PRODUCTS,
       payload: product,
@@ -327,3 +332,16 @@ export const loadCartFromLocalStorage = (savedCart) => {
     payload: savedCart,
   };
 };
+
+
+export const setProductsCopy = (payload) => {
+  return { type: SET_PRODUCTS_COPY, payload };
+};
+
+export const setMaterial = (payload) => {
+  return { type: SET_MATERIAL, payload };
+};
+
+
+
+

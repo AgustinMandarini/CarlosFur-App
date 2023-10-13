@@ -33,6 +33,9 @@ import {
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
+
+
+
 //products
 export const getProducts = () => {
   return async function (dispatch) {
@@ -97,20 +100,20 @@ export const getProductByName = (name) => {
     });
   };
 };
-export const getDetail = (id) => {
-  return async function (dispatch) {
-    try {
-      const apiData = await axios.get(`${apiUrl}/product/${id}`);
-      const detail = apiData.data;
-      dispatch({
-        type: GET_DETAIL,
-        payload: detail,
-      });
-    } catch (error) {
-      console.error("Error en la acción getDetail:", error);
-    }
-  };
-};
+// export const getDetail = (id) => {
+//   return async function (dispatch) {
+//     try {
+//       const apiData = await axios.get(`${apiUrl}/product/${id}`);
+//       const detail = apiData.data;
+//       dispatch({
+//         type: GET_DETAIL,
+//         payload: detail,
+//       });
+//     } catch (error) {
+//       console.error("Error en la acción getDetail:", error);
+//     }
+//   };
+// };
 
 //types
 
@@ -325,4 +328,7 @@ export const loadCartFromLocalStorage = (savedCart) => {
     type: LOAD_CART_FROM_LOCAL_STORAGE,
     payload: savedCart,
   };
+
 };
+
+

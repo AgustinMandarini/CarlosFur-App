@@ -8,14 +8,15 @@ import { updateLocalStorage } from "../LocalStorage/LocalStorageFunctions";
 const Card = (props) => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
-  const countForProductID = Array.isArray(cartProducts)
-    ? cartProducts.reduce((count, product) => {
-        if (product.id === props.id) {
-          return count + 1;
-        }
-        return count;
-      }, 0)
-    : 0;
+
+ const countForProductID = useSelector((state) =>
+  state.cartProducts.reduce((count, product) => {
+    if (product.id === props.id) {
+      return count + product.count;
+    }
+    return count;
+  }, 0)
+);
 
   const [counter, setCounter] = useState(0);
   const [product, setProduct] = useState(0);
@@ -23,23 +24,12 @@ const Card = (props) => {
   const increaseCounter = () => {
     /* Contador */
     setCounter(counter);
-
     /* Se suma el producto al carrito */
     setProduct(1);
     dispatch(postCartProduct(props.id));
     setProduct(0);
   };
-  const decreaseCounter = () => {
-    /* Contador */
-    if (counter > 0) {
-      setCounter(counter - 1);
-    }
-
-    /* Se quita el producto del carrito */
-    setProduct(-1);
-    dispatch(deleteCartProduct(props.id));
-    setProduct(0);
-  };
+  
 
   useEffect(() => {
     if (cartProducts.length === 0) {

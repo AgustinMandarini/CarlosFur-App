@@ -6,22 +6,23 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import logo from "../../imagenes/MSC.png";
 import { getProducts } from "../../redux/actions";
 import style from "./NavBar.module.css";
-import shoppingCart from "./../../imagenes/shoppingCart.png"
+import shoppingCart from "./../../imagenes/shoppingCart.png";
+
 const NavBar = () => {
   const cartProducts = useSelector((state) => state.cartProducts);
   const [navResponsive, setNavResponsive] = useState(false);
-  const [cartItemCount, setCartItemCount] = useState(0);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    const itemCount = cartProducts.reduce((count, product) => {
-      return count + 1;
-    }, 0);
-    setCartItemCount(itemCount);
   }, [cartProducts]);
+
+  const cartItemCount = cartProducts.reduce((count, product) => {
+    return count + product.count;
+  }, 0);
 
   return (
     <>
-      <Navbar
+       <Navbar
         className={navResponsive ? style.navOne : style.navBar}
         collapseOnSelect
         expand="sm"
@@ -72,13 +73,12 @@ const NavBar = () => {
               </Link>
             </div>
           </Navbar.Collapse>
-            <SearchBar />
+          <SearchBar />
           <Link to="/shoppingcart" className={style.linkCart}>
            <img src={shoppingCart} className={style.shoppingCart} alt="" />
             <span className={style.cartItemCount}>{cartItemCount}</span>
           </Link>
         </Container>
-      
       </Navbar>
     </>
   );

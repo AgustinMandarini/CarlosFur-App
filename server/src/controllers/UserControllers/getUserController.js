@@ -9,9 +9,7 @@ const findUser = async (userName, email) => {
 
   const query = {
     attributes: { exclude: ["createdAt", "updatedAt"] },
-    where: {
-      enabled_user: true,
-    },
+    where: {},
   };
 
   if (userName) {

@@ -33,6 +33,9 @@ import {
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
+
+
+
 //products
 export const getProducts = () => {
   return async function (dispatch) {
@@ -325,4 +328,7 @@ export const loadCartFromLocalStorage = (savedCart) => {
     type: LOAD_CART_FROM_LOCAL_STORAGE,
     payload: savedCart,
   };
+
 };
+
+

@@ -43,7 +43,7 @@ const Home = () => {
   useEffect(() => {
     const comb=[filters.productType, filters.color, filters.material, filters.price[0], filters.price[filters.price.length - 1],sort];
     console.log(comb);
-    const uri=`http://localhost:3001/product?colorId=${comb[1]}&materialId=${comb[2]}`;
+    const uri=`http://localhost:3001/product?colorId=${comb[1]}`;
     console.log(uri);
 
     axios.get(uri)
@@ -55,8 +55,6 @@ const Home = () => {
       .catch(error => {
         console.error('Error al hacer la solicitud:', error);
       });
-
-
   }, [sort, filters.productType, filters.color,  filters.material, filters.price, dispatch]);
 
   

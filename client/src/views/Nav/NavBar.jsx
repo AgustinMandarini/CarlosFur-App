@@ -1,18 +1,29 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Container, Navbar } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import style from "./NavBar.module.css";
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { getProducts } from "../../redux/actions";
-import { useDispatch } from "react-redux";
 import logo from "../../imagenes/MSC.png";
+import { getProducts } from "../../redux/actions";
+import style from "./NavBar.module.css";
+import shoppingCart from "./../../imagenes/shoppingCart.png";
+import TextoDesplazante from './../../components/TextoDesplazante/TextoDesplazante';
+
 const NavBar = () => {
+  const cartProducts = useSelector((state) => state.cartProducts);
   const [navResponsive, setNavResponsive] = useState(false);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+  }, [cartProducts]);
+
+  const cartItemCount = cartProducts.reduce((count, product) => {
+    return count + product.count;
+  }, 0);
+
   return (
     <>
-      <Navbar
+       <Navbar
         className={navResponsive ? style.navOne : style.navBar}
         collapseOnSelect
         expand="sm"
@@ -63,21 +74,14 @@ const NavBar = () => {
               </Link>
             </div>
           </Navbar.Collapse>
+          <SearchBar />
           <Link to="/shoppingcart" className={style.linkCart}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="27"
-              height="27"
-              fill="currentColor"
-              class="bi bi-cart"
-              viewBox="0 0 16 16"
-            >
-              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-            </svg>
+           <img src={shoppingCart} className={style.shoppingCart} alt="" />
+            <span className={style.cartItemCount}>{cartItemCount}</span>
           </Link>
         </Container>
-        <SearchBar />
       </Navbar>
+      <TextoDesplazante />
     </>
   );
 };

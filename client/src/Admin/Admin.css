@@ -1,0 +1,22 @@
+.Admin {
+  display: flex;
+}
+
+.AdminNav {
+  flex: 1; /* Ocupa el 100% del ancho disponible en la parte izquierda */
+  padding: 16px; /* Añade espaciado si es necesario */
+}
+
+.AdminNav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.AdminNav li {
+  margin-bottom: 8px;
+}
+
+.AdminContent {
+  flex: 3; /* Ocupa el 100% del ancho disponible en la parte derecha */
+  padding: 16px; /* Añade espaciado si es necesario */
+}

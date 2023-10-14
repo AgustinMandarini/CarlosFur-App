@@ -8,14 +8,16 @@
 }
 
 .containerData {
+
   background-color: #ae9c8f;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 600px;
-  height: 580px;
+  width: 100vh;
+  height: 100vh;
+
   border-radius: 10px;
-  box-shadow: 0 35px 60px -15px #1c1b1b;
+  box-shadow: 0 35px 60px -15px #070707;
   padding: 20px;
   margin-top: 0px;
 }

@@ -8,35 +8,28 @@ import { updateLocalStorage } from "../LocalStorage/LocalStorageFunctions";
 const Card = (props) => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
-  const countForProductID = cartProducts.reduce((count, product) => {
+
+ const countForProductID = useSelector((state) =>
+  state.cartProducts.reduce((count, product) => {
     if (product.id === props.id) {
-      return count + 1;
+      return count + product.count;
     }
     return count;
-  }, 0);
+  }, 0)
+);
+
   const [counter, setCounter] = useState(0);
   const [product, setProduct] = useState(0);
 
   const increaseCounter = () => {
     /* Contador */
-    setCounter(counter + 1);
-
+    setCounter(counter);
     /* Se suma el producto al carrito */
     setProduct(1);
     dispatch(postCartProduct(props.id));
     setProduct(0);
   };
-  const decreaseCounter = () => {
-    /* Contador */
-    if (counter > 0) {
-      setCounter(counter - 1);
-    }
-
-    /* Se quita el producto del carrito */
-    setProduct(-1);
-    dispatch(deleteCartProduct(props.id));
-    setProduct(0);
-  };
+  
 
   useEffect(() => {
     if (cartProducts.length === 0) {
@@ -63,13 +56,12 @@ const Card = (props) => {
         </div>
       </Link>
       <div className={style.counterContainer}>
-        <button className={style.buttonCount} onClick={decreaseCounter}>
-          -
+        {/* <span className={style.counterValue}>{countForProductID}</span> */}
+        <button className={style.buttonCount} onClick={increaseCounter}>
+          Agregar al carrito
+
         </button>
         <span className={style.counterValue}>{countForProductID}</span>
-        <button className={style.buttonCount} onClick={increaseCounter}>
-          +
-        </button>
       </div>
     </div>
   );

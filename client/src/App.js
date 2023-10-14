@@ -21,11 +21,13 @@ import {
   RegisterForm,
   LoginForm,
 } from "./views";
+import Admin from "./Admin/Admin"
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const location = useLocation();
+  const { pathname } = location;
   const dispatch = useDispatch();
   const { isLoading, isAuthenticated } = useAuth0();
   const cartProducts = useSelector((state) => state.cartProducts);
@@ -47,10 +49,14 @@ function App() {
     );
   }
 
+
+  const isAdminRoute = pathname.startsWith("/admin");
+  // console.log(isAdminRoute);
   return (
     <div className="App">
-      {location.pathname !== "/" && <LoginRegisterBar />}
-      {location.pathname !== "/" && <NavBar />}
+      {location.pathname !== "/" && !isAdminRoute  && <LoginRegisterBar />}
+      {location.pathname !== "/"  && !isAdminRoute && <NavBar />}
+
       <ToastContainer />
       <Route exact path="/" component={LandingPage} />
       <Route path="/home" render={() => <Home />} />
@@ -64,6 +70,9 @@ function App() {
       />
       <Route path="/register" component={RegisterForm} />
       <Route path="/logIn" component={LoginForm} />
+
+      {/* //Dashboard Admin */}
+      <Route path="/admin" component={Admin} />
     </div>
   );
 }

@@ -23,13 +23,11 @@ const ShoppingCart = () => {
         productMap[productId] = {
           description: product.name,
           unit_price: product.price,
-          total_price: product.price,
           quantity: 1,
           currency_id: "ARS",
         };
       } else {
         productMap[productId].quantity++;
-        productMap[productId].total_price += product.unit_price;
       }
     });
 

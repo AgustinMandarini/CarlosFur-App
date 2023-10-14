@@ -2,7 +2,7 @@
 const { Product, ProductType } = require("../../db.js");
 const { Op } = require("sequelize");
 
-const findAllProducts = async (name, type, colorId, materialId, orderBy, orderDirection, enabled_product, minPrice, maxPrice) => { 
+const findAllProducts = async (name, productTypeId, colorId, materialId, orderBy, orderDirection, enabled_product, minPrice, maxPrice) => { 
   const query = {
     include: [{ model: ProductType, attributes: ["name"] }],
     attributes: {
@@ -21,12 +21,8 @@ const findAllProducts = async (name, type, colorId, materialId, orderBy, orderDi
   }
 
   // Filtrar por tipo si se proporciona
-  if (type) {
-    query.include[0].where = {
-      name: {
-        [Op.iLike]: `%${type}%`,
-      },
-    };
+  if (productTypeId) {
+    query.where.productTypeId = productTypeId;
   }
 
   // Filtrar por color si se proporciona

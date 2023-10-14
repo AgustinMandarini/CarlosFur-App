@@ -29,11 +29,9 @@ const ToolBar = () => {
     setShowFilters(!showFilters);
   };
 
-  const productTypeNames = productTypeList.map(
-    (productType) => productType.name
-  );
+  const productTypeNames = productTypeList.map((productType) => productType);
 
-  const materialNames = materialList.map((material) => material.name);
+  const materialNames = materialList.map((material) => material);
 
   const productPrices = productList.map((product) => product.price);
 
@@ -74,6 +72,8 @@ const ToolBar = () => {
     <div className={style.cntnToolBar}>
       {location.pathname === "/home" && (
         <div className={style.container}>
+          
+
           <div className={style.divSelect}>
             <Form.Select
               onChange={setFilterByProductTypeHandler}
@@ -82,9 +82,9 @@ const ToolBar = () => {
             >
               <option value="allProductTypes">Tipo de ambiente</option>
               {productTypeNames &&
-                productTypeNames.map((productType, index) => (
-                  <option value={productType} key={index}>
-                    {productType}
+                productTypeNames.map((productType) => (
+                  <option value={productType.id} key={productType.id}>
+                    {productType.name}
                   </option>
                 ))}
             </Form.Select>
@@ -104,9 +104,9 @@ const ToolBar = () => {
                 >
                   <option value="allMaterials">Todos los Materiales</option>
                   {materialNames &&
-                    materialNames.map((material, index) => (
-                      <option value={material} key={index}>
-                        {material}
+                    materialNames.map((material) => (
+                      <option value={material.id} key={material.id}>
+                        {material.name}
                       </option>
                     ))}
                 </Form.Select>
@@ -129,7 +129,7 @@ const ToolBar = () => {
                 </Form.Select>
               </div>
 
-              <div className={style.divSelect}>
+              {/* <div className={style.divSelect}>
                 <Form.Select
                   onChange={setFilterByPriceHandler}
                   size="sm"
@@ -150,7 +150,7 @@ const ToolBar = () => {
                   </option>
                 </Form.Select>
               </div>
-
+ */}
               <div className={style.divSelect}>
                 <Form.Select
                   size="sm"
@@ -158,8 +158,8 @@ const ToolBar = () => {
                   className={style.select}
                 >
                   <option value="notSorted">Ordenar...</option>
-                  <option value="DESC">Mas caros</option>
-                  <option value="ASC">Mas baratos </option>
+                  <option value="desc">Mayor precio</option>
+                  <option value="asc">Menor precio</option>
                 </Form.Select>
               </div>
 

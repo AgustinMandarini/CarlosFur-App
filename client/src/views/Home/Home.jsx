@@ -41,23 +41,39 @@ const Home = () => {
 
   //Combinación de ordenamientos y filtros
   useEffect(() => {
-    const comb=[filters.productType, filters.color, filters.material, filters.price[0], filters.price[filters.price.length - 1],sort];
+    const comb = [
+      filters.productType,
+      filters.material,
+      filters.color,
+      sort,
+    ];
     console.log(comb);
-    const uri=`http://localhost:3001/product?colorId=${comb[1]}`;
+    filters.productType = filters.productType === "allProductTypes" ? "" : filters.productType;
+    filters.material = filters.material === "allMaterials" ? "" : filters.material;
+    filters.color = filters.color === "allColors" ? "" : filters.color;
+    
+    const uri = `http://localhost:3001/product?productTypeId=${filters.productType}&materialId=${filters.material}&colorId=${filters.color}&orderBy=price&orderDirection=${sort}`;
     console.log(uri);
 
-    axios.get(uri)
-      .then(response => {
-      const list = response.data; // Array con el resultado del filtro
-      setProducts(list); // Actualizar el estado local
-      setCurrentPage(1);
+    axios
+      .get(uri)
+      .then((response) => {
+        const list = response.data; // Array con el resultado del filtro
+        setProducts(list); // Actualizar el estado local
+        setCurrentPage(1);
       })
-      .catch(error => {
-        console.error('Error al hacer la solicitud:', error);
+      .catch((error) => {
+        console.error("Error al hacer la solicitud:", error);
       });
-  }, [sort, filters.productType, filters.color,  filters.material, filters.price, dispatch]);
+  }, [
+    sort,
+    filters.productType,
+    filters.color,
+    filters.material,
+    filters.price,
+    dispatch,
+  ]);
 
-  
   return (
     <div className={style.cntnHome}>
       <h1 className={style.tittle}>MSC AMOBLAMIENTOS</h1>

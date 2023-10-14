@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { login } from "../../../redux/actions";
+import { toast } from "react-toastify";
 import googleLogo from "../../../imagenes/logoGoogle.png";
 import styles from "./LoginForm.module.css";
 import validation from "./validation";
@@ -47,7 +48,10 @@ const LoginForm = () => {
           dispatch(login(userInfoWithToken));
         }
       } catch (error) {
-        alert("El usuario no esta registrado o la contraseña es incorrecta");
+        toast.error("El usuario no se encuentra registrado", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+        });
       }
     }
   };
@@ -96,6 +100,7 @@ const LoginForm = () => {
         <form className={styles.form} onSubmit={submitHandler}>
           {/* E_mail input */}
           <div className={styles.inputContainer}>
+          <span className={styles.label}>E-mail</span>
             <div className={styles.data}>
               <input
                 type="text"
@@ -107,12 +112,13 @@ const LoginForm = () => {
                 required
               />
             </div>
-            <span className={styles.label}>E-mail</span>
+          
           </div>
           {errors.e_mail && <p className={styles.errorText}>{errors.e_mail}</p>}
 
           {/* Password input */}
           <div className={`${styles.inputContainer} ${styles.mt2}`}>
+          <span className={styles.label}>Contraseña</span>
             <div className={styles.data}>
               <input
                 type="password"
@@ -123,7 +129,7 @@ const LoginForm = () => {
                 onChange={changeHandler}
                 required
               />
-              <span className={styles.label}>Contraseña</span>
+             
             </div>
           </div>
           {errors.password && (

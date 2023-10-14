@@ -11,7 +11,7 @@ const FormPage = () => {
   const stateProductType = useSelector((state) => state.productType);
   const stateColor = useSelector((state) => state.colorState);
   const stateMaterial = useSelector((state) => state.materialState);
-
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,8 +26,8 @@ const FormPage = () => {
     width: "",
     weight: "",
     stock: "",
-    colorId: "",
-    materialId: "",
+    color: "",
+    material:"",
     description: "",
     productType: "",
     imageBase64: "",
@@ -41,12 +41,15 @@ const FormPage = () => {
     width: "",
     weight: "",
     stock: "",
-    colorId: "",
-    materialId: "",
+    color: "",
+    material: "",
     description: "",
     productType: "",
     imageBase64: "",
   });
+
+
+
   const changeHandler = (event) => {
     const property = event.target.name;
     let value = event.target.value;
@@ -57,32 +60,24 @@ const FormPage = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(form);
-
+    setFormSubmitted(true);
     const validationErrors = validation(form);
-    setErrors(validationErrors);
+
     if (Object.keys(validationErrors).length === 0) {
+      // Los datos son válidos, puedes enviar el formulario
       dispatch(postProduct(form));
+    } else {
+      // Mostrar errores en los campos
+      setErrors(validationErrors);
     }
   };
 
   const handleSelectMuebles = (event) => {
     const property = event.target.name;
     let value = event.target.value;
-
     setForm({ ...form, [property]: value });
-
-    if (
-      value !== "Seleccionar Tipo de Producto" &&
-      property === "productType"
-    ) {
-      setErrors({ ...errors, productType: "" });
-    } else if (value !== "Seleccionar material" && property === "material") {
-      setErrors({ ...errors, material: "" });
-    } else if (value !== "Seleccionar color" && property === "color") {
-      setErrors({ ...errors, color: "" });
-    }
   };
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     const isAnImageRegex = /\.(jpg|jpeg|png|gif|bmp|tiff)$/i;
@@ -126,7 +121,7 @@ const FormPage = () => {
               className={style.input}
             />
             <Form.Text className={style.error}>
-              {errors.name ? <span>{errors.name}</span> : ""}
+              {errors.name && formSubmitted ? <span>{errors.name}</span> : ""}{" "}
             </Form.Text>
           </div>
         </Form.Group>
@@ -144,7 +139,7 @@ const FormPage = () => {
             />
 
             <Form.Text className={style.error}>
-              {errors.price ? <span>{errors.price}</span> : ""}
+              {errors.price && formSubmitted ? <span>{errors.price}</span> : ""}{" "}
             </Form.Text>
           </div>
         </Form.Group>
@@ -161,7 +156,11 @@ const FormPage = () => {
             />
 
             <Form.Text className={style.error}>
-              {errors.height ? <span>{errors.height}</span> : ""}
+              {errors.height && formSubmitted ? (
+                <span>{errors.height}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
         </Form.Group>
@@ -177,7 +176,7 @@ const FormPage = () => {
               className={style.input}
             />
             <Form.Text className={style.error}>
-              {errors.depth ? <span>{errors.depth}</span> : ""}
+              {errors.depth && formSubmitted ? <span>{errors.depth}</span> : ""}
             </Form.Text>
           </div>
         </Form.Group>
@@ -194,7 +193,7 @@ const FormPage = () => {
             />
 
             <Form.Text className={style.error}>
-              {errors.width ? <span>{errors.width}</span> : ""}
+              {errors.width && formSubmitted ? <span>{errors.width}</span> : ""}
             </Form.Text>
           </div>
         </Form.Group>
@@ -211,7 +210,11 @@ const FormPage = () => {
             />
 
             <Form.Text className={style.error}>
-              {errors.weight ? <span>{errors.weight}</span> : ""}
+              {errors.weight && formSubmitted ? (
+                <span>{errors.weight}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
         </Form.Group>
@@ -227,22 +230,23 @@ const FormPage = () => {
               name="stock"
               className={style.input}
             />
+
             <Form.Text className={style.error}>
-              {errors.stock ? <span>{errors.stock}</span> : ""}
+              {errors.stock && formSubmitted ? <span>{errors.stock}</span> : ""}
             </Form.Text>
           </div>
         </Form.Group>
 
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
-          <Form.Label className={style.label} name="colorId">
+          <Form.Label className={style.label} name="color">
             Color:
           </Form.Label>
           <div className={style.divinputErrorType}>
             <Form.Select
               size="sm"
               onChange={handleSelectMuebles}
-              value={form.colorId}
-              name="colorId"
+              value={form.color}
+              name="color"
               className={style.select}
             >
               <option>Seleccionar color</option>
@@ -257,20 +261,25 @@ const FormPage = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.colorId ? <span>{errors.colorId}</span> : ""}
+              {errors.color && formSubmitted ? (
+                <span>{errors.color}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
         </Form.Group>
+                {/* //Material */}
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
-          <Form.Label className={style.label} name="materialId">
+          <Form.Label className={style.label} name="material">
             Material:
           </Form.Label>
           <div className={style.divinputErrorType}>
             <Form.Select
               size="sm"
               onChange={handleSelectMuebles}
-              value={form.materialId}
-              name="materialId"
+              value={form.material}
+              name="material"
               className={style.select}
             >
               <option>Seleccionar material</option>
@@ -285,7 +294,11 @@ const FormPage = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.materialId ? <span>{errors.materialId}</span> : ""}
+              {errors.materialId && formSubmitted ? (
+                <span>{errors.materialId}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
         </Form.Group>
@@ -314,13 +327,17 @@ const FormPage = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.productType ? <span>{errors.productType}</span> : ""}
+              {errors.productType && formSubmitted ? (
+                <span>{errors.productType}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
         </Form.Group>
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
           <Form.Label className={style.label}>Descripcion:</Form.Label>
-          <div className={style.divinputErrorType}>
+          <div className={style.divinputError}>
             <Form.Control
               size="sm"
               type="text"
@@ -331,7 +348,11 @@ const FormPage = () => {
             />
 
             <Form.Text className={style.error}>
-              {errors.description ? <span>{errors.description}</span> : ""}
+              {errors.description && formSubmitted ? (
+                <span>{errors.description}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
         </Form.Group>

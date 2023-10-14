@@ -1,16 +1,15 @@
+// getProductController.js
 const { Product, ProductType } = require("../../db.js");
 const { Op } = require("sequelize");
 
-
-const findAllProducts = async (name, type, color, material, orderBy, orderDirection, enabled_product) => { 
-
+const findAllProducts = async (name, productTypeId, colorId, materialId, orderBy, orderDirection, enabled_product, minPrice, maxPrice) => { 
   const query = {
     include: [{ model: ProductType, attributes: ["name"] }],
     attributes: {
       exclude: ["productTypeId"],
     },
     where: {
-      enabled_product: true
+      enabled_product: true,
     },
   };
 
@@ -22,25 +21,25 @@ const findAllProducts = async (name, type, color, material, orderBy, orderDirect
   }
 
   // Filtrar por tipo si se proporciona
-  if (type) {
-    query.include[0].where = {
-      name: {
-        [Op.iLike]: `%${type}%`,
-      },
-    };
+  if (productTypeId) {
+    query.where.productTypeId = productTypeId;
   }
 
   // Filtrar por color si se proporciona
-  if (color) {
-    query.where.color = {
-      [Op.iLike]: `%${color}%`,
-    };
+  if (colorId) {
+    query.where.colorId = colorId;
   }
 
+  
   // Filtrar por material si se proporciona
-  if (material) {
-    query.where.material = {
-      [Op.iLike]: `%${material}%`,
+  if (materialId) {
+    query.where.materialId = materialId;
+  }
+
+  // Filtrar por precio si se proporciona minPrice y maxPrice
+  if (minPrice !== undefined && maxPrice !== undefined) {
+    query.where.price = {
+      [Op.between]: [minPrice, maxPrice],
     };
   }
 
@@ -57,6 +56,5 @@ const findAllProducts = async (name, type, color, material, orderBy, orderDirect
   const products = await Product.findAll(query);
   return products;
 };
-
 
 module.exports = { findAllProducts };

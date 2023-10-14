@@ -1,6 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const helmet = require("helmet");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const EventEmitter = require("events");
@@ -20,6 +21,16 @@ server.name = "API";
 const bus = new EventEmitter();
 bus.setMaxListeners(20);
 
+server.use(helmet());
+server.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "https://http2.mlstatic.com"],
+      // Otras directivas CSP que necesites configurar
+    },
+  })
+);
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());

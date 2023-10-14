@@ -12,21 +12,25 @@ function LoginBar() {
 
   const userIsAuthenticated =
     isAuthenticated || localStorage.getItem("token") != null;
-
   const cartProducts = useSelector((state) => state.cartProducts);
-  // const localStorage = useSelector((state) => state.localStorage);
-  const cartArray = cartProducts.reduce((result, product) => {
-    const existingProduct = result.find((item) => item.id === product.id);
-    if (existingProduct) {
-      existingProduct.quantity += 1;
-    } else {
-      result.push({
-        id: product.id,
-        quantity: 1,
-      });
-    }
-    return result;
-  }, []);
+
+  let cartArray = [];
+
+  if (cartProducts.length > 0) {
+    cartArray = cartProducts.reduce((result, product) => {
+      const existingProduct = result.find((item) => item.id === product.id);
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        result.push({
+          id: product.id,
+          quantity: 1,
+        });
+      }
+      return result;
+    }, []);
+  }
+
   const cartToDispatch = { products: cartArray };
 
   // console.log(localStorage);

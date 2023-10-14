@@ -4,13 +4,12 @@ const { Op } = require("sequelize");
 const { generateUserToken } = require("../../middleware/generateUserToken.js");
 
 const findUser = async (userName, email) => {
+  console.log("Nombre de usuario:", email);
   console.log("Nombre de usuario:", userName);
 
   const query = {
     attributes: { exclude: ["createdAt", "updatedAt"] },
-    where: {
-      enabled_user: true,
-    },
+    where: {},
   };
 
   if (userName) {

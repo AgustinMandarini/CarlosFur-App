@@ -23,10 +23,10 @@ import {
   FETCH_USER_DATA,
   LOAD_CART_FROM_LOCAL_STORAGE,
   POST_CART,
-  SET_MATERIAL
-
+  SET_MATERIAL,
   GET_CART,
-  UPDATE_PRODUCT_COUNT_IN_CART
+  UPDATE_PRODUCT_COUNT_IN_CART,
+  PUT_PRODUCT
 
 } from "./types";
 
@@ -66,11 +66,20 @@ const rootReducer = (state = initialState, action) => {
         muebles: action.payload,
         allMuebles: action.payload,
       };
+      case PUT_PRODUCT:
+        return {
+
+        }
     case GET_DETAIL:
       return {
         ...state,
         detail: action.payload,
       };
+      case PUT_PRODUCT:
+        return {
+          ...state,
+          muebles: action.payload
+        }
 
     case SET_IMAGE_URL:
       return {

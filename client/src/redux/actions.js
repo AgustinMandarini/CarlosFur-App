@@ -22,10 +22,10 @@ import {
   FETCH_USER_DATA,
   LOAD_CART_FROM_LOCAL_STORAGE,
   POST_CART,
-  SET_MATERIAL
-
+  SET_MATERIAL,
   GET_CART,
   DELETE_CART,
+  PUT_PRODUCT
 
 } from "./types";
 import { toast } from "react-toastify";
@@ -75,6 +75,22 @@ export const postProduct = (payload) => {
     }
   };
 };
+
+export const putProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`${apiUrl}/product/${id}`);
+      const product = response.data;
+      dispatch({
+        type: PUT_PRODUCT,
+        payload: product,
+      });
+    } catch (error) {
+      console.error("Error en la acción putProduct:", error);
+    }
+  }
+}
+
 export const getProductByName = (name) => {
   return async function (dispatch) {
     const apiData = await axios.get(
@@ -332,12 +348,6 @@ export const loadCartFromLocalStorage = (savedCart) => {
     payload: savedCart,
   };
 };
-
-
-export const setProductsCopy = (payload) => {
-  return { type: SET_PRODUCTS_COPY, payload };
-};
-
 export const setMaterial = (payload) => {
   return { type: SET_MATERIAL, payload };
 };

@@ -2,14 +2,9 @@ const { ACCES_CONTROL_URL } = process.env;
 const mercadopago = require("mercadopago");
 
 const mpCartHandler = async (req, res) => {
+  const products = req.body;
   let preference = {
-    items: [
-      {
-        title: req.body.description,
-        unit_price: Number(req.body.price),
-        quantity: Number(req.body.quantity),
-      },
-    ],
+    items: products,
     back_urls: {
       success: `${ACCES_CONTROL_URL}/shoppingcart`,
       failure: `${ACCES_CONTROL_URL}/shoppingcart`,

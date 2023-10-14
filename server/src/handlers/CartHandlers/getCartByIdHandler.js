@@ -17,4 +17,4 @@ const getCartByIdHandler = async (req, res) => {
   }
 };
 
-module.exports = {getCartByIdHandler};
+module.exports = { getCartByIdHandler };

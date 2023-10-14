@@ -6,10 +6,10 @@
     "depth": 12,
     "width": 28,
     "weight": 12,
-    "color": 3,  
+    "colorId": 3,  
     "stock": 10,
-    "productType": 14,  
-    "material": 3,  
+    "productTypeId": 14,  
+    "materialId": 3,  
     "description": "Perfecto para habitaciones juveniles, con un toque de color vibrante."
   },
   {
@@ -19,10 +19,10 @@
     "depth": 16,
     "width": 32,
     "weight": 16,
-    "color": 4,  
+    "colorId": 4,  
     "stock": 10,
-    "productType": 14,  
-    "material": 1,  
+    "productTypeId": 14,  
+    "materialId": 1,  
     "description": "Un escritorio con un toque rústico y natural."
   },
   {
@@ -32,10 +32,10 @@
     "depth": 14,
     "width": 26,
     "weight": 14,
-    "color": 5,  
+    "colorId": 5,  
     "stock": 10,
-    "productType": 14,  
-    "material": 2,  
+    "productTypeId": 14,  
+    "materialId": 2,  
     "description": "Compacto y versátil, perfecto para espacios pequeños."
   },
   {
@@ -45,10 +45,10 @@
     "depth": 14,
     "width": 28,
     "weight": 14,
-    "color": 5,  
+    "colorId": 5,  
     "stock": 10,
-    "productType": 14,  
-    "material": 2,  
+    "productTypeId": 14,  
+    "materialId": 2,  
     "description": "Un escritorio que fomenta una postura de trabajo más saludable."
   },
   {
@@ -58,10 +58,10 @@
     "depth": 12,
     "width": 28,
     "weight": 12,
-    "color": 6,  
+    "colorId": 6,  
     "stock": 10,
-    "productType": 14,  
-    "material": 1,  
+    "productTypeId": 14,  
+    "materialId": 1,  
     "description": "Un escritorio flotante para un aspecto moderno y limpio."
   },
   {
@@ -71,10 +71,10 @@
     "depth": 18,
     "width": 36,
     "weight": 18,
-    "color": 8,  
+    "colorId": 8,  
     "stock": 10,
-    "productType": 14,  
-    "material": 1,  
+    "productTypeId": 14,  
+    "materialId": 1,  
     "description": "Un escritorio con espacio adicional de almacenamiento."
   },
   {
@@ -84,10 +84,10 @@
     "depth": 15,
     "width": 30,
     "weight": 15,
-    "color": 7,  
+    "colorId": 7,  
     "stock": 10,
-    "productType": 14,  
-    "material": 2,  
+    "productTypeId": 14,  
+    "materialId": 2,  
     "description": "Un escritorio con un acabado mate y diseño industrial."
   },
   {
@@ -97,10 +97,10 @@
     "depth": 20,
     "width": 40,
     "weight": 20,
-    "color": 6,  
+    "colorId": 6,  
     "stock": 10,
-    "productType": 14,  
-    "material": 2,  
+    "productTypeId": 14,  
+    "materialId": 2,  
     "description": "Ideal para espacios con esquinas disponibles."
   },
   {
@@ -110,25 +110,13 @@
     "depth": 55,
     "width": 120,
     "weight": 22,
-    "color": 6,  
+    "colorId": 6,  
     "stock": 10,
-    "productType": 14,  
-    "material": 2,  
+    "productTypeId": 14,  
+    "materialId": 2,  
     "description": "Diseñado para una estación de trabajo de computadora."
   },
-  {
-    "name": "Escritorio de Pie Blanco de Metal",
-    "price": 320,
-    "height": 90,
-    "depth": 14,
-    "width": 28,
-    "weight": 14,
-    "color": 5,  
-    "stock": 10,
-    "productType": 14,  
-    "material": 2,  
-    "description": "Un escritorio ergonómico que fomenta estar de pie."
-  },
+  
   {
     "name": "Silla de Comedor Clásica Marrón de Madera",
     "price": 150,
@@ -136,10 +124,10 @@
     "depth": 45,
     "width": 40,
     "weight": 5,
-    "color": 1,  
+    "colorId": 1,  
     "stock": 10,
-    "productType": 15,  
-    "material": 1,  
+    "productTypeId": 15,  
+    "materialId": 1,  
     "description": "Una silla elegante y cómoda para el comedor."
   },
   {
@@ -149,10 +137,10 @@
     "depth": 50,
     "width": 45,
     "weight": 7,
-    "color": 2,  
+    "colorId": 2,  
     "stock": 10,
-    "productType": 15,  
-    "material": 2,  
+    "productTypeId": 15,  
+    "materialId": 2,  
     "description": "Diseñada para brindar comodidad y soporte durante largas horas de trabajo."
   },
   {
@@ -162,10 +150,10 @@
     "depth": 40,
     "width": 35,
     "weight": 3,
-    "color": 10,  
+    "colorId": 10,  
     "stock": 10,
-    "productType": 15,  
-    "material": 3,  
+    "productTypeId": 15,  
+    "materialId": 3,  
     "description": "Ideal para picnics y actividades al aire libre."
   },
   {
@@ -175,10 +163,10 @@
     "depth": 48,
     "width": 42,
     "weight": 6,
-    "color": 6,  
+    "colorId": 6,  
     "stock": 10,
-    "productType": 15,  
-    "material": 2,  
+    "productTypeId": 15,  
+    "materialId": 2,  
     "description": "Un toque contemporáneo para tu sala de estar."
   },
   {
@@ -188,10 +176,10 @@
     "depth": 38,
     "width": 36,
     "weight": 4,
-    "color": 3,  
+    "colorId": 3,  
     "stock": 10,
-    "productType": 15,  
-    "material": 3,  
+    "productTypeId": 15,  
+    "materialId": 3,  
     "description": "Perfecta para el área de estudio de los más jóvenes."
   },
   {
@@ -201,10 +189,10 @@
     "depth": 44,
     "width": 38,
     "weight": 5,
-    "color": 8,  
+    "colorId": 8,  
     "stock": 10,
-    "productType": 15, 
-    "material": 2,  
+    "productTypeId": 15, 
+    "materialId": 2,  
     "description": "Aporta encanto vintage a tu cocina."
   },
   {
@@ -214,10 +202,10 @@
     "depth": 40,
     "width": 38,
     "weight": 6,
-    "color": 9,  
+    "colorId": 9,  
     "stock": 10,
-    "productType": 15,  
-    "material": 2,  
+    "productTypeId": 15,  
+    "materialId": 2,  
     "description": "Perfecta para barras y mesas altas, con altura ajustable."
   },
   {
@@ -227,23 +215,23 @@
     "depth": 50,
     "width": 45,
     "weight": 7,
-    "color": 7,  
+    "colorId": 7,  
     "stock": 10,
-    "productType": 15,  
-    "material": 4,  
+    "productTypeId": 15,  
+    "materialId": 4,  
     "description": "Cómoda y acolchada, ideal para tu rincón de lectura."
   },
   {
-    "name": "Silla Infantil Temática Multicolor de Metal",
+    "name": "Silla Infantil Verde de Metal",
     "price": 100,
     "height": 70,
     "depth": 30,
     "width": 25,
     "weight": 3,
-    "color": 11,  
+    "colorId": 10,  
     "stock": 10,
-    "productType": 15,  
-    "material": 2,  
+    "productTypeId": 15,  
+    "materialId": 2,  
     "description": "Con divertidos diseños para los más pequeños de la casa."
   },
   {
@@ -253,10 +241,10 @@
     "depth": 48,
     "width": 42,
     "weight": 6,
-    "color": 9,  
+    "colorId": 9,  
     "stock": 10,
-    "productType": 15,  
-    "material": 2,  
+    "productTypeId": 15,  
+    "materialId": 2,  
     "description": "Perfecta para relajarse en el jardín con comodidad."
   },
   {
@@ -266,10 +254,10 @@
     "depth": 200,
     "width": 160,
     "weight": 50,
-    "color": 1,  
+    "colorId": 1,  
     "stock": 10,
-    "productType": 17,  
-    "material": 1,  
+    "productTypeId": 17,  
+    "materialId": 1,  
     "description": "Una cama doble elegante y resistente para noches de sueño reparador."
   },
   {
@@ -279,10 +267,10 @@
     "depth": 190,
     "width": 90,
     "weight": 40,
-    "color": 5,  
+    "colorId": 5,  
     "stock": 10,
-    "productType": 17,  
-    "material": 2,  
+    "productTypeId": 17,  
+    "materialId": 2,  
     "description": "Perfecta para habitaciones modernas y juveniles."
   },
   {
@@ -292,10 +280,10 @@
     "depth": 150,
     "width": 70,
     "weight": 20,
-    "color": 3,  
+    "colorId": 3,  
     "stock": 10,
-    "productType": 17,  
-    "material": 3,  
+    "productTypeId": 17,  
+    "materialId": 3,  
     "description": "Con divertidos diseños para los más pequeños de la casa."
   },
   {
@@ -305,10 +293,10 @@
     "depth": 210,
     "width": 180,
     "weight": 60,
-    "color": 4,  
+    "colorId": 4,  
     "stock": 10,
-    "productType": 17,  
-    "material": 1,  
+    "productTypeId": 17,  
+    "materialId": 1,  
     "description": "Un toque rústico para dormitorios acogedores."
   },
   {
@@ -318,10 +306,10 @@
     "depth": 180,
     "width": 80,
     "weight": 30,
-    "color": 5,  
+    "colorId": 5,  
     "stock": 10,
-    "productType": 17,  
-    "material": 2,  
+    "productTypeId": 17,  
+    "materialId": 2,  
     "description": "Compacta y versátil, ideal para espacios pequeños."
   },
   {
@@ -331,10 +319,10 @@
     "depth": 220,
     "width": 200,
     "weight": 70,
-    "color": 6,  
+    "colorId": 6,  
     "stock": 10,
-    "productType": 17,  
-    "material": 2,  
+    "productTypeId": 17,  
+    "materialId": 2,  
     "description": "Elegancia y comodidad para dormitorios amplios."
   },
   {
@@ -344,10 +332,10 @@
     "depth": 200,
     "width": 100,
     "weight": 45,
-    "color": 2,  
+    "colorId": 2,  
     "stock": 10,
-    "productType": 17,  
-    "material": 2,  
+    "productTypeId": 17,  
+    "materialId": 2,  
     "description": "Ideal para habitaciones compartidas o espacios reducidos."
   },
   {
@@ -357,10 +345,10 @@
     "depth": 200,
     "width": 160,
     "weight": 55,
-    "color": 7,  
+    "colorId": 7,  
     "stock": 10,
-    "productType": 17, 
-    "material": 4,  
+    "productTypeId": 17, 
+    "materialId": 4,  
     "description": "Con opciones de ajuste para mayor comodidad."
   },
   {
@@ -370,10 +358,10 @@
     "depth": 210,
     "width": 160,
     "weight": 50,
-    "color": 8,  
+    "colorId": 8,  
     "stock": 10,
-    "productType": 17,  
-    "material": 1,  
+    "productTypeId": 17,  
+    "materialId": 1,  
     "description": "Estilo suave y relajado para dormitorios acogedores."
   },
   {
@@ -383,10 +371,10 @@
     "depth": 220,
     "width": 180,
     "weight": 60,
-    "color": 9,  
+    "colorId": 9,  
     "stock": 10,
-    "productType": 17,  
-    "material": 1,  
+    "productTypeId": 17,  
+    "materialId": 1,  
     "description": "Añade un toque de elegancia con un dosel y color profundo."
   }
 ]

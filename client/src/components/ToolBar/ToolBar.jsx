@@ -14,7 +14,10 @@ import {
 } from "../../redux/actions";
 import style from "./ToolBar.module.css";
 import filter from "./../../imagenes/filter.png";
+<<<<<<< HEAD
 
+=======
+>>>>>>> a1e061cdf6bc101c19f6822f1c200be4ae4b7ee6
 
 const ToolBar = () => {
   const location = useLocation();
@@ -31,10 +34,16 @@ const ToolBar = () => {
     setShowFilters(!showFilters);
   };
 
+<<<<<<< HEAD
   const productTypeNames = productTypeList.map(
     (productType) => productType.name
   );
   const materialNames = materialList.map((material) => material.name);
+=======
+  const productTypeNames = productTypeList.map((productType) => productType);
+
+  const materialNames = materialList.map((material) => material);
+>>>>>>> a1e061cdf6bc101c19f6822f1c200be4ae4b7ee6
 
   const productPrices = productList.map((product) => product.price);
   const sortedProductPrices = [...productPrices].sort((a, b) => a - b);
@@ -59,6 +68,10 @@ const ToolBar = () => {
   };
 
   const setFilterByMaterialHandler = (event) => {
+<<<<<<< HEAD
+=======
+    console.log(event.target.value);
+>>>>>>> a1e061cdf6bc101c19f6822f1c200be4ae4b7ee6
     dispatch(setMaterial(event.target.value));
   };
 
@@ -70,6 +83,11 @@ const ToolBar = () => {
     <div className={style.cntnToolBar}>
       {location.pathname === "/home" && (
         <div className={style.container}>
+<<<<<<< HEAD
+=======
+          
+
+>>>>>>> a1e061cdf6bc101c19f6822f1c200be4ae4b7ee6
           <div className={style.divSelect}>
             <Form.Select
               onChange={setFilterByProductTypeHandler}
@@ -78,9 +96,15 @@ const ToolBar = () => {
             >
               <option value="allProductTypes">Tipo de ambiente</option>
               {productTypeNames &&
+<<<<<<< HEAD
                 productTypeNames.map((productType, index) => (
                   <option value={productType} key={index}>
                     {productType}
+=======
+                productTypeNames.map((productType) => (
+                  <option value={productType.id} key={productType.id}>
+                    {productType.name}
+>>>>>>> a1e061cdf6bc101c19f6822f1c200be4ae4b7ee6
                   </option>
                 ))}
             </Form.Select>
@@ -92,8 +116,11 @@ const ToolBar = () => {
           </div>
           {showFilters && (
             <div className={style.filterOptions}>
+<<<<<<< HEAD
               {/* ... Otro código ... */}
 
+=======
+>>>>>>> a1e061cdf6bc101c19f6822f1c200be4ae4b7ee6
               <div className={style.divSelect}>
                 <Form.Select
                   onChange={setFilterByMaterialHandler}
@@ -102,9 +129,15 @@ const ToolBar = () => {
                 >
                   <option value="allMaterials">Todos los Materiales</option>
                   {materialNames &&
+<<<<<<< HEAD
                     materialNames.map((material, index) => (
                       <option value={material} key={index}>
                         {material}
+=======
+                    materialNames.map((material) => (
+                      <option value={material.id} key={material.id}>
+                        {material.name}
+>>>>>>> a1e061cdf6bc101c19f6822f1c200be4ae4b7ee6
                       </option>
                     ))}
                 </Form.Select>
@@ -127,7 +160,7 @@ const ToolBar = () => {
                 </Form.Select>
               </div>
 
-              <div className={style.divSelect}>
+              {/* <div className={style.divSelect}>
                 <Form.Select
                   onChange={setFilterByPriceHandler}
                   size="sm"
@@ -148,7 +181,11 @@ const ToolBar = () => {
                   </option>
                 </Form.Select>
               </div>
+<<<<<<< HEAD
 
+=======
+ */}
+>>>>>>> a1e061cdf6bc101c19f6822f1c200be4ae4b7ee6
               <div className={style.divSelect}>
                 <Form.Select
                   size="sm"
@@ -156,6 +193,7 @@ const ToolBar = () => {
                   className={style.select}
                 >
                   <option value="notSorted">Ordenar...</option>
+<<<<<<< HEAD
                   <option value="DESC">Mas caros</option>
                   <option value="ASC">Mas baratos </option>
                   {/* <option value="MV">Mayor Antiguedad</option>
@@ -164,6 +202,14 @@ const ToolBar = () => {
               </div>
 
               {/* ... Otro código ... */}
+=======
+                  <option value="desc">Mayor precio</option>
+                  <option value="asc">Menor precio</option>
+                </Form.Select>
+              </div>
+
+              {/* ...otros selectores... */}
+>>>>>>> a1e061cdf6bc101c19f6822f1c200be4ae4b7ee6
             </div>
           )}
         </div>

@@ -178,9 +178,6 @@ export const setPriceRange = (payload) => {
   return { type: SET_PRICE_RANGE, payload };
 };
 
-export const setProductsCopy = (payload) => {
-  return { type: SET_PRODUCTS_COPY, payload };
-};
 
 //img
 

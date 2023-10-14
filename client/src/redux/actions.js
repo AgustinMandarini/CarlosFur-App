@@ -22,8 +22,7 @@ import {
   FETCH_USER_DATA,
   LOAD_CART_FROM_LOCAL_STORAGE,
   POST_CART,
-  SET_MATERIAL
-
+  SET_MATERIAL,
   GET_CART,
   DELETE_CART,
 
@@ -162,9 +161,6 @@ export const setPriceRange = (payload) => {
   return { type: SET_PRICE_RANGE, payload };
 };
 
-export const setProductsCopy = (payload) => {
-  return { type: SET_PRODUCTS_COPY, payload };
-};
 
 //img
 

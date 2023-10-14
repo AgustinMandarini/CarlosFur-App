@@ -1,6 +1,6 @@
-const { Product } = require("../db");
+const { Product } = require("../../db");
 // const { findAllTypes } = require("./getProductTypeController");
-const { uploadImage } = require("../services/Cloudinary/index");
+const { uploadImage } = require("../../services/Cloudinary/index");
 
 const postProductController = async ({
   name,

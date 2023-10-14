@@ -1,4 +1,4 @@
-const { Product } = require("../db.js");
+const { Product } = require("../../db.js");
 
 const getProductByIdController = async (id) => {
   try {

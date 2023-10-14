@@ -1,22 +1,23 @@
 //postUserController.js
-const { User } = require("../db");
-const { encryptPassword } = require("../controllers/passwordUtils");
+const { User } = require("../../db");
+const { encryptPassword } = require("../Utils/passwordUtils");
 
 const createUser = async (
   user_name,
   password,
   e_mail,
   first_name,
-  last_name
+  last_name,
+  auth0
 ) => {
-  // Encriptar la contraseña antes de crear el usuario
-  const hashedPassword = await encryptPassword(password);
+  let hashedPassword = null;
+  if (password) hashedPassword = await encryptPassword(password);
 
   try {
     // Crea un nuevo usuario en la base de datos
     const newUser = await User.create({
       user_name,
-      password: hashedPassword,
+      password: auth0 ? "123456" : hashedPassword, // Si intenta ingresar un usuario de google por formulario, le asignara esa clave que nunca podra ser validada
       e_mail,
       first_name,
       last_name,

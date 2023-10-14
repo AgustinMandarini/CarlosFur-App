@@ -1,6 +1,6 @@
 const {
     findAllTypes,
-  } = require("../../controllers/getMaterialController.js");
+  } = require("../../controllers/MaterialController/getMaterialController.js");
   
   const getMaterialHandler = async (req, res) => {
     try {

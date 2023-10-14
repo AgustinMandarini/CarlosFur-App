@@ -1,4 +1,4 @@
-const { Material } = require("../db.js");
+const { Material } = require("../../db.js");
 
 const findAllTypes = async () => {
   const allMaterialsArray = await Material.findAll({

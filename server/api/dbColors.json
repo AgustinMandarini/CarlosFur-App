@@ -1,0 +1,12 @@
+[
+    { "name": "Marrón", "description": "Color cálido y terroso, ideal para muebles clásicos y acogedores." },
+    { "name": "Negro", "description": "Elegante y moderno, perfecto para un toque contemporáneo en tus muebles." },
+    { "name": "Azul", "description": "Vibrante y juvenil, agrega un toque de frescura a cualquier espacio." },
+    { "name": "Madera natural", "description": "Tonalidades naturales que resaltan la belleza de la madera, perfecto para un estilo rústico." },
+    { "name": "Blanco", "description": "Puro y versátil, adecuado para una estética limpia y minimalista." },
+    { "name": "Gris", "description": "Neutral y sofisticado, combina bien con una variedad de estilos decorativos." },
+    { "name": "Negro mate", "description": "Aporta un aspecto moderno y elegante con un acabado mate." },
+    { "name": "Blanco roto", "description": "Suavidad y calidez, ideal para crear un ambiente relajado." },
+    { "name": "Verde oscuro", "description": "Tonalidad profunda que evoca la naturaleza y la serenidad." },
+    { "name": "Verde", "description": "Fresco y natural, ideal para muebles de exterior y espacios verdes." }
+  ]

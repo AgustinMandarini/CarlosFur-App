@@ -2,7 +2,7 @@
 const { Product, ProductType } = require("../../db.js");
 const { Op } = require("sequelize");
 
-const findAllProducts = async (name, type, colorId, material, orderBy, orderDirection, enabled_product, minPrice, maxPrice) => { 
+const findAllProducts = async (name, type, colorId, materialId, orderBy, orderDirection, enabled_product, minPrice, maxPrice) => { 
   const query = {
     include: [{ model: ProductType, attributes: ["name"] }],
     attributes: {
@@ -36,10 +36,8 @@ const findAllProducts = async (name, type, colorId, material, orderBy, orderDire
 
   
   // Filtrar por material si se proporciona
-  if (material) {
-    query.where.material = {
-      [Op.iLike]: `%${material}%`,
-    };
+  if (materialId) {
+    query.where.materialId = materialId;
   }
 
   // Filtrar por precio si se proporciona minPrice y maxPrice

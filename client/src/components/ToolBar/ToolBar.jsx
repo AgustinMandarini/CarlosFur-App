@@ -288,7 +288,7 @@ const ToolBar = () => {
             >
               <option value="notSorted">Ordenar...</option>
               <option value="DESC">Mas caros</option>
-              <option value="MB">Mas baratos </option>
+              <option value="ASC">Mas baratos </option>
               {/* <option value="MV">Mayor Antiguedad</option>
               <option value="MN">Menor Antiguedad </option> */}
             </Form.Select>

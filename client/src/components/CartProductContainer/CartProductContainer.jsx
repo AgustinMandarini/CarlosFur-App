@@ -41,7 +41,7 @@ const CartProductContainer = () => {
 
   useEffect(() => {
     if (cartProducts.length === 0) {
-      localStorage.clear();
+      localStorage.removeItem("cart");
     } else {
       updateLocalStorage(cartProducts);
     }

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
 import Paginacion from "../../components/Paginacion/Paginacion";
 import ToolBar from "../../components/ToolBar/ToolBar";
-import { setProductsCopy } from "../../redux/actions";
+// import { setProductsCopy } from "../../redux/actions";
 import style from "./Home.module.css";
 import { useCheckUserExists } from "../../helpers/checkUserExist";
 
@@ -15,7 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     checkUserExist();
-    dispatch(setProductsCopy());
+    // dispatch(setProductsCopy());
     // eslint-disable-next-line
   }, []);
 

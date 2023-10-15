@@ -26,7 +26,8 @@ import {
   SET_MATERIAL,
   GET_CART,
   UPDATE_PRODUCT_COUNT_IN_CART,
-  PUT_PRODUCT
+  PUT_PRODUCT,
+  DELETE_PRODUCT
 
 } from "./types";
 
@@ -190,9 +191,11 @@ const rootReducer = (state = initialState, action) => {
 
         return newState;
       }
-
-    // Otros casos de reducción
-
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        muebles: action.payload
+      }
     case DELETE_CART:
       localStorage.clear();
       return {

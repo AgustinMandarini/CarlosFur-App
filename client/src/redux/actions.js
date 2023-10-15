@@ -25,7 +25,8 @@ import {
   SET_MATERIAL,
   GET_CART,
   DELETE_CART,
-  PUT_PRODUCT
+  PUT_PRODUCT,
+  DELETE_PRODUCT
 
 } from "./types";
 import { toast } from "react-toastify";
@@ -84,6 +85,21 @@ export const putProduct = (id) => {
       dispatch({
         type: PUT_PRODUCT,
         payload: product,
+      });
+    } catch (error) {
+      console.error("Error en la acción putProduct:", error);
+    } 
+  }
+}
+
+export const deleteProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`${apiUrl}/product/${id}`);
+      const eliminado = response.data;
+      dispatch({
+        type: DELETE_PRODUCT,
+        payload: eliminado,
       });
     } catch (error) {
       console.error("Error en la acción putProduct:", error);

@@ -2,7 +2,8 @@ import Button from 'react-bootstrap/Button';
 import Table from "react-bootstrap/Table";
 import { useSelector, useDispatch } from "react-redux";
 import style from "./Productos.module.css";
-import {putProduct} from "./../../../redux/actions"
+import {putProduct, deleteProduct} from "./../../../redux/actions"
+import { useEffect } from 'react';
 const Productos = () => {
 
   const productos = useSelector((state) => state.muebles);
@@ -12,7 +13,7 @@ const Productos = () => {
     alert("esto funciona Correctamente")
     const id = event.target.value
     console.log(id);
-    // dispatch(putProduct(id));
+    dispatch(deleteProduct(id));
   }
 
   const handlePutProduct = (event) => {
@@ -24,13 +25,13 @@ const Productos = () => {
   <Table striped bordered hover>
     <thead>
       <tr>
-        <th>  <h1>Productos Cargados</h1></th>
+        <th><h1>Productos Cargados</h1></th>
       </tr>
     </thead>
   </Table>
   <Table striped bordered hover>
     <tbody>
-      {productos.map((producto) => (
+      {productos && productos.map((producto) => (
         <tr key={producto.id}>
         <td>
         <img src={producto.imagen} className={style.img}alt={producto.name} />

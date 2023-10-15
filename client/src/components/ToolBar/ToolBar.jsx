@@ -2,6 +2,7 @@
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
+import {useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,7 +14,7 @@ import {
 } from "../../redux/actions";
 import filter from "./../../imagenes/filter.png";
 import style from "./ToolBar.module.css";
-import filter from "./../../imagenes/filter.png";
+
 
 const ToolBar = () => {
   const location = useLocation();

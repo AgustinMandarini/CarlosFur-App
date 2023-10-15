@@ -25,6 +25,8 @@ const FETCH_USER_DATA = "FETCH_USER_DATA";
 const SET_MATERIAL="SET_MATERIAL"
 const GET_USERS = "GET_USERS";
 const PUT_PRODUCT = "PUT_PRODUCT";
+const DELETE_PRODUCT = "DELETE_PRODUCT";
+
 
 module.exports = {
   GET_PRODUCTS,
@@ -45,6 +47,7 @@ module.exports = {
   POST_CART_PRODUCT,
   DELETE_CART_PRODUCT,
   DELETE_CART,
+  DELETE_PRODUCT,
   POST_USER,
   LOGIN,
   LOGOUT,
@@ -53,5 +56,6 @@ module.exports = {
   POST_CART,
   SET_MATERIAL,
   PUT_PRODUCT
+
 
 };

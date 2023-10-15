@@ -28,7 +28,6 @@ import {
   UPDATE_PRODUCT_COUNT_IN_CART,
   PUT_PRODUCT,
   DELETE_PRODUCT
-
 } from "./types";
 
 const initialState = {
@@ -41,7 +40,7 @@ const initialState = {
     productType: "allProductTypes",
     color: "allColors",
     price: ["allPrices"],
-    material:"allMaterials",
+    material: "allMaterials",
   },
   imageURL: null,
   colorState: [],
@@ -54,7 +53,6 @@ const initialState = {
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case GET_MATERIAL:
       return {
         ...state,
@@ -140,7 +138,7 @@ const rootReducer = (state = initialState, action) => {
         };
       }
 
-    case "DELETE_CART_PRODUCT":
+    case DELETE_CART_PRODUCT:
       const productId2 = action.payload;
       const productToDelete = state.cartProducts.find(
         (product) => product.id === productId2
@@ -197,7 +195,7 @@ const rootReducer = (state = initialState, action) => {
         muebles: action.payload
       }
     case DELETE_CART:
-      localStorage.clear();
+      localStorage.removeItem("cart");
       return {
         ...state,
         cartProducts: [],

@@ -25,7 +25,6 @@ import {
   SET_MATERIAL,
   GET_CART,
   DELETE_CART,
-
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -36,13 +35,13 @@ import {
 } from "../components/LocalStorage/LocalStorageFunctions";
 
 const apiUrl = process.env.REACT_APP_API_URL;
+const detailUrl = process.env.REACT_APP_API_DETAIL_URL;
 
 //products
 export const getProducts = () => {
   return async function (dispatch) {
     const apiData = await axios.get(`${apiUrl}/product`);
     const product = apiData.data;
-    console.log(product);
     return dispatch({
       type: GET_PRODUCTS,
       payload: product,
@@ -54,6 +53,7 @@ export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(`${apiUrl}/product`, payload);
+      console.log(response);
       const producto = response.data;
       if (response.status === 200) {
         dispatch({ type: POST_PRODUCT, payload: producto });
@@ -61,9 +61,10 @@ export const postProduct = (payload) => {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000, // Tiempo en milisegundos que la notificación estará visible
         });
+
         setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+          window.location.href = `${detailUrl}/${producto.id}`;
+        }, 3000); // 3000 milisegundos (3 segundos)
       }
     } catch (error) {
       // Mostrar notificación de error
@@ -160,7 +161,6 @@ export const setColor = (payload) => {
 export const setPriceRange = (payload) => {
   return { type: SET_PRICE_RANGE, payload };
 };
-
 
 //img
 
@@ -329,7 +329,6 @@ export const loadCartFromLocalStorage = (savedCart) => {
   };
 };
 
-
 export const setProductsCopy = (payload) => {
   return { type: SET_PRODUCTS_COPY, payload };
 };
@@ -337,7 +336,3 @@ export const setProductsCopy = (payload) => {
 export const setMaterial = (payload) => {
   return { type: SET_MATERIAL, payload };
 };
-
-
-
-

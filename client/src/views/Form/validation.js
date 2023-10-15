@@ -53,18 +53,18 @@ const validation = (formState) => {
   }
 
   // Validar Tipo de Producto
-  if (!formState.productType) {
-    errors.productType = "Por favor seleccione un Tipo de Producto";
+  if (!formState.productTypeId) {
+    errors.productTypeId = "Por favor seleccione un Tipo de Producto";
   }
 
   // Validar Material
-  if (!formState.material) {
-    errors.material = "Por favor seleccione un Material";
+  if (!formState.materialId) {
+    errors.materialId = "Por favor seleccione un Material";
   }
 
   // Validar Color
-  if (!formState.color) {
-    errors.color = "Por favor seleccione un Color";
+  if (!formState.colorId) {
+    errors.colorId = "Por favor seleccione un Color";
   }
 
   //Descripcion

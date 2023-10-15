@@ -21,6 +21,7 @@ const Detail = () => {
 
   const stateDetail = useSelector((state) => state.detail);
   const cartProducts = useSelector((state) => state.cartProducts);
+  const colorState = useSelector((state) => state.colorState);
 
   const countForProductID = cartProducts.reduce((count, product) => {
     if (product.id === Number(id)) {
@@ -61,6 +62,11 @@ const Detail = () => {
     }
   }, [cartProducts]);
 
+  const getColorName = (colorId) => {
+    const color = colorState.find((color) => color.id === colorId);
+    return color ? color.name : "Desconocido";
+  };
+
   return (
     <div className={style.cntnDetail}>
       <Button
@@ -99,7 +105,9 @@ const Detail = () => {
             <p className={style.p}>Profundidad: {stateDetail.depth} </p>
             <p className={style.p}>Ancho: {stateDetail.width}</p>
             <p className={style.p}>Peso: {stateDetail.weight}</p>
-            <p className={style.p}>Color: {stateDetail.color}</p>
+            <p className={style.p}>
+              Color: {getColorName(stateDetail.colorId)}
+            </p>
             <div className={style.counterContainer}>
               <button className={style.buttonCount} onClick={decreaseCounter}>
                 -

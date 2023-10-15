@@ -59,15 +59,14 @@ export const postProduct = (payload) => {
         dispatch({ type: POST_PRODUCT, payload: producto });
         toast.success("Producto Creado", {
           position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000, // Tiempo en milisegundos que la notificación estará visible
+          autoClose: 3000,
         });
 
         setTimeout(() => {
           window.location.href = `${detailUrl}/${producto.id}`;
-        }, 3000); // 3000 milisegundos (3 segundos)
+        }, 3000);
       }
     } catch (error) {
-      // Mostrar notificación de error
       toast.error("No se pudo crear el producto", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,

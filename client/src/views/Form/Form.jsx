@@ -18,37 +18,9 @@ const FormPage = () => {
   const [preview, setPreview] = useState(null);
   const dispatch = useDispatch();
 
-  const [form, setForm] = useState({
-    name: "",
-    price: "",
-    height: "",
-    depth: "",
-    width: "",
-    weight: "",
-    stock: "",
-    color: "",
-    material:"",
-    description: "",
-    productType: "",
-    imageBase64: "",
-  });
+  const [form, setForm] = useState({});
 
-  const [errors, setErrors] = useState({
-    name: "",
-    price: "",
-    height: "",
-    depth: "",
-    width: "",
-    weight: "",
-    stock: "",
-    color: "",
-    material: "",
-    description: "",
-    productType: "",
-    imageBase64: "",
-  });
-
-
+  const [errors, setErrors] = useState({});
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -261,15 +233,11 @@ const FormPage = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.color && formSubmitted ? (
-                <span>{errors.color}</span>
-              ) : (
-                ""
-              )}
+              {errors.color && formSubmitted ? <span>{errors.color}</span> : ""}
             </Form.Text>
           </div>
         </Form.Group>
-                {/* //Material */}
+        {/* //Material */}
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
           <Form.Label className={style.label} name="material">
             Material:
@@ -294,8 +262,8 @@ const FormPage = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.materialId && formSubmitted ? (
-                <span>{errors.materialId}</span>
+              {errors.material && formSubmitted ? (
+                <span>{errors.material}</span>
               ) : (
                 ""
               )}
@@ -408,152 +376,6 @@ const FormPage = () => {
         )}
       </Form>
     </div>
-
-    //   <form onSubmit={submitHandler} className={style.formContainer}>
-    //     <div>
-    //       <h1>Nuevo Mueble</h1>
-    //     </div>
-    //     <div className={style.container}>
-    //       <label>Nombre:</label>
-    //       <input
-    //         type="text"
-    //         value={form.name}
-    //         onChange={changeHandler}
-    //         name="name"
-    //       />
-    //       {errors.name ? <span>{errors.name}</span> : null}
-    //     </div>
-    //     <div className={style.container}>
-    //       <label>Precio:</label>
-    //       <input
-    //         type="number"
-    //         value={form.price}
-    //         onChange={changeHandler}
-    //         name="price"
-    //       />
-    //       {errors.price ? <span>{errors.price}</span> : null}
-    //     </div>
-    //     <div className={style.container}>
-    //       <label>Altura:</label>
-    //       <input
-    //         type="number"
-    //         value={form.height}
-    //         onChange={changeHandler}
-    //         name="height"
-    //       />
-    //       {errors.height ? <span>{errors.height}</span> : null}
-    //     </div>
-    //     <div className={style.container}>
-    //       <label>Profundidad:</label>
-    //       <input
-    //         type="number"
-    //         value={form.depth}
-    //         onChange={changeHandler}
-    //         name="depth"
-    //       />
-    //       {errors.depth ? <span>{errors.depth}</span> : null}
-    //     </div>
-    //     <div className={style.container}>
-    //       <label>Ancho:</label>
-    //       <input
-    //         type="number"
-    //         value={form.width}
-    //         onChange={changeHandler}
-    //         name="width"
-    //       />
-    //       {errors.width ? <span>{errors.width}</span> : null}
-    //     </div>
-    //     <div className={style.container}>
-    //       <label>Peso:</label>
-    //       <input
-    //         type="number"
-    //         value={form.weight}
-    //         onChange={changeHandler}
-    //         name="weight"
-    //       />
-    //       {errors.weight ? <span>{errors.weight}</span> : null}
-    //     </div>
-    //     <div className={style.container}>
-    //       <label>Color:</label>
-    //       <input
-    //         type="text"
-    //         value={form.color}
-    //         onChange={changeHandler}
-    //         name="color"
-    //       />
-    //       {errors.color ? <span>{errors.color}</span> : null}
-    //     </div>
-    //     <div className={style.container}>
-    //       <label>Descripcion:</label>
-    //       <input
-    //         type="text"
-    //         value={form.description}
-    //         onChange={changeHandler}
-    //         name="description"
-    //       />
-    //       {errors.description ? <span>{errors.description}</span> : null}
-    //     </div>
-
-    //     <div className={style.container}>
-    //       <label name="productType">Selecciona el tipo de Producto:</label>
-    //       <select
-    //         onChange={handleSelectMuebles}
-    //         value={form.productType}
-    //         name="productType"
-    //       >
-    //         {stateProductType &&
-    //           stateProductType.map((tipo, index) => {
-    //             return (
-    //               <option key={index} value={tipo.id} name={tipo.name}>
-    //                 {tipo.name}
-    //               </option>
-    //             );
-    //           })}
-    //       </select>
-    //       {errors.productType ? <span>{errors.productType}</span> : null}
-    //     </div>
-    //     <div>
-    //       <header>
-    //         <p>
-    //           <span>Click en seleccionar archivo</span>&nbsp;
-    //         </p>
-    //         <input
-    //           id="hidden-input"
-    //           type="file"
-    //           className="hidden"
-    //           onChange={handleImageChange}
-    //           accept="image/*"
-    //         />
-    //         <div>{preview && <img src={preview} alt="preview" />}</div>
-    //       </header>
-    //       <div>
-    //         <button onClick={handleResetClick}>Reset</button>
-    //       </div>
-    //       {loading ? (
-    //         <div>
-    //           <div></div>
-    //           <span>Processing...</span>
-    //         </div>
-    //       ) : (
-    //         url && (
-    //           <div>
-    //             <img src={preview} alt="preview" />
-    //           </div>
-    //         )
-    //       )}
-    //     </div>
-    //     {errors.imageBase64 ? <span>{errors.imageBase64}</span> : null}
-    //     {Object.values(errors).every((error) => error === "") ? (
-    //       <button type="submit" className={style.botonSubmit}>
-    //         Enviar
-    //       </button>
-    //     ) : (
-    //       <button type="submit" className={style.botonSubmitOff}>
-    //         Enviar
-    //       </button>
-    //     )}
-    //   </form>
-    //
   );
 };
 

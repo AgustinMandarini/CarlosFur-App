@@ -72,30 +72,28 @@ const ToolBar = () => {
     <div className={style.cntnToolBar}>
       {location.pathname === "/home" && (
         <div className={style.container}>
-          
-
-          <div className={style.divSelect}>
-            <Form.Select
-              onChange={setFilterByProductTypeHandler}
-              size="sm"
-              className={style.select}
-            >
-              <option value="allProductTypes">Tipo de ambiente</option>
-              {productTypeNames &&
-                productTypeNames.map((productType) => (
-                  <option value={productType.id} key={productType.id}>
-                    {productType.name}
-                  </option>
-                ))}
-            </Form.Select>
-          </div>
-
           <div className={style.filterIcon} onClick={toggleFilters}>
             <span>Filtrados</span>
             <img src={filter} alt="" className={style.filter} />
           </div>
           {showFilters && (
             <div className={style.filterOptions}>
+              <div className={style.divSelect}>
+                <Form.Select
+                  onChange={setFilterByProductTypeHandler}
+                  size="sm"
+                  className={style.select}
+                >
+                  <option value="allProductTypes">Tipo de ambiente</option>
+                  {productTypeNames &&
+                    productTypeNames.map((productType) => (
+                      <option value={productType.id} key={productType.id}>
+                        {productType.name}
+                      </option>
+                    ))}
+                </Form.Select>
+              </div>
+
               <div className={style.divSelect}>
                 <Form.Select
                   onChange={setFilterByMaterialHandler}
@@ -129,28 +127,6 @@ const ToolBar = () => {
                 </Form.Select>
               </div>
 
-              {/* <div className={style.divSelect}>
-                <Form.Select
-                  onChange={setFilterByPriceHandler}
-                  size="sm"
-                  className={style.select}
-                >
-                  <option value={[]}>Precios</option>
-                  <option value={cheapPrices}>
-                    Precios entre {cheapPrices[0]} y{" "}
-                    {cheapPrices[cheapPrices.length - 1]}
-                  </option>
-                  <option value={middlePrices}>
-                    Precios entre {middlePrices[0]} y{" "}
-                    {middlePrices[middlePrices.length - 1]}
-                  </option>
-                  <option value={highPrices}>
-                    Precios entre {highPrices[0]} y{" "}
-                    {highPrices[highPrices.length - 1]}
-                  </option>
-                </Form.Select>
-              </div>
- */}
               <div className={style.divSelect}>
                 <Form.Select
                   size="sm"
@@ -162,8 +138,6 @@ const ToolBar = () => {
                   <option value="asc">Menor precio</option>
                 </Form.Select>
               </div>
-
-              {/* ...otros selectores... */}
             </div>
           )}
         </div>

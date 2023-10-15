@@ -4,7 +4,15 @@ import style from "./CartProductContainer.module.css";
 import { updateLocalStorage } from "../LocalStorage/LocalStorageFunctions";
 import CartProductCard from "../CartProductCard/CartProductCard";
 const CartProductContainer = () => {
+  
   const cartProducts = useSelector((state) => state.cartProducts);
+
+  const calculateTotalPrice = (cartProducts) => {
+    return cartProducts.reduce((total, product) => {
+      return total + product.price * product.count;
+    }, 0);
+  };
+  const cartTotal = calculateTotalPrice(cartProducts);
 
   const cartProductCards = Array.isArray(cartProducts)
     ? cartProducts.reduce((result, product) => {
@@ -21,23 +29,9 @@ const CartProductContainer = () => {
             name: product.name,
           });
         }
-
         return result.sort((a, b) => a.id - b.id);
       }, [])
     : [];
-
-  const sumTotalPrices = (cartProductCards) => {
-    return (
-      cartProductCards &&
-      cartProductCards.length > 0 &&
-      cartProductCards.reduce((total, product) => {
-        return total + product.totalPrice;
-      }, 0)
-    );
-  };
-  const totalPriceSum = sumTotalPrices(cartProductCards);
-
-  const shouldRenderTotalPrice = cartProductCards.length > 0;
 
   useEffect(() => {
     if (cartProducts.length === 0) {
@@ -67,9 +61,7 @@ const CartProductContainer = () => {
           <h1>No se ha añadido nada al carrito</h1>
         </div>
       )}
-      {shouldRenderTotalPrice && (
-        <p className={style.p}>Precio Total de la compra: {totalPriceSum}</p>
-      )}
+        <p className={style.p}>Precio Total de la compra: $ {cartTotal} </p>
     </div>
   );
 };

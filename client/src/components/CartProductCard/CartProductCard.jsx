@@ -37,6 +37,7 @@ const CartProductCard = (props) => {
         <button className={style.buttonCount} onClick={postProduct}>
           +
         </button>
+        
       </div>
     </div>
   );

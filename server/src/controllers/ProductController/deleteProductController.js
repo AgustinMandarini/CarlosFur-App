@@ -4,8 +4,9 @@ const { Product } = require('../../db');
 const deleteProduct = async (req) => {
   console.log(req.params);
     try {
+
       const { productId } = req.params;
-    
+
   
       if (isNaN(productId)) {
         return { status: 400, data: { error: 'Invalid product ID' } };

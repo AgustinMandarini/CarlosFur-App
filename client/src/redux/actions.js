@@ -44,7 +44,6 @@ export const getProducts = () => {
   return async function (dispatch) {
     const apiData = await axios.get(`${apiUrl}/product`);
     const product = apiData.data;
-    console.log(product);
     return dispatch({
       type: GET_PRODUCTS,
       payload: product,

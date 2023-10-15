@@ -10,6 +10,6 @@ productRouter.get("", getProductHandler);
 productRouter.get("/:id", getProductByIdHandler);
 productRouter.post("", postProductHandler);
 productRouter.put("/:id", putProductHandler);
-productRouter.delete("/:productId", deleteProductHandler);
+productRouter.delete("/:id", deleteProductHandler);
 
 module.exports = productRouter;

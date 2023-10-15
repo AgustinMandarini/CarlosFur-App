@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postProduct } from "../../redux/actions";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-
+import { toast } from "react-toastify";
 import style from "./Form.module.css";
 import validation from "./validation";
 
@@ -29,12 +29,11 @@ const FormPage = () => {
     setErrors(validation({ ...form, [property]: value }));
     setForm({ ...form, [property]: value });
   };
-
   const submitHandler = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
     const validationErrors = validation(form);
-
+    console.log(form);
     if (Object.keys(validationErrors).length === 0) {
       // Los datos son válidos, puedes enviar el formulario
       dispatch(postProduct(form));
@@ -62,7 +61,10 @@ const FormPage = () => {
         console.log(errors);
       };
     } else {
-      window.alert("No es un formato de imagen valido");
+      toast.error("No es un formato de imagen válido", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
     }
   };
 
@@ -218,7 +220,7 @@ const FormPage = () => {
               size="sm"
               onChange={handleSelectMuebles}
               value={form.color}
-              name="color"
+              name="colorId"
               className={style.select}
             >
               <option>Seleccionar color</option>
@@ -247,7 +249,7 @@ const FormPage = () => {
               size="sm"
               onChange={handleSelectMuebles}
               value={form.material}
-              name="material"
+              name="materialId"
               className={style.select}
             >
               <option>Seleccionar material</option>
@@ -280,7 +282,7 @@ const FormPage = () => {
               size="sm"
               onChange={handleSelectMuebles}
               value={form.productType}
-              name="productType"
+              name="productTypeId"
               className={style.select}
             >
               <option>Seleccionar Tipo de Producto</option>

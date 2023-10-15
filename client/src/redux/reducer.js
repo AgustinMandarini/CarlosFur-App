@@ -50,6 +50,7 @@ const initialState = {
   allUsers: [],
   userToken: null,
   loggedUser: null,
+  cartTotal: 0,
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -135,6 +136,7 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           cartProducts: [...state.cartProducts, { ...productToAdd, count: 1 }],
+          cartTotal: state.cartTotal + (action.payload.price * action.payload.quantity)
         };
       }
 

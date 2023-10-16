@@ -28,8 +28,7 @@ import {
   UPDATE_CART,
   PUT_PRODUCT,
   DELETE_PRODUCT,
-  ADMIN_ENABLEDISABLE
-
+  ADMIN_ENABLEDISABLE,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -91,9 +90,9 @@ export const putProduct = (id) => {
       });
     } catch (error) {
       console.error("Error en la acción putProduct:", error);
-    } 
-  }
-}
+    }
+  };
+};
 
 export const deleteProduct = (id) => {
   return async (dispatch) => {
@@ -107,8 +106,8 @@ export const deleteProduct = (id) => {
     } catch (error) {
       console.error("Error en la acción putProduct:", error);
     }
-  }
-}
+  };
+};
 
 export const getProductByName = (name) => {
   return async function (dispatch) {
@@ -252,13 +251,14 @@ export const login = (payload) => {
         setToken(accessToken);
         //LOCALSTORAGE
         const userInfo = { userId: user.id, cartId: user.cartId };
-        localStorage.setItem('user', JSON.stringify(userInfo));
+        localStorage.setItem("user", JSON.stringify(userInfo));
         dispatch({
           type: LOGIN,
           payload: { userToken: accessToken, user: user },
         });
       }
     } catch (error) {
+      console.log(error);
       toast.error("La contraseña es incorrecta", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
@@ -271,7 +271,7 @@ export const logOut = () => {
   return async (dispatch) => {
     removeToken();
     //LOCALSTORAGE
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     dispatch({
       type: LOGOUT,
       payload: null,
@@ -337,7 +337,7 @@ export const postCart = (cart) => {
 
       // Guardar la información en el LocalStorage
       const user = { userId: user.id, cartId: user.cartId };
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));
 
       return dispatch({
         type: POST_CART,
@@ -369,7 +369,9 @@ export const deleteCart = (cartId) => {
 export const updateCart = (userId, cartId, updatedCart) => {
   return async (dispatch) => {
     try {
-      await axios.put(`${apiUrl}/cart/${userId}/${cartId}`, { products: updatedCart });
+      await axios.put(`${apiUrl}/cart/${userId}/${cartId}`, {
+        products: updatedCart,
+      });
 
       // Si es necesario, puedes actualizar el estado de Redux con el carrito actualizado
       dispatch({ type: UPDATE_CART, payload: updatedCart });
@@ -378,8 +380,6 @@ export const updateCart = (userId, cartId, updatedCart) => {
     }
   };
 };
-
-
 
 export const loadCartFromLocalStorage = (savedCart) => {
   return {
@@ -395,7 +395,6 @@ export const setProductsCopy = (payload) => {
 export const setMaterial = (payload) => {
   return { type: SET_MATERIAL, payload };
 };
-
 
 export const putEnableDisable = (id) => {
   return async function (dispatch) {

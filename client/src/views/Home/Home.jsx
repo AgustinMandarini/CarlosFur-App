@@ -9,6 +9,8 @@ import { setProductsCopy } from "../../redux/actions";
 import style from "./Home.module.css";
 import { useCheckUserExists } from "../../helpers/checkUserExist";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const Home = () => {
   const dispatch = useDispatch();
   const checkUserExist = useCheckUserExists();

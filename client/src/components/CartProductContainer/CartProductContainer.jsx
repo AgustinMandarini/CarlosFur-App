@@ -4,7 +4,6 @@ import style from "./CartProductContainer.module.css";
 import { updateLocalStorage } from "../LocalStorage/LocalStorageFunctions";
 import CartProductCard from "../CartProductCard/CartProductCard";
 const CartProductContainer = () => {
-  
   const cartProducts = useSelector((state) => state.cartProducts);
 
   const calculateTotalPrice = (cartProducts) => {
@@ -27,6 +26,7 @@ const CartProductContainer = () => {
             count: 1,
             totalPrice: product.price,
             name: product.name,
+            imagePath: product.imagePath,
           });
         }
         return result.sort((a, b) => a.id - b.id);
@@ -40,7 +40,6 @@ const CartProductContainer = () => {
       updateLocalStorage(cartProducts);
     }
   }, [cartProducts]);
-
   return (
     <div className={style.cntnCart}>
       {cartProductCards.length > 0 ? (
@@ -52,6 +51,7 @@ const CartProductContainer = () => {
                 name={m.name}
                 count={m.count}
                 totalPrice={m.totalPrice}
+                imagePath={m.imagePath}
               />
             </div>
           );
@@ -61,7 +61,7 @@ const CartProductContainer = () => {
           <h1>No se ha añadido nada al carrito</h1>
         </div>
       )}
-        <p className={style.p}>Precio Total de la compra: $ {cartTotal} </p>
+      <p className={style.p}>Precio Total de la compra: $ {cartTotal} </p>
     </div>
   );
 };

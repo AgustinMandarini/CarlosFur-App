@@ -29,6 +29,8 @@ const PUT_PRODUCT = "PUT_PRODUCT";
 const DELETE_PRODUCT = "DELETE_PRODUCT";
 const ADMIN_ENABLEDISABLE = "ADMIN_ENABLEDISABLE";
 const SET_NAME = "SET_NAME";
+const POST_COLOR = "POST_COLOR";
+
 
 module.exports = {
   GET_PRODUCTS,
@@ -60,4 +62,7 @@ module.exports = {
   PUT_PRODUCT,
   ADMIN_ENABLEDISABLE,
   SET_NAME,
+  POST_COLOR
+
+
 };

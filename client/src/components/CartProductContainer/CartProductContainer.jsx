@@ -33,7 +33,7 @@ const CartProductContainer = () => {
 
       const data = {
         userId: userParse.userId,
-        products: newProducts,
+        products: newProducts.filter((item) => item.quantity != 0),
       };
       if (isAuthenticated && cartIdParse) {
         dispatch(updateCart(cartIdParse, data));

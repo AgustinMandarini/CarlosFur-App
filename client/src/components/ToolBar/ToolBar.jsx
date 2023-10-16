@@ -2,18 +2,19 @@
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
+import {useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import {
   setColor,
+  setMaterial,
   setPriceRange,
   setProductType,
-  setMaterial, // Nuevo action para filtrar por material
   setSort,
 } from "../../redux/actions";
-import style from "./ToolBar.module.css";
 import filter from "./../../imagenes/filter.png";
+import style from "./ToolBar.module.css";
+
 
 const ToolBar = () => {
   const location = useLocation();
@@ -63,7 +64,6 @@ const ToolBar = () => {
   const setFilterByPriceHandler = (event) => {
     dispatch(setPriceRange(event.target.value));
   };
-
   return (
     <div className={style.cntnToolBar}>
       {location.pathname === "/home" && (
@@ -92,6 +92,22 @@ const ToolBar = () => {
             <div className={style.filterOptions}>
               <div className={style.divSelect}>
                 <Form.Select
+                  onChange={setFilterByProductTypeHandler}
+                  size="sm"
+                  className={style.select}
+                >
+                  <option value="allProductTypes">Tipo de ambiente</option>
+                  {productTypeNames &&
+                    productTypeNames.map((productType) => (
+                      <option value={productType.id} key={productType.id}>
+                        {productType.name}
+                      </option>
+                    ))}
+                </Form.Select>
+              </div>
+
+              <div className={style.divSelect}>
+                <Form.Select
                   onChange={setFilterByMaterialHandler}
                   size="sm"
                   className={style.select}
@@ -105,7 +121,6 @@ const ToolBar = () => {
                     ))}
                 </Form.Select>
               </div>
-
               <div className={style.divSelect}>
                 <Form.Select
                   onChange={setFilterByColorHandler}
@@ -163,6 +178,7 @@ const ToolBar = () => {
       )}
     </div>
   );
+  
 };
 
 export default ToolBar;

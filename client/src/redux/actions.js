@@ -25,6 +25,10 @@ import {
   SET_MATERIAL,
   GET_CART,
   DELETE_CART,
+  UPDATE_CART,
+  PUT_PRODUCT,
+  DELETE_PRODUCT,
+  ADMIN_ENABLEDISABLE
 
 } from "./types";
 import { toast } from "react-toastify";
@@ -36,13 +40,13 @@ import {
 } from "../components/LocalStorage/LocalStorageFunctions";
 
 const apiUrl = process.env.REACT_APP_API_URL;
+const detailUrl = process.env.REACT_APP_API_DETAIL_URL;
 
 //products
 export const getProducts = () => {
   return async function (dispatch) {
     const apiData = await axios.get(`${apiUrl}/product`);
     const product = apiData.data;
-    console.log(product);
     return dispatch({
       type: GET_PRODUCTS,
       payload: product,
@@ -54,19 +58,20 @@ export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(`${apiUrl}/product`, payload);
+      console.log(response);
       const producto = response.data;
       if (response.status === 200) {
         dispatch({ type: POST_PRODUCT, payload: producto });
         toast.success("Producto Creado", {
           position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000, // Tiempo en milisegundos que la notificación estará visible
+          autoClose: 3000,
         });
+
         setTimeout(() => {
-          window.location.reload();
+          window.location.href = `${detailUrl}/${producto.id}`;
         }, 3000);
       }
     } catch (error) {
-      // Mostrar notificación de error
       toast.error("No se pudo crear el producto", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,
@@ -74,6 +79,37 @@ export const postProduct = (payload) => {
     }
   };
 };
+
+export const putProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`${apiUrl}/product/${id}`);
+      const product = response.data;
+      dispatch({
+        type: PUT_PRODUCT,
+        payload: product,
+      });
+    } catch (error) {
+      console.error("Error en la acción putProduct:", error);
+    } 
+  }
+}
+
+export const deleteProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`${apiUrl}/product/${id}`);
+      const eliminado = response.data;
+      dispatch({
+        type: DELETE_PRODUCT,
+        payload: eliminado,
+      });
+    } catch (error) {
+      console.error("Error en la acción putProduct:", error);
+    }
+  }
+}
+
 export const getProductByName = (name) => {
   return async function (dispatch) {
     const apiData = await axios.get(
@@ -161,7 +197,6 @@ export const setPriceRange = (payload) => {
   return { type: SET_PRICE_RANGE, payload };
 };
 
-
 //img
 
 export const setImageURL = (imageURL) => {
@@ -215,6 +250,9 @@ export const login = (payload) => {
       const user = response.data;
       if (response.status === 200) {
         setToken(accessToken);
+        //LOCALSTORAGE
+        const userInfo = { userId: user.id, cartId: user.cartId };
+        localStorage.setItem('user', JSON.stringify(userInfo));
         dispatch({
           type: LOGIN,
           payload: { userToken: accessToken, user: user },
@@ -232,6 +270,8 @@ export const login = (payload) => {
 export const logOut = () => {
   return async (dispatch) => {
     removeToken();
+    //LOCALSTORAGE
+    localStorage.removeItem('user');
     dispatch({
       type: LOGOUT,
       payload: null,
@@ -267,20 +307,20 @@ export const fetchUserData = () => {
 };
 
 //carrito
-export const getCart = () => {
-  try {
-    return async (dispatch) => {
-      const { data } = await axios.post(`${apiUrl}/cart`);
-      const payload = data.data;
+export const getCart = (userId, cartId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/cart/${userId}/${cartId}`);
+      const cartData = response.data;
 
-      return dispatch({
-        type: GET_CART,
-        payload: payload,
-      });
-    };
-  } catch (error) {
-    console.log(error);
-  }
+      // Actualiza el estado de Redux con la información del carrito
+      dispatch({ type: GET_CART, payload: cartData });
+
+      return cartData;
+    } catch (error) {
+      console.error("Error al obtener el carrito:", error);
+    }
+  };
 };
 
 export const postCartProduct = (payload) => {
@@ -290,20 +330,23 @@ export const deleteCartProduct = (payload) => {
   return { type: DELETE_CART_PRODUCT, payload: payload };
 };
 export const postCart = (cart) => {
-  try {
-    return async (dispatch) => {
+  return async (dispatch) => {
+    try {
       const { data } = await axios.post(`${apiUrl}/cart`, cart);
       const payload = data.data;
+
+      // Guardar la información en el LocalStorage
+      const user = { userId: user.id, cartId: user.cartId };
+      localStorage.setItem('user', JSON.stringify(user));
 
       return dispatch({
         type: POST_CART,
         payload: payload,
       });
-    };
-    // eslint-disable-next-line no-unreachable
-  } catch (error) {
-    console.log(error);
-  }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
 export const deleteCart = (cartId) => {
   // borra todo el carro
@@ -322,13 +365,28 @@ export const deleteCart = (cartId) => {
     console.log(error);
   }
 };
+
+export const updateCart = (userId, cartId, updatedCart) => {
+  return async (dispatch) => {
+    try {
+      await axios.put(`${apiUrl}/cart/${userId}/${cartId}`, { products: updatedCart });
+
+      // Si es necesario, puedes actualizar el estado de Redux con el carrito actualizado
+      dispatch({ type: UPDATE_CART, payload: updatedCart });
+    } catch (error) {
+      console.error("Error al actualizar el carrito:", error);
+    }
+  };
+};
+
+
+
 export const loadCartFromLocalStorage = (savedCart) => {
   return {
     type: LOAD_CART_FROM_LOCAL_STORAGE,
     payload: savedCart,
   };
 };
-
 
 export const setProductsCopy = (payload) => {
   return { type: SET_PRODUCTS_COPY, payload };
@@ -339,5 +397,17 @@ export const setMaterial = (payload) => {
 };
 
 
-
-
+export const putEnableDisable = (id) => {
+  return async function (dispatch) {
+    try {
+      const apiData = await axios.put(`${apiUrl}/product/${id}`);
+      const putenable = apiData.data;
+      dispatch({
+        type: ADMIN_ENABLEDISABLE,
+        payload: putenable,
+      });
+    } catch (error) {
+      console.error("Error en la acción getDetail:", error);
+    }
+  };
+};

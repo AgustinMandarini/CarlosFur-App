@@ -6,6 +6,13 @@ import CartProductCard from "../CartProductCard/CartProductCard";
 const CartProductContainer = () => {
   const cartProducts = useSelector((state) => state.cartProducts);
 
+  const calculateTotalPrice = (cartProducts) => {
+    return cartProducts.reduce((total, product) => {
+      return total + product.price * product.count;
+    }, 0);
+  };
+  const cartTotal = calculateTotalPrice(cartProducts);
+
   const cartProductCards = Array.isArray(cartProducts)
     ? cartProducts.reduce((result, product) => {
         const existingProduct = result.find((item) => item.id === product.id);
@@ -19,34 +26,20 @@ const CartProductContainer = () => {
             count: 1,
             totalPrice: product.price,
             name: product.name,
+            imagePath: product.imagePath,
           });
         }
-
         return result.sort((a, b) => a.id - b.id);
       }, [])
     : [];
 
-  const sumTotalPrices = (cartProductCards) => {
-    return (
-      cartProductCards &&
-      cartProductCards.length > 0 &&
-      cartProductCards.reduce((total, product) => {
-        return total + product.totalPrice;
-      }, 0)
-    );
-  };
-  const totalPriceSum = sumTotalPrices(cartProductCards);
-
-  const shouldRenderTotalPrice = cartProductCards.length > 0;
-
   useEffect(() => {
     if (cartProducts.length === 0) {
-      localStorage.clear();
+      localStorage.removeItem("cart");
     } else {
       updateLocalStorage(cartProducts);
     }
   }, [cartProducts]);
-
   return (
     <div className={style.cntnCart}>
       {cartProductCards.length > 0 ? (
@@ -58,6 +51,7 @@ const CartProductContainer = () => {
                 name={m.name}
                 count={m.count}
                 totalPrice={m.totalPrice}
+                imagePath={m.imagePath}
               />
             </div>
           );
@@ -67,9 +61,7 @@ const CartProductContainer = () => {
           <h1>No se ha añadido nada al carrito</h1>
         </div>
       )}
-      {shouldRenderTotalPrice && (
-        <p className={style.p}>Precio Total de la compra: {totalPriceSum}</p>
-      )}
+      <p className={style.p}>Precio Total de la compra: $ {cartTotal} </p>
     </div>
   );
 };

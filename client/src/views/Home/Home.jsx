@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
 import Paginacion from "../../components/Paginacion/Paginacion";
 import ToolBar from "../../components/ToolBar/ToolBar";
-import { setProductsCopy } from "../../redux/actions";
+// import { setProductsCopy } from "../../redux/actions";
 import style from "./Home.module.css";
 import { useCheckUserExists } from "../../helpers/checkUserExist";
 
@@ -15,7 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     checkUserExist();
-    dispatch(setProductsCopy());
+    // dispatch(setProductsCopy());
     // eslint-disable-next-line
   }, []);
 
@@ -24,7 +24,6 @@ const Home = () => {
   const filters = useSelector((state) => state.filter); //
   const sort = useSelector((state) => state.sort);
   // const materialList = useSelector((state) => state.materialState);
-
   // Paginado
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,17 +40,13 @@ const Home = () => {
 
   //Combinación de ordenamientos y filtros
   useEffect(() => {
-    const comb = [
-      filters.productType,
-      filters.material,
-      filters.color,
-      sort,
-    ];
-    console.log(comb);
-    filters.productType = filters.productType === "allProductTypes" ? "" : filters.productType;
-    filters.material = filters.material === "allMaterials" ? "" : filters.material;
+    const comb = [filters.productType, filters.material, filters.color, sort];
+    filters.productType =
+      filters.productType === "allProductTypes" ? "" : filters.productType;
+    filters.material =
+      filters.material === "allMaterials" ? "" : filters.material;
     filters.color = filters.color === "allColors" ? "" : filters.color;
-    
+
     const uri = `http://localhost:3001/product?productTypeId=${filters.productType}&materialId=${filters.material}&colorId=${filters.color}&orderBy=price&orderDirection=${sort}`;
     console.log(uri);
 

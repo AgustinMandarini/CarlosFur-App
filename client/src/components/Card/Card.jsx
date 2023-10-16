@@ -9,14 +9,14 @@ const Card = (props) => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
 
- const countForProductID = useSelector((state) =>
-  state.cartProducts.reduce((count, product) => {
-    if (product.id === props.id) {
-      return count + product.count;
-    }
-    return count;
-  }, 0)
-);
+  const countForProductID = useSelector((state) =>
+    state.cartProducts.reduce((count, product) => {
+      if (product.id === props.id) {
+        return count + product.count;
+      }
+      return count;
+    }, 0)
+  );
 
   const [counter, setCounter] = useState(0);
   const [product, setProduct] = useState(0);
@@ -29,11 +29,10 @@ const Card = (props) => {
     dispatch(postCartProduct(props.id));
     setProduct(0);
   };
-  
 
   useEffect(() => {
     if (cartProducts.length === 0) {
-      localStorage.clear();
+      localStorage.removeItem("cartProducts");
     } else {
       updateLocalStorage(cartProducts);
     }
@@ -59,7 +58,6 @@ const Card = (props) => {
         {/* <span className={style.counterValue}>{countForProductID}</span> */}
         <button className={style.buttonCount} onClick={increaseCounter}>
           Agregar al carrito
-
         </button>
         <span className={style.counterValue}>{countForProductID}</span>
       </div>

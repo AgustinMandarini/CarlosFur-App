@@ -4,10 +4,11 @@ import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
+import Offcanvas from "react-bootstrap/Offcanvas";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 const REACT_APP_PUBLIC_MP_KEY = process.env.REACT_APP_PUBLIC_MP_KEY;
 
-const ShoppingCart = () => {
+const ShoppingCart = ({ show, handleClose, handleShow }) => {
   const cartProducts = useSelector((state) => state.cartProducts);
 
   const [preferenceId, setPreferenceId] = useState(null);
@@ -23,11 +24,13 @@ const ShoppingCart = () => {
         productMap[productId] = {
           description: product.name,
           unit_price: product.price,
+          total_price: product.price,
           quantity: 1,
           currency_id: "ARS",
         };
       } else {
         productMap[productId].quantity++;
+        productMap[productId].total_price += product.unit_price;
       }
     });
 
@@ -52,6 +55,8 @@ const ShoppingCart = () => {
   };
 
   const handleBuy = async () => {
+    console.log("handleBuy ejecutado"); // Agrega esta línea
+
     const id = await createPreference();
     if (id) {
       setPreferenceId(id);
@@ -72,13 +77,27 @@ const ShoppingCart = () => {
   }, []);
 
   return (
-    <div className={style.background}>
-      <CartProductContainer />
-      <button className={style.buttonComprar} onClick={handleBuy}>
-        Comprar!
-      </button>
-      {preferenceId && <Wallet initialization={{ preferenceId }} />}
-    </div>
+    handleShow && (
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        className={style.cntnShoppingCart}
+        placement="end"
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title className={style.cartTittle}>
+            CARRITO
+          </Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <CartProductContainer />
+          <button className={style.buttonComprar} onClick={handleBuy}>
+            Comprar!
+          </button>
+          {preferenceId && <Wallet initialization={{ preferenceId }} />}
+        </Offcanvas.Body>
+      </Offcanvas>
+    )
   );
 };
 

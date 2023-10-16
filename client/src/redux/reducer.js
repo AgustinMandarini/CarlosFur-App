@@ -28,10 +28,7 @@ import {
   UPDATE_PRODUCT_COUNT_IN_CART,
   PUT_PRODUCT,
   DELETE_PRODUCT,
-<<<<<<< HEAD
   ADMIN_ENABLEDISABLE
-=======
->>>>>>> 4014967f4b89776fecc574532e363641aad9dd63
 } from "./types";
 
 const initialState = {

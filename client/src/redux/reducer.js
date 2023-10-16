@@ -28,7 +28,7 @@ import {
   UPDATE_PRODUCT_COUNT_IN_CART,
   PUT_PRODUCT,
   DELETE_PRODUCT,
-  ADMIN_ENABLEDISABLE
+  ADMIN_ENABLEDISABLE,
 } from "./types";
 
 const initialState = {
@@ -108,10 +108,26 @@ const rootReducer = (state = initialState, action) => {
         muebles: action.payload,
       };
     case GET_CART:
+      const newProducts = action.payload.products.map((item) => {
+        const mueble = state.muebles.find((m) => m.id === item.id);
+
+        if (mueble) {
+          return {
+            id: item.id,
+            count: item.cart_products.product_quantity,
+            price: mueble.price,
+            name: mueble.name,
+            imagePath: mueble.imagePath,
+          };
+        }
+        return mueble;
+      });
+
       return {
         ...state,
-        cartProducts: action.payload,
+        cartProducts: newProducts,
       };
+
     case POST_CART_PRODUCT:
       const productId = action.payload;
       // Busca el producto en el carrito actual
@@ -277,12 +293,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         localStorage: action.payload,
       };
-      case ADMIN_ENABLEDISABLE:
-        return {
-          ...state,
-          muebles: action.payload,
-          enabled_product: action.payload.enabled_product
-        }; 
+    case ADMIN_ENABLEDISABLE:
+      return {
+        ...state,
+        muebles: action.payload,
+        enabled_product: action.payload.enabled_product,
+      };
 
     default:
       return { ...state };

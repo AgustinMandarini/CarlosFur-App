@@ -4,6 +4,23 @@
   border: 2px solid black;
   font-size: 12px;
   font-weight: 500;
-  margin: 1rem;
+  margin-top: 1rem;
   background-color: rgb(0, 0, 0);
+  width: 100% !important;
+}
+.cntnShoppingCart {
+  width: 35% !important;
+}
+.cartTittle {
+  font-size: 1.6rem;
+  /* font-weight: 600; */
+  letter-spacing: 0.2rem;
+  padding-left: 1rem;
+}
+.btn-close {
+  font-size: 16px !important;
+}
+.btn-close:focus {
+  border-color: #000 !important;
+  box-shadow: none !important;
 }

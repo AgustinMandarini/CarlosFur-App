@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { postProduct } from "../../redux/actions";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import style from "./Form.module.css";
+import { postProduct } from "./../../../redux/actions";
+import style from "./CrearProducto.module.css";
 import validation from "./validation";
 
-const FormPage = () => {
+const CrearProducto = () => {
   const stateProductType = useSelector((state) => state.productType);
   const stateColor = useSelector((state) => state.colorState);
   const stateMaterial = useSelector((state) => state.materialState);
@@ -33,7 +34,7 @@ const FormPage = () => {
     event.preventDefault();
     setFormSubmitted(true);
     const validationErrors = validation(form);
-    console.log(form);
+    // console.log(form);
     if (Object.keys(validationErrors).length === 0) {
       // Los datos son válidos, puedes enviar el formulario
       dispatch(postProduct(form));
@@ -233,7 +234,7 @@ const FormPage = () => {
                   );
                 })}
             </Form.Select>
-
+            <Button variant="dark"> <Link to="/admin/crear/color">Crear Color</Link></Button>
             <Form.Text className={style.error}>
               {errors.color && formSubmitted ? <span>{errors.color}</span> : ""}
             </Form.Text>
@@ -262,7 +263,7 @@ const FormPage = () => {
                   );
                 })}
             </Form.Select>
-
+            <Button variant="dark"> <Link to="/admin/crear/material">Crear Material</Link></Button>
             <Form.Text className={style.error}>
               {errors.material && formSubmitted ? (
                 <span>{errors.material}</span>
@@ -295,7 +296,7 @@ const FormPage = () => {
                   );
                 })}
             </Form.Select>
-
+            <Button variant="dark"> <Link to="/admin/crear/tipo-de-producto">Crear Tipo de Producto</Link></Button>
             <Form.Text className={style.error}>
               {errors.productType && formSubmitted ? (
                 <span>{errors.productType}</span>
@@ -381,4 +382,4 @@ const FormPage = () => {
   );
 };
 
-export default FormPage;
+export default CrearProducto;

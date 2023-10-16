@@ -30,6 +30,12 @@ const LoginForm = () => {
 
   // Maneja el login desde el formulario (login local de nuestro server)
   const handleLocalLogin = async () => {
+
+    const saveUserInfoToLocalStorage = (userId, cartId) => {
+      const user = { userId, cartId };
+      localStorage.setItem('user', JSON.stringify(user));
+    };
+
     const userInfo = { e_mail: form.e_mail, password: form.password };
     if (form.e_mail && form.password) {
       try {
@@ -46,6 +52,7 @@ const LoginForm = () => {
         if (Object.keys(data).length > 0 && data.user.e_mail === form.e_mail) {
           // Si el usuario está creado, lo tiene que logear
           dispatch(login(userInfoWithToken));
+          saveUserInfoToLocalStorage(data.user.id, data.user.cartId);
         }
       } catch (error) {
         toast.error("El usuario no se encuentra registrado", {

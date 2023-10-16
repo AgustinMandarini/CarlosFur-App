@@ -5,17 +5,22 @@ import { Link } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import logo from "../../imagenes/MSC.png";
 import { getProducts } from "../../redux/actions";
-import style from "./NavBar.module.css";
+import ShoppingCart from "../ShoppingCart/ShoppingCart";
+import TextoDesplazante from "./../../components/TextoDesplazante/TextoDesplazante";
 import shoppingCart from "./../../imagenes/shoppingCart.png";
-import TextoDesplazante from './../../components/TextoDesplazante/TextoDesplazante';
+import style from "./NavBar.module.css";
 
 const NavBar = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const cartProducts = useSelector((state) => state.cartProducts);
   const [navResponsive, setNavResponsive] = useState(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-  }, [cartProducts]);
+  useEffect(() => {}, [cartProducts]);
 
   const cartItemCount = cartProducts.reduce((count, product) => {
     return count + product.count;
@@ -23,7 +28,7 @@ const NavBar = () => {
 
   return (
     <>
-       <Navbar
+      <Navbar
         className={navResponsive ? style.navOne : style.navBar}
         collapseOnSelect
         expand="sm"
@@ -61,12 +66,6 @@ const NavBar = () => {
                 Home
               </Link>
               <Link
-                to="/create"
-                className={navResponsive ? style.linkResponsive : style.links}
-              >
-                Crear Producto
-              </Link>
-              <Link
                 to="/about"
                 className={navResponsive ? style.linkResponsive : style.links}
               >
@@ -75,13 +74,18 @@ const NavBar = () => {
             </div>
           </Navbar.Collapse>
           <SearchBar />
-          <Link to="/shoppingcart" className={style.linkCart}>
-           <img src={shoppingCart} className={style.shoppingCart} alt="" />
+          <div onClick={() => setShow(true)} className={style.linkCart}>
+            <img src={shoppingCart} className={style.shoppingCart} alt="" />
             <span className={style.cartItemCount}>{cartItemCount}</span>
-          </Link>
+          </div>
         </Container>
       </Navbar>
       <TextoDesplazante />
+      <ShoppingCart
+        show={show}
+        handleShow={handleShow}
+        handleClose={handleClose}
+      />
     </>
   );
 };

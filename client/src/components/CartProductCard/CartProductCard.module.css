@@ -1,6 +1,6 @@
 .divCard {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: start;
   margin: 6px;
@@ -8,8 +8,9 @@
 .counterContainer {
   display: flex;
   align-items: start;
-  justify-content: center;
+  justify-content: start;
   height: 2.6rem;
+  margin-top: 0.3rem;
 }
 .buttonCount {
   color: white;
@@ -33,4 +34,23 @@
 .prop {
   height: 0.5rem;
   font-size: 14px;
+}
+.propsCartCard {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  margin-left: 15px;
+  height: 126px;
+}
+.img {
+  width: 100px; /* Tamaño deseado para ambas imágenes */
+  height: 100px; /* Tamaño deseado para ambas imágenes */
+  border: 1px solid black;
+  object-fit: contain;
+}
+.img2 {
+  width: 126px; /* Tamaño deseado para ambas imágenes */
+  height: 126px; /* Tamaño deseado para ambas imágenes */
+  border: 1px solid black;
+  object-fit: contain;
 }

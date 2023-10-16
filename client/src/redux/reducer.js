@@ -28,7 +28,10 @@ import {
   UPDATE_PRODUCT_COUNT_IN_CART,
   PUT_PRODUCT,
   DELETE_PRODUCT,
+<<<<<<< HEAD
   ADMIN_ENABLEDISABLE
+=======
+>>>>>>> 4014967f4b89776fecc574532e363641aad9dd63
 } from "./types";
 
 const initialState = {
@@ -67,20 +70,18 @@ const rootReducer = (state = initialState, action) => {
         muebles: action.payload,
         allMuebles: action.payload,
       };
-      case PUT_PRODUCT:
-        return {
-
-        }
+    case PUT_PRODUCT:
+      return {};
     case GET_DETAIL:
       return {
         ...state,
         detail: action.payload,
       };
-      case PUT_PRODUCT:
-        return {
-          ...state,
-          muebles: action.payload
-        }
+    case PUT_PRODUCT:
+      return {
+        ...state,
+        muebles: action.payload,
+      };
 
     case SET_IMAGE_URL:
       return {
@@ -137,7 +138,8 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           cartProducts: [...state.cartProducts, { ...productToAdd, count: 1 }],
-          cartTotal: state.cartTotal + (action.payload.price * action.payload.quantity)
+          cartTotal:
+            state.cartTotal + action.payload.price * action.payload.quantity,
         };
       }
 
@@ -195,8 +197,8 @@ const rootReducer = (state = initialState, action) => {
     case DELETE_PRODUCT:
       return {
         ...state,
-        muebles: action.payload
-      }
+        muebles: action.payload,
+      };
     case DELETE_CART:
       localStorage.removeItem("cart");
       return {

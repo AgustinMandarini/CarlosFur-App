@@ -29,6 +29,8 @@ import {
   PUT_PRODUCT,
   DELETE_PRODUCT,
   ADMIN_ENABLEDISABLE,
+  POST_COLOR
+
 } from "./types";
 
 const initialState = {
@@ -261,6 +263,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         newUser: action.payload,
       };
+
+    case POST_COLOR:
+      return {
+        ...state,
+        colorState: action.payload,
+      }
     case GET_USERS:
       return {
         ...state,

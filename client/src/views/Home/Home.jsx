@@ -47,35 +47,34 @@ const Home = () => {
   }, [globalProducts]);
 
   //Combinación de ordenamientos y filtros
-  useEffect(() => {
-    const comb = [filters.productType, filters.material, filters.color, sort];
-    filters.productType =
-      filters.productType === "allProductTypes" ? "" : filters.productType;
-    filters.material =
-      filters.material === "allMaterials" ? "" : filters.material;
-    filters.color = filters.color === "allColors" ? "" : filters.color;
+  useEffect(
+    () => {
+      filters.productType =
+        filters.productType === "allOptions" ? "" : filters.productType;
+      filters.material =
+        filters.material === "allOptions" ? "" : filters.material;
+      filters.color = filters.color === "allOptions" ? "" : filters.color;
 
-    const uri = `http://localhost:3001/product?productTypeId=${filters.productType}&materialId=${filters.material}&colorId=${filters.color}&orderBy=price&orderDirection=${sort}`;
-    console.log(uri);
+      const uri = `http://localhost:3001/product?productTypeId=${
+        filters.productType
+      }&materialId=${filters.material}&colorId=${
+        filters.color
+      }&orderBy=price&orderDirection=${sort === "allOptions" ? "" : sort}`;
 
-    axios
-      .get(uri)
-      .then((response) => {
-        const list = response.data; // Array con el resultado del filtro
-        setProducts(list); // Actualizar el estado local
-        setCurrentPage(1);
-      })
-      .catch((error) => {
-        console.error("Error al hacer la solicitud:", error);
-      });
-  }, [
-    sort,
-    filters.productType,
-    filters.color,
-    filters.material,
-    filters.price,
-    dispatch,
-  ]);
+      axios
+        .get(uri)
+        .then((response) => {
+          const list = response.data; // Array con el resultado del filtro
+          setProducts(list); // Actualizar el estado local
+          setCurrentPage(1);
+        })
+        .catch((error) => {
+          console.error("Error al hacer la solicitud:", error);
+        });
+    },
+    // eslint-disable-next-line
+    [sort, filters.productType, filters.color, filters.material, filters.price]
+  );
 
   useEffect(() => {
     const cartIdParse = cartId != null && JSON.parse(cartId);

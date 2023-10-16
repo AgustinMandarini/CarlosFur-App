@@ -29,6 +29,7 @@ import {
   PUT_PRODUCT,
   DELETE_PRODUCT,
   ADMIN_ENABLEDISABLE,
+  SET_NAME,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -109,12 +110,13 @@ export const deleteProduct = (id) => {
 };
 
 export const getProductByName = (name) => {
+  console.log(name);
+
   return async function (dispatch) {
     const apiData = await axios.get(
       `${apiUrl}/product${name ? `?name=${name}` : ""}`
     );
     const nameid = apiData.data;
-
     return dispatch({
       type: GET_PRODUCT_BY_NAME,
       payload: nameid,
@@ -390,6 +392,10 @@ export const setProductsCopy = (payload) => {
 
 export const setMaterial = (payload) => {
   return { type: SET_MATERIAL, payload };
+};
+
+export const setName = (payload) => {
+  return { type: SET_NAME, payload };
 };
 
 export const putEnableDisable = (id) => {

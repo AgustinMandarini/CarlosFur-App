@@ -28,8 +28,7 @@ import {
   UPDATE_CART,
   PUT_PRODUCT,
   DELETE_PRODUCT,
-  ADMIN_ENABLEDISABLE
-
+  ADMIN_ENABLEDISABLE,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -58,7 +57,6 @@ export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(`${apiUrl}/product`, payload);
-      console.log(response);
       const producto = response.data;
       if (response.status === 200) {
         dispatch({ type: POST_PRODUCT, payload: producto });
@@ -91,9 +89,9 @@ export const putProduct = (id) => {
       });
     } catch (error) {
       console.error("Error en la acción putProduct:", error);
-    } 
-  }
-}
+    }
+  };
+};
 
 export const deleteProduct = (id) => {
   return async (dispatch) => {
@@ -107,8 +105,8 @@ export const deleteProduct = (id) => {
     } catch (error) {
       console.error("Error en la acción putProduct:", error);
     }
-  }
-}
+  };
+};
 
 export const getProductByName = (name) => {
   return async function (dispatch) {
@@ -252,7 +250,8 @@ export const login = (payload) => {
         setToken(accessToken);
         //LOCALSTORAGE
         const userInfo = { userId: user.id, cartId: user.cartId };
-        localStorage.setItem('user', JSON.stringify(userInfo));
+
+        localStorage.setItem("user", JSON.stringify(userInfo));
         dispatch({
           type: LOGIN,
           payload: { userToken: accessToken, user: user },
@@ -271,7 +270,7 @@ export const logOut = () => {
   return async (dispatch) => {
     removeToken();
     //LOCALSTORAGE
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     dispatch({
       type: LOGOUT,
       payload: null,
@@ -307,10 +306,10 @@ export const fetchUserData = () => {
 };
 
 //carrito
-export const getCart = (userId, cartId) => {
+export const getCart = (cartId) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${apiUrl}/cart/${userId}/${cartId}`);
+      const response = await axios.get(`${apiUrl}/cart/${cartId}`);
       const cartData = response.data;
 
       // Actualiza el estado de Redux con la información del carrito
@@ -334,10 +333,9 @@ export const postCart = (cart) => {
     try {
       const { data } = await axios.post(`${apiUrl}/cart`, cart);
       const payload = data.data;
-
       // Guardar la información en el LocalStorage
-      const user = { userId: user.id, cartId: user.cartId };
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("cartId", payload.id);
+      localStorage.removeItem("cart");
 
       return dispatch({
         type: POST_CART,
@@ -366,20 +364,18 @@ export const deleteCart = (cartId) => {
   }
 };
 
-export const updateCart = (userId, cartId, updatedCart) => {
+export const updateCart = (cartId, cart) => {
   return async (dispatch) => {
     try {
-      await axios.put(`${apiUrl}/cart/${userId}/${cartId}`, { products: updatedCart });
-
+      await axios.put(`${apiUrl}/cart/${cartId}`, cart);
       // Si es necesario, puedes actualizar el estado de Redux con el carrito actualizado
-      dispatch({ type: UPDATE_CART, payload: updatedCart });
+      // actualmente el put esta devolviendo {"status":200,"data":null}. Pero si se actualiza el card
+      // dispatch({ type: UPDATE_CART, payload: updatedCart });
     } catch (error) {
       console.error("Error al actualizar el carrito:", error);
     }
   };
 };
-
-
 
 export const loadCartFromLocalStorage = (savedCart) => {
   return {
@@ -395,7 +391,6 @@ export const setProductsCopy = (payload) => {
 export const setMaterial = (payload) => {
   return { type: SET_MATERIAL, payload };
 };
-
 
 export const putEnableDisable = (id) => {
   return async function (dispatch) {

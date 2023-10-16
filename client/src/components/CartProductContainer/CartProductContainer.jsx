@@ -3,8 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./CartProductContainer.module.css";
 import { updateLocalStorage } from "../LocalStorage/LocalStorageFunctions";
 import CartProductCard from "../CartProductCard/CartProductCard";
+import { postCart, updateCart } from "../../redux/actions";
+import { useAuth0 } from "@auth0/auth0-react";
+
 const CartProductContainer = () => {
+  const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
+  const { isAuthenticated } = useAuth0();
+  const user = localStorage.getItem("user");
+  const cartId = localStorage.getItem("cartId");
+  const [checkIncrementAndDecrement, setCheckIncrementAndDecrement] =
+    useState(false);
 
   const calculateTotalPrice = (cartProducts) => {
     return cartProducts.reduce((total, product) => {
@@ -13,37 +22,40 @@ const CartProductContainer = () => {
   };
   const cartTotal = calculateTotalPrice(cartProducts);
 
-  const cartProductCards = Array.isArray(cartProducts)
-    ? cartProducts.reduce((result, product) => {
-        const existingProduct = result.find((item) => item.id === product.id);
+  useEffect(() => {
+    if (checkIncrementAndDecrement === true) {
+      const userParse = cartId != null && JSON.parse(user);
+      const cartIdParse = cartId != null && JSON.parse(cartId);
+      const newProducts = cartProducts.map((item) => ({
+        id: item.id,
+        quantity: item.count,
+      }));
 
-        if (existingProduct) {
-          existingProduct.count += 1;
-          existingProduct.totalPrice += product.price;
-        } else {
-          result.push({
-            id: product.id,
-            count: 1,
-            totalPrice: product.price,
-            name: product.name,
-            imagePath: product.imagePath,
-          });
-        }
-        return result.sort((a, b) => a.id - b.id);
-      }, [])
-    : [];
+      const data = {
+        userId: userParse.userId,
+        products: newProducts,
+      };
+      if (isAuthenticated && cartIdParse) {
+        dispatch(updateCart(cartIdParse, data));
+        setCheckIncrementAndDecrement(false);
+      }
+    }
+  }, [cartProducts, checkIncrementAndDecrement]);
 
   useEffect(() => {
-    if (cartProducts.length === 0) {
-      localStorage.removeItem("cart");
-    } else {
-      updateLocalStorage(cartProducts);
+    if (!isAuthenticated) {
+      if (cartProducts.length === 0) {
+        localStorage.removeItem("cart");
+      } else {
+        updateLocalStorage(cartProducts);
+      }
     }
   }, [cartProducts]);
+
   return (
     <div className={style.cntnCart}>
-      {cartProductCards.length > 0 ? (
-        cartProductCards.map((m) => {
+      {cartProducts.length > 0 ? (
+        cartProducts.map((m) => {
           return (
             <div className={style.cntnCard} key={m.id}>
               <CartProductCard
@@ -52,6 +64,7 @@ const CartProductContainer = () => {
                 count={m.count}
                 totalPrice={m.totalPrice}
                 imagePath={m.imagePath}
+                setCheckIncrementAndDecrement={setCheckIncrementAndDecrement}
               />
             </div>
           );

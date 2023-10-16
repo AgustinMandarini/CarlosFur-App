@@ -3,11 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import style from "./Card.module.css";
 import defaultImage from "./../../imagenes/default.png";
-import { deleteCartProduct, postCartProduct } from "../../redux/actions";
+import {
+  deleteCartProduct,
+  postCartProduct,
+  updateCart,
+} from "../../redux/actions";
 import { updateLocalStorage } from "../LocalStorage/LocalStorageFunctions";
+import { useAuth0 } from "@auth0/auth0-react";
+
 const Card = (props) => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
+  const user = localStorage.getItem("user");
+  const cartId = localStorage.getItem("cartId");
+  const { isAuthenticated } = useAuth0();
 
   const countForProductID = useSelector((state) =>
     state.cartProducts.reduce((count, product) => {
@@ -28,13 +37,33 @@ const Card = (props) => {
     setProduct(1);
     dispatch(postCartProduct(props.id));
     setProduct(0);
+    handleUpdateCart();
+  };
+
+  const handleUpdateCart = () => {
+    const userParse = cartId != null && JSON.parse(user);
+    const cartIdParse = cartId != null && JSON.parse(cartId);
+    const newProducts = cartProducts.map((item) => ({
+      id: item.id,
+      quantity: item.count,
+    }));
+
+    const data = {
+      userId: userParse.userId,
+      products: newProducts,
+    };
+    if (isAuthenticated && cartIdParse) {
+      dispatch(updateCart(cartIdParse, data));
+    }
   };
 
   useEffect(() => {
-    if (cartProducts.length === 0) {
-      localStorage.removeItem("cartProducts");
-    } else {
-      updateLocalStorage(cartProducts);
+    if (!isAuthenticated) {
+      if (cartProducts.length === 0) {
+        localStorage.removeItem("cartProducts");
+      } else {
+        updateLocalStorage(cartProducts);
+      }
     }
   }, [cartProducts]);
 

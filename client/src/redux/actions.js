@@ -29,9 +29,14 @@ import {
   PUT_PRODUCT,
   DELETE_PRODUCT,
   ADMIN_ENABLEDISABLE,
+<<<<<<< HEAD
   POST_COLOR,
   POST_MATERIAL,
   POST_PRODUCTTYPE
+=======
+  SET_NAME,
+  POST_COLOR
+>>>>>>> 5fd47ad43f524a9dfd23b50ef7c241262be23d2e
 
 } from "./types";
 import { toast } from "react-toastify";
@@ -113,12 +118,13 @@ export const deleteProduct = (id) => {
 };
 
 export const getProductByName = (name) => {
+  console.log(name);
+
   return async function (dispatch) {
     const apiData = await axios.get(
       `${apiUrl}/product${name ? `?name=${name}` : ""}`
     );
     const nameid = apiData.data;
-
     return dispatch({
       type: GET_PRODUCT_BY_NAME,
       payload: nameid,
@@ -437,6 +443,10 @@ export const setProductsCopy = (payload) => {
 
 export const setMaterial = (payload) => {
   return { type: SET_MATERIAL, payload };
+};
+
+export const setName = (payload) => {
+  return { type: SET_NAME, payload };
 };
 
 export const putEnableDisable = (id) => {

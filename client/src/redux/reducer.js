@@ -29,15 +29,10 @@ import {
   PUT_PRODUCT,
   DELETE_PRODUCT,
   ADMIN_ENABLEDISABLE,
-<<<<<<< HEAD
   POST_COLOR,
   POST_MATERIAL,
-  POST_PRODUCTTYPE
-=======
-  SET_NAME,
-  POST_COLOR
-
->>>>>>> 5fd47ad43f524a9dfd23b50ef7c241262be23d2e
+  POST_PRODUCTTYPE,
+  SET_NAME
 } from "./types";
 
 const initialState = {

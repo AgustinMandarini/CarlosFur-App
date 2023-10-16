@@ -29,6 +29,7 @@ import {
   PUT_PRODUCT,
   DELETE_PRODUCT,
   ADMIN_ENABLEDISABLE,
+  SET_NAME,
   POST_COLOR
 
 } from "./types";
@@ -38,16 +39,17 @@ const initialState = {
   allMuebles: [],
   detail: [],
   productType: [],
-  sort: "notSorted",
+  sort: "allOptions",
   filter: {
-    productType: "allProductTypes",
-    color: "allColors",
-    price: ["allPrices"],
-    material: "allMaterials",
+    productType: "allOptions",
+    color: "allOptions",
+    price: ["allOptions"],
+    material: "allOptions",
   },
   imageURL: null,
   colorState: [],
   materialState: [],
+  nameState: null,
   cartProducts: [],
   localStorage: [],
   allUsers: [],
@@ -227,6 +229,9 @@ const rootReducer = (state = initialState, action) => {
       };
     case SET_SORT:
       return { ...state, sort: action.payload };
+
+    case SET_NAME:
+      return { ...state, nameState: action.payload };
 
     case SET_PRODUCT_TYPE:
       return {

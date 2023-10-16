@@ -29,14 +29,9 @@ import {
   PUT_PRODUCT,
   DELETE_PRODUCT,
   ADMIN_ENABLEDISABLE,
-<<<<<<< HEAD
   POST_COLOR,
   POST_MATERIAL,
   POST_PRODUCTTYPE
-=======
-  POST_COLOR
-
->>>>>>> 5faf0a9330a5c47bdc7f60e8d8c154edb3b47248
 } from "./types";
 
 const initialState = {

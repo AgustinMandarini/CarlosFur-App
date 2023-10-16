@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 28rem;
+    width: 45rem;
     border: 1px solid black;
     padding-top: 2.3rem;
     background-color: white;
@@ -20,6 +20,10 @@
     justify-content: space-between;
     margin-bottom: 0.6rem !important;
   }
+  .editContainer{
+    margin: 0.5em;
+  }
+  .editContainer 
   .input {
     height: 0.1rem !important;
     width: 190px !important; /* Ancho fijo para los inputs */
@@ -146,4 +150,17 @@
   }
   .imageForm {
     max-width: 320px;
+  }
+
+  .edit{
+    display: flex;
+    flex-direction: row;
+    width: 1.4em;
+    height: 1.4em;
+  
+  }
+  .edit:hover {
+    background-color: #ffffffa9; /* Cambia el color al pasar el mouse (puedes ajustar el color) */
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.778);
   }

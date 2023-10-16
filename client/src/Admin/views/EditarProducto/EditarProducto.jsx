@@ -9,6 +9,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
+import { toast } from "react-toastify";
 
 const FormPage = () => {
   const { id } = useParams();
@@ -34,7 +35,6 @@ const FormPage = () => {
       reader.onload = () => {
         setPreview(reader.result);
         setForm({ ...form, imageBase64: reader.result });
-        console.log(errors);
       };
     } else {
       toast.error("No es un formato de imagen válido", {
@@ -44,7 +44,6 @@ const FormPage = () => {
     }
   };
 
-  
   const handleResetClick = (event) => {
     event.preventDefault();
     setPreview(null);
@@ -381,46 +380,44 @@ const FormPage = () => {
             </Container>
             {showFilters && (
               <div className={style.divinputError}>
-              
                 <header>
-            <div className={style.tittleSelectImage}>
-              <span>Selecciona nueva imagen:</span>
-            </div>
-            <div className={style.inputSelectImage}>
-              <input
-                id="hidden-input"
-                type="file"
-                className="hidden"
-                onChange={handleImageChange}
-                accept="image/*"
-              />
-              <div>
-                {preview && (
-                  <img
-                    className={style.imageForm}
-                    src={preview}
-                    alt="preview"
-                  />
+                  <div className={style.tittleSelectImage}>
+                    <span>Selecciona nueva imagen:</span>
+                  </div>
+                  <div className={style.inputSelectImage}>
+                    <input
+                      id="hidden-input"
+                      type="file"
+                      className="hidden"
+                      onChange={handleImageChange}
+                      accept="image/*"
+                    />
+                    <div>
+                      {preview && (
+                        <img
+                          className={style.imageForm}
+                          src={preview}
+                          alt="preview"
+                        />
+                      )}
+                    </div>
+                  </div>
+                </header>
+                <button className={style.botonReset} onClick={handleResetClick}>
+                  Reset
+                </button>
+                {loading ? (
+                  <div>
+                    <div></div>
+                    <span>Processing...</span>
+                  </div>
+                ) : (
+                  url && (
+                    <div>
+                      <img src={preview} alt="preview" />
+                    </div>
+                  )
                 )}
-              </div>
-            </div>
-          </header>
-          <button className={style.botonReset} onClick={handleResetClick}>
-            Reset
-          </button>
-          {loading ? (
-          <div>
-            <div></div>
-            <span>Processing...</span>
-          </div>
-        ) : (
-          url && (
-            <div>
-              <img src={preview} alt="preview" />
-            </div>
-          )
-        )}
-       
               </div>
             )}
           </Form.Group>

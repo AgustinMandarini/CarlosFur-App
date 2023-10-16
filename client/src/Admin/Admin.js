@@ -6,6 +6,8 @@ import NavBar from "./components/NavBar/NavBar";
 import EditarProducto from "./views/EditarProducto/EditarProducto"
 import CrearProducto from "./views/CrearProducto/CrearProducto";
 import CrearColor from "./views/CrearColor/CrearColor"
+import CrearMaterial from "./views/CrearMaterial/CrearMaterial"
+import CrearTipoProducto from "./views/CrearTipoProducto/CrearTipoProducto";
 import "./Admin.css";
 
 function Admin() {
@@ -21,6 +23,8 @@ function Admin() {
         <Route  path="/admin/usuarios" component={Usuarios} />
         <Route  path="/admin/crear/producto" component={CrearProducto} />
         <Route  path="/admin/crear/color" component={CrearColor} />
+        <Route  path="/admin/crear/material" component={CrearMaterial} />
+        <Route  path="/admin/crear/tipo-de-producto" component={CrearTipoProducto} />
       </div>
     </div>
   );

@@ -29,7 +29,9 @@ import {
   PUT_PRODUCT,
   DELETE_PRODUCT,
   ADMIN_ENABLEDISABLE,
-  POST_COLOR
+  POST_COLOR,
+  POST_MATERIAL,
+  POST_PRODUCTTYPE
 
 } from "./types";
 import { toast } from "react-toastify";
@@ -176,12 +178,40 @@ export const postColor = (payload) => {
     try {
       const response = await axios.post(`${apiUrl}/color`, payload);
       const color = response.data;
-      if (response.status === 200) {
+  
         dispatch({ type: POST_COLOR, payload: color });
         alert("Color Creado");
-      }
+      
     } catch (error) {
       alert("No se pudo crear el color: ",error);
+    }
+}}
+
+export const postMaterial = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/material`, payload);
+      const material = response.data;
+  
+        dispatch({ type: POST_MATERIAL, payload: material });
+        alert("Material Creado");
+      
+    } catch (error) {
+      alert("No se pudo crear el Material: ",error);
+    }
+}}
+
+export const postProductType = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/productType`, payload);
+      const productType = response.data;
+  
+        dispatch({ type: POST_PRODUCTTYPE, payload: productType });
+        alert("Tipo de Producto Creado");
+      
+    } catch (error) {
+      alert("No se pudo crear el Material: ",error);
     }
 }}
 

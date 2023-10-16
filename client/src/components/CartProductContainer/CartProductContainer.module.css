@@ -1,27 +1,28 @@
 .cntnCart {
   display: flex;
-  padding-top: 3rem;
+  /* padding-top: 0.1rem; */
   justify-content: center;
-  align-items: center;
+  align-items: start;
   flex-direction: column;
 }
 .cntnCard {
   border-bottom: 1px solid rgba(0, 0, 0, 0.308);
-  width: 50%;
-  margin: 6px;
+  width: 70%;
+  margin: 3px;
+  padding: 10px;
 }
 
 .p {
   color: black;
   padding: 18px 18px 18px 18px;
-  border: 1px solid black;
-  margin-top: 3rem;
+  margin-top: 1.3rem;
   /* background-color: black; */
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
+  justify-content: start;
+  align-items: start;
+  font-size: 19px;
   /* height: 1.9rem; */
-  width: 27rem;
+  width: 24rem;
+  font-weight: 600;
 }
 .link {
   text-decoration: none;

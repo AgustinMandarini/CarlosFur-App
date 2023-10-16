@@ -31,7 +31,8 @@ import {
   ADMIN_ENABLEDISABLE,
   POST_COLOR,
   POST_MATERIAL,
-  POST_PRODUCTTYPE
+  POST_PRODUCTTYPE,
+  SET_NAME
 
 } from "./types";
 import { toast } from "react-toastify";

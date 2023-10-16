@@ -24,7 +24,7 @@ const LOGOUT = "LOGOUT";
 const FETCH_USER_DATA = "FETCH_USER_DATA";
 const SET_MATERIAL="SET_MATERIAL"
 const GET_USERS = "GET_USERS";
-
+const UPDATE_CART = "UPDATE_CART";
 module.exports = {
   GET_PRODUCTS,
   GET_DETAIL,
@@ -51,5 +51,6 @@ module.exports = {
   LOAD_CART_FROM_LOCAL_STORAGE,
   POST_CART,
   SET_MATERIAL,
+  UPDATE_CART
 
 };

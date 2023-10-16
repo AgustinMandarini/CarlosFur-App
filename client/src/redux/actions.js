@@ -25,6 +25,7 @@ import {
   SET_MATERIAL,
   GET_CART,
   DELETE_CART,
+  UPDATE_CART
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -214,6 +215,9 @@ export const login = (payload) => {
       const user = response.data;
       if (response.status === 200) {
         setToken(accessToken);
+        //LOCALSTORAGE
+        const userInfo = { userId: user.id, cartId: user.cartId };
+        localStorage.setItem('user', JSON.stringify(userInfo));
         dispatch({
           type: LOGIN,
           payload: { userToken: accessToken, user: user },
@@ -231,6 +235,8 @@ export const login = (payload) => {
 export const logOut = () => {
   return async (dispatch) => {
     removeToken();
+    //LOCALSTORAGE
+    localStorage.removeItem('user');
     dispatch({
       type: LOGOUT,
       payload: null,
@@ -266,20 +272,20 @@ export const fetchUserData = () => {
 };
 
 //carrito
-export const getCart = () => {
-  try {
-    return async (dispatch) => {
-      const { data } = await axios.post(`${apiUrl}/cart`);
-      const payload = data.data;
+export const getCart = (userId, cartId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/cart/${userId}/${cartId}`);
+      const cartData = response.data;
 
-      return dispatch({
-        type: GET_CART,
-        payload: payload,
-      });
-    };
-  } catch (error) {
-    console.log(error);
-  }
+      // Actualiza el estado de Redux con la información del carrito
+      dispatch({ type: GET_CART, payload: cartData });
+
+      return cartData;
+    } catch (error) {
+      console.error("Error al obtener el carrito:", error);
+    }
+  };
 };
 
 export const postCartProduct = (payload) => {
@@ -289,20 +295,23 @@ export const deleteCartProduct = (payload) => {
   return { type: DELETE_CART_PRODUCT, payload: payload };
 };
 export const postCart = (cart) => {
-  try {
-    return async (dispatch) => {
+  return async (dispatch) => {
+    try {
       const { data } = await axios.post(`${apiUrl}/cart`, cart);
       const payload = data.data;
+
+      // Guardar la información en el LocalStorage
+      const user = { userId: user.id, cartId: user.cartId };
+      localStorage.setItem('user', JSON.stringify(user));
 
       return dispatch({
         type: POST_CART,
         payload: payload,
       });
-    };
-    // eslint-disable-next-line no-unreachable
-  } catch (error) {
-    console.log(error);
-  }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
 export const deleteCart = (cartId) => {
   // borra todo el carro
@@ -321,6 +330,22 @@ export const deleteCart = (cartId) => {
     console.log(error);
   }
 };
+
+export const updateCart = (userId, cartId, updatedCart) => {
+  return async (dispatch) => {
+    try {
+      await axios.put(`${apiUrl}/cart/${userId}/${cartId}`, { products: updatedCart });
+
+      // Si es necesario, puedes actualizar el estado de Redux con el carrito actualizado
+      dispatch({ type: UPDATE_CART, payload: updatedCart });
+    } catch (error) {
+      console.error("Error al actualizar el carrito:", error);
+    }
+  };
+};
+
+
+
 export const loadCartFromLocalStorage = (savedCart) => {
   return {
     type: LOAD_CART_FROM_LOCAL_STORAGE,

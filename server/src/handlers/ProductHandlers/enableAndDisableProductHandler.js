@@ -1,12 +1,11 @@
-const { putProductController } = require("../../controllers/ProductController/putProductController");
+const { enableAndDisableProductController } = require("../../controllers/ProductController/enableAndDisableProductController");
 
-const putProductHandler = async (req, res) => {
+const enableAndDisableProductHandler = async (req, res) => {
   try {
     const { id } = req.params; // Obtén el ID del producto de la solicitud
-    const requestData = req.body;
-    const result = await putProductController(id, requestData);
-    
   
+    const result = await enableAndDisableProductController(id);
+
     if (!result) {
       res.status(404).json({ message: 'Producto no encontrado' });
       return;
@@ -17,4 +16,4 @@ const putProductHandler = async (req, res) => {
   }
 };
 
-module.exports = { putProductHandler };
+module.exports = { enableAndDisableProductHandler };

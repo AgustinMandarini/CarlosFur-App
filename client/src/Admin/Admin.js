@@ -4,6 +4,7 @@ import Ventas from "./views/Ventas/Ventas";
 import Usuarios from "./views/Usuarios/Usuarios";
 import NavBar from "./components/NavBar/NavBar";
 import EditarProducto from "./views/EditarProducto/EditarProducto"
+import CrearProducto from "./views/CrearProducto/CrearProducto";
 import "./Admin.css";
 
 function Admin() {
@@ -17,6 +18,7 @@ function Admin() {
         <Route   path="/admin/productos/editar/:id" component={EditarProducto} />
         <Route path="/admin/ventas" component={Ventas} />
         <Route  path="/admin/usuarios" component={Usuarios} />
+        <Route  path="/admin/crear/producto" component={CrearProducto} />
       </div>
     </div>
   );

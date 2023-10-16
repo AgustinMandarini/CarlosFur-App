@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postProduct } from "../../redux/actions";
+import { postProduct } from "./../../../redux/actions";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
-import style from "./Form.module.css";
+import style from "./CrearProducto.module.css"
 import validation from "./validation";
 
-const FormPage = () => {
+const CrearProducto = () => {
   const stateProductType = useSelector((state) => state.productType);
   const stateColor = useSelector((state) => state.colorState);
   const stateMaterial = useSelector((state) => state.materialState);
@@ -381,4 +381,4 @@ const FormPage = () => {
   );
 };
 
-export default FormPage;
+export default CrearProducto;

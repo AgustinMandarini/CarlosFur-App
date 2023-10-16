@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import style from "./LoginRegisterBar.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { postCart, logOut } from "../../redux/actions";
+import { logOut } from "../../redux/actions";
 
 function LoginBar() {
   const { logout, isAuthenticated } = useAuth0();
@@ -33,10 +33,9 @@ function LoginBar() {
 
   const cartToDispatch = { products: cartArray };
 
-  // console.log(localStorage);
   const handleLogout = () => {
     dispatch(logOut());
-    dispatch(postCart(cartToDispatch));
+    localStorage.removeItem("cartId");
     logout({
       logoutParams: {
         returnTo: window.location.origin,

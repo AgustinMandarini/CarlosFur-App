@@ -25,8 +25,10 @@ import {
   POST_CART,
   SET_MATERIAL,
   GET_CART,
-  UPDATE_PRODUCT_COUNT_IN_CART
-
+  UPDATE_PRODUCT_COUNT_IN_CART,
+  PUT_PRODUCT,
+  DELETE_PRODUCT,
+  ADMIN_ENABLEDISABLE,
 } from "./types";
 
 const initialState = {
@@ -39,7 +41,7 @@ const initialState = {
     productType: "allProductTypes",
     color: "allColors",
     price: ["allPrices"],
-    material:"allMaterials",
+    material: "allMaterials",
   },
   imageURL: null,
   colorState: [],
@@ -49,10 +51,10 @@ const initialState = {
   allUsers: [],
   userToken: null,
   loggedUser: null,
+  cartTotal: 0,
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case GET_MATERIAL:
       return {
         ...state,
@@ -65,10 +67,17 @@ const rootReducer = (state = initialState, action) => {
         muebles: action.payload,
         allMuebles: action.payload,
       };
+    case PUT_PRODUCT:
+      return {};
     case GET_DETAIL:
       return {
         ...state,
         detail: action.payload,
+      };
+    case PUT_PRODUCT:
+      return {
+        ...state,
+        muebles: action.payload,
       };
 
     case SET_IMAGE_URL:
@@ -99,10 +108,26 @@ const rootReducer = (state = initialState, action) => {
         muebles: action.payload,
       };
     case GET_CART:
+      const newProducts = action.payload.products.map((item) => {
+        const mueble = state.muebles.find((m) => m.id === item.id);
+
+        if (mueble) {
+          return {
+            id: item.id,
+            count: item.cart_products.product_quantity,
+            price: mueble.price,
+            name: mueble.name,
+            imagePath: mueble.imagePath,
+          };
+        }
+        return mueble;
+      });
+
       return {
         ...state,
-        cartProducts: action.payload,
+        cartProducts: newProducts,
       };
+
     case POST_CART_PRODUCT:
       const productId = action.payload;
       // Busca el producto en el carrito actual
@@ -126,10 +151,12 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           cartProducts: [...state.cartProducts, { ...productToAdd, count: 1 }],
+          cartTotal:
+            state.cartTotal + action.payload.price * action.payload.quantity,
         };
       }
 
-    case "DELETE_CART_PRODUCT":
+    case DELETE_CART_PRODUCT:
       const productId2 = action.payload;
       const productToDelete = state.cartProducts.find(
         (product) => product.id === productId2
@@ -180,11 +207,13 @@ const rootReducer = (state = initialState, action) => {
 
         return newState;
       }
-
-    // Otros casos de reducción
-
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        muebles: action.payload,
+      };
     case DELETE_CART:
-      localStorage.clear();
+      localStorage.removeItem("cart");
       return {
         ...state,
         cartProducts: [],
@@ -263,6 +292,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         localStorage: action.payload,
+      };
+    case ADMIN_ENABLEDISABLE:
+      return {
+        ...state,
+        muebles: action.payload,
+        enabled_product: action.payload.enabled_product,
       };
 
     default:

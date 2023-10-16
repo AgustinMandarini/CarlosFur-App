@@ -3,54 +3,59 @@ import { useDispatch, useSelector } from "react-redux";
 import style from "./CartProductContainer.module.css";
 import { updateLocalStorage } from "../LocalStorage/LocalStorageFunctions";
 import CartProductCard from "../CartProductCard/CartProductCard";
+import { postCart, updateCart } from "../../redux/actions";
+import { useAuth0 } from "@auth0/auth0-react";
+
 const CartProductContainer = () => {
+  const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
+  const { isAuthenticated } = useAuth0();
+  const user = localStorage.getItem("user");
+  const cartId = localStorage.getItem("cartId");
+  const [checkIncrementAndDecrement, setCheckIncrementAndDecrement] =
+    useState(false);
 
-  const cartProductCards = Array.isArray(cartProducts)
-    ? cartProducts.reduce((result, product) => {
-        const existingProduct = result.find((item) => item.id === product.id);
-
-        if (existingProduct) {
-          existingProduct.count += 1;
-          existingProduct.totalPrice += product.price;
-        } else {
-          result.push({
-            id: product.id,
-            count: 1,
-            totalPrice: product.price,
-            name: product.name,
-          });
-        }
-
-        return result.sort((a, b) => a.id - b.id);
-      }, [])
-    : [];
-
-  const sumTotalPrices = (cartProductCards) => {
-    return (
-      cartProductCards &&
-      cartProductCards.length > 0 &&
-      cartProductCards.reduce((total, product) => {
-        return total + product.totalPrice;
-      }, 0)
-    );
+  const calculateTotalPrice = (cartProducts) => {
+    return cartProducts.reduce((total, product) => {
+      return total + product.price * product.count;
+    }, 0);
   };
-  const totalPriceSum = sumTotalPrices(cartProductCards);
-
-  const shouldRenderTotalPrice = cartProductCards.length > 0;
+  const cartTotal = calculateTotalPrice(cartProducts);
 
   useEffect(() => {
-    if (cartProducts.length === 0) {
-      localStorage.clear();
-    } else {
-      updateLocalStorage(cartProducts);
+    if (checkIncrementAndDecrement === true) {
+      const userParse = cartId != null && JSON.parse(user);
+      const cartIdParse = cartId != null && JSON.parse(cartId);
+      const newProducts = cartProducts.map((item) => ({
+        id: item.id,
+        quantity: item.count,
+      }));
+
+      const data = {
+        userId: userParse.userId,
+        products: newProducts,
+      };
+      if (isAuthenticated && cartIdParse) {
+        dispatch(updateCart(cartIdParse, data));
+        setCheckIncrementAndDecrement(false);
+      }
+    }
+  }, [cartProducts, checkIncrementAndDecrement]);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      if (cartProducts.length === 0) {
+        localStorage.removeItem("cart");
+      } else {
+        updateLocalStorage(cartProducts);
+      }
     }
   }, [cartProducts]);
 
   return (
     <div className={style.cntnCart}>
-      {cartProductCards.length > 0 ? (
-        cartProductCards.map((m) => {
+      {cartProducts.length > 0 ? (
+        cartProducts.map((m) => {
           return (
             <div className={style.cntnCard} key={m.id}>
               <CartProductCard
@@ -58,6 +63,8 @@ const CartProductContainer = () => {
                 name={m.name}
                 count={m.count}
                 totalPrice={m.totalPrice}
+                imagePath={m.imagePath}
+                setCheckIncrementAndDecrement={setCheckIncrementAndDecrement}
               />
             </div>
           );
@@ -67,9 +74,7 @@ const CartProductContainer = () => {
           <h1>No se ha añadido nada al carrito</h1>
         </div>
       )}
-      {shouldRenderTotalPrice && (
-        <p className={style.p}>Precio Total de la compra: {totalPriceSum}</p>
-      )}
+      <p className={style.p}>Precio Total de la compra: $ {cartTotal} </p>
     </div>
   );
 };

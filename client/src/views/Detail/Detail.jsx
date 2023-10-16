@@ -25,7 +25,7 @@ const Detail = () => {
 
   const countForProductID = cartProducts.reduce((count, product) => {
     if (product.id === Number(id)) {
-      return count + 1;
+      return count + product.count;
     }
     return count;
   }, 0);
@@ -56,7 +56,7 @@ const Detail = () => {
 
   useEffect(() => {
     if (cartProducts.length === 0) {
-      localStorage.clear();
+      localStorage.removeItem("cart");
     } else {
       updateLocalStorage(cartProducts);
     }

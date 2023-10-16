@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import Table from 'react-bootstrap/Table';
-import { useSelector, useDispatch } from 'react-redux';
-import style from './Productos.module.css';
-import { putProduct, deleteProduct } from './../../../redux/actions';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
+import Modal from "react-bootstrap/Modal";
+import Row from "react-bootstrap/Row";
+import Table from "react-bootstrap/Table";
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { deleteProduct, putEnableDisable } from "./../../../redux/actions";
+import style from "./Productos.module.css";
 
 const Productos = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -13,28 +18,33 @@ const Productos = () => {
 
   const productos = useSelector((state) => state.muebles);
   const dispatch = useDispatch();
-
+console.log(productos);
   const handleDeleteProduct = (event) => {
     const id = event.target.value;
     setProductIdToDelete(id);
     setShowDeleteModal(true);
-  }
+  };
 
   const confirmDelete = () => {
     if (productIdToDelete !== null) {
       dispatch(deleteProduct(productIdToDelete));
       setShowDeleteModal(false);
     }
-  }
+  };
 
   const cancelDelete = () => {
     setProductIdToDelete(null);
     setShowDeleteModal(false);
-  }
-
+  };
+  const changeProductEnabled = (id) => {
+    // Llama a la acción putEnableDisable con el id del producto
+    //const id = event.target.value;
+    dispatch(putEnableDisable(id));
+  };
 
   return (
     <div>
+  
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -46,22 +56,48 @@ const Productos = () => {
       </Table>
       <Table striped bordered hover>
         <tbody>
-          {productos &&
+          {Array.isArray(productos) &&
             productos.map((producto) => (
               <tr key={producto.id}>
                 <td>
-                  <img src={producto.imagen} className={style.img} alt={producto.name} />
+                  <Container>
+                    <Row>
+                      <Col xs={10} md={6}>
+                        <Image
+                          src={producto.imagen}
+                          className={style.img}
+                          thumbnail
+                        />
+                      </Col>
+                    </Row>
+                  </Container>
                 </td>
                 <td>{producto.name}</td>
                 <td>
-                  <Button variant="outline-secondary" >
-                   <Link  to={`/admin/productos/editar/${producto.id}`}>Editar</Link>
-                  </Button>{' '}
+                  <Button variant="outline-secondary">
+                    <Link to={`/admin/productos/editar/${producto.id}`}>
+                      Editar
+                    </Link>
+                  </Button>{" "}
                 </td>
                 <td>
-                  <Button variant="outline-danger" value={producto.id} onClick={handleDeleteProduct}>
+                  <BootstrapSwitchButton
+                    onstyle="success"
+                    value={producto.id}
+                    onChange={() => changeProductEnabled(producto.id)}
+                    checked={productos.enabled_product}
+                   
+                  />
+               
+                </td>
+                <td>
+                  <Button
+                    variant="outline-danger"
+                    value={producto.id}
+                    onClick={handleDeleteProduct}
+                  >
                     Eliminar
-                  </Button>{' '}
+                  </Button>{" "}
                 </td>
               </tr>
             ))}

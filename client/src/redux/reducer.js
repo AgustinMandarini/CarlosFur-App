@@ -28,6 +28,7 @@ import {
   UPDATE_PRODUCT_COUNT_IN_CART,
   PUT_PRODUCT,
   DELETE_PRODUCT,
+  ADMIN_ENABLEDISABLE
 } from "./types";
 
 const initialState = {
@@ -276,6 +277,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         localStorage: action.payload,
       };
+      case ADMIN_ENABLEDISABLE:
+        return {
+          ...state,
+          muebles: action.payload,
+          enabled_product: action.payload.enabled_product
+        }; 
 
     default:
       return { ...state };

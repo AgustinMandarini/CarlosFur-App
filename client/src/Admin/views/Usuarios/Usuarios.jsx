@@ -45,7 +45,7 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {allUsers.map((user) => (
+          {Array.isArray(allUsers) && allUsers.map((user) => (
             <tr key={user.id}>
               <td>{user.user_name}</td>
               <td>{user.e_mail}</td>

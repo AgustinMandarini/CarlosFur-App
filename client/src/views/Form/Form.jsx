@@ -33,7 +33,7 @@ const FormPage = () => {
     event.preventDefault();
     setFormSubmitted(true);
     const validationErrors = validation(form);
-    console.log(form);
+    // console.log(form);
     if (Object.keys(validationErrors).length === 0) {
       // Los datos son válidos, puedes enviar el formulario
       dispatch(postProduct(form));

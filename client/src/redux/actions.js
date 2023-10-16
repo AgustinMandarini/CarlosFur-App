@@ -27,7 +27,9 @@ import {
   DELETE_CART,
   UPDATE_CART,
   PUT_PRODUCT,
-  DELETE_PRODUCT
+  DELETE_PRODUCT,
+  ADMIN_ENABLEDISABLE
+
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -392,4 +394,20 @@ export const setProductsCopy = (payload) => {
 
 export const setMaterial = (payload) => {
   return { type: SET_MATERIAL, payload };
+};
+
+
+export const putEnableDisable = (id) => {
+  return async function (dispatch) {
+    try {
+      const apiData = await axios.put(`${apiUrl}/product/${id}`);
+      const putenable = apiData.data;
+      dispatch({
+        type: ADMIN_ENABLEDISABLE,
+        payload: putenable,
+      });
+    } catch (error) {
+      console.error("Error en la acción getDetail:", error);
+    }
+  };
 };

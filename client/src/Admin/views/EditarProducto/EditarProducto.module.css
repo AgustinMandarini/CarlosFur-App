@@ -1,0 +1,149 @@
+.cntnForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    flex-direction: column;
+  }
+  .formConteiner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 28rem;
+    border: 1px solid black;
+    padding-top: 2.3rem;
+    background-color: white;
+    box-shadow: 8px 0px 10px rgba(148, 133, 122, 0.8);
+  }
+  .formGroup {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.6rem !important;
+  }
+  .input {
+    height: 0.1rem !important;
+    width: 190px !important; /* Ancho fijo para los inputs */
+  }
+  .input:focus {
+    border: 2px solid #ae9c8f !important;
+    box-shadow: none !important;
+  }
+  
+  .divinputErrorType {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+    margin-left: 2rem !important;
+    margin-top: 0.7rem;
+  }
+  .divinputError {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+    margin-left: 2rem !important;
+  }
+  .error {
+    font-size: 0.7rem !important;
+    justify-content: center;
+    align-items: center;
+    color: red !important;
+    max-width: 12rem;
+  }
+  .tittle {
+    font-size: 2.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1.2rem;
+  }
+  .label {
+    font-size: 1.1rem !important;
+    font-weight: 400;
+    width: 90px; /* Ancho fijo para los labels */
+    text-align: start;
+    margin-right: 5px;
+  }
+  .button {
+    justify-content: center;
+    margin: 1rem;
+  }
+  .buttonReset {
+    justify-content: center;
+    font-size: 0.1rem;
+  }
+  .select {
+    height: 1.9rem !important;
+    width: 190px !important; /* Ancho fijo para los inputs */
+    margin-top: -0.9rem !important;
+  }
+  .select:focus {
+    border-color: #ae9c8f !important;
+    box-shadow: none !important;
+  }
+  .divSelectImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+  }
+  .tittleSelectImage {
+    font-weight: 500;
+    margin: 0.6rem;
+  }
+  .inputSelectImage {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+  }
+  
+  .botonReset {
+    color: white;
+    padding: 2px 13px 2px 13px;
+    border: 2px solid black;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 1rem;
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+  }
+  .botonReset:hover {
+    background-color: white !important;
+    border: 1px solid black;
+    color: black;
+  }
+  .botonSubmit {
+    color: white;
+    padding: 8px 25px 8px 25px;
+    border: 2px solid black;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 1rem;
+    background-color: rgb(0, 0, 0);
+  }
+  .botonSubmit:hover {
+    background-color: white !important;
+    border: 1px solid black;
+    color: black;
+  }
+  .botonSubmitOff {
+    background-color: black;
+    color: white;
+    padding: 8px 25px 8px 25px;
+    border: 2px solid black;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 1rem;
+  }
+  .botonSubmitOff:hover {
+    background-color: white !important;
+    border: 1px solid black;
+    color: black;
+  }
+  .imageForm {
+    max-width: 320px;
+  }

@@ -1,0 +1,7 @@
+.img {
+    /* Aquí puedes agregar estilos a tu imagen */
+    width: 100px; /* Ancho de la imagen */
+    height: 100px; /* Altura de la imagen */
+    border: 1px solid #000; /* Borde de la imagen */
+    /* Otros estilos personalizados */
+  }

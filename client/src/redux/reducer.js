@@ -26,6 +26,8 @@ import {
   SET_MATERIAL,
   GET_CART,
   UPDATE_PRODUCT_COUNT_IN_CART,
+  PUT_PRODUCT,
+  DELETE_PRODUCT
 } from "./types";
 
 const initialState = {
@@ -64,11 +66,20 @@ const rootReducer = (state = initialState, action) => {
         muebles: action.payload,
         allMuebles: action.payload,
       };
+      case PUT_PRODUCT:
+        return {
+
+        }
     case GET_DETAIL:
       return {
         ...state,
         detail: action.payload,
       };
+      case PUT_PRODUCT:
+        return {
+          ...state,
+          muebles: action.payload
+        }
 
     case SET_IMAGE_URL:
       return {
@@ -180,9 +191,11 @@ const rootReducer = (state = initialState, action) => {
 
         return newState;
       }
-
-    // Otros casos de reducción
-
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        muebles: action.payload
+      }
     case DELETE_CART:
       localStorage.removeItem("cart");
       return {

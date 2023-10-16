@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import logo from "../../imagenes/MSC.png";
 import { getProducts } from "../../redux/actions";
-import style from "./NavBar.module.css";
-import shoppingCart from "./../../imagenes/shoppingCart.png";
-import TextoDesplazante from "./../../components/TextoDesplazante/TextoDesplazante";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
+import TextoDesplazante from "./../../components/TextoDesplazante/TextoDesplazante";
+import shoppingCart from "./../../imagenes/shoppingCart.png";
+import style from "./NavBar.module.css";
 
 const NavBar = () => {
   const [show, setShow] = useState(false);
@@ -64,12 +64,6 @@ const NavBar = () => {
                 onClick={() => dispatch(getProducts())}
               >
                 Home
-              </Link>
-              <Link
-                to="/create"
-                className={navResponsive ? style.linkResponsive : style.links}
-              >
-                Crear Producto
               </Link>
               <Link
                 to="/about"

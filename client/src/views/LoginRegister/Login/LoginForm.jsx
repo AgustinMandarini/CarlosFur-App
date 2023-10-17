@@ -20,7 +20,9 @@ const LoginForm = () => {
 
   
   const mostrarNotificacionBienvenida = () => {
-    toast.success('Estas iniciando sesion en MSC Amoblamientos!');
+    toast.success('Iniciando Sesión', {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
   };
 
 

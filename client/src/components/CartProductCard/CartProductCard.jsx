@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteCartProduct,
   postCartProduct,
+  deleteCartProductDirect,
   updateCart,
 } from "../../redux/actions";
 import style from "./CartProductCard.module.css";
@@ -21,6 +22,12 @@ const CartProductCard = (props) => {
     props.setCheckIncrementAndDecrement(true);
   };
 
+  const removeProduct = () =>{
+    dispatch(deleteCartProductDirect(props.id))
+    props.setCheckIncrementAndDecrement(true)
+
+  }
+
 
   const productTotalPrice = props.totalPrice * props.count;
 
@@ -38,6 +45,7 @@ const CartProductCard = (props) => {
         <p className={style.prop}>Cantidad: {props.count}</p>{" "}
         <p className={style.prop}>Precio unitario: ${props.totalPrice}</p>
         <p className={style.prop}>Precio total: ${productTotalPrice}</p>
+        <button onClick={removeProduct}>Quitar</button>
         <div className={style.counterContainer}>
           <button className={style.buttonCount} onClick={deleteProduct}>
             -

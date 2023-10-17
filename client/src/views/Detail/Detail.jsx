@@ -65,7 +65,7 @@ const Detail = () => {
     setProduct(0);
     handleUpdateCart();
   };
-
+  //put
   const decreaseCounter = () => {
     /* Contador */
     if (counter > 0) {

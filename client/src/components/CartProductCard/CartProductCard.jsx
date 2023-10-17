@@ -10,7 +10,6 @@ import style from "./CartProductCard.module.css";
 import defaultImage from "../../imagenes/default.png";
 import { IconTrash } from "@tabler/icons-react";
 
-
 const CartProductCard = (props) => {
   const dispatch = useDispatch();
 
@@ -24,12 +23,10 @@ const CartProductCard = (props) => {
     props.setCheckIncrementAndDecrement(true);
   };
 
-  const removeProduct = () =>{
-    dispatch(deleteCartProductDirect(props.id))
-    props.setCheckIncrementAndDecrement(true)
-
-  }
-
+  const removeProduct = () => {
+    dispatch(deleteCartProductDirect(props.id));
+    props.setCheckIncrementAndDecrement(true);
+  };
 
   const productTotalPrice = props.totalPrice * props.count;
 
@@ -54,8 +51,8 @@ const CartProductCard = (props) => {
           <button className={style.buttonCount} onClick={postProduct}>
             +
           </button>
-        <button onClick={removeProduct} className={style.buttonCount}>
-         <IconTrash />
+          <button onClick={removeProduct} className={style.buttonCount}>
+            <IconTrash size="16px" />
           </button>
         </div>
       </div>

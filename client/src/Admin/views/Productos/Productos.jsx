@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { deleteProduct, putEnableDisable } from "./../../../redux/actions";
 import style from "./Productos.module.css";
+import { IconTrash } from "@tabler/icons-react";
 
 const Productos = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -18,7 +19,7 @@ const Productos = () => {
 
   const productos = useSelector((state) => state.muebles);
   const dispatch = useDispatch();
-console.log(productos);
+  console.log(productos);
   const handleDeleteProduct = (event) => {
     const id = event.target.value;
     setProductIdToDelete(id);
@@ -43,81 +44,83 @@ console.log(productos);
   };
 
   return (
-    <div>
-  
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>
-              <h1>Productos Cargados</h1>
-            </th>
-          </tr>
-        </thead>
-      </Table>
-      <Table striped bordered hover>
-        <tbody>
-          {Array.isArray(productos) &&
-            productos.map((producto) => (
-              <tr key={producto.id}>
-                <td>
-                  <Container>
-                    <Row>
-                      <Col xs={10} md={6}>
-                        <Image
-                          src={producto.imagen}
-                          className={style.img}
-                          thumbnail
-                        />
-                      </Col>
-                    </Row>
-                  </Container>
-                </td>
-                <td>{producto.name}</td>
-                <td>
-                  <Button variant="outline-secondary">
-                    <Link to={`/admin/productos/editar/${producto.id}`}>
+    <div className={style.cntnProductos}>
+      <div className={style.cntnTable}>
+        <Table striped bordered hover>
+          <thead>
+            <tr className={style.tittle}>
+              <th>
+                <h1>Productos Cargados</h1>
+              </th>
+            </tr>
+          </thead>
+        </Table>
+        <Table striped bordered hover className={style.td}>
+          <tbody>
+            {Array.isArray(productos) &&
+              productos.map((producto) => (
+                <tr key={producto.id} className={style.td}>
+                  <td>
+                    <Container>
+                      <Row className={style.td}>
+                        <Col xs={10} md={6} className={style.td}>
+                          <Image
+                            src={producto.imagen}
+                            className={style.img}
+                            thumbnail
+                          />
+                        </Col>
+                      </Row>
+                    </Container>
+                  </td>
+                  <td>{producto.name}</td>
+
+                  <td>
+                    <Link
+                      to={`/admin/productos/editar/${producto.id}`}
+                      className={style.link}
+                    >
                       Editar
                     </Link>
-                  </Button>{" "}
-                </td>
-                <td>
-                  <BootstrapSwitchButton
-                    onstyle="success"
-                    value={producto.id}
-                    onChange={() => changeProductEnabled(producto.id)}
-                    checked={productos.enabled_product}
-                   
-                  />
-               
-                </td>
-                <td>
-                  <Button
-                    variant="outline-danger"
-                    value={producto.id}
-                    onClick={handleDeleteProduct}
-                  >
-                    Eliminar
-                  </Button>{" "}
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </Table>
+                  </td>
+                  <td>
+                    <BootstrapSwitchButton
+                      onstyle="success"
+                      value={producto.id}
+                      onChange={() => changeProductEnabled(producto.id)}
+                      checked={productos.enabled_product}
+                      className={style.button}
+                    />
+                  </td>
+                  <td>
+                    <button
+                      className={style.buttonDelete}
+                      value={producto.id}
+                      onClick={handleDeleteProduct}
+                    >
+                      <IconTrash color="red" stroke="1.3" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </Table>
 
-      <Modal show={showDeleteModal} onHide={cancelDelete}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirmar Eliminación</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>¿Seguro que deseas eliminar este producto?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={cancelDelete}>
-            Cancelar
-          </Button>
-          <Button variant="danger" onClick={confirmDelete}>
-            Eliminar
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        <Modal show={showDeleteModal} onHide={cancelDelete}>
+          <Modal.Header closeButton>
+            <Modal.Title>Confirmar Eliminación</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>¿Seguro que deseas eliminar este producto?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={cancelDelete}>
+              Cancelar
+            </Button>
+            <Button variant="danger" onClick={confirmDelete}>
+              Eliminar
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     </div>
   );
 };

@@ -8,6 +8,8 @@ import {
 } from "../../redux/actions";
 import style from "./CartProductCard.module.css";
 import defaultImage from "../../imagenes/default.png";
+import { IconTrash } from "@tabler/icons-react";
+
 
 const CartProductCard = (props) => {
   const dispatch = useDispatch();
@@ -45,13 +47,15 @@ const CartProductCard = (props) => {
         <p className={style.prop}>Cantidad: {props.count}</p>{" "}
         <p className={style.prop}>Precio unitario: ${props.totalPrice}</p>
         <p className={style.prop}>Precio total: ${productTotalPrice}</p>
-        <button onClick={removeProduct}>Quitar</button>
         <div className={style.counterContainer}>
           <button className={style.buttonCount} onClick={deleteProduct}>
             -
           </button>
           <button className={style.buttonCount} onClick={postProduct}>
             +
+          </button>
+        <button onClick={removeProduct} className={style.buttonCount}>
+         <IconTrash />
           </button>
         </div>
       </div>

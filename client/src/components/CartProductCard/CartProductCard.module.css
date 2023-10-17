@@ -55,3 +55,21 @@
   border: 1px solid black;
   object-fit: contain;
 }
+
+.buttonRemove {
+  color: white;
+  padding: 0px 6px;
+  border: 2px solid black;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: black;
+  margin-right: 5px; /* Espacio entre el botón "Quitar" y los otros botones */
+}
+
+.buttonRemove:hover {
+  background-color: #b1ada2a9;
+  font-weight: 600;
+  border: none;
+  color: black;
+  cursor: pointer;
+}

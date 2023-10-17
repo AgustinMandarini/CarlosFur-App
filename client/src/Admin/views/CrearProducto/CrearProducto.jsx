@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { postProduct } from "./../../../redux/actions";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import style from "./CrearProducto.module.css"
+import { postProduct } from "./../../../redux/actions";
+import style from "./CrearProducto.module.css";
 import validation from "./validation";
 
 const CrearProducto = () => {
@@ -233,7 +234,7 @@ const CrearProducto = () => {
                   );
                 })}
             </Form.Select>
-
+            <Button variant="dark"> <Link to="/admin/crear/color">Crear Color</Link></Button>
             <Form.Text className={style.error}>
               {errors.color && formSubmitted ? <span>{errors.color}</span> : ""}
             </Form.Text>
@@ -262,7 +263,7 @@ const CrearProducto = () => {
                   );
                 })}
             </Form.Select>
-
+            <Button variant="dark"> <Link to="/admin/crear/material">Crear Material</Link></Button>
             <Form.Text className={style.error}>
               {errors.material && formSubmitted ? (
                 <span>{errors.material}</span>
@@ -295,7 +296,7 @@ const CrearProducto = () => {
                   );
                 })}
             </Form.Select>
-
+            <Button variant="dark"> <Link to="/admin/crear/tipo-de-producto">Crear Tipo de Producto</Link></Button>
             <Form.Text className={style.error}>
               {errors.productType && formSubmitted ? (
                 <span>{errors.productType}</span>

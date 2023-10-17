@@ -29,6 +29,10 @@ import {
   PUT_PRODUCT,
   DELETE_PRODUCT,
   ADMIN_ENABLEDISABLE,
+  POST_COLOR,
+  POST_MATERIAL,
+  POST_PRODUCTTYPE,
+  SET_NAME,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -78,10 +82,10 @@ export const postProduct = (payload) => {
   };
 };
 
-export const putProduct = (id) => {
+export const putProduct = (id, edit) => {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`${apiUrl}/product/${id}`);
+      const response = await axios.put(`${apiUrl}/product/${id}`, edit);
       const product = response.data;
       dispatch({
         type: PUT_PRODUCT,
@@ -109,12 +113,13 @@ export const deleteProduct = (id) => {
 };
 
 export const getProductByName = (name) => {
+  console.log(name);
+
   return async function (dispatch) {
     const apiData = await axios.get(
       `${apiUrl}/product${name ? `?name=${name}` : ""}`
     );
     const nameid = apiData.data;
-
     return dispatch({
       type: GET_PRODUCT_BY_NAME,
       payload: nameid,
@@ -168,6 +173,62 @@ export const getColor = () => {
   };
 };
 
+export const postColor = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/color`, payload);
+      const color = response.data;
+
+      dispatch({ type: POST_COLOR, payload: color });
+      alert("Color Creado");
+    } catch (error) {
+      alert("No se pudo crear el color: ", error);
+    }
+  };
+};
+
+export const postMaterial = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/material`, payload);
+      const material = response.data;
+
+      dispatch({ type: POST_MATERIAL, payload: material });
+      alert("Material Creado");
+    } catch (error) {
+      alert("No se pudo crear el Material: ", error);
+    }
+  };
+};
+
+export const postProductType = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/productType`, payload);
+      const productType = response.data;
+
+      dispatch({ type: POST_PRODUCTTYPE, payload: productType });
+      alert("Tipo de Producto Creado");
+    } catch (error) {
+      alert("No se pudo crear el Material: ", error);
+    }
+  };
+};
+
+export const postUser = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/user`, payload);
+      const user = response.data;
+      if (response.status === 200) {
+        dispatch({ type: POST_USER, payload: user });
+        alert("Usuario Creado");
+      }
+    } catch (error) {
+      console.log(`Error: ${error}. Ya existe un usuario con ese email`);
+    }
+  };
+};
 export const getMaterial = () => {
   return async (dispatch) => {
     try {
@@ -217,21 +278,6 @@ export const getUsers = () => {
       });
     } catch (error) {
       alert("No se encontraron usuarios");
-    }
-  };
-};
-
-export const postUser = (payload) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.post(`${apiUrl}/user`, payload);
-      const user = response.data;
-      if (response.status === 200) {
-        dispatch({ type: POST_USER, payload: user });
-        alert("Usuario Creado");
-      }
-    } catch (error) {
-      console.log(`Error: ${error}. Ya existe un usuario con ese email`);
     }
   };
 };
@@ -335,6 +381,7 @@ export const postCart = (cart) => {
       const payload = data.data;
       // Guardar la información en el LocalStorage
       localStorage.setItem("cartId", payload.id);
+      console.log("entra payload", payload);
       localStorage.removeItem("cart");
 
       return dispatch({
@@ -390,6 +437,10 @@ export const setProductsCopy = (payload) => {
 
 export const setMaterial = (payload) => {
   return { type: SET_MATERIAL, payload };
+};
+
+export const setName = (payload) => {
+  return { type: SET_NAME, payload };
 };
 
 export const putEnableDisable = (id) => {

@@ -21,6 +21,9 @@ const CartProductCard = (props) => {
     props.setCheckIncrementAndDecrement(true);
   };
 
+
+  const productTotalPrice = props.totalPrice * props.count;
+
   return (
     <div className={style.divCard}>
       <img
@@ -33,7 +36,8 @@ const CartProductCard = (props) => {
           <strong>{props.name}</strong>
         </p>
         <p className={style.prop}>Cantidad: {props.count}</p>{" "}
-        <p className={style.prop}>Precio Total: {props.totalPrice}</p>
+        <p className={style.prop}>Precio unitario: ${props.totalPrice}</p>
+        <p className={style.prop}>Precio total: ${productTotalPrice}</p>
         <div className={style.counterContainer}>
           <button className={style.buttonCount} onClick={deleteProduct}>
             -

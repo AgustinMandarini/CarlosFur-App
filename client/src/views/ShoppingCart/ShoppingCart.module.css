@@ -43,5 +43,5 @@
   display: flex;
   justify-content: space-between; /* Para alinear el botón y el título horizontalmente */
   align-items: center; /* Para alinear el contenido verticalmente al centro */
-  padding: 1rem; /* Agrega relleno para espacio alrededor del contenido */
+  padding: 1rem; /* Agrega relleno para espacio alrededor del contenido; */
 }

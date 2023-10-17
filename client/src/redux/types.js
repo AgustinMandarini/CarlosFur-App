@@ -66,4 +66,5 @@ module.exports = {
   POST_COLOR,
   POST_MATERIAL,
   POST_PRODUCTTYPE,
+  SET_NAME
 };

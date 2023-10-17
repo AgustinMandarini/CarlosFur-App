@@ -22,7 +22,7 @@
   transform: scale(1.02); /* Cambia el tamaño al pasar el mouse (opcional) */
 }
 
-/* Estilos responsive */
+/* Estilos responsive! */
 @media (max-width: 768px) {
   .container {
     width: 100%;

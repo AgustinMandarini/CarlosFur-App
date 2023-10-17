@@ -31,8 +31,8 @@ import {
   ADMIN_ENABLEDISABLE,
   POST_COLOR,
   POST_MATERIAL,
-  POST_PRODUCTTYPE
-
+  POST_PRODUCTTYPE,
+  SET_NAME,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -85,7 +85,7 @@ export const postProduct = (payload) => {
 export const putProduct = (id, edit) => {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`${apiUrl}/product/${id}`,edit);
+      const response = await axios.put(`${apiUrl}/product/${id}`, edit);
       const product = response.data;
       dispatch({
         type: PUT_PRODUCT,
@@ -178,42 +178,42 @@ export const postColor = (payload) => {
     try {
       const response = await axios.post(`${apiUrl}/color`, payload);
       const color = response.data;
-  
-        dispatch({ type: POST_COLOR, payload: color });
-        alert("Color Creado");
-      
+
+      dispatch({ type: POST_COLOR, payload: color });
+      alert("Color Creado");
     } catch (error) {
-      alert("No se pudo crear el color: ",error);
+      alert("No se pudo crear el color: ", error);
     }
-}}
+  };
+};
 
 export const postMaterial = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(`${apiUrl}/material`, payload);
       const material = response.data;
-  
-        dispatch({ type: POST_MATERIAL, payload: material });
-        alert("Material Creado");
-      
+
+      dispatch({ type: POST_MATERIAL, payload: material });
+      alert("Material Creado");
     } catch (error) {
-      alert("No se pudo crear el Material: ",error);
+      alert("No se pudo crear el Material: ", error);
     }
-}}
+  };
+};
 
 export const postProductType = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(`${apiUrl}/productType`, payload);
       const productType = response.data;
-  
-        dispatch({ type: POST_PRODUCTTYPE, payload: productType });
-        alert("Tipo de Producto Creado");
-      
+
+      dispatch({ type: POST_PRODUCTTYPE, payload: productType });
+      alert("Tipo de Producto Creado");
     } catch (error) {
-      alert("No se pudo crear el Material: ",error);
+      alert("No se pudo crear el Material: ", error);
     }
-}}
+  };
+};
 
 export const postUser = (payload) => {
   return async (dispatch) => {
@@ -281,8 +281,6 @@ export const getUsers = () => {
     }
   };
 };
-
-
 
 export const login = (payload) => {
   const accessToken = payload.accessToken;
@@ -383,6 +381,7 @@ export const postCart = (cart) => {
       const payload = data.data;
       // Guardar la información en el LocalStorage
       localStorage.setItem("cartId", payload.id);
+      console.log("entra payload", payload);
       localStorage.removeItem("cart");
 
       return dispatch({

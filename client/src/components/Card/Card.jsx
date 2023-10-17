@@ -39,21 +39,23 @@ const Card = (props) => {
     setProduct(0);
     handleUpdateCart();
   };
-
   const handleUpdateCart = () => {
-    const userParse = cartId != null && JSON.parse(user);
-    const cartIdParse = cartId != null && JSON.parse(cartId);
-    const newProducts = cartProducts.map((item) => ({
-      id: item.id,
-      quantity: item.count,
-    }));
+    // Verifica si user y cartId están definidos antes de analizarlos
+    if (user && cartId) {
+      const userParse = JSON.parse(user);
+      const cartIdParse = JSON.parse(cartId);
+      const newProducts = cartProducts.map((item) => ({
+        id: item.id,
+        quantity: item.count,
+      }));
 
-    const data = {
-      userId: userParse.userId,
-      products: newProducts,
-    };
-    if (isAuthenticated && cartIdParse) {
-      dispatch(updateCart(cartIdParse, data));
+      const data = {
+        userId: userParse.userId,
+        products: newProducts,
+      };
+      if (isAuthenticated && cartIdParse) {
+        dispatch(updateCart(cartIdParse, data));
+      }
     }
   };
 

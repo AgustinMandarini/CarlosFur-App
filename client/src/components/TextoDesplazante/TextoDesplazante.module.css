@@ -14,7 +14,7 @@
 .textoDesplazante span {
   animation: desplazamiento 12s linear infinite;
 }
-
+/* m */
 @keyframes desplazamiento {
   from {
     transform: translateX(200%);

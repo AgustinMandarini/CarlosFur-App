@@ -33,6 +33,7 @@ import {
   POST_MATERIAL,
   POST_PRODUCTTYPE,
   SET_NAME,
+  DELETE_CART_PRODUCT_DIRECT
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -374,6 +375,10 @@ export const postCartProduct = (payload) => {
 export const deleteCartProduct = (payload) => {
   return { type: DELETE_CART_PRODUCT, payload: payload };
 };
+
+export const deleteCartProductDirect = (payload) => {
+  return {type: DELETE_CART_PRODUCT_DIRECT, payload: payload}
+}
 export const postCart = (cart) => {
   return async (dispatch) => {
     try {

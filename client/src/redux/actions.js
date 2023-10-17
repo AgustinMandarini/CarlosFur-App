@@ -33,7 +33,6 @@ import {
   POST_MATERIAL,
   POST_PRODUCTTYPE,
   SET_NAME,
-
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -297,7 +296,6 @@ export const login = (payload) => {
         setToken(accessToken);
         //LOCALSTORAGE
         const userInfo = { userId: user.id, cartId: user.cartId };
-
         localStorage.setItem("user", JSON.stringify(userInfo));
         dispatch({
           type: LOGIN,
@@ -305,6 +303,7 @@ export const login = (payload) => {
         });
       }
     } catch (error) {
+      console.log(error);
       toast.error("La contraseña es incorrecta", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
@@ -381,6 +380,7 @@ export const postCart = (cart) => {
       const { data } = await axios.post(`${apiUrl}/cart`, cart);
       const payload = data.data;
       // Guardar la información en el LocalStorage
+
       localStorage.setItem("cartId", payload.id);
       console.log("entra payload", payload);
       localStorage.removeItem("cart");
@@ -416,6 +416,7 @@ export const updateCart = (cartId, cart) => {
   return async (dispatch) => {
     try {
       await axios.put(`${apiUrl}/cart/${cartId}`, cart);
+
       // Si es necesario, puedes actualizar el estado de Redux con el carrito actualizado
       // actualmente el put esta devolviendo {"status":200,"data":null}. Pero si se actualiza el card
       // dispatch({ type: UPDATE_CART, payload: updatedCart });

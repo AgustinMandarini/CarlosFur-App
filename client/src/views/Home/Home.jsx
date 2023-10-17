@@ -31,7 +31,8 @@ const Home = () => {
   const globalProducts = useSelector((state) => state.muebles); //trae todos los muebles
   const filters = useSelector((state) => state.filter); //
   const sort = useSelector((state) => state.sort);
-  // const materialList = useSelector((state) => state.materialState);
+  const nameState = useSelector((state) => state.nameState);
+
   // Paginado
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,28 +50,30 @@ const Home = () => {
   //Combinación de ordenamientos y filtros
   useEffect(
     () => {
-      filters.productType =
-        filters.productType === "allOptions" ? "" : filters.productType;
-      filters.material =
-        filters.material === "allOptions" ? "" : filters.material;
-      filters.color = filters.color === "allOptions" ? "" : filters.color;
+      if (nameState !== true) {
+        filters.productType =
+          filters.productType === "allOptions" ? "" : filters.productType;
+        filters.material =
+          filters.material === "allOptions" ? "" : filters.material;
+        filters.color = filters.color === "allOptions" ? "" : filters.color;
 
-      const uri = `http://localhost:3001/product?productTypeId=${
-        filters.productType
-      }&materialId=${filters.material}&colorId=${
-        filters.color
-      }&orderBy=price&orderDirection=${sort === "allOptions" ? "" : sort}`;
+        const uri = `http://localhost:3001/product?productTypeId=${
+          filters.productType
+        }&materialId=${filters.material}&colorId=${
+          filters.color
+        }&orderBy=price&orderDirection=${sort === "allOptions" ? "" : sort}`;
 
-      axios
-        .get(uri)
-        .then((response) => {
-          const list = response.data; // Array con el resultado del filtro
-          setProducts(list); // Actualizar el estado local
-          setCurrentPage(1);
-        })
-        .catch((error) => {
-          console.error("Error al hacer la solicitud:", error);
-        });
+        axios
+          .get(uri)
+          .then((response) => {
+            const list = response.data; // Array con el resultado del filtro
+            setProducts(list); // Actualizar el estado local
+            setCurrentPage(1);
+          })
+          .catch((error) => {
+            console.error("Error al hacer la solicitud:", error);
+          });
+      }
     },
     // eslint-disable-next-line
     [sort, filters.productType, filters.color, filters.material, filters.price]

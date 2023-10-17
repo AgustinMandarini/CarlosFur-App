@@ -92,10 +92,16 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
         className={style.cntnShoppingCart}
         placement="end"
       >
-        <Offcanvas.Header className={style.buttonClose} closeButton>
+        <Offcanvas.Header className={style.Header}>
           <Offcanvas.Title className={style.cartTittle}>
             CARRITO
           </Offcanvas.Title>
+          <button
+            className={`${style.customCloseButton} close`}
+            onClick={handleClose}
+          >
+            X
+          </button>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <CartProductContainer />

@@ -7,6 +7,9 @@ import { toast } from "react-toastify";
 import { postProduct } from "./../../../redux/actions";
 import style from "./CrearProducto.module.css";
 import validation from "./validation";
+import { IconSquareRoundedPlusFilled } from "@tabler/icons-react";
+import Tooltip from "react-bootstrap/Tooltip";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
 const CrearProducto = () => {
   const stateProductType = useSelector((state) => state.productType);
@@ -234,14 +237,23 @@ const CrearProducto = () => {
                   );
                 })}
             </Form.Select>
-            <Button variant="dark"> <Link to="/admin/crear/color">Crear Color</Link></Button>
+
             <Form.Text className={style.error}>
               {errors.color && formSubmitted ? <span>{errors.color}</span> : ""}
             </Form.Text>
           </div>
+          <OverlayTrigger overlay={<Tooltip>Crear un color</Tooltip>}>
+            <Link to="/admin/crear/color" className={style.link}>
+              <IconSquareRoundedPlusFilled className={style.icon} />
+            </Link>
+          </OverlayTrigger>
         </Form.Group>
+
         {/* //Material */}
-        <Form.Group className={style.formGroup} controlId="formBasicPassword">
+        <Form.Group
+          className={style.formGroupSpecial}
+          controlId="formBasicPassword"
+        >
           <Form.Label className={style.label} name="material">
             Material:
           </Form.Label>
@@ -263,7 +275,7 @@ const CrearProducto = () => {
                   );
                 })}
             </Form.Select>
-            <Button variant="dark"> <Link to="/admin/crear/material">Crear Material</Link></Button>
+
             <Form.Text className={style.error}>
               {errors.material && formSubmitted ? (
                 <span>{errors.material}</span>
@@ -272,6 +284,12 @@ const CrearProducto = () => {
               )}
             </Form.Text>
           </div>
+
+          <OverlayTrigger overlay={<Tooltip>Crear un material</Tooltip>}>
+            <Link to="/admin/crear/material" className={style.link}>
+              <IconSquareRoundedPlusFilled className={style.icon} />
+            </Link>
+          </OverlayTrigger>
         </Form.Group>
 
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
@@ -296,7 +314,7 @@ const CrearProducto = () => {
                   );
                 })}
             </Form.Select>
-            <Button variant="dark"> <Link to="/admin/crear/tipo-de-producto">Crear Tipo de Producto</Link></Button>
+
             <Form.Text className={style.error}>
               {errors.productType && formSubmitted ? (
                 <span>{errors.productType}</span>
@@ -305,6 +323,12 @@ const CrearProducto = () => {
               )}
             </Form.Text>
           </div>
+
+          <OverlayTrigger overlay={<Tooltip>Crear tipo</Tooltip>}>
+            <Link to="/admin/crear/tipo-de-producto" className={style.link}>
+              <IconSquareRoundedPlusFilled className={style.iconType} />
+            </Link>
+          </OverlayTrigger>
         </Form.Group>
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
           <Form.Label className={style.label}>Descripcion:</Form.Label>

@@ -53,7 +53,6 @@ const CartProductContainer = () => {
       }
     }
   }, [cartProducts]);
-
   return (
     <div className={style.cntnCart}>
       {cartProducts.length > 0 ? (
@@ -64,7 +63,7 @@ const CartProductContainer = () => {
                 id={m.id}
                 name={m.name}
                 count={m.count}
-                totalPrice={m.totalPrice}
+                totalPrice={m.price}
                 imagePath={m.imagePath}
                 setCheckIncrementAndDecrement={setCheckIncrementAndDecrement}
               />

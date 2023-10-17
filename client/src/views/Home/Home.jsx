@@ -9,7 +9,7 @@ import ToolBar from "../../components/ToolBar/ToolBar";
 import style from "./Home.module.css";
 import { useCheckUserExists } from "../../helpers/checkUserExist";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getCart, updateCart, postCart } from "../../redux/actions";
+import { getCart, postCart } from "../../redux/actions";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -77,15 +77,15 @@ const Home = () => {
   );
 
   useEffect(() => {
-    const cartIdParse = cartId != null && JSON.parse(cartId);
-    if (isAuthenticated && cartIdParse) {
+    const cartIdParse = cartId != null ? JSON.parse(cartId) : undefined;
+    if (isAuthenticated && cartIdParse != undefined) {
       dispatch(getCart(cartIdParse));
     }
   }, []);
 
   useEffect(() => {
     const userParse = cartId != null && JSON.parse(user);
-    const cartIdParse = cartId != null && JSON.parse(cartId);
+    const cartIdParse = cartId != null ? JSON.parse(cartId) : undefined;
     const newProducts = cartProducts.map((item) => ({
       id: item.id,
       quantity: item.count,
@@ -95,7 +95,11 @@ const Home = () => {
       userId: userParse.userId,
       products: newProducts,
     };
-    if (isAuthenticated && !cartIdParse) {
+    if (
+      isAuthenticated &&
+      cartIdParse === undefined &&
+      data.products.length > 0
+    ) {
       if (userParse.cartId === undefined) {
         dispatch(postCart(data));
       }

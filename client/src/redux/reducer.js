@@ -28,7 +28,11 @@ import {
   UPDATE_PRODUCT_COUNT_IN_CART,
   PUT_PRODUCT,
   DELETE_PRODUCT,
-  ADMIN_ENABLEDISABLE
+  ADMIN_ENABLEDISABLE,
+  POST_COLOR,
+  POST_MATERIAL,
+  POST_PRODUCTTYPE,
+  SET_NAME
 } from "./types";
 
 const initialState = {
@@ -36,16 +40,17 @@ const initialState = {
   allMuebles: [],
   detail: [],
   productType: [],
-  sort: "notSorted",
+  sort: "allOptions",
   filter: {
-    productType: "allProductTypes",
-    color: "allColors",
-    price: ["allPrices"],
-    material: "allMaterials",
+    productType: "allOptions",
+    color: "allOptions",
+    price: ["allOptions"],
+    material: "allOptions",
   },
   imageURL: null,
   colorState: [],
   materialState: [],
+  nameState: null,
   cartProducts: [],
   localStorage: [],
   allUsers: [],
@@ -108,10 +113,26 @@ const rootReducer = (state = initialState, action) => {
         muebles: action.payload,
       };
     case GET_CART:
+      const newProducts = action.payload.products.map((item) => {
+        const mueble = state.muebles.find((m) => m.id === item.id);
+
+        if (mueble) {
+          return {
+            id: item.id,
+            count: item.cart_products.product_quantity,
+            price: mueble.price,
+            name: mueble.name,
+            imagePath: mueble.imagePath,
+          };
+        }
+        return mueble;
+      });
+
       return {
         ...state,
-        cartProducts: action.payload,
+        cartProducts: newProducts,
       };
+
     case POST_CART_PRODUCT:
       const productId = action.payload;
       // Busca el producto en el carrito actual
@@ -210,6 +231,9 @@ const rootReducer = (state = initialState, action) => {
     case SET_SORT:
       return { ...state, sort: action.payload };
 
+    case SET_NAME:
+      return { ...state, nameState: action.payload };
+
     case SET_PRODUCT_TYPE:
       return {
         ...state,
@@ -245,6 +269,24 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         newUser: action.payload,
       };
+
+    case POST_COLOR:
+      return {
+        ...state,
+        colorState: action.payload,
+      }
+
+      case POST_MATERIAL:
+        return {
+          ...state,
+          materialState: action.payload
+        }
+
+    case POST_PRODUCTTYPE:
+      return {
+        ...state,
+        productType: action.payload
+      }
     case GET_USERS:
       return {
         ...state,
@@ -277,12 +319,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         localStorage: action.payload,
       };
-      case ADMIN_ENABLEDISABLE:
-        return {
-          ...state,
-          muebles: action.payload,
-          enabled_product: action.payload.enabled_product
-        }; 
+    case ADMIN_ENABLEDISABLE:
+      return {
+        ...state,
+        muebles: action.payload,
+        enabled_product: action.payload.enabled_product,
+      };
 
     default:
       return { ...state };

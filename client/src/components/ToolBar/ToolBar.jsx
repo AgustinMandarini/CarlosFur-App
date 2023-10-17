@@ -1,50 +1,49 @@
 // ToolBar.jsx
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
-import {useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setColor,
   setMaterial,
-  setPriceRange,
   setProductType,
   setSort,
 } from "../../redux/actions";
 import filter from "./../../imagenes/filter.png";
 import style from "./ToolBar.module.css";
 
-
 const ToolBar = () => {
   const location = useLocation();
 
   const productTypeList = useSelector((state) => state.productType);
   const materialList = useSelector((state) => state.materialState);
-  const productList = useSelector((state) => state.muebles);
   const coloresList = useSelector((state) => state.colorState);
-
+  const nameState = useSelector((state) => state.nameState);
   const [showFilters, setShowFilters] = useState(false);
 
   const toggleFilters = () => {
     setShowFilters(!showFilters);
   };
 
+  useEffect(() => {
+    if (nameState === true) {
+      const defaultOptionValue = "allOptions"; // Valor que debe coincidir con las opciones que quieres seleccionar
+
+      const selects = document.querySelectorAll(`.${style.select}`);
+      selects.forEach((select) => {
+        select.value = defaultOptionValue;
+      });
+
+      // Dispara manualmente los eventos "change" para que se refleje en el estado de Redux
+      selects.forEach((select) => {
+        const event = new Event("change", { bubbles: true });
+        select.dispatchEvent(event);
+      });
+    }
+  }, [nameState]);
+
   const productTypeNames = productTypeList.map((productType) => productType);
-
   const materialNames = materialList.map((material) => material);
-
-  const productPrices = productList.map((product) => product.price);
-
-  const sortedProductPrices = productPrices.sort(function (a, b) {
-    return a - b;
-  });
-
-  const chunkSize = Math.ceil(sortedProductPrices.length / 3);
-
-  const cheapPrices = sortedProductPrices.slice(0, chunkSize);
-  const middlePrices = sortedProductPrices.slice(chunkSize, 2 * chunkSize);
-  const highPrices = sortedProductPrices.slice(2 * chunkSize);
 
   const dispatch = useDispatch();
 
@@ -61,13 +60,9 @@ const ToolBar = () => {
   };
 
   const setFilterByMaterialHandler = (event) => {
-    console.log(event.target.value);
     dispatch(setMaterial(event.target.value));
   };
 
-  const setFilterByPriceHandler = (event) => {
-    dispatch(setPriceRange(event.target.value));
-  };
   return (
     <div className={style.cntnToolBar}>
       {location.pathname === "/home" && (
@@ -84,7 +79,7 @@ const ToolBar = () => {
                   size="sm"
                   className={style.select}
                 >
-                  <option value="allProductTypes">Tipo de ambiente</option>
+                  <option value="allOptions">Tipo de ambiente</option>
                   {productTypeNames &&
                     productTypeNames.map((productType) => (
                       <option value={productType.id} key={productType.id}>
@@ -100,7 +95,7 @@ const ToolBar = () => {
                   size="sm"
                   className={style.select}
                 >
-                  <option value="allMaterials">Todos los Materiales</option>
+                  <option value="allOptions">Todos los Materiales</option>
                   {materialNames &&
                     materialNames.map((material) => (
                       <option value={material.id} key={material.id}>
@@ -115,7 +110,7 @@ const ToolBar = () => {
                   size="sm"
                   className={style.select}
                 >
-                  <option value="allColors">Todos los Colores</option>
+                  <option value="allOptions">Todos los Colores</option>
                   {coloresList.map((color) => {
                     return (
                       <option value={color.id} key={color.id}>
@@ -132,7 +127,7 @@ const ToolBar = () => {
                   onChange={setSortProductsHandler}
                   className={style.select}
                 >
-                  <option value="notSorted">Ordenar...</option>
+                  <option value="allOptions">Ordenar...</option>
                   <option value="desc">Mayor precio</option>
                   <option value="asc">Menor precio</option>
                 </Form.Select>
@@ -143,7 +138,6 @@ const ToolBar = () => {
       )}
     </div>
   );
-  
 };
 
 export default ToolBar;

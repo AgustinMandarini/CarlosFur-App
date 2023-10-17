@@ -5,11 +5,16 @@ import React, { useState, useEffect } from "react";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useHistory } from "react-router-dom";
+
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 const REACT_APP_PUBLIC_MP_KEY = process.env.REACT_APP_PUBLIC_MP_KEY;
 
 const ShoppingCart = ({ show, handleClose, handleShow }) => {
   const cartProducts = useSelector((state) => state.cartProducts);
+  const { isAuthenticated } = useAuth0();
+  const history = useHistory();
 
   const [preferenceId, setPreferenceId] = useState(null);
 
@@ -55,11 +60,14 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
   };
 
   const handleBuy = async () => {
-    console.log("handleBuy ejecutado"); // Agrega esta línea
-
-    const id = await createPreference();
-    if (id) {
-      setPreferenceId(id);
+    if (isAuthenticated) {
+      const id = await createPreference();
+      if (id) {
+        setPreferenceId(id);
+      }
+    } else {
+      history.push("/logIn");
+      handleClose();
     }
   };
 
@@ -84,10 +92,16 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
         className={style.cntnShoppingCart}
         placement="end"
       >
-        <Offcanvas.Header closeButton>
+        <Offcanvas.Header className={style.Header}>
           <Offcanvas.Title className={style.cartTittle}>
             CARRITO
           </Offcanvas.Title>
+          <button
+            className={`${style.customCloseButton} close`}
+            onClick={handleClose}
+          >
+            X
+          </button>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <CartProductContainer />

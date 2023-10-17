@@ -1,24 +1,25 @@
 .textoDesplazante {
-    width: 100%;
-    height: 20px;
-    background-color: #000000;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    white-space: nowrap;
+  width: 100%;
+  height: 20px;
+  background-color: #000000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.textoDesplazante span {
+  animation: desplazamiento 12s linear infinite;
+}
+/* m */
+@keyframes desplazamiento {
+  from {
+    transform: translateX(200%);
   }
-  
-  .textoDesplazante span {
-    animation: desplazamiento 6s linear infinite;
+  to {
+    transform: translateX(-100%);
   }
-  
-  @keyframes desplazamiento {
-    from {
-      transform: translateX(200%);
-    }
-    to {
-      transform: translateX(-100%);
-    }
-  }
-  
+}

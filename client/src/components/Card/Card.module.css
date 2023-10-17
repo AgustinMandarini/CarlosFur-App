@@ -17,9 +17,11 @@
 .imgCard {
   height: 15rem;
   width: 15rem;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 .container {
+  display: flex;
+  flex-direction: column;
   height: 20.3rem;
   justify-content: center;
   align-items: center;
@@ -30,11 +32,13 @@
 .divProps {
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  width: 12rem;
+  justify-content: start;
+  align-items: start;
 }
 .description {
   color: black;
-  font-weight: 300;
+  font-weight: 600;
   margin-bottom: 8px;
   font-size: 14px;
   height: 1.5rem;
@@ -50,9 +54,10 @@
 }
 .counterContainer {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   height: 2.6rem;
+  width: 14rem;
 }
 .buttonCount {
   color: white;
@@ -60,15 +65,16 @@
   border: 2px solid black;
   font-size: 12px;
   font-weight: 500;
-  margin: 1rem;
+  /* margin: 1rem; */
   background-color: black;
   justify-content: center;
   align-items: center;
+  width: 15rem;
 }
 .buttonCount:hover {
   background-color: #b1ada2a9;
-  font-weight: 600;
-  border: none;
+  /* font-weight: 600; */
+  border: white;
   color: black;
 }
 

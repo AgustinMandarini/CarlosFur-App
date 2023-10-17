@@ -8,21 +8,20 @@
 .cntnCard {
   border-bottom: 1px solid rgba(0, 0, 0, 0.308);
   width: 70%;
-  margin: 3px;
+  margin: 3.5px;
   padding: 10px;
 }
 
 .p {
   color: black;
-  padding: 18px 18px 18px 18px;
   margin-top: 1.3rem;
-  /* background-color: black; */
   justify-content: start;
   align-items: start;
   font-size: 19px;
-  /* height: 1.9rem; */
-  width: 24rem;
+  width: 26rem;
   font-weight: 600;
+  letter-spacing: 0.6px;
+  margin-left: 12px;
 }
 .link {
   text-decoration: none;

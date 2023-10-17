@@ -9,6 +9,7 @@ import styles from "./LoginForm.module.css";
 import validation from "./validation";
 import axios from "axios";
 
+
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const LoginForm = () => {
@@ -16,6 +17,12 @@ const LoginForm = () => {
   const { loginWithRedirect } = useAuth0();
   const history = useHistory();
   const loggedUser = useSelector((state) => state.loggedUser);
+
+  
+  const mostrarNotificacionBienvenida = () => {
+    toast.success('Estas iniciando sesion en MSC Amoblamientos!');
+  };
+
 
   const handleLogin = async () => {
     await loginWithRedirect({
@@ -26,6 +33,7 @@ const LoginForm = () => {
         returnTo: "/home",
       },
     });
+    mostrarNotificacionBienvenida()
   };
 
   // Maneja el login desde el formulario (login local de nuestro server)
@@ -160,7 +168,9 @@ const LoginForm = () => {
                 className={styles.googleLogo}
               />
               Acceder con Google
+            
             </button>
+
             <span className={`${styles.text} ${styles.mt6}`}>
               ¿No tienes una cuenta?{" "}
               <Link to="/register" className={styles.link}>

@@ -100,9 +100,7 @@ const Home = () => {
       cartIdParse === undefined &&
       data.products.length > 0
     ) {
-      if (userParse.cartId === undefined) {
-        dispatch(postCart(data));
-      }
+      dispatch(postCart(data));
     }
   }, [cartProducts]);
 

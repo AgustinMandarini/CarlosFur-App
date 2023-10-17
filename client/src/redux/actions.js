@@ -305,7 +305,7 @@ export const login = (payload) => {
     } catch (error) {
       console.log(error);
       toast.error("La contraseña es incorrecta", {
-        position: toast.POSITION.TOP_CENTER,
+        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
       });
     }

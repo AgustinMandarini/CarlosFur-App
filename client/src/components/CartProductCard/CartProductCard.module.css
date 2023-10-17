@@ -58,9 +58,10 @@
 
 .buttonRemove {
   color: white;
-  padding: 0px 6px;
-  border: 2px solid black;
-  font-size: 12px;
+  padding: 0px 8px 0px 8px;
+  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
   font-weight: 500;
   background-color: black;
   margin-right: 5px; /* Espacio entre el botón "Quitar" y los otros botones */

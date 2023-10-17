@@ -59,11 +59,11 @@
 
 .dropdownContent {
   left: 40px;
-  top: 20px;
+  top: 26px;
   position: absolute;
   background-color: #ffffff;
-  width: 160px;
-  height: 160px;
+  width: 195px;
+  height: 195px;
   z-index: 1;
   margin-left: 6px;
   border: 1px solid black;

@@ -5,15 +5,15 @@ const deleteProduct = async (req) => {
   console.log(req.params);
     try {
 
-      const { productId } = req.params;
+      const { id } = req.params;
 
   
-      if (isNaN(productId)) {
+      if (isNaN(id)) {
         return { status: 400, data: { error: 'Invalid product ID' } };
       }
   
-      const product = await Product.findByPk(productId);
-  
+      const product = await Product.findByPk(id);
+      console.log(product)
       if (!product) {
         return { status: 404, data: { error: 'Product not found' } };
       }

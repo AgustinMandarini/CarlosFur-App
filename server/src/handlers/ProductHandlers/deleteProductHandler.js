@@ -3,7 +3,6 @@ const { deleteProduct } = require("../../controllers/ProductController/deletePro
 const deleteProductHandler = async (req, res) => {
   try {
     const { id } = req.params; 
-
     const result = await deleteProduct(id);
 
     return res.status(200).json(result);

@@ -11,14 +11,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { deleteProduct, putEnableDisable } from "./../../../redux/actions";
 import style from "./Productos.module.css";
+import { useEffect } from "react";
+import { getProductsAdmin } from "./../../../redux/actions";
 
 const Productos = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState(null);
+  const [reloadProducts, setReloadProducts] = useState(false);
 
-  const productos = useSelector((state) => state.muebles);
+  const productos = useSelector((state) => state.productsAdmin);
   const dispatch = useDispatch();
-console.log(productos);
+  // console.log(productos);
+  
   const handleDeleteProduct = (event) => {
     const id = event.target.value;
     setProductIdToDelete(id);
@@ -42,9 +46,12 @@ console.log(productos);
     dispatch(putEnableDisable(id));
   };
 
+  useEffect(() => {
+    dispatch(getProductsAdmin());
+     },[productIdToDelete]); //[producto]
+
   return (
     <div>
-  
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -53,7 +60,17 @@ console.log(productos);
             </th>
           </tr>
         </thead>
-      </Table>
+      </Table>{" "}
+      <div className={style.containerOrden}>
+        <span>
+          Ordenar Alfabeticamente:{" "}
+          <BootstrapSwitchButton
+            onstyle="success"
+            className={style.botonSwitch}
+            //checked={true}
+          />
+        </span>
+      </div>
       <Table striped bordered hover>
         <tbody>
           {Array.isArray(productos) &&
@@ -85,10 +102,8 @@ console.log(productos);
                     onstyle="success"
                     value={producto.id}
                     onChange={() => changeProductEnabled(producto.id)}
-                    checked={productos.enabled_product}
-                   
+                    checked={producto.enabled_product}
                   />
-               
                 </td>
                 <td>
                   <Button
@@ -103,7 +118,6 @@ console.log(productos);
             ))}
         </tbody>
       </Table>
-
       <Modal show={showDeleteModal} onHide={cancelDelete}>
         <Modal.Header closeButton>
           <Modal.Title>Confirmar Eliminación</Modal.Title>

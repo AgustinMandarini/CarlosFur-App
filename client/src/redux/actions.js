@@ -5,6 +5,7 @@ import {
   GET_DETAIL,
   GET_MATERIAL,
   GET_PRODUCTS,
+  GET_PRODUCTS_ADMIN,
   GET_PRODUCT_BY_NAME,
   GET_PRODUCT_TYPE,
   GET_USERS,
@@ -58,6 +59,17 @@ export const getProducts = () => {
   };
 };
 
+export const getProductsAdmin = () => {
+  return async function (dispatch) {
+    const apiData = await axios.get(`${apiUrl}/product/admin`);
+    const product = apiData.data;
+    return dispatch({
+      type: GET_PRODUCTS_ADMIN,
+      payload: product,
+    });
+  };
+};
+
 export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
@@ -85,6 +97,7 @@ export const postProduct = (payload) => {
 
 export const putProduct = (id, edit) => {
   return async (dispatch) => {
+    console.log(id, edit);
     try {
       const response = await axios.put(`${apiUrl}/product/${id}`, edit);
       const product = response.data;
@@ -181,7 +194,6 @@ export const postColor = (payload) => {
       const color = response.data;
 
       dispatch({ type: POST_COLOR, payload: color });
-      alert("Color Creado");
     } catch (error) {
       alert("No se pudo crear el color: ", error);
     }
@@ -195,7 +207,6 @@ export const postMaterial = (payload) => {
       const material = response.data;
 
       dispatch({ type: POST_MATERIAL, payload: material });
-      alert("Material Creado");
     } catch (error) {
       alert("No se pudo crear el Material: ", error);
     }
@@ -209,7 +220,6 @@ export const postProductType = (payload) => {
       const productType = response.data;
 
       dispatch({ type: POST_PRODUCTTYPE, payload: productType });
-      alert("Tipo de Producto Creado");
     } catch (error) {
       alert("No se pudo crear el Material: ", error);
     }
@@ -447,7 +457,7 @@ export const setName = (payload) => {
 export const putEnableDisable = (id) => {
   return async function (dispatch) {
     try {
-      const apiData = await axios.put(`${apiUrl}/product/${id}`);
+      const apiData = await axios.put(`${apiUrl}/product/enabledisable/${id}`);
       const putenable = apiData.data;
       dispatch({
         type: ADMIN_ENABLEDISABLE,

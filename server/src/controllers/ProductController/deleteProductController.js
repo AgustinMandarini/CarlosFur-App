@@ -1,30 +1,26 @@
 const { Product } = require('../../db');
 
+const deleteProduct = async (id) => {
 
-const deleteProduct = async (req) => {
-  console.log(req.params);
-    try {
-
-      const { productId } = req.params;
-
-  
-      if (isNaN(productId)) {
-        return { status: 400, data: { error: 'Invalid product ID' } };
-      }
-  
-      const product = await Product.findByPk(productId);
-  
-      if (!product) {
-        return { status: 404, data: { error: 'Product not found' } };
-      }
-  
-      await product.destroy();
-  
-      return { status: 204 };
-    } catch (error) {
-      console.error('Error in deleteProduct:', error);
-      return { status: 500, data: { error: 'Failed to delete product' } };
+  try {
+console.log(id);
+    if (isNaN(id)) {
+      return { status: 400, data: { error: 'Invalid product ID' } };
     }
-  };
+    const product = await Product.findByPk(id);
+
+    if (!product) {
+      return { status: 404, data: { error: 'Product not found' } };
+    }
+
+    await product.destroy();
+
+    return { status: 204 };
+  } catch (error) {
+    console.error('Error in deleteProduct:', error);
+    return { status: 500, data: { error: 'Failed to delete product' } };
+  }
+};
+
 
   module.exports = { deleteProduct  };

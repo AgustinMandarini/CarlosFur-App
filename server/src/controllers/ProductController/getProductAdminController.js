@@ -1,0 +1,57 @@
+
+const { Product, ProductType } = require("../../db.js");
+const { Op } = require("sequelize");
+
+const getProductAdminController = async (name, productTypeId, colorId, materialId, orderBy, orderDirection, enabled_product, minPrice, maxPrice) => { 
+  const query = {
+    include: [{ model: ProductType, attributes: ["name"] }],
+    attributes: {
+      exclude: ["productTypeId"],
+    },
+  };
+
+  // Filtrar por nombre si se proporciona
+  if (name) {
+    query.where.name = {
+      [Op.iLike]: `%${name}%`,
+    };
+  }
+
+  // Filtrar por tipo si se proporciona
+  if (productTypeId) {
+    query.where.productTypeId = productTypeId;
+  }
+
+  // Filtrar por color si se proporciona
+  if (colorId) {
+    query.where.colorId = colorId;
+  }
+
+  
+  // Filtrar por material si se proporciona
+  if (materialId) {
+    query.where.materialId = materialId;
+  }
+
+  // Filtrar por precio si se proporciona minPrice y maxPrice
+  if (minPrice !== undefined && maxPrice !== undefined) {
+    query.where.price = {
+      [Op.between]: [minPrice, maxPrice],
+    };
+  }
+
+  // Ordenar si se proporciona orderBy
+  if (orderBy) {
+    // Determinar la dirección de la ordenación
+    const direction = orderDirection === 'desc' ? 'DESC' : 'ASC';
+
+    // Agregar la ordenación al query
+    query.order = [[orderBy, direction]];
+  }
+
+  // Obtener productos según la consulta
+  const products = await Product.findAll(query);
+  return products;
+};
+
+module.exports = { getProductAdminController };

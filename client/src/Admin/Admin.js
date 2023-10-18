@@ -9,8 +9,16 @@ import CrearColor from "./views/CrearColor/CrearColor"
 import CrearMaterial from "./views/CrearMaterial/CrearMaterial"
 import CrearTipoProducto from "./views/CrearTipoProducto/CrearTipoProducto";
 import "./Admin.css";
+import { useEffect } from "react";
+import {getProductsAdmin} from "./../redux/actions"
+import { useDispatch } from "react-redux";
 
 function Admin() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+ dispatch(getProductsAdmin());
+  }, [dispatch]);
+ 
   return (
     <div className="Admin">
       <nav className="AdminNav">

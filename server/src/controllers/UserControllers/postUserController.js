@@ -25,8 +25,9 @@ const createUser = async (
       is_admin: false, // Siempre tiene false porque nadie puede ser admin
       enabled_user: true, // Esto es para cuando lo querés banear
     });
-    // Esta funcion envia un mail de bienvenida al email del nuevo usuario
-    await nodeMailerConfig(e_mail);
+    // Esta funcion envia un mail de bienvenida al email del nuevo usuario. El tercer argumento "wellcome", define el tipo de email
+    // que sera enviado
+    await nodeMailerConfig(e_mail, user_name, "wellcome");
     // Devuelve el nuevo usuario creado
     return {
       user_name,

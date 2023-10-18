@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import {postProductType } from "./../../../redux/actions";
 import style from "./CrearTipoProducto.module.css";
 import validation from "./validation";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 const CrearTipoProducto = () => {
 
@@ -12,6 +14,7 @@ const CrearTipoProducto = () => {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -27,11 +30,17 @@ const CrearTipoProducto = () => {
     if (Object.keys(validationErrors).length === 0) {
       // Los datos son válidos, puedes enviar el formulario
       dispatch(postProductType(form));
+      setModal(true);
     } else {
       // Mostrar errores en los campos
       setErrors(validationErrors);
     }
   };
+
+  
+  const handleAcept = () => {
+    setModal(false);
+  }
 
 
   return (
@@ -84,6 +93,16 @@ const CrearTipoProducto = () => {
           </button>
         )}
       </Form>
+      <Modal show={modal} >
+        <Modal.Header closeButton>
+          <Modal.Title>Tipo de Producto Creado</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleAcept}>
+            Aceptar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

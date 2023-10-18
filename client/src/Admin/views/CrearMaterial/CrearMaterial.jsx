@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import {postMaterial } from "./../../../redux/actions";
 import style from "./CrearMaterial.module.css";
 import validation from "./validation";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 const CrearProducto = () => {
 
@@ -12,6 +14,7 @@ const CrearProducto = () => {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -27,12 +30,17 @@ const CrearProducto = () => {
     if (Object.keys(validationErrors).length === 0) {
       // Los datos son válidos, puedes enviar el formulario
       dispatch(postMaterial(form));
+      setModal(true);
     } else {
       // Mostrar errores en los campos
       setErrors(validationErrors);
     }
   };
 
+
+  const handleAcept = () => {
+    setModal(false);
+  }
 
   return (
     <div className={style.cntnForm}>
@@ -84,6 +92,16 @@ const CrearProducto = () => {
           </button>
         )}
       </Form>
+      <Modal show={modal} >
+        <Modal.Header closeButton>
+          <Modal.Title>Material Creado</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleAcept}>
+            Aceptar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

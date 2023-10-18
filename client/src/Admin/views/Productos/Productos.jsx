@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -8,18 +8,18 @@ import Row from "react-bootstrap/Row";
 import Table from "react-bootstrap/Table";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import { deleteProduct, putEnableDisable } from "./../../../redux/actions";
+import { Link } from "react-router-dom"; // Cambiado a "react-router-dom"
+import { deleteProduct, putEnableDisable, getProductsAdmin } from "./../../../redux/actions"; // Agregada la importación de "getProductsAdmin"
 import style from "./Productos.module.css";
-import { IconTrash } from "@tabler/icons-react";
 
 const Productos = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState(null);
+  const [reloadProducts, setReloadProducts] = useState(false);
 
-  const productos = useSelector((state) => state.muebles);
+  const productos = useSelector((state) => state.productsAdmin);
   const dispatch = useDispatch();
-  console.log(productos);
+
   const handleDeleteProduct = (event) => {
     const id = event.target.value;
     setProductIdToDelete(id);
@@ -37,11 +37,14 @@ const Productos = () => {
     setProductIdToDelete(null);
     setShowDeleteModal(false);
   };
+
   const changeProductEnabled = (id) => {
-    // Llama a la acción putEnableDisable con el id del producto
-    //const id = event.target.value;
     dispatch(putEnableDisable(id));
   };
+
+  useEffect(() => {
+    dispatch(getProductsAdmin());
+  }, [productIdToDelete]);
 
   return (
     <div className={style.cntnProductos}>
@@ -88,18 +91,17 @@ const Productos = () => {
                       onstyle="success"
                       value={producto.id}
                       onChange={() => changeProductEnabled(producto.id)}
-                      checked={productos.enabled_product}
-                      className={style.button}
+                      checked={producto.enabled_product} // Cambiado a "producto.enabled_product"
                     />
                   </td>
                   <td>
-                    <button
-                      className={style.buttonDelete}
+                    <Button
+                      variant="outline-danger"
                       value={producto.id}
                       onClick={handleDeleteProduct}
                     >
-                      <IconTrash color="red" stroke="1.3" />
-                    </button>
+                      Eliminar
+                    </Button>{" "}
                   </td>
                 </tr>
               ))}
@@ -126,3 +128,4 @@ const Productos = () => {
 };
 
 export default Productos;
+

@@ -9,17 +9,20 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
+import Modal from "react-bootstrap/Modal";
 import validation from "./validation";
 
 
 const FormPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const stateDetail = useSelector((state) => state.detail);
   const stateProductType = useSelector((state) => state.productType);
   const stateColor = useSelector((state) => state.colorState);
   const stateMaterial = useSelector((state) => state.materialState);
-  const [form, setForm] = useState("");
+  const [form, setForm] = useState({});
   const [errors, setErrors] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [image, setImage] = useState(null);
@@ -27,6 +30,7 @@ const FormPage = () => {
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -38,18 +42,13 @@ const FormPage = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    console.log(id,form);
     setFormSubmitted(true);
-    const validationErrors = validation(id,form);
-    if (Object.keys(validationErrors).length === 0) {
-      // Los datos son válidos, puedes enviar el formulario
-      dispatch(putProduct(form));
-    } else {
-      // Mostrar errores en los campos
-      setErrors(validationErrors);
-    }
+      dispatch(putProduct(id,form));
+      setModal(true);
+   
   };
 
-  console.log(form);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -92,8 +91,20 @@ const FormPage = () => {
 
   useEffect(() => {
     dispatch(getDetail(id));
-  }, []);
-  const stateDetail = useSelector((state) => state.detail);
+    setForm({})
+    setForm({ name: stateDetail.name, 
+      price: stateDetail.price, 
+      height: stateDetail.height, 
+      depth: stateDetail.depth, 
+      width: stateDetail.width, 
+      weight: stateDetail.weight, 
+      stock: stateDetail.stock, 
+      colorId: stateDetail.colorId, 
+      materialId: stateDetail.materialId, 
+      productTypeId: stateDetail.productTypeId, 
+      description: stateDetail.description, 
+      imageBase64: null,})
+  }, [getDetail]);
 
   return (
     <div className={style.cntnForm}>
@@ -466,6 +477,16 @@ const FormPage = () => {
           </button>
         ))}
       </Form>
+      <Modal show={modal} >
+        <Modal.Header closeButton>
+          <Modal.Title>Producto Editado</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="secondary">
+            Aceptar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

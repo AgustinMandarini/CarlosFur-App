@@ -1,6 +1,7 @@
 //reducer.js
 import {
   GET_PRODUCTS,
+  GET_PRODUCTS_ADMIN,
   GET_DETAIL,
   GET_USERS,
   POST_PRODUCT,
@@ -38,6 +39,7 @@ import {
 
 const initialState = {
   muebles: [],
+  productsAdmin: [],
   allMuebles: [],
   detail: [],
   productType: [],
@@ -73,6 +75,14 @@ const rootReducer = (state = initialState, action) => {
         muebles: action.payload,
         allMuebles: action.payload,
       };
+
+    case GET_PRODUCTS_ADMIN:
+      return{
+        ...state,
+        productsAdmin: action.payload
+      }
+
+    
     case PUT_PRODUCT:
       return {};
     case GET_DETAIL:

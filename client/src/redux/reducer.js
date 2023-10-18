@@ -26,6 +26,14 @@ import {
   SET_MATERIAL,
   GET_CART,
   UPDATE_PRODUCT_COUNT_IN_CART,
+  PUT_PRODUCT,
+  DELETE_PRODUCT,
+  ADMIN_ENABLEDISABLE,
+  POST_COLOR,
+  POST_MATERIAL,
+  POST_PRODUCTTYPE,
+  SET_NAME,
+  DELETE_CART_PRODUCT_DIRECT
 } from "./types";
 
 const initialState = {
@@ -33,21 +41,23 @@ const initialState = {
   allMuebles: [],
   detail: [],
   productType: [],
-  sort: "notSorted",
+  sort: "allOptions",
   filter: {
-    productType: "allProductTypes",
-    color: "allColors",
-    price: ["allPrices"],
-    material: "allMaterials",
+    productType: "allOptions",
+    color: "allOptions",
+    price: ["allOptions"],
+    material: "allOptions",
   },
   imageURL: null,
   colorState: [],
   materialState: [],
+  nameState: null,
   cartProducts: [],
   localStorage: [],
   allUsers: [],
   userToken: null,
   loggedUser: null,
+  cartTotal: 0,
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -63,10 +73,17 @@ const rootReducer = (state = initialState, action) => {
         muebles: action.payload,
         allMuebles: action.payload,
       };
+    case PUT_PRODUCT:
+      return {};
     case GET_DETAIL:
       return {
         ...state,
         detail: action.payload,
+      };
+    case PUT_PRODUCT:
+      return {
+        ...state,
+        muebles: action.payload,
       };
 
     case SET_IMAGE_URL:
@@ -97,10 +114,26 @@ const rootReducer = (state = initialState, action) => {
         muebles: action.payload,
       };
     case GET_CART:
+      const newProducts = action.payload.products.map((item) => {
+        const mueble = state.muebles.find((m) => m.id === item.id);
+
+        if (mueble) {
+          return {
+            id: item.id,
+            count: item.cart_products.product_quantity,
+            price: mueble.price,
+            name: mueble.name,
+            imagePath: mueble.imagePath,
+          };
+        }
+        return mueble;
+      });
+
       return {
         ...state,
-        cartProducts: action.payload,
+        cartProducts: newProducts,
       };
+
     case POST_CART_PRODUCT:
       const productId = action.payload;
       // Busca el producto en el carrito actual
@@ -124,6 +157,8 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           cartProducts: [...state.cartProducts, { ...productToAdd, count: 1 }],
+          cartTotal:
+            state.cartTotal + action.payload.price * action.payload.quantity,
         };
       }
 
@@ -179,8 +214,13 @@ const rootReducer = (state = initialState, action) => {
         return newState;
       }
 
-    // Otros casos de reducción
 
+
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        muebles: action.payload,
+      };
     case DELETE_CART:
       localStorage.removeItem("cart");
       return {
@@ -194,6 +234,9 @@ const rootReducer = (state = initialState, action) => {
       };
     case SET_SORT:
       return { ...state, sort: action.payload };
+
+    case SET_NAME:
+      return { ...state, nameState: action.payload };
 
     case SET_PRODUCT_TYPE:
       return {
@@ -230,6 +273,24 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         newUser: action.payload,
       };
+
+    case POST_COLOR:
+      return {
+        ...state,
+        colorState: action.payload,
+      }
+
+      case POST_MATERIAL:
+        return {
+          ...state,
+          materialState: action.payload
+        }
+
+    case POST_PRODUCTTYPE:
+      return {
+        ...state,
+        productType: action.payload
+      }
     case GET_USERS:
       return {
         ...state,
@@ -262,9 +323,48 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         localStorage: action.payload,
       };
+    case ADMIN_ENABLEDISABLE:
+      return {
+        ...state,
+        muebles: action.payload,
+        enabled_product: action.payload.enabled_product,
+      };
 
     default:
       return { ...state };
+
+
+      case DELETE_CART_PRODUCT_DIRECT: {
+        const productId3 = action.payload;
+        const productToDelete = state.cartProducts.find(
+          (product) => product.id === productId3
+        );
+  
+        if (!productToDelete) {
+          return state; // No se hace nada si el producto no se encuentra
+        }
+  
+        if (productToDelete.count) {
+          // Si el count es menor o igual a 1, elimina el producto del carrito
+          const updatedCartProducts = state.cartProducts.filter(
+            (product) => product.id !== productId3
+          );
+  
+          // Actualiza el estado de Redux
+          const newState = {
+            ...state,
+            cartProducts: updatedCartProducts,
+          };
+  
+          // Actualiza el localStorage
+          localStorage.setItem(
+            "cartProducts",
+            JSON.stringify(updatedCartProducts)
+          );
+  
+          return newState;
+      }
+    }
   }
 };
 

@@ -1,13 +1,15 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  /* justify-content: space-around; */
   align-items: center;
+  align-content: center;
   background-color: #ffffff;
-  padding: 2em;
+  /* padding: 2em; */
   width: 30vh; /* Ancho inicial del Navbar vertical */
   height: 100vh;
-  border-right: #000000 0.2em solid;
+  border: #000000 0.1em solid;
+  background-image: url(../../../imagenes/backLanding.jpg);
   @media (max-width: 768px) {
     display: flex;
     flex-direction: row;
@@ -19,7 +21,72 @@
 }
 
 .logo {
-  width: 100px;
+  width: 160px;
   height: auto;
-  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.divLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-top: 30px;
+}
+.link {
+  display: flex;
+  margin: 26px;
+  text-decoration: none;
+  font-size: 19px;
+  color: rgb(0, 0, 0);
+  justify-content: center;
+  align-items: center;
+}
+.icon {
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+}
+.dropdown {
+  position: relative;
+  cursor: pointer;
+  margin: 26px;
+  text-decoration: none;
+  font-size: 19px;
+  color: rgb(0, 0, 0);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.dropdownContent {
+  left: 40px;
+  top: 26px;
+  position: absolute;
+  background-color: #ffffff;
+  width: 195px;
+  height: 195px;
+  z-index: 1;
+  margin-left: 6px;
+  border: 1px solid black;
+}
+
+.dropdownContent a {
+  color: #000000;
+  padding: 12px;
+  text-decoration: none;
+  display: flex;
+  justify-content: start;
+  font-size: 16px;
+}
+
+.dropdownContent a:hover {
+  background-color: #e9e9e9;
+}
+
+/* Estilo para ocultar el menú desplegable por defecto */
+.dropdownContent {
+  display: none;
+}
+
+.dropdown:hover .dropdownContent {
+  display: block;
 }

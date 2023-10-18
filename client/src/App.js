@@ -13,7 +13,6 @@ import "./App.css";
 import {
   About,
   Detail,
-  Form,
   Home,
   LandingPage,
   NavBar,
@@ -21,7 +20,7 @@ import {
   RegisterForm,
   LoginForm,
 } from "./views";
-import Admin from "./Admin/Admin"
+import Admin from "./Admin/Admin";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -36,9 +35,12 @@ function App() {
     isAuthenticated || localStorage.getItem("token") != null;
 
   useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const savedCart = localStorage.getItem("cart");
 
-    dispatch(loadCartFromLocalStorage(savedCart));
+    if (savedCart) {
+      const cartFromLocalStorage = JSON.parse(savedCart);
+      dispatch(loadCartFromLocalStorage(cartFromLocalStorage));
+    }
   }, [dispatch]);
 
   if (isLoading) {
@@ -49,19 +51,17 @@ function App() {
     );
   }
 
-
   const isAdminRoute = pathname.startsWith("/admin");
   // console.log(isAdminRoute);
   return (
     <div className="App">
-      {location.pathname !== "/" && !isAdminRoute  && <LoginRegisterBar />}
-      {location.pathname !== "/"  && !isAdminRoute && <NavBar />}
+      {location.pathname !== "/" && !isAdminRoute && <LoginRegisterBar />}
+      {location.pathname !== "/" && !isAdminRoute && <NavBar />}
 
       <ToastContainer />
       <Route exact path="/" component={LandingPage} />
       <Route path="/home" render={() => <Home />} />
       <Route path="/detail/:id" component={Detail} />
-      <Route path="/create" component={Form} />
       <Route path="/about" component={About} />
       <GuardedRoute
         path="/shoppingcart"

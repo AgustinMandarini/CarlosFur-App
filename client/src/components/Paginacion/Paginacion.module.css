@@ -9,19 +9,6 @@
   margin-bottom: 1em;
 }
 
-/* .botonActivo{
-  background-color:black;
-  color:black;
-}
-.botonInactivo {
-  color: black;
-  background:black !important;
-}
-.numberPaginado {
-  color: black !important;
-  background:black !important;
-} */
-
 @media screen and (max-width: 768px) {
   .container button {
     padding: 3px 8px;

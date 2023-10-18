@@ -3,9 +3,10 @@ const { putProductController } = require("../../controllers/ProductController/pu
 const putProductHandler = async (req, res) => {
   try {
     const { id } = req.params; // Obtén el ID del producto de la solicitud
+    const requestData = req.body;
+    const result = await putProductController(id, requestData);
+    
   
-    const result = await putProductController(id);
-
     if (!result) {
       res.status(404).json({ message: 'Producto no encontrado' });
       return;

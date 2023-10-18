@@ -1,10 +1,12 @@
 .Admin {
   display: flex;
+  justify-content: center;
+  /* align-items: center; */
 }
 
 .AdminNav {
-  flex: 1; /* Ocupa el 100% del ancho disponible en la parte izquierda */
-  padding: 16px; /* Añade espaciado si es necesario */
+  /* Ocupa el 100% del ancho disponible en la parte izquierda */
+  padding: 1px; /* Añade espaciado si es necesario */
 }
 
 .AdminNav ul {
@@ -18,5 +20,5 @@
 
 .AdminContent {
   flex: 3; /* Ocupa el 100% del ancho disponible en la parte derecha */
-  padding: 16px; /* Añade espaciado si es necesario */
+  padding: 16px;
 }

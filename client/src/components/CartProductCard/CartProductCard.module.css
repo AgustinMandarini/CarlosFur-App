@@ -1,6 +1,6 @@
 .divCard {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: start;
   margin: 6px;
@@ -8,12 +8,14 @@
 .counterContainer {
   display: flex;
   align-items: start;
-  justify-content: center;
+  justify-content: start;
   height: 2.6rem;
+  margin-top: 0.3rem;
 }
+/* m */
 .buttonCount {
   color: white;
-  padding: 1px 9px 1px 9px;
+  padding: 0px 8px 0px 8px;
   border: 2px solid black;
   font-size: 12px;
   font-weight: 500;
@@ -33,4 +35,42 @@
 .prop {
   height: 0.5rem;
   font-size: 14px;
+}
+.propsCartCard {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  margin-left: 15px;
+  height: 126px;
+}
+.img {
+  width: 100px; /* Tamaño deseado para ambas imágenes */
+  height: 100px; /* Tamaño deseado para ambas imágenes */
+  border: 1px solid black;
+  object-fit: contain;
+}
+.img2 {
+  width: 126px; /* Tamaño deseado para ambas imágenes */
+  height: 126px; /* Tamaño deseado para ambas imágenes */
+  border: 1px solid black;
+  object-fit: contain;
+}
+
+.buttonRemove {
+  color: white;
+  padding: 0px 8px 0px 8px;
+  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  background-color: black;
+  margin-right: 5px; /* Espacio entre el botón "Quitar" y los otros botones */
+}
+
+.buttonRemove:hover {
+  background-color: #b1ada2a9;
+  font-weight: 600;
+  border: none;
+  color: black;
+  cursor: pointer;
 }

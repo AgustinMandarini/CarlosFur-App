@@ -9,6 +9,7 @@ import styles from "./LoginForm.module.css";
 import validation from "./validation";
 import axios from "axios";
 
+
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const LoginForm = () => {
@@ -16,6 +17,14 @@ const LoginForm = () => {
   const { loginWithRedirect } = useAuth0();
   const history = useHistory();
   const loggedUser = useSelector((state) => state.loggedUser);
+
+  
+  const mostrarNotificacionBienvenida = () => {
+    toast.success('Iniciando Sesión', {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
+  };
+
 
   const handleLogin = async () => {
     await loginWithRedirect({
@@ -26,10 +35,17 @@ const LoginForm = () => {
         returnTo: "/home",
       },
     });
+    mostrarNotificacionBienvenida()
   };
 
   // Maneja el login desde el formulario (login local de nuestro server)
   const handleLocalLogin = async () => {
+
+    const saveUserInfoToLocalStorage = (userId, cartId) => {
+      const user = { userId, cartId };
+      localStorage.setItem('user', JSON.stringify(user));
+    };
+
     const userInfo = { e_mail: form.e_mail, password: form.password };
     if (form.e_mail && form.password) {
       try {
@@ -46,6 +62,7 @@ const LoginForm = () => {
         if (Object.keys(data).length > 0 && data.user.e_mail === form.e_mail) {
           // Si el usuario está creado, lo tiene que logear
           dispatch(login(userInfoWithToken));
+          saveUserInfoToLocalStorage(data.user.id, data.user.cartId);
         }
       } catch (error) {
         toast.error("El usuario no se encuentra registrado", {
@@ -153,7 +170,9 @@ const LoginForm = () => {
                 className={styles.googleLogo}
               />
               Acceder con Google
+            
             </button>
+
             <span className={`${styles.text} ${styles.mt6}`}>
               ¿No tienes una cuenta?{" "}
               <Link to="/register" className={styles.link}>

@@ -4,6 +4,7 @@ import { getUsers } from "../../../redux/actions";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
+import style from "./Usuarios.module.css";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -24,7 +25,7 @@ const Users = () => {
     }
   };
   return (
-    <div>
+    <div className={style.cntnUsers}>
       <h1>Usuarios registrados</h1>
       <Table striped bordered hover>
         <thead>

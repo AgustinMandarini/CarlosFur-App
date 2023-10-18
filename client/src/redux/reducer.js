@@ -33,7 +33,8 @@ import {
   POST_COLOR,
   POST_MATERIAL,
   POST_PRODUCTTYPE,
-  SET_NAME
+  SET_NAME,
+  DELETE_CART_PRODUCT_DIRECT
 } from "./types";
 
 const initialState = {
@@ -222,6 +223,9 @@ const rootReducer = (state = initialState, action) => {
 
         return newState;
       }
+
+
+
     case DELETE_PRODUCT:
       return {
         ...state,
@@ -338,6 +342,39 @@ const rootReducer = (state = initialState, action) => {
 
     default:
       return { ...state };
+
+
+      case DELETE_CART_PRODUCT_DIRECT: {
+        const productId3 = action.payload;
+        const productToDelete = state.cartProducts.find(
+          (product) => product.id === productId3
+        );
+  
+        if (!productToDelete) {
+          return state; // No se hace nada si el producto no se encuentra
+        }
+  
+        if (productToDelete.count) {
+          // Si el count es menor o igual a 1, elimina el producto del carrito
+          const updatedCartProducts = state.cartProducts.filter(
+            (product) => product.id !== productId3
+          );
+  
+          // Actualiza el estado de Redux
+          const newState = {
+            ...state,
+            cartProducts: updatedCartProducts,
+          };
+  
+          // Actualiza el localStorage
+          localStorage.setItem(
+            "cartProducts",
+            JSON.stringify(updatedCartProducts)
+          );
+  
+          return newState;
+      }
+    }
   }
 };
 

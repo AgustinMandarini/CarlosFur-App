@@ -5,8 +5,13 @@ const putProductController = async (id, requestData) => {
     const product = await Product.findByPk(id);
     
     const {name, price, height, depth, width, weight, descrption, stock, productTypeId, colorId, materialId, imagePath, enabled_product } = requestData
-   product.name = name;
-   product.price = price;
+   if(name){
+    product.name = name;
+   }
+    if(price){
+      product.price = price;
+    }
+   
    product.height = height;
    product.depth = depth;
    product.width = width;

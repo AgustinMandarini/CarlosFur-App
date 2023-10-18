@@ -1,14 +1,13 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
-import {postProductType } from "./../../../redux/actions";
+import { postProductType } from "./../../../redux/actions";
 import style from "./CrearTipoProducto.module.css";
 import validation from "./validation";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 const CrearTipoProducto = () => {
-
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({});
@@ -37,18 +36,16 @@ const CrearTipoProducto = () => {
     }
   };
 
-  
   const handleAcept = () => {
     setModal(false);
-  }
-
+  };
 
   return (
     <div className={style.cntnForm}>
       <p className={style.tittle}>Nuevo Tipo de Producto:</p>
       <Form className={style.formConteiner} onSubmit={submitHandler}>
         <Form.Group className={style.formGroup} controlId="formBasicEmail">
-          <Form.Label className={style.label}>Nombre del Tipo de Producto: </Form.Label>
+          <Form.Label className={style.label}>Tipo de Producto: </Form.Label>
           <div className={style.divinputError}>
             <Form.Control
               size="sm"
@@ -77,12 +74,15 @@ const CrearTipoProducto = () => {
               className={style.input}
             />
             <Form.Text className={style.error}>
-              {errors.description && formSubmitted ? <span>{errors.description}</span> : ""}{" "}
+              {errors.description && formSubmitted ? (
+                <span>{errors.description}</span>
+              ) : (
+                ""
+              )}{" "}
             </Form.Text>
           </div>
         </Form.Group>
 
-       
         {Object.values(errors).every((error) => error === "") ? (
           <button type="submit" className={style.botonSubmit}>
             Enviar
@@ -93,7 +93,7 @@ const CrearTipoProducto = () => {
           </button>
         )}
       </Form>
-      <Modal show={modal} >
+      <Modal show={modal}>
         <Modal.Header closeButton>
           <Modal.Title>Tipo de Producto Creado</Modal.Title>
         </Modal.Header>

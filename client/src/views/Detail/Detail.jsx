@@ -133,14 +133,18 @@ const Detail = () => {
             <p className={style.p}>
               Color: {getColorName(stateDetail.colorId)}
             </p>
-            <div className={style.counterContainer}>
-              <button className={style.buttonCount} onClick={decreaseCounter}>
-                -
-              </button>
-              <p className={style.counterValue}>{countForProductID}</p>
-              <button className={style.buttonCount} onClick={increaseCounter}>
-                +
-              </button>
+            <div className={style.butttons}>
+              <div className={style.counterContainer}>
+                <button className={style.buttonCount} onClick={decreaseCounter}>
+                  -
+                </button>
+
+                <p className={style.propCounter}>{countForProductID}</p>
+
+                <button className={style.buttonCount} onClick={increaseCounter}>
+                  +
+                </button>
+              </div>
             </div>
           </div>
         </div>

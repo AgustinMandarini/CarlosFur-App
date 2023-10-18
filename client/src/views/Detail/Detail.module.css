@@ -64,9 +64,12 @@
 }
 .counterContainer {
   display: flex;
-  align-items: left;
-  margin-top: 7rem;
-  height: 1.7rem;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  width: 6.9rem;
+  margin-right: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.404);
 }
 .buttonCount {
   color: white;
@@ -100,4 +103,41 @@
 .ImgandData {
   display: flex;
   flex-direction: row;
+}
+.butttons {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-content: start;
+  width: 130px;
+  margin-top: 0.8rem;
+  padding: 0.2rem;
+}
+.propCounter {
+  display: flex;
+  color: black;
+  padding: 0px 8px 0px 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 800;
+  margin: 0.3rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.7rem;
+  margin-top: 0.7rem;
+  background-color: white;
+}
+.buttonCount {
+  display: flex;
+  color: black;
+  padding: 0px 8px 0px 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 800;
+  margin: 0.3rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.7rem;
+  margin-top: 0.7rem;
+  background-color: white;
 }

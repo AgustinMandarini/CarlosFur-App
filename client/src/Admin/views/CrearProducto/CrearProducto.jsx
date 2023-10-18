@@ -267,6 +267,7 @@ const CrearProducto = () => {
             >
               <option>Seleccionar material</option>
               {stateMaterial &&
+                stateMaterial == !undefined &&
                 stateMaterial.map((tipo, index) => {
                   return (
                     <option key={index} value={tipo.id} name={tipo.name}>

@@ -15,7 +15,7 @@ import Modal from "react-bootstrap/Modal";
 import validation from "./validation";
 
 
-const FormPage = () => {
+const EditarProducto = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const stateDetail = useSelector((state) => state.detail);
@@ -46,7 +46,6 @@ const FormPage = () => {
     setFormSubmitted(true);
       dispatch(putProduct(id,form));
       setModal(true);
-   
   };
 
 
@@ -82,7 +81,7 @@ const FormPage = () => {
   const toggleEdit = () => {
     setShowFilters(!showFilters);
   };
-
+//hola
   const handleSelectMuebles = (event) => {
     const property = event.target.name;
     let value = event.target.value;
@@ -104,7 +103,7 @@ const FormPage = () => {
       productTypeId: stateDetail.productTypeId, 
       description: stateDetail.description, 
       imageBase64: null,})
-  }, [getDetail]);
+  }, [getDetail,stateDetail]);
 
   return (
     <div className={style.cntnForm}>
@@ -117,7 +116,7 @@ const FormPage = () => {
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Nombre: </Form.Label>
-            <Form.Label className={style.label}>{stateDetail.name}</Form.Label>
+            <Form.Label className={style.label}>{stateDetail && stateDetail.name ? stateDetail.name : 'Nombre no disponible'}</Form.Label>
             {showFilters && (
               <div className={style.divinputError}>
                 <Form.Label className={style.label}>
@@ -141,7 +140,7 @@ const FormPage = () => {
           {/*PRECIO*/}
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Precio: </Form.Label>
-            <Form.Label className={style.label}>{stateDetail.price}</Form.Label>
+            <Form.Label className={style.label}>{stateDetail && stateDetail.price}</Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
@@ -167,7 +166,7 @@ const FormPage = () => {
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Altura: </Form.Label>
             <Form.Label className={style.label}>
-              {stateDetail.height}
+              {stateDetail && stateDetail.height}
             </Form.Label>
 
             {showFilters && (
@@ -193,7 +192,7 @@ const FormPage = () => {
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Profundida</Form.Label>
-            <Form.Label className={style.label}>{stateDetail.depth}</Form.Label>
+            <Form.Label className={style.label}>{stateDetail && stateDetail.depth}</Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
@@ -218,7 +217,7 @@ const FormPage = () => {
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Ancho:</Form.Label>
-            <Form.Label className={style.label}>{stateDetail.width}</Form.Label>
+            <Form.Label className={style.label}>{stateDetail && stateDetail.width}</Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
@@ -244,7 +243,7 @@ const FormPage = () => {
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Peso:</Form.Label>
             <Form.Label className={style.label}>
-              {stateDetail.weight}
+              {stateDetail && stateDetail.weight}
             </Form.Label>
 
             {showFilters && (
@@ -270,7 +269,7 @@ const FormPage = () => {
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Stock:</Form.Label>
-            <Form.Label className={style.label}>{stateDetail.stock}</Form.Label>
+            <Form.Label className={style.label}>{stateDetail && stateDetail.stock}</Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
@@ -295,7 +294,7 @@ const FormPage = () => {
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Color:</Form.Label>
-            <Form.Label className={style.label}>{stateDetail.color}</Form.Label>
+            <Form.Label className={style.label}>{stateDetail && stateDetail.color}</Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
@@ -326,7 +325,7 @@ const FormPage = () => {
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Material:</Form.Label>
             <Form.Label className={style.label}>
-              {stateDetail.materialId}
+              {stateDetail && stateDetail.materialId}
             </Form.Label>
 
             {showFilters && (
@@ -358,7 +357,7 @@ const FormPage = () => {
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Tipo de Producto:</Form.Label>
             <Form.Label className={style.label}>
-              {stateDetail.productTypeId}
+              {stateDetail && stateDetail.productTypeId}
             </Form.Label>
 
             {showFilters && (
@@ -390,7 +389,7 @@ const FormPage = () => {
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Descripcion:</Form.Label>
             <Form.Label className={style.label}>
-              {stateDetail.description}
+              {stateDetail && stateDetail.description}
             </Form.Label>
 
             {showFilters && (
@@ -417,7 +416,7 @@ const FormPage = () => {
             <Container>
               <Row>
                 <Col xs={8} md={3}>
-                  <Image src={stateDetail.imagePath} thumbnail />
+                  <Image src={stateDetail && stateDetail.imagePath} thumbnail />
                 </Col>
               </Row>
             </Container>
@@ -491,4 +490,4 @@ const FormPage = () => {
   );
 };
 
-export default FormPage;
+export default EditarProducto;

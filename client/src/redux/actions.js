@@ -2,6 +2,7 @@
 import {
   DELETE_CART_PRODUCT,
   GET_COLOR,
+  GET_COLOR_BYID,
   GET_DETAIL,
   GET_MATERIAL,
   GET_PRODUCTS,
@@ -182,10 +183,25 @@ export const getColor = () => {
         payload: color,
       });
     } catch (error) {
-      alert("No se encontro color");
+      alert("No se encontraron los colores");
     }
   };
 };
+
+export const getColorById = () => {
+  return async (dispatch) => {
+    try {
+       const response = await axios.get(`${apiUrl}/color/${id}`);
+       const color = response.data;
+       return dispatch({
+        type:GET_COLOR_BYID,
+        payload: color
+       })
+    } catch (error) {
+      alert("No se encontro el color");
+    }
+  }
+}
 
 export const postColor = (payload) => {
   return async (dispatch) => {

@@ -9,7 +9,11 @@ import Table from "react-bootstrap/Table";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"; // Cambiado a "react-router-dom"
-import { deleteProduct, putEnableDisable, getProductsAdmin } from "./../../../redux/actions"; // Agregada la importación de "getProductsAdmin"
+import {
+  deleteProduct,
+  putEnableDisable,
+  getProductsAdmin,
+} from "./../../../redux/actions"; // Agregada la importación de "getProductsAdmin"
 import style from "./Productos.module.css";
 
 const Productos = () => {
@@ -79,12 +83,15 @@ const Productos = () => {
                   <td>{producto.name}</td>
 
                   <td>
-                    <Link
-                      to={`/admin/productos/editar/${producto.id}`}
-                      className={style.link}
-                    >
-                      Editar
-                    </Link>
+                    <Button variant="outline-warning">
+                      {" "}
+                      <Link
+                        to={`/admin/productos/editar/${producto.id}`}
+                        className={style.link}
+                      >
+                        Editar
+                      </Link>
+                    </Button>{" "}
                   </td>
                   <td>
                     <BootstrapSwitchButton
@@ -128,4 +135,3 @@ const Productos = () => {
 };
 
 export default Productos;
-

@@ -9,19 +9,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 45rem;
+  justify-content: center;
+  align-content: center;
+  width: 26rem;
   border: 1px solid black;
-  padding-top: 2.3rem;
+  padding: 3rem;
   background-color: white;
   box-shadow: 8px 0px 10px rgba(148, 133, 122, 0.8);
 }
 .formGroup {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.6rem !important;
+  margin-bottom: 2px solid rgba(148, 133, 122, 0.8) !important;
 }
 .editContainer {
-  margin: 0.5em;
+  margin: 0.4em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.226);
+}
+.editContainerImg {
+  margin: 0.2em;
+  height: 8rem !important;
 }
 .editContainer .input {
   height: 0.1rem !important;
@@ -56,6 +63,11 @@
   color: red !important;
   max-width: 12rem;
 }
+.img {
+  width: 250px;
+  height: 150px;
+  background-color: red;
+}
 .tittle {
   font-size: 2.6rem;
   font-weight: 600;
@@ -65,9 +77,16 @@
 .label {
   font-size: 1.1rem !important;
   font-weight: 400;
-  width: 90px; /* Ancho fijo para los labels */
+  width: 150px; /* Ancho fijo para los labels */
   text-align: start;
   margin-right: 5px;
+}
+.labelImg {
+  width: 140px; /* Ancho fijo para los labels */
+  text-align: start;
+  margin-right: 2px;
+  font-size: 1.1rem !important;
+  font-weight: 400;
 }
 .button {
   justify-content: center;
@@ -156,9 +175,15 @@
   flex-direction: row;
   width: 1.4em;
   height: 1.4em;
+  position: absolute;
+  top: 9.3em;
+  right: 25.6em;
 }
 .edit:hover {
   background-color: #ffffffa9; /* Cambia el color al pasar el mouse (puedes ajustar el color) */
 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.778);
+}
+.conteinerImg {
+  height: 200px;
 }

@@ -14,7 +14,6 @@ import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import validation from "./validation";
 
-
 const FormPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -42,13 +41,11 @@ const FormPage = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(id,form);
+    console.log(id, form);
     setFormSubmitted(true);
-      dispatch(putProduct(id,form));
-      setModal(true);
-   
+    dispatch(putProduct(id, form));
+    setModal(true);
   };
-
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -91,19 +88,21 @@ const FormPage = () => {
 
   useEffect(() => {
     dispatch(getDetail(id));
-    setForm({})
-    setForm({ name: stateDetail.name, 
-      price: stateDetail.price, 
-      height: stateDetail.height, 
-      depth: stateDetail.depth, 
-      width: stateDetail.width, 
-      weight: stateDetail.weight, 
-      stock: stateDetail.stock, 
-      colorId: stateDetail.colorId, 
-      materialId: stateDetail.materialId, 
-      productTypeId: stateDetail.productTypeId, 
-      description: stateDetail.description, 
-      imageBase64: null,})
+    setForm({});
+    setForm({
+      name: stateDetail.name,
+      price: stateDetail.price,
+      height: stateDetail.height,
+      depth: stateDetail.depth,
+      width: stateDetail.width,
+      weight: stateDetail.weight,
+      stock: stateDetail.stock,
+      colorId: stateDetail.colorId,
+      materialId: stateDetail.materialId,
+      productTypeId: stateDetail.productTypeId,
+      description: stateDetail.description,
+      imageBase64: null,
+    });
   }, [getDetail]);
 
   return (
@@ -413,11 +412,13 @@ const FormPage = () => {
         {/*IMAGEN*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Imagen:</Form.Label>
+            <Form.Label className={style.labelImg}>Imagen:</Form.Label>
             <Container>
               <Row>
-                <Col xs={8} md={3}>
-                  <Image src={stateDetail.imagePath} thumbnail />
+                <Col xs={10} md={3}>
+                  <Form.Label className={style.labelImg}>
+                    <Image src={stateDetail.imagePath} thumbnail />
+                  </Form.Label>
                 </Col>
               </Row>
             </Container>
@@ -466,25 +467,23 @@ const FormPage = () => {
           </Form.Group>
         </div>
 
-        {
-         showFilters && (Object.values(errors).every((error) => error === "") ? (
-          <button type="submit" className={style.botonSubmit}>
-            Enviar
-          </button>
-        ) : (
-          <button type="submit" className={style.botonSubmitOff}>
-            Enviar
-          </button>
-        ))}
+        {showFilters &&
+          (Object.values(errors).every((error) => error === "") ? (
+            <button type="submit" className={style.botonSubmit}>
+              Enviar
+            </button>
+          ) : (
+            <button type="submit" className={style.botonSubmitOff}>
+              Enviar
+            </button>
+          ))}
       </Form>
-      <Modal show={modal} >
+      <Modal show={modal}>
         <Modal.Header closeButton>
           <Modal.Title>Producto Editado</Modal.Title>
         </Modal.Header>
         <Modal.Footer>
-          <Button variant="secondary">
-            Aceptar
-          </Button>
+          <Button variant="secondary">Aceptar</Button>
         </Modal.Footer>
       </Modal>
     </div>

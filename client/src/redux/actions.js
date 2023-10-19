@@ -34,7 +34,7 @@ import {
   POST_MATERIAL,
   POST_PRODUCTTYPE,
   SET_NAME,
-  DELETE_CART_PRODUCT_DIRECT
+  DELETE_CART_PRODUCT_DIRECT,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -78,7 +78,7 @@ export const postProduct = (payload) => {
       if (response.status === 200) {
         dispatch({ type: POST_PRODUCT, payload: producto });
         toast.success("Producto Creado", {
-          position: toast.POSITION.TOP_RIGHT,
+          position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
         });
 
@@ -88,7 +88,7 @@ export const postProduct = (payload) => {
       }
     } catch (error) {
       toast.error("No se pudo crear el producto", {
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
       });
     }
@@ -387,8 +387,8 @@ export const deleteCartProduct = (payload) => {
 };
 
 export const deleteCartProductDirect = (payload) => {
-  return {type: DELETE_CART_PRODUCT_DIRECT, payload: payload}
-}
+  return { type: DELETE_CART_PRODUCT_DIRECT, payload: payload };
+};
 export const postCart = (cart) => {
   return async (dispatch) => {
     try {

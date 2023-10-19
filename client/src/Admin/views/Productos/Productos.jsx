@@ -9,7 +9,11 @@ import Table from "react-bootstrap/Table";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"; // Cambiado a "react-router-dom"
-import { deleteProduct, putEnableDisable, getProductsAdmin } from "./../../../redux/actions"; // Agregada la importación de "getProductsAdmin"
+import {
+  deleteProduct,
+  putEnableDisable,
+  getProductsAdmin,
+} from "./../../../redux/actions"; // Agregada la importación de "getProductsAdmin"
 import style from "./Productos.module.css";
 
 const Productos = () => {
@@ -63,7 +67,7 @@ const Productos = () => {
             {Array.isArray(productos) &&
               productos.map((producto) => (
                 <tr key={producto.id} className={style.td}>
-                  <td>
+                  <td className={style.cntnTr}>
                     <Container>
                       <Row className={style.td}>
                         <Col xs={10} md={6} className={style.td}>
@@ -76,9 +80,9 @@ const Productos = () => {
                       </Row>
                     </Container>
                   </td>
-                  <td>{producto.name}</td>
+                  <td className={style.cntnTr}>{producto.name}</td>
 
-                  <td>
+                  <td className={style.cntnTr}>
                     <Link
                       to={`/admin/productos/editar/${producto.id}`}
                       className={style.link}
@@ -86,22 +90,25 @@ const Productos = () => {
                       Editar
                     </Link>
                   </td>
-                  <td>
+                  <td className={style.cntnTr}>
                     <BootstrapSwitchButton
                       onstyle="success"
+                      height={15}
+                      width={60}
                       value={producto.id}
                       onChange={() => changeProductEnabled(producto.id)}
                       checked={producto.enabled_product} // Cambiado a "producto.enabled_product"
                     />
                   </td>
-                  <td>
+                  <td className={style.cntnTr}>
                     <Button
+                      className={style.butttonDelete}
                       variant="outline-danger"
                       value={producto.id}
                       onClick={handleDeleteProduct}
                     >
                       Eliminar
-                    </Button>{" "}
+                    </Button>
                   </td>
                 </tr>
               ))}
@@ -128,4 +135,3 @@ const Productos = () => {
 };
 
 export default Productos;
-

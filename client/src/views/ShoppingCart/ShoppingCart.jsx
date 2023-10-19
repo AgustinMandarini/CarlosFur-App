@@ -7,6 +7,7 @@ import axios from "axios";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 const REACT_APP_PUBLIC_MP_KEY = process.env.REACT_APP_PUBLIC_MP_KEY;
@@ -79,7 +80,10 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
       (collectionStatus === "approved" || status === "approved") &&
       (collectionStatus || status)
     ) {
-      alert("Compra exitosa!");
+      toast.success("Compra realizada", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+      });
     }
   }, []);
 

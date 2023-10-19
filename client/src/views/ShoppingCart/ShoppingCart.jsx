@@ -1,6 +1,6 @@
 import style from "./ShoppingCart.module.css";
 import CartProductContainer from "../../components/CartProductContainer/CartProductContainer";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
@@ -8,13 +8,17 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { emptyCart } from "../../redux/actions";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 const REACT_APP_PUBLIC_MP_KEY = process.env.REACT_APP_PUBLIC_MP_KEY;
+const CALLBACK_URL = process.env.REACT_APP_AUTH0_CALLBACK_URL;
 
 const ShoppingCart = ({ show, handleClose, handleShow }) => {
+  const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
   const { isAuthenticated } = useAuth0();
+  const [order, setOrder] = useState(false);
   const history = useHistory();
 
   const [preferenceId, setPreferenceId] = useState(null);
@@ -63,6 +67,7 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
     if (isAuthenticated) {
       const id = await createPreference();
       if (id) {
+        setOrder(true);
         setPreferenceId(id);
       }
     } else {
@@ -84,8 +89,14 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
       });
+      dispatch(emptyCart());
+      localStorage.clear();
+      setOrder(false);
+      setTimeout(() => {
+        window.location.href = CALLBACK_URL;
+      }, 4000);
     }
-  }, []);
+  }, [order]);
 
   return (
     handleShow && (

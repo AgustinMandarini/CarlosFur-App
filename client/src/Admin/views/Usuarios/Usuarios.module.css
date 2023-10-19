@@ -12,3 +12,21 @@
   letter-spacing: 0.1rem;
   margin-bottom: 1.2rem;
 }
+.cntnTittle {
+  padding: 6px;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.cntnTh {
+  justify-content: center !important;
+  letter-spacing: 1px;
+  padding: 9px !important;
+  align-items: center !important;
+}
+.cntnTr {
+  justify-content: center !important;
+  letter-spacing: 1px;
+  padding: 12px !important;
+  align-items: center !important;
+  font-size: 16px;
+}

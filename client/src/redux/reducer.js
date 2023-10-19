@@ -34,7 +34,8 @@ import {
   POST_MATERIAL,
   POST_PRODUCTTYPE,
   SET_NAME,
-  DELETE_CART_PRODUCT_DIRECT
+  DELETE_CART_PRODUCT_DIRECT,
+  EMPTY_CART,
 } from "./types";
 
 const initialState = {
@@ -77,12 +78,11 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case GET_PRODUCTS_ADMIN:
-      return{
+      return {
         ...state,
-        productsAdmin: action.payload
-      }
+        productsAdmin: action.payload,
+      };
 
-    
     case PUT_PRODUCT:
       return {};
     case GET_DETAIL:
@@ -224,8 +224,6 @@ const rootReducer = (state = initialState, action) => {
         return newState;
       }
 
-
-
     case DELETE_PRODUCT:
       return {
         ...state,
@@ -288,19 +286,19 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         colorState: action.payload,
-      }
+      };
 
-      case POST_MATERIAL:
-        return {
-          ...state,
-          materialState: action.payload
-        }
+    case POST_MATERIAL:
+      return {
+        ...state,
+        materialState: action.payload,
+      };
 
     case POST_PRODUCTTYPE:
       return {
         ...state,
-        productType: action.payload
-      }
+        productType: action.payload,
+      };
     case GET_USERS:
       return {
         ...state,
@@ -340,41 +338,49 @@ const rootReducer = (state = initialState, action) => {
         enabled_product: action.payload.enabled_product,
       };
 
+    case EMPTY_CART:
+      return {
+        ...state,
+        cartProducts: [],
+      };
+
+    case DELETE_CART_PRODUCT_DIRECT: {
+      const productId3 = action.payload;
+      const productToDelete = state.cartProducts.find(
+        (product) => product.id === productId3
+      );
+
+      if (!productToDelete) {
+        return state; // No se hace nada si el producto no se encuentra
+      }
+
+      if (productToDelete.count > 0) {
+        // Solo si el contador es mayor que cero
+        // Elimina el producto del carrito
+        const updatedCartProducts = state.cartProducts.filter(
+          (product) => product.id !== productId3
+        );
+
+        // Actualiza el estado de Redux
+        const newState = {
+          ...state,
+          cartProducts: updatedCartProducts,
+        };
+
+        // Actualiza el localStorage
+        localStorage.setItem(
+          "cartProducts",
+          JSON.stringify(updatedCartProducts)
+        );
+
+        return newState;
+      }
+      // En caso contrario, no hagas nada y simplemente devuelve el estado actual
+      return state;
+    }
+
     default:
       return { ...state };
-
-
-      case DELETE_CART_PRODUCT_DIRECT: {
-        const productId3 = action.payload;
-        const productToDelete = state.cartProducts.find(
-          (product) => product.id === productId3
-        );
-  
-        if (!productToDelete) {
-          return state; // No se hace nada si el producto no se encuentra
-        }
-  
-        if (productToDelete.count) {
-          // Si el count es menor o igual a 1, elimina el producto del carrito
-          const updatedCartProducts = state.cartProducts.filter(
-            (product) => product.id !== productId3
-          );
-  
-          // Actualiza el estado de Redux
-          const newState = {
-            ...state,
-            cartProducts: updatedCartProducts,
-          };
-  
-          // Actualiza el localStorage
-          localStorage.setItem(
-            "cartProducts",
-            JSON.stringify(updatedCartProducts)
-          );
-  
-          return newState;
-      }
-    }
   }
 };
 

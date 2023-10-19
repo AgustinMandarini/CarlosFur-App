@@ -4,18 +4,9 @@ import { getUsers } from "../../../redux/actions";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
+import style from "./Usuarios.module.css";
 
 const apiUrl = process.env.REACT_APP_API_URL;
-{
-  /* <BootstrapSwitchButton
-  checked={false}
-  onlabel="Admin User"
-  offlabel="Regular User"
-  onChange={(checked) => {
-    this.setState({ isUserAdmin: checked });
-  }}
-/>; */
-}
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -34,7 +25,7 @@ const Users = () => {
     }
   };
   return (
-    <div>
+    <div className={style.cntnUsers}>
       <h1>Usuarios registrados</h1>
       <Table striped bordered hover>
         <thead>
@@ -45,19 +36,20 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {Array.isArray(allUsers) && allUsers.map((user) => (
-            <tr key={user.id}>
-              <td>{user.user_name}</td>
-              <td>{user.e_mail}</td>
-              <td>
-                <BootstrapSwitchButton
-                  checked={user.enabled_user}
-                  onstyle="success"
-                  onChange={() => setEnabled(user.id)}
-                />
-              </td>
-            </tr>
-          ))}
+          {Array.isArray(allUsers) &&
+            allUsers.map((user) => (
+              <tr key={user.id}>
+                <td>{user.user_name}</td>
+                <td>{user.e_mail}</td>
+                <td>
+                  <BootstrapSwitchButton
+                    checked={user.enabled_user}
+                    onstyle="success"
+                    onChange={() => setEnabled(user.id)}
+                  />
+                </td>
+              </tr>
+            ))}
         </tbody>
       </Table>
     </div>

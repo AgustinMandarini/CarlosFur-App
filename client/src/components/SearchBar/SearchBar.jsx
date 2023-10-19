@@ -1,10 +1,11 @@
 import { React, useState } from "react";
 import style from "./SearchBar.module.css";
 import { useLocation } from "react-router-dom";
-import { getProductByName } from "../../redux/actions";
+import { getProductByName, setName } from "../../redux/actions";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { InputGroup, Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+
 const SearchBar = () => {
   const location = useLocation();
   const [products, setNameProducts] = useState("");
@@ -12,18 +13,21 @@ const SearchBar = () => {
 
   const handleOnClick = (e) => {
     e.preventDefault();
-    console.log("Button clicked");
     dispatch(getProductByName(products));
-    setNameProducts("");
+    dispatch(setName(true));
   };
+
+  useEffect(() => {
+    if (products === "") {
+      dispatch(getProductByName(products));
+      dispatch(setName(false));
+    }
+  }, [products]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setNameProducts(e.target.value);
   };
-  // useEffect(() => {
-  //   dispatch(getProductByName(products))
-  // }, []);
 
   return (
     <div className={style.divSerchBar}>

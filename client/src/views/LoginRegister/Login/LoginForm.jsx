@@ -9,6 +9,7 @@ import styles from "./LoginForm.module.css";
 import validation from "./validation";
 import axios from "axios";
 
+
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const LoginForm = () => {
@@ -16,6 +17,14 @@ const LoginForm = () => {
   const { loginWithRedirect } = useAuth0();
   const history = useHistory();
   const loggedUser = useSelector((state) => state.loggedUser);
+
+  
+  const mostrarNotificacionBienvenida = () => {
+    toast.success('Iniciando Sesión', {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
+  };
+
 
   const handleLogin = async () => {
     
@@ -27,6 +36,7 @@ const LoginForm = () => {
         returnTo: `/home`,
       },
     });
+    mostrarNotificacionBienvenida()
   };
 
 
@@ -72,13 +82,12 @@ const LoginForm = () => {
       if (loggedUser) {
         try {
           const userEmail = loggedUser.e_mail;
-          console.log(userEmail);
           const apiUrl = "http://localhost:3001/user/profile";
           const response = await axios.get(`${apiUrl}?email=${userEmail}`);
           const userId = response.data.userId;
-          console.log(userId);
 
-          history.push(`/user/profile/${userId}`);
+          // history.push(`/user/profile/${userId}`);
+          history.push(`/home`);
         } catch (error) {
           console.error("Error al obtener el ID del usuario:", error.message);
         }
@@ -172,7 +181,9 @@ const LoginForm = () => {
                 className={styles.googleLogo}
               />
               Acceder con Google
+            
             </button>
+
             <span className={`${styles.text} ${styles.mt6}`}>
               ¿No tienes una cuenta?{" "}
               <Link to="/register" className={styles.link}>

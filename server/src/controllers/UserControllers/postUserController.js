@@ -1,6 +1,7 @@
 //postUserController.js
 const { User } = require("../../db");
 const { encryptPassword } = require("../Utils/passwordUtils");
+// const { nodeMailerConfig } = require("../Utils/nodeMailerConfig");
 
 const createUser = async (
   user_name,
@@ -28,7 +29,8 @@ const createUser = async (
       is_admin,
       enabled_user: true, // Esto es para cuando lo querés banear
     });
-
+    // Esta funcion envia un mail de bienvenida al email del nuevo usuario
+    // await nodeMailerConfig(e_mail);
     // Devuelve el nuevo usuario creado
     return {
       user_name,

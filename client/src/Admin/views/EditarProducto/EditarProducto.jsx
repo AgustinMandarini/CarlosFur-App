@@ -2,29 +2,53 @@ import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getDetail } from "../../../redux/actions";
+import { getDetail, putProduct } from "../../../redux/actions";
 import style from "./EditarProducto.module.css";
 import edit from "./../../../imagenes/edit.png";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
+import Modal from "react-bootstrap/Modal";
+import validation from "./validation";
+
 
 const FormPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const stateDetail = useSelector((state) => state.detail);
   const stateProductType = useSelector((state) => state.productType);
   const stateColor = useSelector((state) => state.colorState);
   const stateMaterial = useSelector((state) => state.materialState);
-
-  const [form, setForm] = useState("");
+  const [form, setForm] = useState({});
+  const [errors, setErrors] = useState("");
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState(null);
-
   const [showFilters, setShowFilters] = useState(false);
+  const [modal, setModal] = useState(false);
+
+  const changeHandler = (event) => {
+    const property = event.target.name;
+    let value = event.target.value;
+
+    setErrors(validation({ ...form, [property]: value }));
+    setForm({ ...form, [property]: value });
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    console.log(id,form);
+    setFormSubmitted(true);
+      dispatch(putProduct(id,form));
+      setModal(true);
+   
+  };
+
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -67,13 +91,25 @@ const FormPage = () => {
 
   useEffect(() => {
     dispatch(getDetail(id));
-  }, []);
-  const stateDetail = useSelector((state) => state.detail);
+    setForm({})
+    setForm({ name: stateDetail.name, 
+      price: stateDetail.price, 
+      height: stateDetail.height, 
+      depth: stateDetail.depth, 
+      width: stateDetail.width, 
+      weight: stateDetail.weight, 
+      stock: stateDetail.stock, 
+      colorId: stateDetail.colorId, 
+      materialId: stateDetail.materialId, 
+      productTypeId: stateDetail.productTypeId, 
+      description: stateDetail.description, 
+      imageBase64: null,})
+  }, [getDetail]);
 
   return (
     <div className={style.cntnForm}>
       <p className={style.tittle}>Editar Producto</p>
-      <Form className={style.formConteiner}>
+      <Form className={style.formConteiner} onSubmit={submitHandler}>
         <div onClick={toggleEdit}>
           <img src={edit} alt="" className={style.edit} />
         </div>
@@ -88,6 +124,7 @@ const FormPage = () => {
                   Ingrese nuevo nombre:{" "}
                 </Form.Label>
                 <Form.Control
+                  onChange={changeHandler}
                   placeholder={stateDetail.name}
                   size="sm"
                   type="text"
@@ -112,6 +149,7 @@ const FormPage = () => {
                   Ingrese nuevo precio:{" "}
                 </Form.Label>
                 <Form.Control
+                  onChange={changeHandler}
                   placeholder={stateDetail.price}
                   size="sm"
                   type="text"
@@ -138,6 +176,7 @@ const FormPage = () => {
                   Ingrese nueva altura:{" "}
                 </Form.Label>
                 <Form.Control
+                  onChange={changeHandler}
                   placeholder={stateDetail.height}
                   size="sm"
                   type="text"
@@ -162,6 +201,7 @@ const FormPage = () => {
                   Ingrese nueva profundidad:{" "}
                 </Form.Label>
                 <Form.Control
+                  onChange={changeHandler}
                   placeholder={stateDetail.depth}
                   size="sm"
                   type="text"
@@ -186,6 +226,7 @@ const FormPage = () => {
                   Ingrese nuevo ancho:{" "}
                 </Form.Label>
                 <Form.Control
+                  onChange={changeHandler}
                   placeholder={stateDetail.width}
                   size="sm"
                   type="text"
@@ -212,6 +253,7 @@ const FormPage = () => {
                   Ingrese nuevo peso:{" "}
                 </Form.Label>
                 <Form.Control
+                  onChange={changeHandler}
                   placeholder={stateDetail.weight}
                   size="sm"
                   type="text"
@@ -236,6 +278,7 @@ const FormPage = () => {
                   Ingrese nuevo stock:{" "}
                 </Form.Label>
                 <Form.Control
+                  onChange={changeHandler}
                   placeholder={stateDetail.stock}
                   size="sm"
                   type="text"
@@ -422,7 +465,28 @@ const FormPage = () => {
             )}
           </Form.Group>
         </div>
+
+        {
+         showFilters && (Object.values(errors).every((error) => error === "") ? (
+          <button type="submit" className={style.botonSubmit}>
+            Enviar
+          </button>
+        ) : (
+          <button type="submit" className={style.botonSubmitOff}>
+            Enviar
+          </button>
+        ))}
       </Form>
+      <Modal show={modal} >
+        <Modal.Header closeButton>
+          <Modal.Title>Producto Editado</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="secondary">
+            Aceptar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

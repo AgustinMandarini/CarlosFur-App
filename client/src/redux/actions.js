@@ -5,6 +5,7 @@ import {
   GET_DETAIL,
   GET_MATERIAL,
   GET_PRODUCTS,
+  GET_PRODUCTS_ADMIN,
   GET_PRODUCT_BY_NAME,
   GET_PRODUCT_TYPE,
   GET_USERS,
@@ -28,8 +29,12 @@ import {
   UPDATE_CART,
   PUT_PRODUCT,
   DELETE_PRODUCT,
-  ADMIN_ENABLEDISABLE
-
+  ADMIN_ENABLEDISABLE,
+  POST_COLOR,
+  POST_MATERIAL,
+  POST_PRODUCTTYPE,
+  SET_NAME,
+  DELETE_CART_PRODUCT_DIRECT
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -54,11 +59,21 @@ export const getProducts = () => {
   };
 };
 
+export const getProductsAdmin = () => {
+  return async function (dispatch) {
+    const apiData = await axios.get(`${apiUrl}/product/admin`);
+    const product = apiData.data;
+    return dispatch({
+      type: GET_PRODUCTS_ADMIN,
+      payload: product,
+    });
+  };
+};
+
 export const postProduct = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(`${apiUrl}/product`, payload);
-      console.log(response);
       const producto = response.data;
       if (response.status === 200) {
         dispatch({ type: POST_PRODUCT, payload: producto });
@@ -80,10 +95,11 @@ export const postProduct = (payload) => {
   };
 };
 
-export const putProduct = (id) => {
+export const putProduct = (id, edit) => {
   return async (dispatch) => {
+    console.log(id, edit);
     try {
-      const response = await axios.put(`${apiUrl}/product/${id}`);
+      const response = await axios.put(`${apiUrl}/product/${id}`, edit);
       const product = response.data;
       dispatch({
         type: PUT_PRODUCT,
@@ -91,9 +107,9 @@ export const putProduct = (id) => {
       });
     } catch (error) {
       console.error("Error en la acción putProduct:", error);
-    } 
-  }
-}
+    }
+  };
+};
 
 export const deleteProduct = (id) => {
   return async (dispatch) => {
@@ -107,16 +123,17 @@ export const deleteProduct = (id) => {
     } catch (error) {
       console.error("Error en la acción putProduct:", error);
     }
-  }
-}
+  };
+};
 
 export const getProductByName = (name) => {
+  console.log(name);
+
   return async function (dispatch) {
     const apiData = await axios.get(
       `${apiUrl}/product${name ? `?name=${name}` : ""}`
     );
     const nameid = apiData.data;
-
     return dispatch({
       type: GET_PRODUCT_BY_NAME,
       payload: nameid,
@@ -170,6 +187,59 @@ export const getColor = () => {
   };
 };
 
+export const postColor = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/color`, payload);
+      const color = response.data;
+
+      dispatch({ type: POST_COLOR, payload: color });
+    } catch (error) {
+      alert("No se pudo crear el color: ", error);
+    }
+  };
+};
+
+export const postMaterial = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/material`, payload);
+      const material = response.data;
+
+      dispatch({ type: POST_MATERIAL, payload: material });
+    } catch (error) {
+      alert("No se pudo crear el Material: ", error);
+    }
+  };
+};
+
+export const postProductType = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/productType`, payload);
+      const productType = response.data;
+
+      dispatch({ type: POST_PRODUCTTYPE, payload: productType });
+    } catch (error) {
+      alert("No se pudo crear el Material: ", error);
+    }
+  };
+};
+
+export const postUser = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/user`, payload);
+      const user = response.data;
+      if (response.status === 200) {
+        dispatch({ type: POST_USER, payload: user });
+        alert("Usuario Creado");
+      }
+    } catch (error) {
+      console.log(`Error: ${error}. Ya existe un usuario con ese email`);
+    }
+  };
+};
 export const getMaterial = () => {
   return async (dispatch) => {
     try {
@@ -223,21 +293,6 @@ export const getUsers = () => {
   };
 };
 
-export const postUser = (payload) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.post(`${apiUrl}/user`, payload);
-      const user = response.data;
-      if (response.status === 200) {
-        dispatch({ type: POST_USER, payload: user });
-        alert("Usuario Creado");
-      }
-    } catch (error) {
-      console.log(`Error: ${error}. Ya existe un usuario con ese email`);
-    }
-  };
-};
-
 export const login = (payload) => {
   const accessToken = payload.accessToken;
   return async function (dispatch) {
@@ -252,15 +307,16 @@ export const login = (payload) => {
         setToken(accessToken);
         //LOCALSTORAGE
         const userInfo = { userId: user.id, cartId: user.cartId };
-        localStorage.setItem('user', JSON.stringify(userInfo));
+        localStorage.setItem("user", JSON.stringify(userInfo));
         dispatch({
           type: LOGIN,
           payload: { userToken: accessToken, user: user },
         });
       }
     } catch (error) {
+      console.log(error);
       toast.error("La contraseña es incorrecta", {
-        position: toast.POSITION.TOP_CENTER,
+        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
       });
     }
@@ -271,7 +327,7 @@ export const logOut = () => {
   return async (dispatch) => {
     removeToken();
     //LOCALSTORAGE
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     dispatch({
       type: LOGOUT,
       payload: null,
@@ -307,10 +363,10 @@ export const fetchUserData = () => {
 };
 
 //carrito
-export const getCart = (userId, cartId) => {
+export const getCart = (cartId) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${apiUrl}/cart/${userId}/${cartId}`);
+      const response = await axios.get(`${apiUrl}/cart/${cartId}`);
       const cartData = response.data;
 
       // Actualiza el estado de Redux con la información del carrito
@@ -329,15 +385,20 @@ export const postCartProduct = (payload) => {
 export const deleteCartProduct = (payload) => {
   return { type: DELETE_CART_PRODUCT, payload: payload };
 };
+
+export const deleteCartProductDirect = (payload) => {
+  return {type: DELETE_CART_PRODUCT_DIRECT, payload: payload}
+}
 export const postCart = (cart) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`${apiUrl}/cart`, cart);
       const payload = data.data;
-
       // Guardar la información en el LocalStorage
-      const user = { userId: user.id, cartId: user.cartId };
-      localStorage.setItem('user', JSON.stringify(user));
+
+      localStorage.setItem("cartId", payload.id);
+      console.log("entra payload", payload);
+      localStorage.removeItem("cart");
 
       return dispatch({
         type: POST_CART,
@@ -366,20 +427,19 @@ export const deleteCart = (cartId) => {
   }
 };
 
-export const updateCart = (userId, cartId, updatedCart) => {
+export const updateCart = (cartId, cart) => {
   return async (dispatch) => {
     try {
-      await axios.put(`${apiUrl}/cart/${userId}/${cartId}`, { products: updatedCart });
+      await axios.put(`${apiUrl}/cart/${cartId}`, cart);
 
       // Si es necesario, puedes actualizar el estado de Redux con el carrito actualizado
-      dispatch({ type: UPDATE_CART, payload: updatedCart });
+      // actualmente el put esta devolviendo {"status":200,"data":null}. Pero si se actualiza el card
+      // dispatch({ type: UPDATE_CART, payload: updatedCart });
     } catch (error) {
       console.error("Error al actualizar el carrito:", error);
     }
   };
 };
-
-
 
 export const loadCartFromLocalStorage = (savedCart) => {
   return {
@@ -396,11 +456,14 @@ export const setMaterial = (payload) => {
   return { type: SET_MATERIAL, payload };
 };
 
+export const setName = (payload) => {
+  return { type: SET_NAME, payload };
+};
 
 export const putEnableDisable = (id) => {
   return async function (dispatch) {
     try {
-      const apiData = await axios.put(`${apiUrl}/product/${id}`);
+      const apiData = await axios.put(`${apiUrl}/product/enabledisable/${id}`);
       const putenable = apiData.data;
       dispatch({
         type: ADMIN_ENABLEDISABLE,

@@ -40,7 +40,12 @@ const updateCart = async (cartId, products, userId) => {
 
     cart.total_amount = totalAmount;
     
-    
+    const cartProducts = await cart.getProducts();
+    for (const cartProduct of cartProducts) {
+      if (!productIds.includes(cartProduct.id)) {
+        await cart.removeProduct(cartProduct);
+      }
+    }
 
     // Retrieve the updated cart from the database
     

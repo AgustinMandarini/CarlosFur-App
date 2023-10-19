@@ -4,53 +4,91 @@
   justify-content: center;
   align-items: start;
   margin: 6px;
+  padding: 0.6rem;
 }
 .counterContainer {
   display: flex;
-  align-items: start;
-  justify-content: start;
-  height: 2.6rem;
-  margin-top: 0.3rem;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  width: 6.9rem;
+  margin-right: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.404);
 }
+/* m */
 .buttonCount {
-  color: white;
-  padding: 1px 9px 1px 9px;
-  border: 2px solid black;
-  font-size: 12px;
-  font-weight: 500;
-  margin-right: 1rem;
-  background-color: black;
+  display: flex;
+  color: black;
+  padding: 0px 8px 0px 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 800;
+  margin: 0.3rem;
   justify-content: center;
   align-items: center;
   margin-bottom: 0.7rem;
   margin-top: 0.7rem;
+  background-color: white;
 }
 .buttonCount:hover {
-  background-color: #b1ada2a9;
   font-weight: 600;
   border: none;
-  color: black;
+  color: #b1ada2a9;
 }
 .prop {
-  height: 0.5rem;
+  height: 0.4rem;
   font-size: 14px;
+}
+.propCounter {
+  display: flex;
+  color: black;
+  padding: 0px 8px 0px 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 800;
+  margin: 0.3rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.7rem;
+  margin-top: 0.7rem;
+  background-color: white;
 }
 .propsCartCard {
   display: flex;
   flex-direction: column;
   width: 450px;
   margin-left: 15px;
-  height: 126px;
+  /* margin-bottom: 5px; */
+  /* height: 146px; */
 }
 .img {
-  width: 100px; /* Tamaño deseado para ambas imágenes */
-  height: 100px; /* Tamaño deseado para ambas imágenes */
+  width: 140px; /* Tamaño deseado para ambas imágenes */
+  height: 140px; /* Tamaño deseado para ambas imágenes */
   border: 1px solid black;
-  object-fit: contain;
+  /* object-fit: contain; */
 }
 .img2 {
   width: 126px; /* Tamaño deseado para ambas imágenes */
   height: 126px; /* Tamaño deseado para ambas imágenes */
   border: 1px solid black;
   object-fit: contain;
+}
+.butttons {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-content: start;
+  width: 130px;
+  margin-top: 0.8rem;
+  padding: 0.2rem;
+}
+
+.buttonDelete {
+  background-color: white;
+  border: none;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1.3px;
 }

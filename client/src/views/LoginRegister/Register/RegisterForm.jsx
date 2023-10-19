@@ -19,13 +19,14 @@ const RegisterForm = () => {
   const handleSignUp = async () => {
     //funcion
     await loginWithRedirect({
-      appState: {
-        returnTo: "/home",
-      },
       authorizationParams: {
         screen_hint: "signup",
         connection: "google-oauth2",
       },
+      appState: {
+        returnTo: "/home",
+      },
+
     });
   };
 
@@ -106,13 +107,11 @@ const RegisterForm = () => {
               if (newUser) {
                 try {
                   const userEmail = newUser.e_mail;
-                  console.log(userEmail);
                   const apiUrl = 'http://localhost:3001/user/profile';
                   const response = await axios.get(`${apiUrl}?email=${userEmail}`);
                   const userId = response.data.userId;
-                  console.log(userId);
-          
-                  history.push(`/user/profile/${userId}`);
+                  // history.push(`/user/profile/${userId}`);
+                  history.push(`/home`);
                 } catch (error) {
                   console.error('Error al obtener el ID del usuario:', error.message);
                 }

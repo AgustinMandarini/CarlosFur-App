@@ -30,11 +30,10 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
           description: product.name,
           unit_price: product.price,
           total_price: product.price,
-          quantity: 1,
+          quantity: product.count,
           currency_id: "ARS",
         };
       } else {
-        productMap[productId].quantity++;
         productMap[productId].total_price += product.unit_price;
       }
     });

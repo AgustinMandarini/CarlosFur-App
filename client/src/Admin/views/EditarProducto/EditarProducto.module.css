@@ -31,30 +31,34 @@
   height: 8rem !important;
 }
 .editContainer .input {
-  height: 0.1rem !important;
-  width: 190px !important; /* Ancho fijo para los inputs */
+  height: 0.2rem !important;
+  width: 100px !important; /* Ancho fijo para los inputs */
 }
 .input:focus {
   border: 2px solid #ae9c8f !important;
   box-shadow: none !important;
 }
-
+.labelImgEdit {
+  display: none;
+}
 .divinputErrorType {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-left: 1rem;
-  margin-left: 2rem !important;
+  /* margin-left: 1rem;
+  margin-left: 2rem !important; */
   margin-top: 0.7rem;
+  padding: 2px;
 }
 .divinputError {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-left: 1rem;
-  margin-left: 2rem !important;
+  /* margin-left: 1rem;
+  margin-left: 2rem !important; */
+  padding: 2px;
 }
 .error {
   font-size: 0.7rem !important;
@@ -66,7 +70,6 @@
 .img {
   width: 250px;
   height: 150px;
-  background-color: red;
 }
 .tittle {
   font-size: 2.6rem;
@@ -80,6 +83,9 @@
   width: 150px; /* Ancho fijo para los labels */
   text-align: start;
   margin-right: 5px;
+}
+.labelEdit {
+  display: none;
 }
 .labelImg {
   width: 140px; /* Ancho fijo para los labels */
@@ -98,8 +104,8 @@
 }
 .select {
   height: 1.9rem !important;
-  width: 190px !important; /* Ancho fijo para los inputs */
-  margin-top: -0.9rem !important;
+  width: 254px !important; /* Ancho fijo para los inputs */
+  margin: 1px !important;
 }
 .select:focus {
   border-color: #ae9c8f !important;
@@ -114,7 +120,7 @@
 }
 .tittleSelectImage {
   font-weight: 500;
-  margin: 0.6rem;
+  /* margin: 0.6rem; */
 }
 .inputSelectImage {
   display: flex;
@@ -149,7 +155,7 @@
 }
 .botonSubmit:hover {
   background-color: white !important;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   color: black;
 }
 .botonSubmitOff {
@@ -163,7 +169,7 @@
 }
 .botonSubmitOff:hover {
   background-color: white !important;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   color: black;
 }
 .imageForm {

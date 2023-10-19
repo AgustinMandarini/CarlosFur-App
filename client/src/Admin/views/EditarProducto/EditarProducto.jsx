@@ -115,12 +115,16 @@ const FormPage = () => {
         {/*NOMBRE*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Nombre: </Form.Label>
-            <Form.Label className={style.label}>{stateDetail.name}</Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Nombre:{" "}
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              {stateDetail.name}
+            </Form.Label>
             {showFilters && (
               <div className={style.divinputError}>
                 <Form.Label className={style.label}>
-                  Ingrese nuevo nombre:{" "}
+                  Ingrese nuevo nombre:
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
@@ -139,8 +143,12 @@ const FormPage = () => {
         <div className={style.editContainer}>
           {/*PRECIO*/}
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Precio: </Form.Label>
-            <Form.Label className={style.label}>{stateDetail.price}</Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Precio:{" "}
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              {stateDetail.price}
+            </Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
@@ -164,8 +172,10 @@ const FormPage = () => {
         {/*ALTURA*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Altura: </Form.Label>
-            <Form.Label className={style.label}>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Altura:{" "}
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
               {stateDetail.height}
             </Form.Label>
 
@@ -191,8 +201,12 @@ const FormPage = () => {
         {/*PROFUNDIDAD*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Profundida</Form.Label>
-            <Form.Label className={style.label}>{stateDetail.depth}</Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Profundidad
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              {stateDetail.depth}
+            </Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
@@ -216,8 +230,12 @@ const FormPage = () => {
         {/*ANCHO*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Ancho:</Form.Label>
-            <Form.Label className={style.label}>{stateDetail.width}</Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Ancho:
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              {stateDetail.width}
+            </Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
@@ -241,8 +259,10 @@ const FormPage = () => {
         {/*PESO*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Peso:</Form.Label>
-            <Form.Label className={style.label}>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Peso:
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
               {stateDetail.weight}
             </Form.Label>
 
@@ -268,8 +288,12 @@ const FormPage = () => {
         {/*STOCK*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Stock:</Form.Label>
-            <Form.Label className={style.label}>{stateDetail.stock}</Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Stock:
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              {stateDetail.stock}
+            </Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
@@ -293,11 +317,15 @@ const FormPage = () => {
         {/*COLOR*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Color:</Form.Label>
-            <Form.Label className={style.label}>{stateDetail.color}</Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Color:
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              {stateDetail.color}
+            </Form.Label>
 
             {showFilters && (
-              <div className={style.divinputError}>
+              <div className={style.divinputErrorType}>
                 <Form.Select
                   size="sm"
                   onChange={handleSelectMuebles}
@@ -323,13 +351,15 @@ const FormPage = () => {
         {/*MATERIAL*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Material:</Form.Label>
-            <Form.Label className={style.label}>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Material:
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
               {stateDetail.materialId}
             </Form.Label>
 
             {showFilters && (
-              <div className={style.divinputError}>
+              <div className={style.divinputErrorType}>
                 <Form.Select
                   size="sm"
                   onChange={handleSelectMuebles}
@@ -355,13 +385,15 @@ const FormPage = () => {
         {/*TIPO DE PRODUCTo*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Tipo de Producto:</Form.Label>
-            <Form.Label className={style.label}>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Tipo de Producto:
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
               {stateDetail.productTypeId}
             </Form.Label>
 
             {showFilters && (
-              <div className={style.divinputError}>
+              <div className={style.divinputErrorType}>
                 <Form.Select
                   size="sm"
                   onChange={handleSelectMuebles}
@@ -387,15 +419,17 @@ const FormPage = () => {
         {/*DESCRIPCION*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Descripcion:</Form.Label>
-            <Form.Label className={style.label}>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Descripcion:
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
               {stateDetail.description}
             </Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
                 <Form.Label className={style.label}>
-                  Ingrese nueva descripcion:{" "}
+                  Ingrese nueva descripcion:
                 </Form.Label>
                 <Form.Control
                   size="sm"
@@ -412,11 +446,19 @@ const FormPage = () => {
         {/*IMAGEN*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.labelImg}>Imagen:</Form.Label>
+            <Form.Label
+              className={showFilters ? style.labelEdit : style.labelImg}
+            >
+              Imagen:
+            </Form.Label>
             <Container>
               <Row>
                 <Col xs={10} md={3}>
-                  <Form.Label className={style.labelImg}>
+                  <Form.Label
+                    className={
+                      showFilters ? style.labelImgEdit : style.labelImg
+                    }
+                  >
                     <Image src={stateDetail.imagePath} thumbnail />
                   </Form.Label>
                 </Col>
@@ -426,7 +468,7 @@ const FormPage = () => {
               <div className={style.divinputError}>
                 <header>
                   <div className={style.tittleSelectImage}>
-                    <span>Selecciona nueva imagen:</span>
+                    <span>Selecciona una imagen:</span>
                   </div>
                   <div className={style.inputSelectImage}>
                     <input
@@ -447,9 +489,7 @@ const FormPage = () => {
                     </div>
                   </div>
                 </header>
-                <button className={style.botonReset} onClick={handleResetClick}>
-                  Reset
-                </button>
+
                 {loading ? (
                   <div>
                     <div></div>
@@ -466,7 +506,9 @@ const FormPage = () => {
             )}
           </Form.Group>
         </div>
-
+        <button className={style.botonReset} onClick={handleResetClick}>
+          Reset
+        </button>
         {showFilters &&
           (Object.values(errors).every((error) => error === "") ? (
             <button type="submit" className={style.botonSubmit}>

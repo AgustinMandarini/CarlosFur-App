@@ -18,22 +18,26 @@ const LoginForm = () => {
   const loggedUser = useSelector((state) => state.loggedUser);
 
   const handleLogin = async () => {
+    
     await loginWithRedirect({
       authorizationParams: {
         connection: "google-oauth2",
       },
       appState: {
-        returnTo: "/home",
+        returnTo: `/home`,
       },
     });
   };
 
+
+
+  
   // Maneja el login desde el formulario (login local de nuestro server)
   const handleLocalLogin = async () => {
-
     const saveUserInfoToLocalStorage = (userId, cartId) => {
-      const user = { userId, cartId };
-      localStorage.setItem('user', JSON.stringify(user));
+      const userLS = { userId, cartId };
+      console.log(userLS);
+      localStorage.setItem("user", JSON.stringify(userLS));
     };
 
     const userInfo = { e_mail: form.e_mail, password: form.password };
@@ -63,16 +67,26 @@ const LoginForm = () => {
     }
   };
 
-  // Este efecto se ejecutará cada vez que loggedUser cambie
   useEffect(() => {
-    // Redirigir al usuario a la página de inicio después de iniciar sesión
-    if (loggedUser) {
-      // Realiza acciones adicionales aquí, por ejemplo, redireccionar
-      // Puedes utilizar la navegación de React Router para redirigir al usuario
-      // reemplace "/home" con la ruta correcta a la página de inicio
-      history.push("/home");
-    }
-  }, [loggedUser]);
+    const fetchUserIdAndRedirect = async () => {
+      if (loggedUser) {
+        try {
+          const userEmail = loggedUser.e_mail;
+          console.log(userEmail);
+          const apiUrl = "http://localhost:3001/user/profile";
+          const response = await axios.get(`${apiUrl}?email=${userEmail}`);
+          const userId = response.data.userId;
+          console.log(userId);
+
+          history.push(`/user/profile/${userId}`);
+        } catch (error) {
+          console.error("Error al obtener el ID del usuario:", error.message);
+        }
+      }
+    };
+
+    fetchUserIdAndRedirect();
+  }, [loggedUser, history]);
 
   const [form, setForm] = useState({
     e_mail: "",
@@ -107,7 +121,7 @@ const LoginForm = () => {
         <form className={styles.form} onSubmit={submitHandler}>
           {/* E_mail input */}
           <div className={styles.inputContainer}>
-          <span className={styles.label}>E-mail</span>
+            <span className={styles.label}>E-mail</span>
             <div className={styles.data}>
               <input
                 type="text"
@@ -119,13 +133,12 @@ const LoginForm = () => {
                 required
               />
             </div>
-          
           </div>
           {errors.e_mail && <p className={styles.errorText}>{errors.e_mail}</p>}
 
           {/* Password input */}
           <div className={`${styles.inputContainer} ${styles.mt2}`}>
-          <span className={styles.label}>Contraseña</span>
+            <span className={styles.label}>Contraseña</span>
             <div className={styles.data}>
               <input
                 type="password"
@@ -136,7 +149,6 @@ const LoginForm = () => {
                 onChange={changeHandler}
                 required
               />
-             
             </div>
           </div>
           {errors.password && (

@@ -8,7 +8,9 @@ const createUser = async (
   e_mail,
   first_name,
   last_name,
-  auth0
+  phone,
+  auth0,
+  is_admin
 ) => {
   let hashedPassword = null;
   if (password) hashedPassword = await encryptPassword(password);
@@ -21,7 +23,9 @@ const createUser = async (
       e_mail,
       first_name,
       last_name,
-      is_admin: false, // Siempre tiene false porque nadie puede ser admin
+      phone,
+      // is_admin: false, // Siempre tiene false porque nadie puede ser admin
+      is_admin,
       enabled_user: true, // Esto es para cuando lo querés banear
     });
 
@@ -31,7 +35,9 @@ const createUser = async (
       e_mail,
       first_name,
       last_name,
-      is_admin: false,
+      phone,
+      // is_admin: false,
+      is_admin,
       enabled_user: true,
     };
   } catch (error) {

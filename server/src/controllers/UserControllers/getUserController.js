@@ -48,4 +48,38 @@ const findUser = async (userName, email) => {
   }
 };
 
-module.exports = { findUser };
+const findUserById = async (id) => {
+  const user = await User.findByPk(id, {
+    attributes: { exclude: ["createdAt", "updatedAt"] },
+  });
+
+  if (!user) {
+    throw new Error("Usuario no encontrado");
+  }
+
+  user.dataValues.password = null;
+
+  return user;
+};
+
+
+const findUserByEmail = async (email) => {
+  try {
+    const user = await User.findOne({
+      where: { e_mail: email },
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+    });
+
+    if (!user) {
+      throw new Error("Usuario no encontrado");
+    }
+
+    user.dataValues.password = null;
+
+    return {userId: user.id};
+  } catch (error) {
+    throw new Error(`Error al buscar el usuario: ${error.message}`);
+  }
+};
+
+module.exports = { findUser, findUserById, findUserByEmail };

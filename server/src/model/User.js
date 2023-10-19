@@ -42,6 +42,9 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: true,
       },
+      phone: { // Agregamos el campo para el teléfono o celular
+        type: DataTypes.STRING,
+      },
     },
     { timestamps: false }
   );

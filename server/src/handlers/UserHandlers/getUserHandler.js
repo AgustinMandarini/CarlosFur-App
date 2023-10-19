@@ -1,5 +1,9 @@
 //getUserHandler.js
-const { findUser } = require("../../controllers/UserControllers/getUserController");
+const {
+  findUser,
+  findUserById,
+  findUserByEmail,
+} = require("../../controllers/UserControllers/getUserController");
 
 const getUserHandler = async (req, res) => {
   try {
@@ -15,4 +19,29 @@ const getUserHandler = async (req, res) => {
   }
 };
 
-module.exports = { getUserHandler };
+const getUserByIdHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await findUserById(id);
+
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+
+
+const getUserByEmailHandler = async (req, res) => {
+  try {
+    const { email } = req.query;
+    console.log(email);
+    const user = await findUserByEmail(email);
+
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+
+
+module.exports = { getUserHandler, getUserByIdHandler, getUserByEmailHandler };

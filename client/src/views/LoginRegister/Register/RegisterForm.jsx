@@ -17,6 +17,7 @@ const RegisterForm = () => {
   const history = useHistory();
 
   const handleSignUp = async () => {
+    //funcion
     await loginWithRedirect({
       appState: {
         returnTo: "/home",
@@ -31,6 +32,8 @@ const RegisterForm = () => {
   const [form, setForm] = useState({
     user_name: "",
     e_mail: "",
+    first_name:"",
+    last_Name:"",
     password: "",
     confPassword: "",
   });
@@ -54,7 +57,9 @@ const RegisterForm = () => {
       user_name: form.user_name,
       e_mail: form.e_mail,
       password: form.password,
-      lastName: form.lastName,
+      first_name: form.user_name,
+      last_name: form.last_Name,
+      phone: form.phone
     };
     try {
       const response = await axios.get(`${apiUrl}/user?e_mail=${form.e_mail}`);
@@ -71,6 +76,7 @@ const RegisterForm = () => {
       // Esta funcion es casi la misma que esta en login. Luego de iniciar sesion, loguea
       // generando un token desde la ruta /get
       try {
+        console.log(newUser);
         const response = await axios.post(`${apiUrl}/user`, newUser);
 
         if (response.status === 201) {
@@ -96,7 +102,23 @@ const RegisterForm = () => {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 3000,
               });
-              history.push("/home");
+
+              if (newUser) {
+                try {
+                  const userEmail = newUser.e_mail;
+                  console.log(userEmail);
+                  const apiUrl = 'http://localhost:3001/user/profile';
+                  const response = await axios.get(`${apiUrl}?email=${userEmail}`);
+                  const userId = response.data.userId;
+                  console.log(userId);
+          
+                  history.push(`/user/profile/${userId}`);
+                } catch (error) {
+                  console.error('Error al obtener el ID del usuario:', error.message);
+                }
+              }
+        
+              // history.push("/home");
             }
           } catch (error) {
             alert("Error al loguear el nuevo usuario");
@@ -184,7 +206,7 @@ const RegisterForm = () => {
                     <input
                       type="text"
                       value={form.lastName}
-                      name="lastName"
+                      name="last_Name"
                       onChange={changeHandler}
                       className={styles.inputField}
                       required
@@ -202,7 +224,7 @@ const RegisterForm = () => {
                     <input
                       type="text"
                       value={form.whatsapp}
-                      name="whatsapp"
+                      name="phone"
                       onChange={changeHandler}
                       className={styles.inputField}
                       required

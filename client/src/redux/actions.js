@@ -2,8 +2,10 @@
 import {
   DELETE_CART_PRODUCT,
   GET_COLOR,
+  GET_COLOR_BYID,
   GET_DETAIL,
   GET_MATERIAL,
+  GET_MATERIAL_BYID,
   GET_PRODUCTS,
   GET_PRODUCTS_ADMIN,
   GET_PRODUCT_BY_NAME,
@@ -36,6 +38,7 @@ import {
   SET_NAME,
   DELETE_CART_PRODUCT_DIRECT,
   EMPTY_CART,
+  GET_PRODUCT_TYPE_BYID,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -172,6 +175,32 @@ export const getProductType = () => {
     }
   };
 };
+export const getProductTypeById = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/productType/${id}`);
+      const productType = response.data;
+      return dispatch({
+        type: GET_PRODUCT_TYPE_BYID,
+        payload: productType,
+      });
+    } catch (error) {
+      //alert("No se encontro un tipo de producto");
+    }
+  };
+};
+export const postProductType = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/productType`, payload);
+      const productType = response.data;
+
+      dispatch({ type: POST_PRODUCTTYPE, payload: productType });
+    } catch (error) {
+      alert("No se pudo crear el Material: ", error);
+    }
+  };
+};
 
 export const getColor = () => {
   return async (dispatch) => {
@@ -183,10 +212,25 @@ export const getColor = () => {
         payload: color,
       });
     } catch (error) {
-      alert("No se encontro color");
+      alert("No se encontraron los colores");
     }
   };
 };
+
+export const getColorById = (id) => {
+  return async (dispatch) => {
+    try {
+       const response = await axios.get(`${apiUrl}/color/${id}`);
+       const color = response.data;
+       return dispatch({
+        type:GET_COLOR_BYID,
+        payload: color
+       })
+    } catch (error) {
+      // alert("No se encontro el color");
+    }
+  }
+}
 
 export const postColor = (payload) => {
   return async (dispatch) => {
@@ -214,18 +258,6 @@ export const postMaterial = (payload) => {
   };
 };
 
-export const postProductType = (payload) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.post(`${apiUrl}/productType`, payload);
-      const productType = response.data;
-
-      dispatch({ type: POST_PRODUCTTYPE, payload: productType });
-    } catch (error) {
-      alert("No se pudo crear el Material: ", error);
-    }
-  };
-};
 
 export const postUser = (payload) => {
   return async (dispatch) => {
@@ -252,6 +284,21 @@ export const getMaterial = () => {
       });
     } catch (error) {
       alert("No se encontro el material");
+    }
+  };
+};
+
+export const getMaterialById = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/material/${id}`);
+      const material = response.data;
+      return dispatch({
+        type: GET_MATERIAL_BYID,
+        payload: material,
+      });
+    } catch (error) {
+      // alert("No se encontro el material");
     }
   };
 };

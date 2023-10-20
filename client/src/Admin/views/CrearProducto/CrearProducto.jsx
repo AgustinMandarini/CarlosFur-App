@@ -83,6 +83,7 @@ const CrearProducto = () => {
     }
   };
 
+  console.log(stateProductType);
   return (
     <div className={style.cntnForm}>
       <p className={style.tittle}>Nuevo Producto</p>
@@ -242,11 +243,6 @@ const CrearProducto = () => {
               {errors.color && formSubmitted ? <span>{errors.color}</span> : ""}
             </Form.Text>
           </div>
-          <OverlayTrigger overlay={<Tooltip>Crear un color</Tooltip>}>
-            <Link to="/admin/crear/color" className={style.link}>
-              <IconSquareRoundedPlusFilled className={style.icon} />
-            </Link>
-          </OverlayTrigger>
         </Form.Group>
 
         {/* //Material */}
@@ -267,7 +263,6 @@ const CrearProducto = () => {
             >
               <option>Seleccionar material</option>
               {stateMaterial &&
-                stateMaterial == !undefined &&
                 stateMaterial.map((tipo, index) => {
                   return (
                     <option key={index} value={tipo.id} name={tipo.name}>
@@ -285,12 +280,6 @@ const CrearProducto = () => {
               )}
             </Form.Text>
           </div>
-
-          <OverlayTrigger overlay={<Tooltip>Crear un material</Tooltip>}>
-            <Link to="/admin/crear/material" className={style.link}>
-              <IconSquareRoundedPlusFilled className={style.icon} />
-            </Link>
-          </OverlayTrigger>
         </Form.Group>
 
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
@@ -324,12 +313,6 @@ const CrearProducto = () => {
               )}
             </Form.Text>
           </div>
-
-          <OverlayTrigger overlay={<Tooltip>Crear tipo</Tooltip>}>
-            <Link to="/admin/crear/tipo-de-producto" className={style.link}>
-              <IconSquareRoundedPlusFilled className={style.iconType} />
-            </Link>
-          </OverlayTrigger>
         </Form.Group>
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
           <Form.Label className={style.label}>Descripcion:</Form.Label>

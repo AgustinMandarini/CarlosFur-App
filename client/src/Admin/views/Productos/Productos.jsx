@@ -82,13 +82,16 @@ const Productos = () => {
                   </td>
                   <td className={style.cntnTr}>{producto.name}</td>
 
-                  <td className={style.cntnTr}>
-                    <Link
-                      to={`/admin/productos/editar/${producto.id}`}
-                      className={style.link}
-                    >
-                      Editar
-                    </Link>
+                  <td>
+                    <Button variant="outline-warning">
+                      {" "}
+                      <Link
+                        to={`/admin/productos/editar/${producto.id}`}
+                        className={style.link}
+                      >
+                        Editar
+                      </Link>
+                    </Button>{" "}
                   </td>
                   <td className={style.cntnTr}>
                     <BootstrapSwitchButton

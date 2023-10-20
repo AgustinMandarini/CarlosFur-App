@@ -6,8 +6,10 @@ import {
   GET_USERS,
   POST_PRODUCT,
   GET_PRODUCT_TYPE,
+  GET_PRODUCT_TYPE_BYID,
   GET_COLOR,
   GET_MATERIAL,
+  GET_MATERIAL_BYID,
   GET_PRODUCT_BY_NAME,
   SET_IMAGE_URL,
   SET_SORT,
@@ -36,6 +38,7 @@ import {
   SET_NAME,
   DELETE_CART_PRODUCT_DIRECT,
   EMPTY_CART,
+  GET_COLOR_BYID,
 } from "./types";
 
 const initialState = {
@@ -61,6 +64,9 @@ const initialState = {
   userToken: null,
   loggedUser: null,
   cartTotal: 0,
+  colorById:[],
+  materialId:[],
+  tipoDeProductoById:[],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -68,6 +74,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         materialState: action.payload,
+      };
+
+      case GET_MATERIAL_BYID:
+      return {
+        ...state,
+        materialId: action.payload,
       };
 
     case GET_PRODUCTS:
@@ -112,11 +124,22 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         productType: action.payload,
       };
+
+    case GET_PRODUCT_TYPE_BYID:
+      return {
+        ...state,
+        tipoDeProductoById: action.payload
+      }
     case GET_COLOR:
       return {
         ...state,
         colorState: action.payload,
       };
+      case GET_COLOR_BYID:
+        return {
+          ...state,
+          colorById: action.payload,
+        };
 
     case GET_PRODUCT_BY_NAME:
       return {

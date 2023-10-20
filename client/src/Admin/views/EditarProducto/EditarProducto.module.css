@@ -193,3 +193,31 @@
 .conteinerImg {
   height: 200px;
 }
+.headerModal {
+  background-color: #ae9c8f;
+  font-size: 20px;
+  letter-spacing: 1px !important;
+  padding: 13px;
+  border: none !important;
+}
+.footerModal {
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.buttonModal {
+  color: white;
+  padding: 2px 13px 2px 13px;
+  border: 2px solid black;
+  font-size: 12px !important;
+  font-weight: 500;
+  margin: 1rem;
+  background-color: black !important;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px !important;
+  border: none !important;
+}
+.buttonModal:focus {
+  box-shadow: none !important;
+}

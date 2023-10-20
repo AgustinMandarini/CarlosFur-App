@@ -1,23 +1,21 @@
 const { DataTypes } = require("sequelize");
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
+
 module.exports = (sequelize) => {
-  // defino el modelo
   sequelize.define(
-    "paymentType",
+    "order",
     {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      name: {
-        type: DataTypes.STRING,
+      mercadoPagoId: {
+        type: DataTypes.BIGINT,
         allowNull: false,
-        unique: true,
       },
-      description: {
-        type: DataTypes.TEXT,
+      saleDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
       },
     },
     { timestamps: false }

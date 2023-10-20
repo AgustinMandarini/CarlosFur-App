@@ -9,7 +9,7 @@ import {
   setProductType,
   setSort,
 } from "../../redux/actions";
-import filter from "./../../imagenes/filter.png";
+// import filter from "./../../imagenes/filter.png";
 import style from "./ToolBar.module.css";
 
 const ToolBar = () => {
@@ -21,9 +21,9 @@ const ToolBar = () => {
   const nameState = useSelector((state) => state.nameState);
   const [showFilters, setShowFilters] = useState(false);
 
-  const toggleFilters = () => {
-    setShowFilters(!showFilters);
-  };
+  // const toggleFilters = () => {
+  //   setShowFilters(!showFilters);
+  // };
 
   useEffect(() => {
     if (nameState === true) {
@@ -67,73 +67,65 @@ const ToolBar = () => {
     <div className={style.cntnToolBar}>
       {location.pathname === "/home" && (
         <div className={style.container}>
-          <div className={style.filterIcon} onClick={toggleFilters}>
-            <span>Filtrados</span>
-            <img src={filter} alt="" className={style.filter} />
+          <div className={style.divSelect}>
+            <Form.Select
+              onChange={setFilterByProductTypeHandler}
+              size="sm"
+              className={style.select}
+            >
+              <option value="allOptions">Tipo de ambiente</option>
+              {productTypeNames &&
+                productTypeNames.map((productType) => (
+                  <option value={productType.id} key={productType.id}>
+                    {productType.name}
+                  </option>
+                ))}
+            </Form.Select>
           </div>
-          {showFilters && (
-            <div className={style.filterOptions}>
-              <div className={style.divSelect}>
-                <Form.Select
-                  onChange={setFilterByProductTypeHandler}
-                  size="sm"
-                  className={style.select}
-                >
-                  <option value="allOptions">Tipo de ambiente</option>
-                  {productTypeNames &&
-                    productTypeNames.map((productType) => (
-                      <option value={productType.id} key={productType.id}>
-                        {productType.name}
-                      </option>
-                    ))}
-                </Form.Select>
-              </div>
 
-              <div className={style.divSelect}>
-                <Form.Select
-                  onChange={setFilterByMaterialHandler}
-                  size="sm"
-                  className={style.select}
-                >
-                  <option value="allOptions">Todos los Materiales</option>
-                  {materialNames &&
-                    materialNames.map((material) => (
-                      <option value={material.id} key={material.id}>
-                        {material.name}
-                      </option>
-                    ))}
-                </Form.Select>
-              </div>
-              <div className={style.divSelect}>
-                <Form.Select
-                  onChange={setFilterByColorHandler}
-                  size="sm"
-                  className={style.select}
-                >
-                  <option value="allOptions">Todos los Colores</option>
-                  {coloresList.map((color) => {
-                    return (
-                      <option value={color.id} key={color.id}>
-                        {color.name}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
+          <div className={style.divSelect}>
+            <Form.Select
+              onChange={setFilterByMaterialHandler}
+              size="sm"
+              className={style.select}
+            >
+              <option value="allOptions">Todos los Materiales</option>
+              {materialNames &&
+                materialNames.map((material) => (
+                  <option value={material.id} key={material.id}>
+                    {material.name}
+                  </option>
+                ))}
+            </Form.Select>
+          </div>
+          <div className={style.divSelect}>
+            <Form.Select
+              onChange={setFilterByColorHandler}
+              size="sm"
+              className={style.select}
+            >
+              <option value="allOptions">Todos los Colores</option>
+              {coloresList.map((color) => {
+                return (
+                  <option value={color.id} key={color.id}>
+                    {color.name}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </div>
 
-              <div className={style.divSelect}>
-                <Form.Select
-                  size="sm"
-                  onChange={setSortProductsHandler}
-                  className={style.select}
-                >
-                  <option value="allOptions">Ordenar...</option>
-                  <option value="desc">Mayor precio</option>
-                  <option value="asc">Menor precio</option>
-                </Form.Select>
-              </div>
-            </div>
-          )}
+          <div className={style.divSelect}>
+            <Form.Select
+              size="sm"
+              onChange={setSortProductsHandler}
+              className={style.select}
+            >
+              <option value="allOptions">Ordenar...</option>
+              <option value="desc">Mayor precio</option>
+              <option value="asc">Menor precio</option>
+            </Form.Select>
+          </div>
         </div>
       )}
     </div>

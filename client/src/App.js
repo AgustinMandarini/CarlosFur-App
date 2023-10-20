@@ -19,7 +19,8 @@ import {
   ShoppingCart,
   RegisterForm,
   LoginForm,
-  Reset,
+  ForgottenPassword,
+  ResetPassword,
 } from "./views";
 import Admin from "./Admin/Admin";
 
@@ -71,7 +72,8 @@ function App() {
       />
       <Route path="/register" component={RegisterForm} />
       <Route path="/logIn" component={LoginForm} />
-      <Route path="/reset" component={Reset}></Route>
+      <Route path="/forgottenPassword" component={ForgottenPassword}></Route>
+      <Route path="/resetPassword" component={ResetPassword}></Route>
 
       {/* //Dashboard Admin */}
       <Route path="/admin" component={Admin} />

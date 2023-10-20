@@ -1,12 +1,13 @@
 const {
-  changePasswordController,
-} = require("../../controllers/UserControllers/changePasswordController");
+  postChangePasswordController,
+} = require("../../controllers/UserControllers/postChangePasswordController");
 
-const changePasswordHandler = async (req, res) => {
+const postChangePasswordHandler = async (req, res) => {
   try {
     const { e_mail } = req.body; // Obtén el ID del user de la solicitud
+    console.log(e_mail);
 
-    const result = await changePasswordController(e_mail);
+    const result = await postChangePasswordController(e_mail);
     if (result) {
       return res.status(200).json(result);
     } else {
@@ -20,4 +21,4 @@ const changePasswordHandler = async (req, res) => {
   }
 };
 
-module.exports = { changePasswordHandler };
+module.exports = { postChangePasswordHandler };

@@ -1,9 +1,9 @@
 const { User } = require("../../db.js");
-const { nodeMailerConfig } = require("../Utils/nodeMailerConfig");
+const { nodeMailerConfig } = require("../Utils/nodeMailerConfig.js");
 const crypto = require("crypto");
-const ACCES_CONTROL_URL = process.env.ACCES_CONTROL_URL;
+const API_URL = process.env.API_URL;
 
-const changePasswordController = async (e_mail) => {
+const postChangePasswordController = async (e_mail) => {
   //find a user with such email address
   const user = await User.findOne({ where: { e_mail: e_mail } });
 
@@ -17,7 +17,7 @@ const changePasswordController = async (e_mail) => {
 
     // Esta funcion envia un mail de recuperacion/cambio de password a la direccion de email provista por el
     // usuario. En el email se envia una URL con un token de recuperacion unico.
-    const resetPassURL = `${ACCES_CONTROL_URL}/reset-password?email=${e_mail}?&hash=${hash}`;
+    const resetPassURL = `${API_URL}/user/resetPassword?email=${e_mail}?&hash=${hash}`;
     await nodeMailerConfig(
       e_mail,
       (user_name = null), // Declaramos user_name como null porque en este caso no lo vamos a utilizar
@@ -28,4 +28,4 @@ const changePasswordController = async (e_mail) => {
   }
 };
 
-module.exports = { changePasswordController };
+module.exports = { postChangePasswordController };

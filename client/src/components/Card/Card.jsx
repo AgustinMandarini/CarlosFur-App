@@ -31,7 +31,7 @@ const Card = (props) => {
   const [product, setProduct] = useState(0);
 
   const increaseCounter = () => {
-    console.log(props)
+    console.log(props);
     /* Contador */
     setCounter(counter);
     /* Se suma el producto al carrito */

@@ -17,6 +17,7 @@ const CALLBACK_URL = process.env.REACT_APP_AUTH0_CALLBACK_URL;
 const ShoppingCart = ({ show, handleClose, handleShow }) => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
+  const loggedUser = useSelector((state) => state.loggedUser);
   const { isAuthenticated } = useAuth0();
   const [order, setOrder] = useState(false);
   const history = useHistory();
@@ -76,26 +77,41 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
     }
   };
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const collectionStatus = urlParams.get("collection_status");
-    const status = urlParams.get("status");
+  console.log(cartProducts);
+  /* console.log(loggedUser.e_mail);
+   */ useEffect(() => {
+    const fetchData = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const collectionStatus = urlParams.get("collection_status");
+      const status = urlParams.get("status");
 
-    if (
-      (collectionStatus === "approved" || status === "approved") &&
-      (collectionStatus || status)
-    ) {
-      toast.success("Compra realizada", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
-      });
-      dispatch(emptyCart());
-      localStorage.clear();
-      setOrder(false);
-      setTimeout(() => {
-        window.location.href = CALLBACK_URL;
-      }, 4000);
-    }
+      if (
+        (collectionStatus === "approved" || status === "approved") &&
+        (collectionStatus || status)
+      ) {
+        try {
+          const response = await axios.post(
+            `${REACT_APP_API_URL}/order` /*  acá va lo que hay que mandar */
+          );
+          if (response.status === 201) {
+            toast.success("Compra realizada", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 3000,
+            });
+            dispatch(emptyCart());
+            localStorage.clear();
+            setOrder(false);
+            setTimeout(() => {
+              window.location.href = CALLBACK_URL;
+            }, 4000);
+          }
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+    };
+
+    fetchData();
   }, [order]);
 
   return (

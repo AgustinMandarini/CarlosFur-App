@@ -3,6 +3,7 @@ const mercadopago = require("mercadopago");
 
 const mpCartHandler = async (req, res) => {
   const products = req.body;
+
   let preference = {
     items: products,
     back_urls: {

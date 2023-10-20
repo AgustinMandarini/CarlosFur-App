@@ -35,6 +35,7 @@ import {
   POST_PRODUCTTYPE,
   SET_NAME,
   DELETE_CART_PRODUCT_DIRECT,
+  EMPTY_CART,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -473,4 +474,8 @@ export const putEnableDisable = (id) => {
       console.error("Error en la acción getDetail:", error);
     }
   };
+};
+
+export const emptyCart = () => {
+  return { type: EMPTY_CART };
 };

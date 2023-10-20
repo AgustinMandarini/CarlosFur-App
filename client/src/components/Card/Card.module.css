@@ -10,9 +10,13 @@
   color: white;
   font-size: 16px;
   font-weight: 300;
-  max-width: 14vw;
   letter-spacing: 1px;
   justify-content: center;
+  overflow: hidden; /* Ocultar el texto que desborda */
+  white-space: nowrap; /* Evitar el salto de línea */
+  text-overflow: ellipsis; /* Agregar puntos suspensivos */
+  max-width: 11vw;
+  /* Ancho máximo antes de truncar */
 }
 .imgCard {
   height: 15rem;
@@ -42,6 +46,10 @@
   margin-bottom: 8px;
   font-size: 14px;
   height: 1.5rem;
+  overflow: hidden; /* Ocultar el texto que desborda */
+  white-space: nowrap; /* Evitar el salto de línea */
+  text-overflow: ellipsis; /* Agregar puntos suspensivos */
+  max-width: 11vw;
 }
 .price {
   text-decoration: none;

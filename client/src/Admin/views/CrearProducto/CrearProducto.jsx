@@ -82,7 +82,6 @@ const CrearProducto = () => {
     }
   };
 
-;
   return (
     <div className={style.cntnForm}>
       <p className={style.tittle}>Nuevo Producto</p>
@@ -239,7 +238,11 @@ const CrearProducto = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.colorId && formSubmitted ? <span>{errors.colorId}</span> : ""}
+              {errors.colorId && formSubmitted ? (
+                <span>{errors.colorId}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
         </Form.Group>
@@ -295,6 +298,7 @@ const CrearProducto = () => {
             >
               <option>Seleccionar Tipo de Producto</option>
               {stateProductType &&
+                stateProductType !== undefined &&
                 stateProductType.map((tipo, index) => {
                   return (
                     <option key={index} value={tipo.id} name={tipo.name}>
@@ -374,7 +378,11 @@ const CrearProducto = () => {
             </div>
           )
         )}
-        {errors.imageBase64 ? <span className={style.error}>{errors.imageBase64}</span> : ""}
+        {errors.imageBase64 ? (
+          <span className={style.error}>{errors.imageBase64}</span>
+        ) : (
+          ""
+        )}
         {Object.values(errors).every((error) => error === "") ? (
           <button type="submit" className={style.botonSubmit}>
             Enviar

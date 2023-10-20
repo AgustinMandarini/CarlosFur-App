@@ -67,7 +67,7 @@ const Productos = () => {
             {Array.isArray(productos) &&
               productos.map((producto) => (
                 <tr key={producto.id} className={style.td}>
-                  <td>
+                  <td className={style.cntnTr}>
                     <Container>
                       <Row className={style.td}>
                         <Col xs={10} md={6} className={style.td}>
@@ -80,7 +80,7 @@ const Productos = () => {
                       </Row>
                     </Container>
                   </td>
-                  <td>{producto.name}</td>
+                  <td className={style.cntnTr}>{producto.name}</td>
 
                   <td>
                     <Button variant="outline-warning">
@@ -93,22 +93,25 @@ const Productos = () => {
                       </Link>
                     </Button>{" "}
                   </td>
-                  <td>
+                  <td className={style.cntnTr}>
                     <BootstrapSwitchButton
                       onstyle="success"
+                      height={15}
+                      width={60}
                       value={producto.id}
                       onChange={() => changeProductEnabled(producto.id)}
                       checked={producto.enabled_product} // Cambiado a "producto.enabled_product"
                     />
                   </td>
-                  <td>
+                  <td className={style.cntnTr}>
                     <Button
+                      className={style.butttonDelete}
                       variant="outline-danger"
                       value={producto.id}
                       onClick={handleDeleteProduct}
                     >
                       Eliminar
-                    </Button>{" "}
+                    </Button>
                   </td>
                 </tr>
               ))}

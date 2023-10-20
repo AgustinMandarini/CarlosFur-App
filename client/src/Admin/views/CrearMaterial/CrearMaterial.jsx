@@ -1,14 +1,13 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
-import {postMaterial } from "./../../../redux/actions";
+import { postMaterial } from "./../../../redux/actions";
 import style from "./CrearMaterial.module.css";
 import validation from "./validation";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 const CrearProducto = () => {
-
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({});
@@ -37,17 +36,16 @@ const CrearProducto = () => {
     }
   };
 
-
   const handleAcept = () => {
     setModal(false);
-  }
+  };
 
   return (
     <div className={style.cntnForm}>
       <p className={style.tittle}>Nuevo Material:</p>
       <Form className={style.formConteiner} onSubmit={submitHandler}>
         <Form.Group className={style.formGroup} controlId="formBasicEmail">
-          <Form.Label className={style.label}>Nombre del material: </Form.Label>
+          <Form.Label className={style.label}>Material: </Form.Label>
           <div className={style.divinputError}>
             <Form.Control
               size="sm"
@@ -76,12 +74,15 @@ const CrearProducto = () => {
               className={style.input}
             />
             <Form.Text className={style.error}>
-              {errors.description && formSubmitted ? <span>{errors.description}</span> : ""}{" "}
+              {errors.description && formSubmitted ? (
+                <span>{errors.description}</span>
+              ) : (
+                ""
+              )}{" "}
             </Form.Text>
           </div>
         </Form.Group>
 
-       
         {Object.values(errors).every((error) => error === "") ? (
           <button type="submit" className={style.botonSubmit}>
             Enviar
@@ -92,12 +93,16 @@ const CrearProducto = () => {
           </button>
         )}
       </Form>
-      <Modal show={modal} >
-        <Modal.Header closeButton>
+      <Modal show={modal}>
+        <Modal.Header closeButton className={style.headerModal}>
           <Modal.Title>Material Creado</Modal.Title>
         </Modal.Header>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleAcept}>
+        <Modal.Footer className={style.footerModal}>
+          <Button
+            variant="secondary"
+            onClick={handleAcept}
+            className={style.buttonModal}
+          >
             Aceptar
           </Button>
         </Modal.Footer>

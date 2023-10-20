@@ -4,6 +4,7 @@ import { getUsers } from "../../../redux/actions";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
+import style from "./Usuarios.module.css";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -24,27 +25,31 @@ const Users = () => {
     }
   };
   return (
-    <div>
-      <h1>Usuarios registrados</h1>
+    <div className={style.cntnUsers}>
+      <div className={style.cntnTittle}>
+        <h1>Usuarios registrados</h1>
+      </div>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Nombre de Usuario</th>
-            <th>Email</th>
-            <th>Habilitado</th>
+            <th className={style.cntnTh}>Nombre de Usuario</th>
+            <th className={style.cntnTh}>Email</th>
+            <th className={style.cntnTh}>Habilitado</th>
           </tr>
         </thead>
         <tbody>
           {Array.isArray(allUsers) &&
             allUsers.map((user) => (
               <tr key={user.id}>
-                <td>{user.user_name}</td>
-                <td>{user.e_mail}</td>
-                <td>
+                <td className={style.cntnTr}>{user.user_name}</td>
+                <td className={style.cntnTr}>{user.e_mail}</td>
+                <td className={style.cntnTr}>
                   <BootstrapSwitchButton
                     checked={user.enabled_user}
                     onstyle="success"
                     onChange={() => setEnabled(user.id)}
+                    height={20}
+                    width={50}
                   />
                 </td>
               </tr>

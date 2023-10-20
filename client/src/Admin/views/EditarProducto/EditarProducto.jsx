@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getDetail, putProduct } from "../../../redux/actions";
+import { getDetail, putProduct, getColorById, getMaterialById, getProductTypeById } from "../../../redux/actions";
 import style from "./EditarProducto.module.css";
 import edit from "./../../../imagenes/edit.png";
 import Col from "react-bootstrap/Col";
@@ -14,14 +14,16 @@ import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import validation from "./validation";
 
-
 const EditarProducto = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const stateDetail = useSelector((state) => state.detail);
+  const stateDetail = useSelector((state) => state.detail);//trae todos los productos
   const stateProductType = useSelector((state) => state.productType);
-  const stateColor = useSelector((state) => state.colorState);
+  const stateColor = useSelector((state) => state.colorState);//trae todos los colores
   const stateMaterial = useSelector((state) => state.materialState);
+  const colorById = useSelector((state) => state.colorById);//trae color por id
+  const materialById = useSelector((state) => state.materialId);
+  const productTypeById = useSelector((state) => state.tipoDeProductoById);
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -31,6 +33,13 @@ const EditarProducto = () => {
   const [preview, setPreview] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
   const [modal, setModal] = useState(false);
+// console.log(stateDetail);
+  useEffect(() => {
+    dispatch(getDetail(id));
+    dispatch(getColorById(stateDetail.colorId));
+    dispatch(getMaterialById(stateDetail.materialId));
+    dispatch(getProductTypeById(stateDetail.productTypeId));
+  }, [getDetail, stateDetail]);
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -42,12 +51,11 @@ const EditarProducto = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(id,form);
+    console.log(id, form);
     setFormSubmitted(true);
-      dispatch(putProduct(id,form));
-      setModal(true);
+    dispatch(putProduct(id, form));
+    setModal(true);
   };
-
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -81,30 +89,18 @@ const EditarProducto = () => {
   const toggleEdit = () => {
     setShowFilters(!showFilters);
   };
-//hola
+  //hola
   const handleSelectMuebles = (event) => {
     const property = event.target.name;
     let value = event.target.value;
     setForm({ ...form, [property]: value });
   };
 
-  useEffect(() => {
-    dispatch(getDetail(id));
-    setForm({})
-    setForm({ name: stateDetail.name, 
-      price: stateDetail.price, 
-      height: stateDetail.height, 
-      depth: stateDetail.depth, 
-      width: stateDetail.width, 
-      weight: stateDetail.weight, 
-      stock: stateDetail.stock, 
-      colorId: stateDetail.colorId, 
-      materialId: stateDetail.materialId, 
-      productTypeId: stateDetail.productTypeId, 
-      description: stateDetail.description, 
-      imageBase64: null,})
-  }, [getDetail,stateDetail]);
 
+ 
+
+
+  
   return (
     <div className={style.cntnForm}>
       <p className={style.tittle}>Editar Producto</p>
@@ -116,11 +112,15 @@ const EditarProducto = () => {
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Nombre: </Form.Label>
-            <Form.Label className={style.label}>{stateDetail && stateDetail.name ? stateDetail.name : 'Nombre no disponible'}</Form.Label>
+            <Form.Label className={style.label}>
+              {stateDetail && stateDetail.name
+                ? stateDetail.name
+                : "Nombre no disponible"}
+            </Form.Label>
             {showFilters && (
               <div className={style.divinputError}>
                 <Form.Label className={style.label}>
-                  Ingrese nuevo nombre:{" "}
+                  Ingrese nuevo nombre:
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
@@ -140,7 +140,9 @@ const EditarProducto = () => {
           {/*PRECIO*/}
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Precio: </Form.Label>
-            <Form.Label className={style.label}>{stateDetail && stateDetail.price}</Form.Label>
+            <Form.Label className={style.label}>
+              {stateDetail && stateDetail.price}
+            </Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
@@ -192,7 +194,9 @@ const EditarProducto = () => {
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Profundida</Form.Label>
-            <Form.Label className={style.label}>{stateDetail && stateDetail.depth}</Form.Label>
+            <Form.Label className={style.label}>
+              {stateDetail && stateDetail.depth}
+            </Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
@@ -217,7 +221,9 @@ const EditarProducto = () => {
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Ancho:</Form.Label>
-            <Form.Label className={style.label}>{stateDetail && stateDetail.width}</Form.Label>
+            <Form.Label className={style.label}>
+              {stateDetail && stateDetail.width}
+            </Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
@@ -269,7 +275,9 @@ const EditarProducto = () => {
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Stock:</Form.Label>
-            <Form.Label className={style.label}>{stateDetail && stateDetail.stock}</Form.Label>
+            <Form.Label className={style.label}>
+              {stateDetail && stateDetail.stock}
+            </Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
@@ -294,10 +302,14 @@ const EditarProducto = () => {
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Color:</Form.Label>
-            <Form.Label className={style.label}>{stateDetail && stateDetail.color}</Form.Label>
+            {colorById.id === stateDetail.colorId ? (
+                <Form.Label className={style.label}>{colorById.name}</Form.Label>
+            ) : (
+              <Form.Label className={style.label}>No disponible</Form.Label>
+            )}
 
             {showFilters && (
-              <div className={style.divinputError}>
+              <div className={style.divinputErrorType}>
                 <Form.Select
                   size="sm"
                   onChange={handleSelectMuebles}
@@ -324,12 +336,14 @@ const EditarProducto = () => {
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Material:</Form.Label>
-            <Form.Label className={style.label}>
-              {stateDetail && stateDetail.materialId}
-            </Form.Label>
-
+            {materialById.id === stateDetail.materialId ? (
+                <Form.Label className={style.label}>{materialById.name}</Form.Label>
+            ) : (
+              <Form.Label className={style.label}>No disponible</Form.Label>
+            )}
+          
             {showFilters && (
-              <div className={style.divinputError}>
+              <div className={style.divinputErrorType}>
                 <Form.Select
                   size="sm"
                   onChange={handleSelectMuebles}
@@ -356,12 +370,14 @@ const EditarProducto = () => {
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Tipo de Producto:</Form.Label>
-            <Form.Label className={style.label}>
-              {stateDetail && stateDetail.productTypeId}
-            </Form.Label>
-
+            {productTypeById.id === stateDetail.productTypeId ? (
+                <Form.Label className={style.label}>{productTypeById.name}</Form.Label>
+            ) : (
+              <Form.Label className={style.label}>No disponible</Form.Label>
+            )}
+            
             {showFilters && (
-              <div className={style.divinputError}>
+              <div className={style.divinputErrorType}>
                 <Form.Select
                   size="sm"
                   onChange={handleSelectMuebles}
@@ -395,7 +411,7 @@ const EditarProducto = () => {
             {showFilters && (
               <div className={style.divinputError}>
                 <Form.Label className={style.label}>
-                  Ingrese nueva descripcion:{" "}
+                  Ingrese nueva descripcion:
                 </Form.Label>
                 <Form.Control
                   size="sm"
@@ -412,7 +428,11 @@ const EditarProducto = () => {
         {/*IMAGEN*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Imagen:</Form.Label>
+            <Form.Label
+              className={showFilters ? style.labelEdit : style.labelImg}
+            >
+              Imagen:
+            </Form.Label>
             <Container>
               <Row>
                 <Col xs={8} md={3}>
@@ -424,7 +444,7 @@ const EditarProducto = () => {
               <div className={style.divinputError}>
                 <header>
                   <div className={style.tittleSelectImage}>
-                    <span>Selecciona nueva imagen:</span>
+                    <span>Selecciona una imagen:</span>
                   </div>
                   <div className={style.inputSelectImage}>
                     <input
@@ -445,9 +465,7 @@ const EditarProducto = () => {
                     </div>
                   </div>
                 </header>
-                <button className={style.botonReset} onClick={handleResetClick}>
-                  Reset
-                </button>
+
                 {loading ? (
                   <div>
                     <div></div>
@@ -464,26 +482,26 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-
-        {
-         showFilters && (Object.values(errors).every((error) => error === "") ? (
-          <button type="submit" className={style.botonSubmit}>
-            Enviar
-          </button>
-        ) : (
-          <button type="submit" className={style.botonSubmitOff}>
-            Enviar
-          </button>
-        ))}
+        <button className={style.botonReset} onClick={handleResetClick}>
+          Reset
+        </button>
+        {showFilters &&
+          (Object.values(errors).every((error) => error === "") ? (
+            <button type="submit" className={style.botonSubmit}>
+              Enviar
+            </button>
+          ) : (
+            <button type="submit" className={style.botonSubmitOff}>
+              Enviar
+            </button>
+          ))}
       </Form>
-      <Modal show={modal} >
+      <Modal show={modal}>
         <Modal.Header closeButton>
           <Modal.Title>Producto Editado</Modal.Title>
         </Modal.Header>
         <Modal.Footer>
-          <Button variant="secondary">
-            Aceptar
-          </Button>
+          <Button variant="secondary">Aceptar</Button>
         </Modal.Footer>
       </Modal>
     </div>

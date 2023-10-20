@@ -83,6 +83,7 @@ const CrearProducto = () => {
     }
   };
 
+  console.log(stateProductType);
   return (
     <div className={style.cntnForm}>
       <p className={style.tittle}>Nuevo Producto</p>

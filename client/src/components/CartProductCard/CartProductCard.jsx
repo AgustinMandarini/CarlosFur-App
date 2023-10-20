@@ -41,18 +41,23 @@ const CartProductCard = (props) => {
         <p className={style.prop}>
           <strong>{props.name}</strong>
         </p>
-        <p className={style.prop}>Cantidad: {props.count}</p>{" "}
+        {/* <p className={style.prop}>Cantidad: {props.count}</p> */}
         <p className={style.prop}>Precio unitario: ${props.totalPrice}</p>
         <p className={style.prop}>Precio total: ${productTotalPrice}</p>
-        <div className={style.counterContainer}>
-          <button className={style.buttonCount} onClick={deleteProduct}>
-            -
-          </button>
-          <button className={style.buttonCount} onClick={postProduct}>
-            +
-          </button>
-          <button onClick={removeProduct} className={style.buttonCount}>
-            <IconTrash size="16px" />
+        <div className={style.butttons}>
+          <div className={style.counterContainer}>
+            <button className={style.buttonCount} onClick={deleteProduct}>
+              -
+            </button>
+
+            <p className={style.propCounter}>{props.count}</p>
+
+            <button className={style.buttonCount} onClick={postProduct}>
+              +
+            </button>
+          </div>
+          <button onClick={removeProduct} className={style.buttonDelete}>
+            <IconTrash size="20px" stroke="1." />
           </button>
         </div>
       </div>

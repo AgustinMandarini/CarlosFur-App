@@ -46,8 +46,7 @@ const {
   Cart,
   Order,
   Review,
-  PaymentType,
-  CartSaleState,
+  PaymentType
 } = sequelize.models;
     
 // Aca vendrian las relaciones

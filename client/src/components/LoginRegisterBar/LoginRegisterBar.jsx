@@ -5,15 +5,16 @@ import { Link } from "react-router-dom";
 import style from "./LoginRegisterBar.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../../redux/actions";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function LoginBar() {
   const { logout, isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
 
   const userIsAuthenticated =
-    isAuthenticated || localStorage.getItem("token") != null;
+    isAuthenticated || localStorage.getItem("token") !== null;
+
   const cartProducts = useSelector((state) => state.cartProducts);
 
   let cartArray = [];
@@ -36,8 +37,8 @@ function LoginBar() {
   const cartToDispatch = { products: cartArray };
 
   const handleLogout = () => {
-    toast.info('Cerrando Sesión', {
-      position: toast.POSITION.BOTTOM_RIGHT
+    toast.info("Cerrando Sesión", {
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
     dispatch(logOut());
     localStorage.removeItem("cartId");

@@ -33,6 +33,7 @@ const Productos = () => {
   const confirmDelete = () => {
     if (productIdToDelete !== null) {
       dispatch(deleteProduct(productIdToDelete));
+      dispatch(getProductsAdmin());
       setShowDeleteModal(false);
     }
   };
@@ -119,15 +120,15 @@ const Productos = () => {
         </Table>
 
         <Modal show={showDeleteModal} onHide={cancelDelete}>
-          <Modal.Header closeButton>
+          <Modal.Header className={style.headerModal}>
             <Modal.Title>Confirmar Eliminación</Modal.Title>
           </Modal.Header>
           <Modal.Body>¿Seguro que deseas eliminar este producto?</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={cancelDelete}>
+          <Modal.Footer className={style.footerModal}>
+            <Button className={style.buttonModal} onClick={cancelDelete}>
               Cancelar
             </Button>
-            <Button variant="danger" onClick={confirmDelete}>
+            <Button className={style.buttonModal} onClick={confirmDelete}>
               Eliminar
             </Button>
           </Modal.Footer>

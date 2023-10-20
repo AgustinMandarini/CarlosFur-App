@@ -175,10 +175,12 @@ export const getProductType = () => {
     }
   };
 };
-export const getProductTypeById = (id) => {
+export const getProductTypeById = (productTypeId) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${apiUrl}/productType/${id}`);
+      const response = await axios.get(
+        `${apiUrl}/productType/${productTypeId}`
+      );
       const productType = response.data;
       return dispatch({
         type: GET_PRODUCT_TYPE_BYID,
@@ -217,10 +219,10 @@ export const getColor = () => {
   };
 };
 
-export const getColorById = (id) => {
+export const getColorById = (colorId) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${apiUrl}/color/${id}`);
+      const response = await axios.get(`${apiUrl}/color/${colorId}`);
       const color = response.data;
       return dispatch({
         type: GET_COLOR_BYID,
@@ -287,10 +289,10 @@ export const getMaterial = () => {
   };
 };
 
-export const getMaterialById = (id) => {
+export const getMaterialById = (materialId) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${apiUrl}/material/${id}`);
+      const response = await axios.get(`${apiUrl}/material/${materialId}`);
       const material = response.data;
       return dispatch({
         type: GET_MATERIAL_BYID,

@@ -11,6 +11,7 @@
 .formContainer {
   margin-left: 500px;
   margin-top: 20px;
+  padding: 20px;
   background-color: #ae9c8f;
   width: 400px;
   height: 500px;
@@ -23,7 +24,7 @@
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 1.9rem;
   color: black;
   margin-top: 8px;
 }
@@ -76,16 +77,13 @@
 }
 
 .text {
-  color: white;
+  color: rgb(0, 0, 0);
   margin-top: 6px;
+  text-align: left;
 }
 
 .link {
   color: #fd0000;
-  text-decoration: none;
-}
-.linkReset {
-  color: #0c00f7;
   text-decoration: none;
 }
 

@@ -9,7 +9,6 @@ import styles from "./LoginForm.module.css";
 import validation from "./validation";
 import axios from "axios";
 
-
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const LoginForm = () => {
@@ -18,13 +17,11 @@ const LoginForm = () => {
   const history = useHistory();
   const loggedUser = useSelector((state) => state.loggedUser);
 
-  
   const mostrarNotificacionBienvenida = () => {
-    toast.success('Iniciando Sesión', {
-      position: toast.POSITION.BOTTOM_RIGHT
+    toast.success("Iniciando Sesión", {
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
-
 
   const handleLogin = async () => {
     await loginWithRedirect({
@@ -35,15 +32,14 @@ const LoginForm = () => {
         returnTo: "/home",
       },
     });
-    mostrarNotificacionBienvenida()
+    mostrarNotificacionBienvenida();
   };
 
   // Maneja el login desde el formulario (login local de nuestro server)
   const handleLocalLogin = async () => {
-
     const saveUserInfoToLocalStorage = (userId, cartId) => {
       const user = { userId, cartId };
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));
     };
 
     const userInfo = { e_mail: form.e_mail, password: form.password };
@@ -117,7 +113,7 @@ const LoginForm = () => {
         <form className={styles.form} onSubmit={submitHandler}>
           {/* E_mail input */}
           <div className={styles.inputContainer}>
-          <span className={styles.label}>E-mail</span>
+            <span className={styles.label}>E-mail</span>
             <div className={styles.data}>
               <input
                 type="text"
@@ -129,13 +125,12 @@ const LoginForm = () => {
                 required
               />
             </div>
-          
           </div>
           {errors.e_mail && <p className={styles.errorText}>{errors.e_mail}</p>}
 
           {/* Password input */}
           <div className={`${styles.inputContainer} ${styles.mt2}`}>
-          <span className={styles.label}>Contraseña</span>
+            <span className={styles.label}>Contraseña</span>
             <div className={styles.data}>
               <input
                 type="password"
@@ -146,7 +141,6 @@ const LoginForm = () => {
                 onChange={changeHandler}
                 required
               />
-             
             </div>
           </div>
           {errors.password && (
@@ -158,6 +152,11 @@ const LoginForm = () => {
             <button className={styles.button} type="submit">
               Iniciar sesión
             </button>
+            <span className={`${styles.text} ${styles.mt6}`}>
+              <Link to="/reset" className={styles.linkReset}>
+                ¿Olvidaste tu contraseña?
+              </Link>
+            </span>
             {/* Botón "Acceder con Google" */}
             <button
               onClick={handleLogin}
@@ -170,7 +169,6 @@ const LoginForm = () => {
                 className={styles.googleLogo}
               />
               Acceder con Google
-            
             </button>
 
             <span className={`${styles.text} ${styles.mt6}`}>

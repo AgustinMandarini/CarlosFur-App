@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-import styles from "./LoginForm.module.css";
+import styles from "./Reset.module.css";
 import validation from "./validation";
 import axios from "axios";
 
@@ -39,11 +39,15 @@ const LoginForm = () => {
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
-        <h2 className={styles.title}>Inicio de sesión</h2>
+        <h2 className={styles.title}>¿Olvidaste tu contraseña?</h2>
         <form className={styles.form} onSubmit={submitHandler}>
           {/* E_mail input */}
           <div className={styles.inputContainer}>
-            <span className={styles.label}>E-mail</span>
+            <p className={`${styles.text}`}>
+              Introduce abajo tu correo electrónico con el que te registraste.
+              Te enviaremos los detalles para restablecer la contraseña de tu
+              cuenta.{" "}
+            </p>
             <div className={styles.data}>
               <input
                 type="text"
@@ -63,12 +67,6 @@ const LoginForm = () => {
             <button className={styles.button} type="submit">
               Restablecer contraseña
             </button>
-
-            <span className={`${styles.text} ${styles.mt6}`}>
-              Introduce abajo tu correo electrónico con el que te registraste.
-              Te enviaremos los detalles para restablecer la contraseña de tu
-              cuenta.{" "}
-            </span>
           </div>
         </form>
       </div>

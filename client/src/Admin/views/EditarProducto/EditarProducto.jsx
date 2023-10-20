@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getDetail, putProduct, getColorById, getMaterialById, getProductTypeById } from "../../../redux/actions";
+import {
+  getDetail,
+  putProduct,
+  getColorById,
+  getMaterialById,
+  getProductTypeById,
+} from "../../../redux/actions";
 import style from "./EditarProducto.module.css";
 import edit from "./../../../imagenes/edit.png";
 import Col from "react-bootstrap/Col";
@@ -17,11 +23,11 @@ import validation from "./validation";
 const EditarProducto = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const stateDetail = useSelector((state) => state.detail);//trae todos los productos
+  const stateDetail = useSelector((state) => state.detail); //trae todos los productos
   const stateProductType = useSelector((state) => state.productType);
-  const stateColor = useSelector((state) => state.colorState);//trae todos los colores
+  const stateColor = useSelector((state) => state.colorState); //trae todos los colores
   const stateMaterial = useSelector((state) => state.materialState);
-  const colorById = useSelector((state) => state.colorById);//trae color por id
+  const colorById = useSelector((state) => state.colorById); //trae color por id
   const materialById = useSelector((state) => state.materialId);
   const productTypeById = useSelector((state) => state.tipoDeProductoById);
   const [form, setForm] = useState({});
@@ -33,13 +39,28 @@ const EditarProducto = () => {
   const [preview, setPreview] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
   const [modal, setModal] = useState(false);
-// console.log(stateDetail);
+  // console.log(stateDetail);
   useEffect(() => {
     dispatch(getDetail(id));
     dispatch(getColorById(stateDetail.colorId));
     dispatch(getMaterialById(stateDetail.materialId));
     dispatch(getProductTypeById(stateDetail.productTypeId));
   }, [getDetail, stateDetail]);
+
+  useEffect(() => {
+    setForm({
+      name: stateDetail.name,
+      price: stateDetail.price,
+      height: stateDetail.height,
+      depth: stateDetail.depth,
+      width: stateDetail.width,
+      weight: stateDetail.weight,
+      stock: stateDetail.stock,
+      colorId: stateDetail.colorId,
+      materialId: stateDetail.materialId,
+      productTypeId: stateDetail.productTypeId,
+    });
+  }, []);
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -51,10 +72,12 @@ const EditarProducto = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(id, form);
     setFormSubmitted(true);
     dispatch(putProduct(id, form));
     setModal(true);
+  };
+  const handleAcept = () => {
+    setModal(false);
   };
 
   const handleImageChange = (event) => {
@@ -89,18 +112,13 @@ const EditarProducto = () => {
   const toggleEdit = () => {
     setShowFilters(!showFilters);
   };
-  //hola
+
   const handleSelectMuebles = (event) => {
     const property = event.target.name;
     let value = event.target.value;
     setForm({ ...form, [property]: value });
   };
 
-
- 
-
-
-  
   return (
     <div className={style.cntnForm}>
       <p className={style.tittle}>Editar Producto</p>
@@ -111,11 +129,11 @@ const EditarProducto = () => {
         {/*NOMBRE*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Nombre: </Form.Label>
-            <Form.Label className={style.label}>
-              {stateDetail && stateDetail.name
-                ? stateDetail.name
-                : "Nombre no disponible"}
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Nombre:
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              {form && form.name ? form.name : stateDetail.name}
             </Form.Label>
             {showFilters && (
               <div className={style.divinputError}>
@@ -124,7 +142,6 @@ const EditarProducto = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.name}
                   size="sm"
                   type="text"
                   value={form.name}
@@ -139,19 +156,20 @@ const EditarProducto = () => {
         <div className={style.editContainer}>
           {/*PRECIO*/}
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Precio: </Form.Label>
-            <Form.Label className={style.label}>
-              {stateDetail && stateDetail.price}
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Precio:{" "}
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              {form && form.price ? form.price : stateDetail.price}
             </Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
                 <Form.Label className={style.label}>
-                  Ingrese nuevo precio:{" "}
+                  Ingrese nuevo precio:
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.price}
                   size="sm"
                   type="text"
                   value={form.price}
@@ -166,9 +184,11 @@ const EditarProducto = () => {
         {/*ALTURA*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Altura: </Form.Label>
-            <Form.Label className={style.label}>
-              {stateDetail && stateDetail.height}
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Altura:{" "}
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              {form && form.height ? form.height : stateDetail.height}
             </Form.Label>
 
             {showFilters && (
@@ -178,7 +198,6 @@ const EditarProducto = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.height}
                   size="sm"
                   type="text"
                   value={form.height}
@@ -193,9 +212,11 @@ const EditarProducto = () => {
         {/*PROFUNDIDAD*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Profundida</Form.Label>
-            <Form.Label className={style.label}>
-              {stateDetail && stateDetail.depth}
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Profundidad
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              {form && form.depth ? form.depth : stateDetail.depth}
             </Form.Label>
 
             {showFilters && (
@@ -205,7 +226,6 @@ const EditarProducto = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.depth}
                   size="sm"
                   type="text"
                   value={form.depth}
@@ -220,9 +240,11 @@ const EditarProducto = () => {
         {/*ANCHO*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Ancho:</Form.Label>
-            <Form.Label className={style.label}>
-              {stateDetail && stateDetail.width}
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Ancho:
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              {form && form.width ? form.width : stateDetail.width}
             </Form.Label>
 
             {showFilters && (
@@ -232,7 +254,6 @@ const EditarProducto = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.width}
                   size="sm"
                   type="text"
                   value={form.width}
@@ -247,9 +268,11 @@ const EditarProducto = () => {
         {/*PESO*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Peso:</Form.Label>
-            <Form.Label className={style.label}>
-              {stateDetail && stateDetail.weight}
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Peso:
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              {form && form.weight ? form.weight : stateDetail.weight}
             </Form.Label>
 
             {showFilters && (
@@ -259,7 +282,6 @@ const EditarProducto = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.weight}
                   size="sm"
                   type="text"
                   value={form.weight}
@@ -274,9 +296,11 @@ const EditarProducto = () => {
         {/*STOCK*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Stock:</Form.Label>
-            <Form.Label className={style.label}>
-              {stateDetail && stateDetail.stock}
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Stock:
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              {form && form.stock ? form.stock : stateDetail.stock}
             </Form.Label>
 
             {showFilters && (
@@ -286,7 +310,6 @@ const EditarProducto = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.stock}
                   size="sm"
                   type="text"
                   value={form.stock}
@@ -301,9 +324,15 @@ const EditarProducto = () => {
         {/*COLOR*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Color:</Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Color:
+            </Form.Label>
             {colorById.id === stateDetail.colorId ? (
-                <Form.Label className={style.label}>{colorById.name}</Form.Label>
+              <Form.Label
+                className={showFilters ? style.labelEdit : style.label}
+              >
+                {colorById.name}
+              </Form.Label>
             ) : (
               <Form.Label className={style.label}>No disponible</Form.Label>
             )}
@@ -335,13 +364,19 @@ const EditarProducto = () => {
         {/*MATERIAL*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Material:</Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Material:
+            </Form.Label>
             {materialById.id === stateDetail.materialId ? (
-                <Form.Label className={style.label}>{materialById.name}</Form.Label>
+              <Form.Label
+                className={showFilters ? style.labelEdit : style.label}
+              >
+                {materialById.name}
+              </Form.Label>
             ) : (
               <Form.Label className={style.label}>No disponible</Form.Label>
             )}
-          
+
             {showFilters && (
               <div className={style.divinputErrorType}>
                 <Form.Select
@@ -369,13 +404,23 @@ const EditarProducto = () => {
         {/*TIPO DE PRODUCTo*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Tipo de Producto:</Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Tipo de Producto:
+            </Form.Label>
             {productTypeById.id === stateDetail.productTypeId ? (
-                <Form.Label className={style.label}>{productTypeById.name}</Form.Label>
+              <Form.Label
+                className={showFilters ? style.labelEdit : style.label}
+              >
+                {productTypeById.name}
+              </Form.Label>
             ) : (
-              <Form.Label className={style.label}>No disponible</Form.Label>
+              <Form.Label
+                className={showFilters ? style.labelEdit : style.label}
+              >
+                No disponible
+              </Form.Label>
             )}
-            
+
             {showFilters && (
               <div className={style.divinputErrorType}>
                 <Form.Select
@@ -403,8 +448,10 @@ const EditarProducto = () => {
         {/*DESCRIPCION*/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
-            <Form.Label className={style.label}>Descripcion:</Form.Label>
-            <Form.Label className={style.label}>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
+              Descripcion:
+            </Form.Label>
+            <Form.Label className={showFilters ? style.labelEdit : style.label}>
               {stateDetail && stateDetail.description}
             </Form.Label>
 
@@ -436,7 +483,13 @@ const EditarProducto = () => {
             <Container>
               <Row>
                 <Col xs={8} md={3}>
-                  <Image src={stateDetail && stateDetail.imagePath} thumbnail />
+                  <Form.Label
+                    className={
+                      showFilters ? style.labelImgEdit : style.labelImg
+                    }
+                  >
+                    <Image src={stateDetail.imagePath} thumbnail />
+                  </Form.Label>
                 </Col>
               </Row>
             </Container>
@@ -497,11 +550,13 @@ const EditarProducto = () => {
           ))}
       </Form>
       <Modal show={modal}>
-        <Modal.Header closeButton>
+        <Modal.Header className={style.headerModal}>
           <Modal.Title>Producto Editado</Modal.Title>
         </Modal.Header>
-        <Modal.Footer>
-          <Button variant="secondary">Aceptar</Button>
+        <Modal.Footer className={style.footerModal}>
+          <Button onClick={handleAcept} className={style.buttonModal}>
+            Aceptar
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>

@@ -39,7 +39,23 @@ const EditarProducto = () => {
     dispatch(getColorById(stateDetail.colorId));
     dispatch(getMaterialById(stateDetail.materialId));
     dispatch(getProductTypeById(stateDetail.productTypeId));
+   
   }, [getDetail, stateDetail]);
+
+  useEffect(()=>{
+    setForm({
+      name: stateDetail.name,
+      price:  stateDetail.price,
+      height: stateDetail.height,
+      depth: stateDetail.depth,
+      width: stateDetail.width,
+      weight: stateDetail.weight,
+      stock: stateDetail.stock,
+      colorId: stateDetail.colorId,
+      materialId: stateDetail.materialId,
+      productTypeId: stateDetail.productTypeId,
+    })
+  },[])
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -51,7 +67,6 @@ const EditarProducto = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(id, form);
     setFormSubmitted(true);
     dispatch(putProduct(id, form));
     setModal(true);
@@ -89,7 +104,7 @@ const EditarProducto = () => {
   const toggleEdit = () => {
     setShowFilters(!showFilters);
   };
-  //hola
+
   const handleSelectMuebles = (event) => {
     const property = event.target.name;
     let value = event.target.value;
@@ -113,9 +128,9 @@ const EditarProducto = () => {
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Nombre: </Form.Label>
             <Form.Label className={style.label}>
-              {stateDetail && stateDetail.name
-                ? stateDetail.name
-                : "Nombre no disponible"}
+              {form && form.name
+                ? form.name
+                : stateDetail.name}
             </Form.Label>
             {showFilters && (
               <div className={style.divinputError}>
@@ -124,7 +139,6 @@ const EditarProducto = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.name}
                   size="sm"
                   type="text"
                   value={form.name}
@@ -141,7 +155,9 @@ const EditarProducto = () => {
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Precio: </Form.Label>
             <Form.Label className={style.label}>
-              {stateDetail && stateDetail.price}
+            {form && form.price
+                ? form.price
+                : stateDetail.price}
             </Form.Label>
 
             {showFilters && (
@@ -151,7 +167,6 @@ const EditarProducto = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.price}
                   size="sm"
                   type="text"
                   value={form.price}
@@ -168,7 +183,9 @@ const EditarProducto = () => {
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Altura: </Form.Label>
             <Form.Label className={style.label}>
-              {stateDetail && stateDetail.height}
+            {form && form.height
+                ? form.height
+                : stateDetail.height}
             </Form.Label>
 
             {showFilters && (
@@ -178,7 +195,6 @@ const EditarProducto = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.height}
                   size="sm"
                   type="text"
                   value={form.height}
@@ -195,7 +211,9 @@ const EditarProducto = () => {
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Profundida</Form.Label>
             <Form.Label className={style.label}>
-              {stateDetail && stateDetail.depth}
+            {form && form.depth
+                ? form.depth
+                : stateDetail.depth}
             </Form.Label>
 
             {showFilters && (
@@ -205,7 +223,6 @@ const EditarProducto = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.depth}
                   size="sm"
                   type="text"
                   value={form.depth}
@@ -222,7 +239,9 @@ const EditarProducto = () => {
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Ancho:</Form.Label>
             <Form.Label className={style.label}>
-              {stateDetail && stateDetail.width}
+            {form && form.width
+                ? form.width
+                : stateDetail.width}
             </Form.Label>
 
             {showFilters && (
@@ -232,7 +251,6 @@ const EditarProducto = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.width}
                   size="sm"
                   type="text"
                   value={form.width}
@@ -249,7 +267,9 @@ const EditarProducto = () => {
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Peso:</Form.Label>
             <Form.Label className={style.label}>
-              {stateDetail && stateDetail.weight}
+            {form && form.weight
+                ? form.weight
+                : stateDetail.weight}
             </Form.Label>
 
             {showFilters && (
@@ -259,7 +279,6 @@ const EditarProducto = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.weight}
                   size="sm"
                   type="text"
                   value={form.weight}
@@ -276,7 +295,9 @@ const EditarProducto = () => {
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={style.label}>Stock:</Form.Label>
             <Form.Label className={style.label}>
-              {stateDetail && stateDetail.stock}
+            {form && form.stock
+                ? form.stock
+                : stateDetail.stock}
             </Form.Label>
 
             {showFilters && (
@@ -286,7 +307,6 @@ const EditarProducto = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.stock}
                   size="sm"
                   type="text"
                   value={form.stock}

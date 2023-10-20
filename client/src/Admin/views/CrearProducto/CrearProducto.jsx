@@ -62,7 +62,6 @@ const CrearProducto = () => {
       reader.onload = () => {
         setPreview(reader.result);
         setForm({ ...form, imageBase64: reader.result });
-        console.log(errors);
       };
     } else {
       toast.error("No es un formato de imagen válido", {
@@ -83,7 +82,7 @@ const CrearProducto = () => {
     }
   };
 
-  console.log(stateProductType);
+;
   return (
     <div className={style.cntnForm}>
       <p className={style.tittle}>Nuevo Producto</p>
@@ -240,7 +239,7 @@ const CrearProducto = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.color && formSubmitted ? <span>{errors.color}</span> : ""}
+              {errors.colorId && formSubmitted ? <span>{errors.colorId}</span> : ""}
             </Form.Text>
           </div>
         </Form.Group>
@@ -273,8 +272,8 @@ const CrearProducto = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.material && formSubmitted ? (
-                <span>{errors.material}</span>
+              {errors.materialId && formSubmitted ? (
+                <span>{errors.materialId}</span>
               ) : (
                 ""
               )}
@@ -306,8 +305,8 @@ const CrearProducto = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.productType && formSubmitted ? (
-                <span>{errors.productType}</span>
+              {errors.productTypeId && formSubmitted ? (
+                <span>{errors.productTypeId}</span>
               ) : (
                 ""
               )}
@@ -375,7 +374,7 @@ const CrearProducto = () => {
             </div>
           )
         )}
-        {errors.imageBase64 ? <span>{errors.imageBase64}</span> : ""}
+        {errors.imageBase64 ? <span className={style.error}>{errors.imageBase64}</span> : ""}
         {Object.values(errors).every((error) => error === "") ? (
           <button type="submit" className={style.botonSubmit}>
             Enviar

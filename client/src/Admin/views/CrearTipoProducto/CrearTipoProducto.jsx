@@ -94,11 +94,11 @@ const CrearTipoProducto = () => {
         )}
       </Form>
       <Modal show={modal}>
-        <Modal.Header closeButton>
+        <Modal.Header className={style.headerModal}>
           <Modal.Title>Tipo de Producto Creado</Modal.Title>
         </Modal.Header>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleAcept}>
+        <Modal.Footer className={style.footerModal}>
+          <Button className={style.buttonModal} onClick={handleAcept}>
             Aceptar
           </Button>
         </Modal.Footer>

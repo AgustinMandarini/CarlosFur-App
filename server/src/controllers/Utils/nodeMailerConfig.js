@@ -47,6 +47,18 @@ const nodeMailerConfig = async (
     };
     htmlToSend = template(replacements);
   }
+  if (emailType === "orderReceipt") {
+    // Construye la ruta absoluta al archivo orderReceipt.html
+    const rutaAlEmailTemplate = path.join(
+      directorioActual,
+      "emailTemplates",
+      "orderReceipt.html"
+    );
+    const source = fs.readFileSync(rutaAlEmailTemplate, "utf-8").toString();
+    const template = handlebars.compile(source);
+
+    htmlToSend = template();
+  }
   if (emailType === "newPassword") {
     // Construye la ruta absoluta al archivo welcomeEmail.html
     const rutaAlEmailTemplate = path.join(

@@ -20,7 +20,7 @@ const Home = () => {
   const cartId = localStorage.getItem("cartId");
   const { isAuthenticated } = useAuth0();
   const cartProducts = useSelector((state) => state.cartProducts);
-
+  console.log(cartProducts);
   useEffect(() => {
     checkUserExist();
     // dispatch(setProductsCopy());
@@ -32,6 +32,8 @@ const Home = () => {
   const filters = useSelector((state) => state.filter); //
   const sort = useSelector((state) => state.sort);
   const nameState = useSelector((state) => state.nameState);
+  const storage = useSelector((state) => state.localStorage);
+  const cart = useSelector((state) => state.cartProducts);
 
   // Paginado
   const [products, setProducts] = useState([]);
@@ -46,7 +48,6 @@ const Home = () => {
   useEffect(() => {
     setProducts(globalProducts);
   }, [globalProducts]);
-
   //Combinación de ordenamientos y filtros
   useEffect(
     () => {
@@ -81,7 +82,7 @@ const Home = () => {
 
   useEffect(() => {
     const cartIdParse = cartId != null ? JSON.parse(cartId) : undefined;
-    if (isAuthenticated && cartIdParse != undefined) {
+    if (isAuthenticated && cartIdParse !== undefined) {
       dispatch(getCart(cartIdParse));
     }
   }, []);
@@ -89,6 +90,7 @@ const Home = () => {
   useEffect(() => {
     const userParse = cartId != null && JSON.parse(user);
     const cartIdParse = cartId != null ? JSON.parse(cartId) : undefined;
+
     const newProducts = cartProducts.map((item) => ({
       id: item.id,
       quantity: item.count,
@@ -100,7 +102,7 @@ const Home = () => {
     };
     if (
       isAuthenticated &&
-      cartIdParse === undefined &&
+      cartIdParse !== undefined &&
       data.products.length > 0
     ) {
       dispatch(postCart(data));

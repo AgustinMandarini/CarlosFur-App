@@ -64,9 +64,9 @@ const initialState = {
   userToken: null,
   loggedUser: null,
   cartTotal: 0,
-  colorById:[],
-  materialId:[],
-  tipoDeProductoById:[],
+  colorById: [],
+  materialId: [],
+  tipoDeProductoById: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -76,7 +76,7 @@ const rootReducer = (state = initialState, action) => {
         materialState: action.payload,
       };
 
-      case GET_MATERIAL_BYID:
+    case GET_MATERIAL_BYID:
       return {
         ...state,
         materialId: action.payload,
@@ -95,8 +95,6 @@ const rootReducer = (state = initialState, action) => {
         productsAdmin: action.payload,
       };
 
-    case PUT_PRODUCT:
-      return {};
     case GET_DETAIL:
       return {
         ...state,
@@ -128,18 +126,18 @@ const rootReducer = (state = initialState, action) => {
     case GET_PRODUCT_TYPE_BYID:
       return {
         ...state,
-        tipoDeProductoById: action.payload
-      }
+        tipoDeProductoById: action.payload,
+      };
     case GET_COLOR:
       return {
         ...state,
         colorState: action.payload,
       };
-      case GET_COLOR_BYID:
-        return {
-          ...state,
-          colorById: action.payload,
-        };
+    case GET_COLOR_BYID:
+      return {
+        ...state,
+        colorById: action.payload,
+      };
 
     case GET_PRODUCT_BY_NAME:
       return {
@@ -147,16 +145,13 @@ const rootReducer = (state = initialState, action) => {
         muebles: action.payload,
       };
     case GET_CART:
+      console.log("Lo que llega al carrito", action.payload);
       const newProducts = action.payload.products.map((item) => {
-        const mueble = state.muebles.find((m) => m.id === item.id);
-
+        const mueble = state.muebles.find((m) => m.id === item.productId);
         if (mueble) {
           return {
-            id: item.id,
-            count: item.cart_products.product_quantity,
-            price: mueble.price,
-            name: mueble.name,
-            imagePath: mueble.imagePath,
+            ...mueble,
+            count: item.product_quantity,
           };
         }
         return mueble;

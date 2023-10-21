@@ -1,11 +1,11 @@
-const { Cart, Product, User } = require('../../db');
+const { Cart, Product, User } = require("../../db");
 
 const createCart = async (req) => {
   try {
     const { products, userId } = req.body;
 
     if (!Array.isArray(products) || products.length === 0) {
-      return { status: 400, data: { error: 'Invalid or empty product list' } };
+      return { status: 400, data: { error: "Invalid or empty product list" } };
     }
 
     const cartData = {};
@@ -13,7 +13,7 @@ const createCart = async (req) => {
     if (userId) {
       const user = await User.findByPk(userId);
       if (!user) {
-        return { status: 400, data: { error: 'User not found' } };
+        return { status: 400, data: { error: "User not found" } };
       }
 
       cartData.userId = userId;
@@ -27,7 +27,9 @@ const createCart = async (req) => {
 
     let totalAmount = 0.0;
     for (const product of products) {
-      const databaseProduct = databaseProducts.find((dbProduct) => dbProduct.id === product.id);
+      const databaseProduct = databaseProducts.find(
+        (dbProduct) => dbProduct.id === product.id
+      );
       if (!databaseProduct) {
         continue;
       }
@@ -51,9 +53,9 @@ const createCart = async (req) => {
       include: [
         {
           model: Product,
-          as: 'products',
+          as: "products",
           // attributes: ['id'],
-          through: { attributes: ['product_quantity', 'productId'] },
+          through: { attributes: ["product_quantity", "productId"] },
         },
       ],
     });
@@ -71,10 +73,9 @@ const createCart = async (req) => {
 
     return { status: 201, cartData: formattedCart };
   } catch (error) {
-    console.error('Error in createCart:', error);
-    return { status: 500, data: { error: 'Internal server error' } };
+    console.error("Error in createCart:", error);
+    return { status: 500, data: { error: "Internal server error" } };
   }
 };
 
 module.exports = { createCart };
-

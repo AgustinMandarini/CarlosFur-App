@@ -1,29 +1,29 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-
   sequelize.define(
-    "order",
+    "productType",
     {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      
-        mercadoPagoId: {
-            type: DataTypes.BIGINT,
-            allowNull: false,
-      },
-
-      saleDate: {
-        type: DataTypes.DATE,
+      name: {
+        type: DataTypes.STRING,
         allowNull: false,
-      }
-
+        unique: true,
+        validate: {
+          len: [2, 30],
+        },
+      },
+      description: {
+        type: DataTypes.TEXT,
+        validate: {
+          len: [0, 1500],
+        },
+      },
     },
-
     { timestamps: false }
-
   );
 };

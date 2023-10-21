@@ -442,12 +442,12 @@ export const postCart = (cart) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`${apiUrl}/cart`, cart);
-      const payload = data.data;
+      const payload = data.cartData;
       // Guardar la información en el LocalStorage
 
       localStorage.setItem("cartId", payload.id);
-      console.log("entra payload", payload);
       localStorage.removeItem("cart");
+      console.log(data);
 
       return dispatch({
         type: POST_CART,

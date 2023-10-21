@@ -62,7 +62,6 @@ const CrearProducto = () => {
       reader.onload = () => {
         setPreview(reader.result);
         setForm({ ...form, imageBase64: reader.result });
-        console.log(errors);
       };
     } else {
       toast.error("No es un formato de imagen válido", {
@@ -239,14 +238,13 @@ const CrearProducto = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.color && formSubmitted ? <span>{errors.color}</span> : ""}
+              {errors.colorId && formSubmitted ? (
+                <span>{errors.colorId}</span>
+              ) : (
+                ""
+              )}
             </Form.Text>
           </div>
-          <OverlayTrigger overlay={<Tooltip>Crear un color</Tooltip>}>
-            <Link to="/admin/crear/color" className={style.link}>
-              <IconSquareRoundedPlusFilled className={style.icon} />
-            </Link>
-          </OverlayTrigger>
         </Form.Group>
 
         {/* //Material */}
@@ -267,7 +265,6 @@ const CrearProducto = () => {
             >
               <option>Seleccionar material</option>
               {stateMaterial &&
-                stateMaterial == !undefined &&
                 stateMaterial.map((tipo, index) => {
                   return (
                     <option key={index} value={tipo.id} name={tipo.name}>
@@ -278,19 +275,13 @@ const CrearProducto = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.material && formSubmitted ? (
-                <span>{errors.material}</span>
+              {errors.materialId && formSubmitted ? (
+                <span>{errors.materialId}</span>
               ) : (
                 ""
               )}
             </Form.Text>
           </div>
-
-          <OverlayTrigger overlay={<Tooltip>Crear un material</Tooltip>}>
-            <Link to="/admin/crear/material" className={style.link}>
-              <IconSquareRoundedPlusFilled className={style.icon} />
-            </Link>
-          </OverlayTrigger>
         </Form.Group>
 
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
@@ -307,6 +298,7 @@ const CrearProducto = () => {
             >
               <option>Seleccionar Tipo de Producto</option>
               {stateProductType &&
+                stateProductType !== undefined &&
                 stateProductType.map((tipo, index) => {
                   return (
                     <option key={index} value={tipo.id} name={tipo.name}>
@@ -317,19 +309,13 @@ const CrearProducto = () => {
             </Form.Select>
 
             <Form.Text className={style.error}>
-              {errors.productType && formSubmitted ? (
-                <span>{errors.productType}</span>
+              {errors.productTypeId && formSubmitted ? (
+                <span>{errors.productTypeId}</span>
               ) : (
                 ""
               )}
             </Form.Text>
           </div>
-
-          <OverlayTrigger overlay={<Tooltip>Crear tipo</Tooltip>}>
-            <Link to="/admin/crear/tipo-de-producto" className={style.link}>
-              <IconSquareRoundedPlusFilled className={style.iconType} />
-            </Link>
-          </OverlayTrigger>
         </Form.Group>
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
           <Form.Label className={style.label}>Descripcion:</Form.Label>
@@ -392,7 +378,11 @@ const CrearProducto = () => {
             </div>
           )
         )}
-        {errors.imageBase64 ? <span>{errors.imageBase64}</span> : ""}
+        {errors.imageBase64 ? (
+          <span className={style.error}>{errors.imageBase64}</span>
+        ) : (
+          ""
+        )}
         {Object.values(errors).every((error) => error === "") ? (
           <button type="submit" className={style.botonSubmit}>
             Enviar

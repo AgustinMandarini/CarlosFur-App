@@ -1,6 +1,6 @@
 // ToolBar.jsx
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useLocation } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,12 +9,10 @@ import {
   setProductType,
   setSort,
 } from "../../redux/actions";
-import filter from "./../../imagenes/filter.png";
 import style from "./ToolBar.module.css";
 
 const ToolBar = () => {
   const location = useLocation();
-  
 
   const productTypeList = useSelector((state) => state.productType);
   const materialList = useSelector((state) => state.materialState);
@@ -69,111 +67,69 @@ const ToolBar = () => {
       {location.pathname === "/home" && (
         <div className={style.container}>
           <div className={style.divSelect}>
-            {/* <Form.Select
+            <Form.Select
               onChange={setFilterByProductTypeHandler}
               size="sm"
               className={style.select}
             >
-              <option value="allProductTypes">Tipo de ambiente</option>
+              <option value="allOptions">Tipo de ambiente</option>
               {productTypeNames &&
                 productTypeNames.map((productType) => (
                   <option value={productType.id} key={productType.id}>
                     {productType.name}
                   </option>
                 ))}
-            </Form.Select> */}
+            </Form.Select>
           </div>
 
           <div className={style.filterIcon} onClick={toggleFilters}>
             <span>Filtrados</span>
-            <img src={filter} alt="" className={style.filter} />
+            {/* <img src={filter} alt="" className={style.filter} /> */}
           </div>
-          {showFilters && (
-            <div className={style.filterOptions}>
-              <div className={style.divSelect}>
-                <Form.Select
-                  onChange={setFilterByProductTypeHandler}
-                  size="sm"
-                  className={style.select}
-                >
-                  <option value="allOptions">Tipo de ambiente</option>
-                  {productTypeNames &&
-                    productTypeNames.map((productType) => (
-                      <option value={productType.id} key={productType.id}>
-                        {productType.name}
-                      </option>
-                    ))}
-                </Form.Select>
-              </div>
 
-              <div className={style.divSelect}>
-                <Form.Select
-                  onChange={setFilterByMaterialHandler}
-                  size="sm"
-                  className={style.select}
-                >
-                  <option value="allOptions">Todos los Materiales</option>
-                  {materialNames &&
-                    materialNames.map((material) => (
-                      <option value={material.id} key={material.id}>
-                        {material.name}
-                      </option>
-                    ))}
-                </Form.Select>
-              </div>
-              <div className={style.divSelect}>
-                <Form.Select
-                  onChange={setFilterByColorHandler}
-                  size="sm"
-                  className={style.select}
-                >
-                  <option value="allOptions">Todos los Colores</option>
-                  {coloresList.map((color) => {
-                    return (
-                      <option value={color.id} key={color.id}>
-                        {color.name}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-              </div>
+          <div className={style.divSelect}>
+            <Form.Select
+              onChange={setFilterByMaterialHandler}
+              size="sm"
+              className={style.select}
+            >
+              <option value="allOptions">Todos los Materiales</option>
+              {materialNames &&
+                materialNames.map((material) => (
+                  <option value={material.id} key={material.id}>
+                    {material.name}
+                  </option>
+                ))}
+            </Form.Select>
+          </div>
+          <div className={style.divSelect}>
+            <Form.Select
+              onChange={setFilterByColorHandler}
+              size="sm"
+              className={style.select}
+            >
+              <option value="allOptions">Todos los Colores</option>
+              {coloresList.map((color) => {
+                return (
+                  <option value={color.id} key={color.id}>
+                    {color.name}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </div>
 
-              {/* <div className={style.divSelect}>
-                <Form.Select
-                  onChange={setFilterByPriceHandler}
-                  size="sm"
-                  className={style.select}
-                >
-                  <option value={[]}>Precios</option>
-                  <option value={cheapPrices}>
-                    Precios entre {cheapPrices[0]} y{" "}
-                    {cheapPrices[cheapPrices.length - 1]}
-                  </option>
-                  <option value={middlePrices}>
-                    Precios entre {middlePrices[0]} y{" "}
-                    {middlePrices[middlePrices.length - 1]}
-                  </option>
-                  <option value={highPrices}>
-                    Precios entre {highPrices[0]} y{" "}
-                    {highPrices[highPrices.length - 1]}
-                  </option>
-                </Form.Select>
-              </div>{/* ...otros selectores... */}
-              <div className={style.divSelect}>
-                <Form.Select
-                  size="sm"
-                  onChange={setSortProductsHandler}
-                  className={style.select}
-                >
-                  <option value="allOptions">Ordenar...</option>
-                  <option value="desc">Mayor precio</option>
-                  <option value="asc">Menor precio</option>
-                </Form.Select>
-              </div>
-
-              
-            </div>
-          )}
+          <div className={style.divSelect}>
+            <Form.Select
+              size="sm"
+              onChange={setSortProductsHandler}
+              className={style.select}
+            >
+              <option value="allOptions">Ordenar...</option>
+              <option value="desc">Mayor precio</option>
+              <option value="asc">Menor precio</option>
+            </Form.Select>
+          </div>
         </div>
       )}
     </div>

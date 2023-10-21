@@ -9,7 +9,6 @@ import styles from "./LoginForm.module.css";
 import validation from "./validation";
 import axios from "axios";
 
-
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const LoginForm = () => {
@@ -21,11 +20,10 @@ const LoginForm = () => {
 
   
   const mostrarNotificacionBienvenida = () => {
-    toast.success('Iniciando Sesión', {
-      position: toast.POSITION.BOTTOM_RIGHT
+    toast.success("Iniciando Sesión", {
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
-
 
   const handleLogin = async () => {
     
@@ -37,7 +35,7 @@ const LoginForm = () => {
         returnTo: `/home`,
       },
     });
-    mostrarNotificacionBienvenida()
+    mostrarNotificacionBienvenida();
   };
 
 
@@ -49,6 +47,8 @@ const LoginForm = () => {
       const userLS = { userId, cartId };
       console.log(userLS);
       localStorage.setItem("user", JSON.stringify(userLS));
+      const user = { userId, cartId };
+      localStorage.setItem("user", JSON.stringify(user));
     };
 
     const userInfo = { e_mail: form.e_mail, password: form.password };
@@ -184,7 +184,6 @@ const LoginForm = () => {
                 className={styles.googleLogo}
               />
               Acceder con Google
-            
             </button>
 
             <span className={`${styles.text} ${styles.mt6}`}>

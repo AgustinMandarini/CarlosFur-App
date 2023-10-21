@@ -94,7 +94,7 @@ const CrearProducto = () => {
         )}
       </Form>
       <Modal show={modal}>
-        <Modal.Header closeButton className={style.headerModal}>
+        <Modal.Header className={style.headerModal}>
           <Modal.Title>Color Creado</Modal.Title>
         </Modal.Header>
         <Modal.Footer className={style.footerModal}>

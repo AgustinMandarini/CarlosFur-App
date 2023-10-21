@@ -2,8 +2,10 @@
 import {
   DELETE_CART_PRODUCT,
   GET_COLOR,
+  GET_COLOR_BYID,
   GET_DETAIL,
   GET_MATERIAL,
+  GET_MATERIAL_BYID,
   GET_PRODUCTS,
   GET_PRODUCTS_ADMIN,
   GET_PRODUCT_BY_NAME,
@@ -36,6 +38,7 @@ import {
   SET_NAME,
   DELETE_CART_PRODUCT_DIRECT,
   EMPTY_CART,
+  GET_PRODUCT_TYPE_BYID,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -172,6 +175,34 @@ export const getProductType = () => {
     }
   };
 };
+export const getProductTypeById = (productTypeId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${apiUrl}/productType/${productTypeId}`
+      );
+      const productType = response.data;
+      return dispatch({
+        type: GET_PRODUCT_TYPE_BYID,
+        payload: productType,
+      });
+    } catch (error) {
+      //alert("No se encontro un tipo de producto");
+    }
+  };
+};
+export const postProductType = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/productType`, payload);
+      const productType = response.data;
+
+      dispatch({ type: POST_PRODUCTTYPE, payload: productType });
+    } catch (error) {
+      alert("No se pudo crear el Material: ", error);
+    }
+  };
+};
 
 export const getColor = () => {
   return async (dispatch) => {
@@ -183,7 +214,22 @@ export const getColor = () => {
         payload: color,
       });
     } catch (error) {
-      alert("No se encontro color");
+      alert("No se encontraron los colores");
+    }
+  };
+};
+
+export const getColorById = (colorId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/color/${colorId}`);
+      const color = response.data;
+      return dispatch({
+        type: GET_COLOR_BYID,
+        payload: color,
+      });
+    } catch (error) {
+      // alert("No se encontro el color");
     }
   };
 };
@@ -208,19 +254,6 @@ export const postMaterial = (payload) => {
       const material = response.data;
 
       dispatch({ type: POST_MATERIAL, payload: material });
-    } catch (error) {
-      alert("No se pudo crear el Material: ", error);
-    }
-  };
-};
-
-export const postProductType = (payload) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.post(`${apiUrl}/productType`, payload);
-      const productType = response.data;
-
-      dispatch({ type: POST_PRODUCTTYPE, payload: productType });
     } catch (error) {
       alert("No se pudo crear el Material: ", error);
     }
@@ -252,6 +285,21 @@ export const getMaterial = () => {
       });
     } catch (error) {
       alert("No se encontro el material");
+    }
+  };
+};
+
+export const getMaterialById = (materialId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/material/${materialId}`);
+      const material = response.data;
+      return dispatch({
+        type: GET_MATERIAL_BYID,
+        payload: material,
+      });
+    } catch (error) {
+      // alert("No se encontro el material");
     }
   };
 };
@@ -394,12 +442,12 @@ export const postCart = (cart) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`${apiUrl}/cart`, cart);
-      const payload = data.data;
+      const payload = data.cartData;
       // Guardar la información en el LocalStorage
 
       localStorage.setItem("cartId", payload.id);
-      console.log("entra payload", payload);
       localStorage.removeItem("cart");
+      console.log(data);
 
       return dispatch({
         type: POST_CART,

@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getDetail, putProduct } from "../../../redux/actions";
+import {
+  getDetail,
+  putProduct,
+  getColorById,
+  getMaterialById,
+  getProductTypeById,
+} from "../../../redux/actions";
 import style from "./EditarProducto.module.css";
 import edit from "./../../../imagenes/edit.png";
 import Col from "react-bootstrap/Col";
@@ -14,13 +20,16 @@ import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import validation from "./validation";
 
-const FormPage = () => {
+const EditarProducto = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const stateDetail = useSelector((state) => state.detail);
+  const stateDetail = useSelector((state) => state.detail); //trae todos los productos
   const stateProductType = useSelector((state) => state.productType);
-  const stateColor = useSelector((state) => state.colorState);
+  const stateColor = useSelector((state) => state.colorState); //trae todos los colores
   const stateMaterial = useSelector((state) => state.materialState);
+  const colorById = useSelector((state) => state.colorById); //trae color por id
+  const materialById = useSelector((state) => state.materialId);
+  const productTypeById = useSelector((state) => state.tipoDeProductoById);
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -30,6 +39,28 @@ const FormPage = () => {
   const [preview, setPreview] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
   const [modal, setModal] = useState(false);
+  // console.log(stateDetail);
+  useEffect(() => {
+    dispatch(getDetail(id));
+    dispatch(getColorById(stateDetail.colorId));
+    dispatch(getMaterialById(stateDetail.materialId));
+    dispatch(getProductTypeById(stateDetail.productTypeId));
+  }, [getDetail, stateDetail]);
+
+  useEffect(() => {
+    setForm({
+      name: stateDetail.name,
+      price: stateDetail.price,
+      height: stateDetail.height,
+      depth: stateDetail.depth,
+      width: stateDetail.width,
+      weight: stateDetail.weight,
+      stock: stateDetail.stock,
+      colorId: stateDetail.colorId,
+      materialId: stateDetail.materialId,
+      productTypeId: stateDetail.productTypeId,
+    });
+  }, []);
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -41,10 +72,12 @@ const FormPage = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(id, form);
     setFormSubmitted(true);
     dispatch(putProduct(id, form));
     setModal(true);
+  };
+  const handleAcept = () => {
+    setModal(false);
   };
 
   const handleImageChange = (event) => {
@@ -86,25 +119,6 @@ const FormPage = () => {
     setForm({ ...form, [property]: value });
   };
 
-  useEffect(() => {
-    dispatch(getDetail(id));
-    setForm({});
-    setForm({
-      name: stateDetail.name,
-      price: stateDetail.price,
-      height: stateDetail.height,
-      depth: stateDetail.depth,
-      width: stateDetail.width,
-      weight: stateDetail.weight,
-      stock: stateDetail.stock,
-      colorId: stateDetail.colorId,
-      materialId: stateDetail.materialId,
-      productTypeId: stateDetail.productTypeId,
-      description: stateDetail.description,
-      imageBase64: null,
-    });
-  }, [getDetail]);
-
   return (
     <div className={style.cntnForm}>
       <p className={style.tittle}>Editar Producto</p>
@@ -116,10 +130,10 @@ const FormPage = () => {
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              Nombre:{" "}
+              Nombre:
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail.name}
+              {form && form.name ? form.name : stateDetail.name}
             </Form.Label>
             {showFilters && (
               <div className={style.divinputError}>
@@ -128,7 +142,6 @@ const FormPage = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.name}
                   size="sm"
                   type="text"
                   value={form.name}
@@ -147,17 +160,16 @@ const FormPage = () => {
               Precio:{" "}
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail.price}
+              {form && form.price ? form.price : stateDetail.price}
             </Form.Label>
 
             {showFilters && (
               <div className={style.divinputError}>
                 <Form.Label className={style.label}>
-                  Ingrese nuevo precio:{" "}
+                  Ingrese nuevo precio:
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.price}
                   size="sm"
                   type="text"
                   value={form.price}
@@ -176,7 +188,7 @@ const FormPage = () => {
               Altura:{" "}
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail.height}
+              {form && form.height ? form.height : stateDetail.height}
             </Form.Label>
 
             {showFilters && (
@@ -186,7 +198,6 @@ const FormPage = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.height}
                   size="sm"
                   type="text"
                   value={form.height}
@@ -205,7 +216,7 @@ const FormPage = () => {
               Profundidad
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail.depth}
+              {form && form.depth ? form.depth : stateDetail.depth}
             </Form.Label>
 
             {showFilters && (
@@ -215,7 +226,6 @@ const FormPage = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.depth}
                   size="sm"
                   type="text"
                   value={form.depth}
@@ -234,7 +244,7 @@ const FormPage = () => {
               Ancho:
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail.width}
+              {form && form.width ? form.width : stateDetail.width}
             </Form.Label>
 
             {showFilters && (
@@ -244,7 +254,6 @@ const FormPage = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.width}
                   size="sm"
                   type="text"
                   value={form.width}
@@ -263,7 +272,7 @@ const FormPage = () => {
               Peso:
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail.weight}
+              {form && form.weight ? form.weight : stateDetail.weight}
             </Form.Label>
 
             {showFilters && (
@@ -273,7 +282,6 @@ const FormPage = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.weight}
                   size="sm"
                   type="text"
                   value={form.weight}
@@ -292,7 +300,7 @@ const FormPage = () => {
               Stock:
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail.stock}
+              {form && form.stock ? form.stock : stateDetail.stock}
             </Form.Label>
 
             {showFilters && (
@@ -302,7 +310,6 @@ const FormPage = () => {
                 </Form.Label>
                 <Form.Control
                   onChange={changeHandler}
-                  placeholder={stateDetail.stock}
                   size="sm"
                   type="text"
                   value={form.stock}
@@ -320,9 +327,15 @@ const FormPage = () => {
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
               Color:
             </Form.Label>
-            <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail.color}
-            </Form.Label>
+            {colorById.id === stateDetail.colorId ? (
+              <Form.Label
+                className={showFilters ? style.labelEdit : style.label}
+              >
+                {colorById.name}
+              </Form.Label>
+            ) : (
+              <Form.Label className={style.label}>No disponible</Form.Label>
+            )}
 
             {showFilters && (
               <div className={style.divinputErrorType}>
@@ -354,9 +367,15 @@ const FormPage = () => {
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
               Material:
             </Form.Label>
-            <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail.materialId}
-            </Form.Label>
+            {materialById.id === stateDetail.materialId ? (
+              <Form.Label
+                className={showFilters ? style.labelEdit : style.label}
+              >
+                {materialById.name}
+              </Form.Label>
+            ) : (
+              <Form.Label className={style.label}>No disponible</Form.Label>
+            )}
 
             {showFilters && (
               <div className={style.divinputErrorType}>
@@ -388,9 +407,19 @@ const FormPage = () => {
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
               Tipo de Producto:
             </Form.Label>
-            <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail.productTypeId}
-            </Form.Label>
+            {productTypeById.id === stateDetail.productTypeId ? (
+              <Form.Label
+                className={showFilters ? style.labelEdit : style.label}
+              >
+                {productTypeById.name}
+              </Form.Label>
+            ) : (
+              <Form.Label
+                className={showFilters ? style.labelEdit : style.label}
+              >
+                No disponible
+              </Form.Label>
+            )}
 
             {showFilters && (
               <div className={style.divinputErrorType}>
@@ -423,7 +452,7 @@ const FormPage = () => {
               Descripcion:
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail.description}
+              {stateDetail && stateDetail.description}
             </Form.Label>
 
             {showFilters && (
@@ -453,7 +482,7 @@ const FormPage = () => {
             </Form.Label>
             <Container>
               <Row>
-                <Col xs={10} md={3}>
+                <Col xs={8} md={3}>
                   <Form.Label
                     className={
                       showFilters ? style.labelImgEdit : style.labelImg
@@ -521,15 +550,17 @@ const FormPage = () => {
           ))}
       </Form>
       <Modal show={modal}>
-        <Modal.Header closeButton>
+        <Modal.Header className={style.headerModal}>
           <Modal.Title>Producto Editado</Modal.Title>
         </Modal.Header>
-        <Modal.Footer>
-          <Button variant="secondary">Aceptar</Button>
+        <Modal.Footer className={style.footerModal}>
+          <Button onClick={handleAcept} className={style.buttonModal}>
+            Aceptar
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
   );
 };
 
-export default FormPage;
+export default EditarProducto;

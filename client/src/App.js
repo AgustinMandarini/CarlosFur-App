@@ -33,7 +33,7 @@ function App() {
   const cartProducts = useSelector((state) => state.cartProducts);
 
   const userIsAuthenticated =
-    isAuthenticated || localStorage.getItem("token") != null;
+    isAuthenticated || localStorage.getItem("token") !== null;
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");

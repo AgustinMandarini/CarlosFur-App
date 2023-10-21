@@ -18,6 +18,7 @@ const LoginForm = () => {
   const history = useHistory();
   const loggedUser = useSelector((state) => state.loggedUser);
 
+
   
   const mostrarNotificacionBienvenida = () => {
     toast.success('Iniciando Sesión', {
@@ -80,11 +81,12 @@ const LoginForm = () => {
   useEffect(() => {
     const fetchUserIdAndRedirect = async () => {
       if (loggedUser) {
+        console.log(loggedUser);
         try {
-          const userEmail = loggedUser.e_mail;
-          const apiUrl = "http://localhost:3001/user/profile";
-          const response = await axios.get(`${apiUrl}?email=${userEmail}`);
-          const userId = response.data.userId;
+          // const userEmail = loggedUser.e_mail;
+          // const apiUrl = "http://localhost:3001/user/profile";
+          // const response = await axios.get(`${apiUrl}?email=${userEmail}`);
+          // const userLogin = response.data;
 
           // history.push(`/user/profile/${userId}`);
           history.push(`/home`);
@@ -124,6 +126,7 @@ const LoginForm = () => {
   };
 
   return (
+    
     <div className={styles.container}>
       <div className={styles.formContainer}>
         <h2 className={styles.title}>Inicio de sesión</h2>

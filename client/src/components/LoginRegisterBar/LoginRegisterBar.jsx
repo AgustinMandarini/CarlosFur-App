@@ -13,7 +13,6 @@ function LoginBar() {
   const dispatch = useDispatch();
   const loggedUser = useSelector((state) => state.loggedUser);
 
-
   const userIsAuthenticated =
     isAuthenticated || localStorage.getItem("token") !== null;
 
@@ -50,7 +49,11 @@ function LoginBar() {
       },
     });
   };
+  const defaultAvatar =
+    "https://cdn.icon-icons.com/icons2/1508/PNG/512/systemusers_104569.png";
 
+  // const userName = loggedUser ? `${loggedUser.user_name} ${loggedUser.last_name}` : "Usuario";
+  const userName = loggedUser ? `${loggedUser.user_name} ` : "Usuario";
   return (
     <Navbar className={style.nav} expand="lg">
       <div className={style.container}>
@@ -72,14 +75,20 @@ function LoginBar() {
           )}
           {userIsAuthenticated && (
             <div className={style.userInfo}>
-              {/* <img src={loggedUser.avatar} alt="User Avatar" /> */}
-              {/* <span className={style.userName}>{loggedUser.user_name}</span> */}
+              <Link to={`/user/profile/${loggedUser ? loggedUser.id : ""}`}>
+                <img
+                  src={loggedUser ? defaultAvatar : defaultAvatar}
+                />
+                <span className={style.userName}>
+                  {userName}
+                </span>
+              </Link>{" "}
               <Button onClick={handleLogout} variant="dark">
                 Log Out
               </Button>
             </div>
           )}
-          </Nav>
+        </Nav>
       </div>
     </Navbar>
   );

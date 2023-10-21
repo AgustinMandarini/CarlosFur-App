@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import imageProfile from "../../imagenes/User01.jpg"
+import { useParams } from "react-router-dom";
+import axios from "axios";
+// import imageProfile from "../../imagenes/User01.jpg"
 import styles from "./Profile.module.css";
 import {
   Container,
@@ -16,18 +16,18 @@ import {
 const Profile = () => {
   const [user, setUser] = useState(null);
   const { id } = useParams();
-  
-  
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/user/profile/${id}`);
+        const response = await axios.get(
+          `http://localhost:3001/user/profile/${id}`
+        );
         setUser(response.data);
-        const admin=response.data.is_admin;
+        const admin = response.data.is_admin;
         console.log(admin);
-        
       } catch (error) {
-        console.error('Error al obtener el perfil:', error.message);
+        console.error("Error al obtener el perfil:", error.message);
       }
     };
 
@@ -36,27 +36,29 @@ const Profile = () => {
 
   if (!user) {
     return <div>Loading...</div>;
-  }  // // Datos hardcodeados solo para propósitos de visualización
-
+  } // // Datos hardcodeados solo para propósitos de visualización
+  const defaultAvatar =
+    "https://cdn.icon-icons.com/icons2/1508/PNG/512/systemusers_104569.png";
   return (
-
-    <Container className={`${styles.profileContainer} ${styles.Background}`}   >
-
+    <Container className={`${styles.profileContainer} ${styles.Background}`}>
       <Row>
-
+        
         {/* Columna izquierda con la imagen y el nombre */}
         <Col md="8">
           <Card className={styles.profileCard}>
             <img
-              src={imageProfile}
+              src={defaultAvatar}
               alt="User Avatar"
               className={styles.profileImage}
             />
             <CardTitle tag="h5" className={styles.profileName}>
-            {user.first_name} {user.last_name}
+              {user.first_name
+                ? `${user.first_name} ${user.last_name}`
+                : user.user_name}
             </CardTitle>
           </Card>
         </Col>
+
 
         {/* Columna derecha con la información del usuario */}
         <Col md="4">
@@ -88,20 +90,21 @@ const Profile = () => {
 
               {user.is_admin && (
                 <Col md="12">
-                  <button className={styles.botonAdmin} onClick={() => window.location.href = 'http://localhost:3000/admin'}>
+                  <button
+                    className={styles.botonAdmin}
+                    onClick={() =>
+                      (window.location.href = "http://localhost:3000/admin")
+                    }
+                  >
                     Ir al Panel de Administración
                   </button>
                 </Col>
               )}
-
             </Row>
           </Card>
         </Col>
-
       </Row>
-
     </Container>
-
   );
 };
 

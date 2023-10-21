@@ -33,7 +33,6 @@ const LoginForm = () => {
       },
     });
     mostrarNotificacionBienvenida();
-    if (loggedUser) console.log("Usuario google");
   };
 
   // Maneja el login desde el formulario (login local de nuestro server)
@@ -75,10 +74,9 @@ const LoginForm = () => {
 
   const fetchUserIdAndRedirect = async () => {
     if (loggedUser) {
-      console.log("Usuario local" + loggedUser);
       try {
-        history.push(`/user/profile/${loggedUser.id}`);
-        // history.push(`/home`);
+        // history.push(`/user/profile/${loggedUser.id}`);
+        history.push(`/home`);
       } catch (error) {
         console.error("Error al obtener el ID del usuario:", error.message);
       }

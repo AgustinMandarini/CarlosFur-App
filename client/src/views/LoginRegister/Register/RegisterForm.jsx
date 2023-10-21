@@ -28,9 +28,10 @@ const RegisterForm = () => {
       appState: {
         returnTo: "/home",
       },
-
+      
     });
   };
+
 
   const [form, setForm] = useState({
     user_name: "",
@@ -79,7 +80,6 @@ const RegisterForm = () => {
       // Esta funcion es casi la misma que esta en login. Luego de iniciar sesion, loguea
       // generando un token desde la ruta /get
       try {
-        console.log(newUser);
         const response = await axios.post(`${apiUrl}/user`, newUser);
 
         if (response.status === 201) {
@@ -88,6 +88,7 @@ const RegisterForm = () => {
               `${apiUrl}/user?e_mail=${form.e_mail}`
             );
             const data = response.data;
+            console.log(data); //imprimo lo que trae el get del usuario
             const accessToken = response.data.accessToken;
             const userInfoWithToken = {
               ...newUser,
@@ -109,7 +110,6 @@ const RegisterForm = () => {
               
               
               if (newUser) {
-                console.log(newUser);
                 try {
                   // const userEmail = newUser.e_mail;
                   // const apiUrl = 'http://localhost:3001/user/profile';

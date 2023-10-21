@@ -17,7 +17,7 @@ const postChangePasswordController = async (e_mail) => {
 
     // Esta funcion envia un mail de recuperacion/cambio de password a la direccion de email provista por el
     // usuario. En el email se envia una URL con un token de recuperacion unico.
-    const resetPassURL = `${API_URL}/user/resetPassword?email=${e_mail}?&hash=${hash}`;
+    const resetPassURL = `${API_URL}/user/change-password?e_mail=${e_mail}&hash=${hash}`;
     await nodeMailerConfig(
       e_mail,
       (user_name = null), // Declaramos user_name como null porque en este caso no lo vamos a utilizar

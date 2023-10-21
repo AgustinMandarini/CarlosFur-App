@@ -1,7 +1,7 @@
 const validation = (formState) => {
   let errors = {};
   const regexPassword =
-    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
+    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$#!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
 
   if (!formState.password) {
     errors.password = "Ingrese una contraseña";

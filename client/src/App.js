@@ -73,7 +73,7 @@ function App() {
       <Route path="/register" component={RegisterForm} />
       <Route path="/logIn" component={LoginForm} />
       <Route path="/forgottenPassword" component={ForgottenPassword}></Route>
-      <Route path="/resetPassword" component={ResetPassword}></Route>
+      <Route path="/resetPassword/:e_mail" component={ResetPassword}></Route>
 
       {/* //Dashboard Admin */}
       <Route path="/admin" component={Admin} />

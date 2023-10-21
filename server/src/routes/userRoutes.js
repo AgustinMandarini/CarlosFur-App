@@ -9,8 +9,12 @@ const {
 const {
   getChangePasswordHandler,
 } = require("../handlers/UserHandlers/getChangePasswordHandler");
+const {
+  putUpdatePasswordHandler,
+} = require("../handlers/UserHandlers/putUpdatePasswordHandler");
 
 const { authenticateJWT } = require("../middleware/authenticateJWT");
+const { emailAuthJWT } = require("../middleware/emailAuthJWT");
 
 const userRouter = Router();
 
@@ -19,6 +23,7 @@ userRouter.post("/login", authenticateJWT, loginHandler);
 userRouter.post("/", postUserHandler);
 userRouter.post("/change-password", postChangePasswordHandler);
 userRouter.get("/change-password", getChangePasswordHandler);
+userRouter.put("/update-password", emailAuthJWT, putUpdatePasswordHandler);
 userRouter.put("/:id", putUserHandler);
 
 module.exports = userRouter;

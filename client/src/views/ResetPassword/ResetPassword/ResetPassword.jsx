@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
+import { toast } from "react-toastify";
 import styles from "./ResetPassword.module.css";
 import validation from "./validation";
 import axios from "axios";
@@ -36,8 +36,42 @@ const ResetPassword = () => {
     event.preventDefault();
     const validationErrors = validation(form);
     setErrors(validationErrors);
+
     if (Object.keys(validationErrors).length === 0) {
-      console.log(form.password);
+      const emailToken = window.location.pathname.split("/")[2];
+      try {
+        await axios.put(
+          `${apiUrl}/user/update-password`,
+          {
+            password: form.password,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${emailToken}`,
+            },
+          }
+        );
+        toast.success("Contraseña actualizada exitosamente!", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+        });
+        history.push("/home");
+      } catch (error) {
+        if (error.response.status === 403) {
+          toast.error(
+            "El token ha vencido. Solicita un nuevo enlace de restablecimiento.",
+            {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 3000,
+            }
+          );
+        } else {
+          toast.error(`${error}`, {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000,
+          });
+        }
+      }
     }
   };
 
@@ -69,7 +103,7 @@ const ResetPassword = () => {
             <span className={styles.label}>Confirmar contraseña</span>
             <div className={styles.data}>
               <input
-                type="confPassword"
+                type="password"
                 placeholder=""
                 className={`${styles.input} ${
                   errors.confPassword && styles.error

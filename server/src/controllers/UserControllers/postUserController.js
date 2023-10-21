@@ -1,6 +1,7 @@
 //postUserController.js
 const { User } = require("../../db");
 const { encryptPassword } = require("../Utils/passwordUtils");
+// const { nodeMailerConfig } = require("../Utils/nodeMailerConfig");
 const { nodeMailerConfig } = require("../Utils/nodeMailerConfig");
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
@@ -10,7 +11,9 @@ const createUser = async (
   e_mail,
   first_name,
   last_name,
-  auth0
+  phone,
+  auth0,
+  is_admin
 ) => {
   let hashedPassword = null;
   if (password) {
@@ -28,9 +31,13 @@ const createUser = async (
       e_mail,
       first_name,
       last_name,
-      is_admin: false, // Siempre tiene false porque nadie puede ser admin
+      phone,
+      // is_admin: false, // Siempre tiene false porque nadie puede ser admin
+      is_admin,
       enabled_user: true, // Esto es para cuando lo querés banear
     });
+    // Esta funcion envia un mail de bienvenida al email del nuevo usuario
+    // await nodeMailerConfig(e_mail);
     // Esta funcion envia un mail de bienvenida al email del nuevo usuario. El tercer argumento, define el tipo de email
     // que sera enviado
     await nodeMailerConfig(e_mail, user_name, (emailType = "welcome"));
@@ -40,7 +47,9 @@ const createUser = async (
       e_mail,
       first_name,
       last_name,
-      is_admin: false,
+      phone,
+      // is_admin: false,
+      is_admin,
       enabled_user: true,
     };
   } catch (error) {

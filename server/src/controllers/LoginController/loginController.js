@@ -54,11 +54,13 @@ const loginUser = async (
 
             return passwordMatch
               ? {
+                  id: user.id,
                   user_name: user.user_name,
                   e_mail: user.e_mail,
                   first_name: user.first_name,
                   last_name: user.last_name,
                   is_admin: user.is_admin,
+                  phone: user.phone,
                 }
               : null;
           } catch (error) {

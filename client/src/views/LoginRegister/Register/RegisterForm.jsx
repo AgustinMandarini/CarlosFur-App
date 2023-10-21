@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { toast } from "react-toastify";
 import { login } from "../../../redux/actions";
@@ -8,6 +8,7 @@ import googleLogo from "../../../imagenes/logoGoogle.png";
 import styles from "./RegisterForm.module.css";
 import validation from "./validation";
 import axios from "axios";
+import { useEffect } from "react";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -15,22 +16,28 @@ const RegisterForm = () => {
   const { loginWithRedirect } = useAuth0();
   const dispatch = useDispatch();
   const history = useHistory();
+  const loggedUser = useSelector((state) => state.loggedUser);
 
   const handleSignUp = async () => {
+    //funcion
     await loginWithRedirect({
-      appState: {
-        returnTo: "/home",
-      },
       authorizationParams: {
         screen_hint: "signup",
         connection: "google-oauth2",
       },
+      appState: {
+        returnTo: "/home",
+      },
+      
     });
   };
+
 
   const [form, setForm] = useState({
     user_name: "",
     e_mail: "",
+    first_name:"",
+    last_Name:"",
     password: "",
     confPassword: "",
   });
@@ -54,7 +61,9 @@ const RegisterForm = () => {
       user_name: form.user_name,
       e_mail: form.e_mail,
       password: form.password,
-      lastName: form.lastName,
+      first_name: form.user_name,
+      last_name: form.last_Name,
+      phone: form.phone
     };
     try {
       const response = await axios.get(`${apiUrl}/user?e_mail=${form.e_mail}`);
@@ -79,6 +88,7 @@ const RegisterForm = () => {
               `${apiUrl}/user?e_mail=${form.e_mail}`
             );
             const data = response.data;
+            console.log(data); //imprimo lo que trae el get del usuario
             const accessToken = response.data.accessToken;
             const userInfoWithToken = {
               ...newUser,
@@ -89,14 +99,30 @@ const RegisterForm = () => {
               Object.keys(data).length > 0 &&
               data.user.e_mail === form.e_mail
             ) {
-              // Si el usuario está creado, lo tiene que logear
-              dispatch(login(userInfoWithToken));
-
+              
               toast.success("Usuario creado exitosamente!", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 3000,
               });
-              history.push("/home");
+              
+              // Si el usuario está creado, lo tiene que logear
+              dispatch(login(userInfoWithToken));
+              
+              
+              if (newUser) {
+                try {
+                  // const userEmail = newUser.e_mail;
+                  // const apiUrl = 'http://localhost:3001/user/profile';
+                  // const response = await axios.get(`${apiUrl}?email=${userEmail}`);
+                  // const userId = response.data.userId;
+                  // history.push(`/user/profile/${userId}`);
+                  history.push(`/home`);
+                } catch (error) {
+                  console.error('Error al obtener el ID del usuario:', error.message);
+                }
+              }
+        
+              // history.push("/home");
             }
           } catch (error) {
             alert("Error al loguear el nuevo usuario");
@@ -107,6 +133,11 @@ const RegisterForm = () => {
       }
     }
   };
+
+  useEffect(()=>{
+    if(loggedUser) history.push(`/home`);                
+  },[loggedUser])
+
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -184,7 +215,7 @@ const RegisterForm = () => {
                     <input
                       type="text"
                       value={form.lastName}
-                      name="lastName"
+                      name="last_Name"
                       onChange={changeHandler}
                       className={styles.inputField}
                       required
@@ -202,7 +233,7 @@ const RegisterForm = () => {
                     <input
                       type="text"
                       value={form.whatsapp}
-                      name="whatsapp"
+                      name="phone"
                       onChange={changeHandler}
                       className={styles.inputField}
                       required

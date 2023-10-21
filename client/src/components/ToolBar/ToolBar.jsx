@@ -1,6 +1,6 @@
 // ToolBar.jsx
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useLocation } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,7 +9,6 @@ import {
   setProductType,
   setSort,
 } from "../../redux/actions";
-// import filter from "./../../imagenes/filter.png";
 import style from "./ToolBar.module.css";
 
 const ToolBar = () => {
@@ -21,9 +20,9 @@ const ToolBar = () => {
   const nameState = useSelector((state) => state.nameState);
   const [showFilters, setShowFilters] = useState(false);
 
-  // const toggleFilters = () => {
-  //   setShowFilters(!showFilters);
-  // };
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
 
   useEffect(() => {
     if (nameState === true) {
@@ -81,6 +80,11 @@ const ToolBar = () => {
                   </option>
                 ))}
             </Form.Select>
+          </div>
+
+          <div className={style.filterIcon} onClick={toggleFilters}>
+            <span>Filtrados</span>
+            {/* <img src={filter} alt="" className={style.filter} /> */}
           </div>
 
           <div className={style.divSelect}>

@@ -7,6 +7,7 @@ import NavBar from "./Nav/NavBar";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 import LoginForm from "./LoginRegister/Login/LoginForm";
 import RegisterForm from "./LoginRegister/Register/RegisterForm";
+import Profile from "./Profile/Profile";
 import ForgottenPassword from "./ResetPassword/ForgottenPassword/ForgottenPassword";
 import ResetPassword from "./ResetPassword/ResetPassword/ResetPassword";
 // eslint-disable-next-line
@@ -19,6 +20,8 @@ export {
   NavBar,
   LoginForm,
   RegisterForm,
+  Profile,
+
   ForgottenPassword,
   ResetPassword,
 };

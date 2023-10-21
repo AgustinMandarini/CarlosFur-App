@@ -19,6 +19,7 @@ import {
   ShoppingCart,
   RegisterForm,
   LoginForm,
+  Profile,
   ForgottenPassword,
   ResetPassword,
 } from "./views";
@@ -77,6 +78,7 @@ function App() {
 
       {/* //Dashboard Admin */}
       <Route path="/admin" component={Admin} />
+      <Route path="/user/profile/:id" component={Profile}/>
     </div>
   );
 }

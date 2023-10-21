@@ -351,7 +351,7 @@ export const login = (payload) => {
           Authorization: `Bearer ${accessToken}`, // Asegúrate de tener el token aquí
         },
       });
-      const user = response.data;
+      const user = response.data;//trae la info del usuario
       if (response.status === 200) {
         setToken(accessToken);
         //LOCALSTORAGE

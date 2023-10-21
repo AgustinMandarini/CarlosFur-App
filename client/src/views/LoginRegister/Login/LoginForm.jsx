@@ -29,7 +29,7 @@ const LoginForm = () => {
         connection: "google-oauth2",
       },
       appState: {
-        returnTo: "/home",
+        returnTo: `/home`,
       },
     });
     mostrarNotificacionBienvenida();
@@ -38,6 +38,9 @@ const LoginForm = () => {
   // Maneja el login desde el formulario (login local de nuestro server)
   const handleLocalLogin = async () => {
     const saveUserInfoToLocalStorage = (userId, cartId) => {
+      const userLS = { userId, cartId };
+      console.log(userLS);
+      localStorage.setItem("user", JSON.stringify(userLS));
       const user = { userId, cartId };
       localStorage.setItem("user", JSON.stringify(user));
     };
@@ -69,16 +72,20 @@ const LoginForm = () => {
     }
   };
 
-  // Este efecto se ejecutará cada vez que loggedUser cambie
-  useEffect(() => {
-    // Redirigir al usuario a la página de inicio después de iniciar sesión
+  const fetchUserIdAndRedirect = async () => {
     if (loggedUser) {
-      // Realiza acciones adicionales aquí, por ejemplo, redireccionar
-      // Puedes utilizar la navegación de React Router para redirigir al usuario
-      // reemplace "/home" con la ruta correcta a la página de inicio
-      history.push("/home");
+      try {
+        // history.push(`/user/profile/${loggedUser.id}`);
+        history.push(`/home`);
+      } catch (error) {
+        console.error("Error al obtener el ID del usuario:", error.message);
+      }
     }
-  }, [loggedUser]);
+  };
+
+  useEffect(() => {
+    fetchUserIdAndRedirect();
+  }, [loggedUser, history]);
 
   const [form, setForm] = useState({
     e_mail: "",

@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
         validate: { min: 0, max: 5 },
       },
       reviewDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull: false,
       },
     },

@@ -1,8 +1,6 @@
 const { DataTypes } = require("sequelize");
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
+
 module.exports = (sequelize) => {
-  // defino el modelo
   sequelize.define(
     "review",
     {
@@ -14,17 +12,19 @@ module.exports = (sequelize) => {
       description: {
         type: DataTypes.TEXT,
         allowNull: false,
-        
+        validate: {
+          len: [2, 1500],
+        },
       },
       rating: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         validate: { min: 0, max: 5 },
       },
       reviewDate: {
         type: DataTypes.STRING,
         allowNull: false,
-      }
-
+      },
     },
     { timestamps: false }
   );

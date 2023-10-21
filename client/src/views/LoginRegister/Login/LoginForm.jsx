@@ -154,6 +154,11 @@ const LoginForm = () => {
             <p className={styles.errorText}>{errors.password}</p>
           )}
 
+          <span className={`${styles.text} ${styles.mt6}`}>
+            <Link to="/ForgottenPassword" className={styles.linkReset}>
+              ¿Olvidaste tu contraseña?
+            </Link>
+          </span>
           {/* Buttons */}
           <div className={styles.buttonContainer}>
             <button className={styles.button} type="submit">

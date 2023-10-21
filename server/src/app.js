@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
+const session = require("express-session");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const EventEmitter = require("events");
@@ -11,6 +12,16 @@ const mercadopago = require("mercadopago");
 require("./db.js");
 
 const server = express();
+
+server.use(
+  session({
+    secret: process.env.TOKEN_SECRET, // Reemplaza 'tu_secreto' por una cadena segura para firmar las cookies
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+    // Otras opciones de configuración si es necesario
+  })
+);
 
 mercadopago.configure({
   access_token: MP_ACCESS_TOKEN,

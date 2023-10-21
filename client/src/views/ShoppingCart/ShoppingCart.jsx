@@ -17,6 +17,7 @@ const CALLBACK_URL = process.env.REACT_APP_AUTH0_CALLBACK_URL;
 const ShoppingCart = ({ show, handleClose, handleShow }) => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
+  const storage = useSelector((state) => state.localStorage);
   const loggedUser = useSelector((state) => state.loggedUser);
   const { isAuthenticated } = useAuth0();
   const [order, setOrder] = useState(false);
@@ -77,9 +78,9 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
     }
   };
 
-  console.log(cartProducts);
-  /* console.log(loggedUser.e_mail);
-   */ useEffect(() => {
+  /* console.log("localStorage", storage);
+  console.log("email", loggedUser.e_mail); */
+  useEffect(() => {
     const fetchData = async () => {
       const urlParams = new URLSearchParams(window.location.search);
       const collectionStatus = urlParams.get("collection_status");

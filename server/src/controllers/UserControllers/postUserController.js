@@ -43,6 +43,7 @@ const createUser = async (
     await nodeMailerConfig(e_mail, user_name, (emailType = "welcome"));
     // Devuelve el nuevo usuario creado
     return {
+      id,
       user_name,
       e_mail,
       first_name,

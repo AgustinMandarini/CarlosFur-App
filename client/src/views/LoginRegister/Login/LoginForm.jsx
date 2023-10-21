@@ -17,8 +17,6 @@ const LoginForm = () => {
   const history = useHistory();
   const loggedUser = useSelector((state) => state.loggedUser);
 
-
-  
   const mostrarNotificacionBienvenida = () => {
     toast.success("Iniciando Sesión", {
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -26,7 +24,6 @@ const LoginForm = () => {
   };
 
   const handleLogin = async () => {
-    
     await loginWithRedirect({
       authorizationParams: {
         connection: "google-oauth2",
@@ -36,11 +33,9 @@ const LoginForm = () => {
       },
     });
     mostrarNotificacionBienvenida();
+    if (loggedUser) console.log("Usuario google");
   };
 
-
-
-  
   // Maneja el login desde el formulario (login local de nuestro server)
   const handleLocalLogin = async () => {
     const saveUserInfoToLocalStorage = (userId, cartId) => {
@@ -78,24 +73,19 @@ const LoginForm = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchUserIdAndRedirect = async () => {
-      if (loggedUser) {
-        console.log(loggedUser);
-        try {
-          // const userEmail = loggedUser.e_mail;
-          // const apiUrl = "http://localhost:3001/user/profile";
-          // const response = await axios.get(`${apiUrl}?email=${userEmail}`);
-          // const userLogin = response.data;
-
-          // history.push(`/user/profile/${userId}`);
-          history.push(`/home`);
-        } catch (error) {
-          console.error("Error al obtener el ID del usuario:", error.message);
-        }
+  const fetchUserIdAndRedirect = async () => {
+    if (loggedUser) {
+      console.log("Usuario local" + loggedUser);
+      try {
+        history.push(`/user/profile/${loggedUser.id}`);
+        // history.push(`/home`);
+      } catch (error) {
+        console.error("Error al obtener el ID del usuario:", error.message);
       }
-    };
+    }
+  };
 
+  useEffect(() => {
     fetchUserIdAndRedirect();
   }, [loggedUser, history]);
 
@@ -126,7 +116,6 @@ const LoginForm = () => {
   };
 
   return (
-    
     <div className={styles.container}>
       <div className={styles.formContainer}>
         <h2 className={styles.title}>Inicio de sesión</h2>

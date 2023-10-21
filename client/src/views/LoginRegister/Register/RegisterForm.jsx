@@ -109,6 +109,7 @@ const RegisterForm = () => {
               
               
               if (newUser) {
+                console.log(newUser);
                 try {
                   // const userEmail = newUser.e_mail;
                   // const apiUrl = 'http://localhost:3001/user/profile';

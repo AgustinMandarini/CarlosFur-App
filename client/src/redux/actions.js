@@ -131,8 +131,6 @@ export const deleteProduct = (id) => {
 };
 
 export const getProductByName = (name) => {
-  console.log(name);
-
   return async function (dispatch) {
     const apiData = await axios.get(
       `${apiUrl}/product${name ? `?name=${name}` : ""}`
@@ -417,7 +415,6 @@ export const getCart = (cartId) => {
     try {
       const response = await axios.get(`${apiUrl}/cart/${cartId}`);
       const cartData = response.data;
-
       // Actualiza el estado de Redux con la información del carrito
       dispatch({ type: GET_CART, payload: cartData });
 
@@ -447,7 +444,6 @@ export const postCart = (cart) => {
 
       localStorage.setItem("cartId", payload.id);
       localStorage.removeItem("cart");
-      console.log(data);
 
       return dispatch({
         type: POST_CART,

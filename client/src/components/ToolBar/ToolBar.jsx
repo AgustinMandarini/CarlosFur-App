@@ -82,10 +82,9 @@ const ToolBar = () => {
             </Form.Select>
           </div>
 
-          <div className={style.filterIcon} onClick={toggleFilters}>
+          {/* <div className={style.filterIcon} onClick={toggleFilters}>
             <span>Filtrados</span>
-            {/* <img src={filter} alt="" className={style.filter} /> */}
-          </div>
+          </div> */}
 
           <div className={style.divSelect}>
             <Form.Select

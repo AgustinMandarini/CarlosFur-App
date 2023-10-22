@@ -78,6 +78,7 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
     }
   };
 
+  /* AGUS, LA INFO QUE TENÉS QUE MANDAR ESTÁ EN ESTOS CONSOLE.LOGS */
   /* console.log("localStorage", storage);
   console.log("email", loggedUser.e_mail); */
   useEffect(() => {
@@ -85,7 +86,8 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
       const urlParams = new URLSearchParams(window.location.search);
       const collectionStatus = urlParams.get("collection_status");
       const status = urlParams.get("status");
-
+      /* AGUS, EN ALGUNA PARTE DE ESTE useEffect HAY QUE MANDAR LA ORDER CON createOrderHandler.
+      ACORDATE DE MODIFICAR EL CONTROLLER PARA PODER INCLUIR EL MAIL. */
       if (
         (collectionStatus === "approved" || status === "approved") &&
         (collectionStatus || status)

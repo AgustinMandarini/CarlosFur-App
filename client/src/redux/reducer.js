@@ -185,7 +185,7 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           cartProducts: [...state.cartProducts, { ...productToAdd, count: 1 }],
           cartTotal:
-            state.cartTotal + action.payload.price * action.payload.quantity,
+            state.cartTotal + (action.payload.price * action.payload.quantity),
         };
       }
 
@@ -213,7 +213,7 @@ const rootReducer = (state = initialState, action) => {
 
         // Actualiza el localStorage
         localStorage.setItem(
-          "cartProducts",
+          "cart",
           JSON.stringify(updatedCartProducts)
         );
 
@@ -234,7 +234,7 @@ const rootReducer = (state = initialState, action) => {
 
         // Actualiza el localStorage
         localStorage.setItem(
-          "cartProducts",
+          "cart",
           JSON.stringify(updatedCartProducts)
         );
 
@@ -386,7 +386,7 @@ const rootReducer = (state = initialState, action) => {
 
         // Actualiza el localStorage
         localStorage.setItem(
-          "cartProducts",
+          "cart",
           JSON.stringify(updatedCartProducts)
         );
 

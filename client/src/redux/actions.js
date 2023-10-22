@@ -482,7 +482,7 @@ export const updateCart = (cartId, cart) => {
 
       // Si es necesario, puedes actualizar el estado de Redux con el carrito actualizado
       // actualmente el put esta devolviendo {"status":200,"data":null}. Pero si se actualiza el card
-      // dispatch({ type: UPDATE_CART, payload: updatedCart });
+      dispatch({ type: UPDATE_CART, payload: cart });
     } catch (error) {
       console.error("Error al actualizar el carrito:", error);
     }

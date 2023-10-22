@@ -18,7 +18,6 @@ const Home = () => {
   const checkUserExist = useCheckUserExists();
   const user = localStorage.getItem("user");
   const cartId = localStorage.getItem("cartId");
-  const { isAuthenticated } = useAuth0();
   const cartProducts = useSelector((state) => state.cartProducts);
 
   useEffect(() => {
@@ -31,7 +30,7 @@ const Home = () => {
   const filters = useSelector((state) => state.filter); //
   const sort = useSelector((state) => state.sort);
   const nameState = useSelector((state) => state.nameState);
-
+  const userIsAuthenticated = localStorage.getItem("token") !== null;
   // Paginado
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -79,7 +78,7 @@ const Home = () => {
 
   useEffect(() => {
     const cartIdParse = cartId != null ? JSON.parse(cartId) : undefined;
-    if (isAuthenticated && cartIdParse != undefined) {
+    if (userIsAuthenticated && cartIdParse != undefined) {
       dispatch(getCart(cartIdParse));
     }
   }, []);
@@ -97,7 +96,7 @@ const Home = () => {
       products: newProducts,
     };
     if (
-      isAuthenticated &&
+      userIsAuthenticated &&
       cartIdParse === undefined &&
       data.products.length > 0
     ) {

@@ -16,7 +16,8 @@ const Card = (props) => {
   const cartProducts = useSelector((state) => state.cartProducts);
   const user = localStorage.getItem("user");
   const cartId = localStorage.getItem("cartId");
-  const { isAuthenticated } = useAuth0();
+
+  const userIsAuthenticated = localStorage.getItem("token") !== null;
 
   const countForProductID = useSelector((state) =>
     state.cartProducts.reduce((count, product) => {
@@ -53,14 +54,14 @@ const Card = (props) => {
         userId: userParse.userId,
         products: newProducts,
       };
-      if (isAuthenticated && cartIdParse) {
+      if (userIsAuthenticated && cartIdParse) {
         dispatch(updateCart(cartIdParse, data));
       }
     }
   };
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!userIsAuthenticated) {
       if (cartProducts.length === 0) {
         localStorage.removeItem("cartProducts");
       } else {

@@ -34,8 +34,7 @@ function App() {
   const { isLoading, isAuthenticated } = useAuth0();
   const cartProducts = useSelector((state) => state.cartProducts);
 
-  const userIsAuthenticated =
-    isAuthenticated || localStorage.getItem("token") !== null;
+  const userIsAuthenticated = localStorage.getItem("token") !== null;
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -78,7 +77,7 @@ function App() {
 
       {/* //Dashboard Admin */}
       <Route path="/admin" component={Admin} />
-      <Route path="/user/profile/:id" component={Profile}/>
+      <Route path="/user/profile/:id" component={Profile} />
     </div>
   );
 }

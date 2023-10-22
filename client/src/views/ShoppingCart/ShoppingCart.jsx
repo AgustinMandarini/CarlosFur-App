@@ -22,6 +22,7 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
   const { isAuthenticated } = useAuth0();
   const [order, setOrder] = useState(false);
   const history = useHistory();
+  const userIsAuthenticated = localStorage.getItem("token") !== null;
 
   const [preferenceId, setPreferenceId] = useState(null);
 
@@ -66,7 +67,7 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
   };
 
   const handleBuy = async () => {
-    if (isAuthenticated) {
+    if (userIsAuthenticated) {
       const id = await createPreference();
       if (id) {
         setOrder(true);

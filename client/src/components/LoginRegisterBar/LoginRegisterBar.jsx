@@ -13,8 +13,7 @@ function LoginBar() {
   const dispatch = useDispatch();
   const loggedUser = useSelector((state) => state.loggedUser);
 
-  const userIsAuthenticated =
-    isAuthenticated || localStorage.getItem("token") !== null;
+  const userIsAuthenticated = localStorage.getItem("token") !== null;
 
   const cartProducts = useSelector((state) => state.cartProducts);
 
@@ -53,12 +52,11 @@ function LoginBar() {
   const defaultAvatar =
     "https://cdn.icon-icons.com/icons2/1508/PNG/512/systemusers_104569.png";
 
-    const userName = isAuthenticated
-    ? user.given_name  // Usuario autenticado con Google
+  const userName = isAuthenticated
+    ? user.given_name // Usuario autenticado con Google
     : loggedUser
     ? `${loggedUser.user_name} ` // Usuario autenticado localmente
     : "Usuario"; // Usuario no autenticado
-  
 
   return (
     <Navbar className={style.nav} expand="lg">

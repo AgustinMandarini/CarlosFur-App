@@ -65,12 +65,11 @@ const createCart = async (req) => {
       total_amount: updatedCart.total_amount,
       userId: updatedCart.userId,
       products: updatedCart.products.map((product) => ({
-        // id: product.id,
+        id: product.id,
         product_quantity: product.cart_products.product_quantity,
         productId: product.cart_products.productId,
       })),
     };
-
     return { status: 201, cartData: formattedCart };
   } catch (error) {
     console.error("Error in createCart:", error);

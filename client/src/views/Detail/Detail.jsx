@@ -10,14 +10,12 @@ import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import imagenDefault from "./../../imagenes/default.png";
 import { updateLocalStorage } from "../../components/LocalStorage/LocalStorageFunctions";
-import { useAuth0 } from "@auth0/auth0-react";
 import { updateCart } from "../../redux/actions";
 const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = localStorage.getItem("user");
   const cartId = localStorage.getItem("cartId");
-  const { isAuthenticated } = useAuth0();
 
   useEffect(() => {
     dispatch(getDetail(id));
@@ -49,7 +47,7 @@ const Detail = () => {
         userId: userParse.userId,
         products: newProducts,
       };
-      if (isAuthenticated && cartIdParse) {
+      if (cartIdParse) {
         dispatch(updateCart(cartIdParse, data));
       }
     }

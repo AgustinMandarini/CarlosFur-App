@@ -145,7 +145,6 @@ const rootReducer = (state = initialState, action) => {
         muebles: action.payload,
       };
     case GET_CART:
-      console.log("Lo que llega al carrito", action.payload);
       const newProducts = action.payload.products.map((item) => {
         const mueble = state.muebles.find((m) => m.id === item.productId);
         if (mueble) {

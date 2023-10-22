@@ -27,6 +27,7 @@ const findUser = async (userName, email) => {
 
   if (users.length === 1) {
     const token = generateUserToken({
+      id: users[0].id,
       is_admin: users[0].is_admin,
       e_mail: users[0].e_mail,
       user_name: users[0].user_name,
@@ -59,7 +60,6 @@ const findUserById = async (id) => {
   return user;
 };
 
-
 const findUserByEmail = async (email) => {
   try {
     const user = await User.findOne({
@@ -73,7 +73,7 @@ const findUserByEmail = async (email) => {
 
     user.dataValues.password = null;
 
-    return {userId: user.id};
+    return { userId: user.id };
   } catch (error) {
     throw new Error(`Error al buscar el usuario: ${error.message}`);
   }

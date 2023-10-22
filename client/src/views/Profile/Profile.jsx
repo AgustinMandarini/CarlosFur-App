@@ -42,7 +42,7 @@
 //   return (
 //     <Container className={`${styles.profileContainer} ${styles.Background}`}>
 //       <Row>
-        
+
 //         {/* Columna izquierda con la imagen y el nombre */}
 //         <Col md="8">
 //           <Card className={styles.profileCard}>
@@ -58,7 +58,6 @@
 //             </CardTitle>
 //           </Card>
 //         </Col>
-
 
 //         {/* Columna derecha con la información del usuario */}
 //         <Col md="4">
@@ -114,13 +113,22 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import styles from "./Profile.module.css";
-import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+} from "reactstrap";
 import { useAuth0 } from "@auth0/auth0-react"; // Importa useAuth0
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const { id } = useParams();
   const { user: auth0User, isAuthenticated } = useAuth0(); // Obtén la información del usuario de Auth0
+  const userIsAuthenticated = localStorage.getItem("token") !== null;
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -144,8 +152,9 @@ const Profile = () => {
   }
 
   // Obtiene la imagen de perfil de Auth0
-  const userImage = isAuthenticated ? auth0User.picture : null;
-  const defaultAvatar = "https://cdn.icon-icons.com/icons2/1508/PNG/512/systemusers_104569.png";
+  const userImage = userIsAuthenticated ? auth0User.picture : null;
+  const defaultAvatar =
+    "https://cdn.icon-icons.com/icons2/1508/PNG/512/systemusers_104569.png";
 
   return (
     <Container className={`${styles.profileContainer} ${styles.Background}`}>
@@ -158,7 +167,9 @@ const Profile = () => {
               className={styles.profileImage}
             />
             <CardTitle tag="h5" className={styles.profileName}>
-              {user.first_name ? `${user.first_name} ${user.last_name}` : user.user_name}
+              {user.first_name
+                ? `${user.first_name} ${user.last_name}`
+                : user.user_name}
             </CardTitle>
           </Card>
         </Col>
@@ -209,4 +220,3 @@ const Profile = () => {
 };
 
 export default Profile;
-

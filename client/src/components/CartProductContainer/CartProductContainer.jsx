@@ -9,7 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const CartProductContainer = () => {
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cartProducts);
-  const { isAuthenticated } = useAuth0();
+  const userIsAuthenticated = localStorage.getItem("token") !== null;
   const user = localStorage.getItem("user");
   const cartId = localStorage.getItem("cartId");
   const [checkIncrementAndDecrement, setCheckIncrementAndDecrement] =
@@ -36,7 +36,7 @@ const CartProductContainer = () => {
           userId: userParse.userId,
           products: newProducts.filter((item) => item.quantity !== 0),
         };
-        if (isAuthenticated && cartIdParse) {
+        if (userIsAuthenticated && cartIdParse) {
           dispatch(updateCart(cartIdParse, data));
           setCheckIncrementAndDecrement(false);
         }
@@ -45,7 +45,7 @@ const CartProductContainer = () => {
   }, [cartProducts, checkIncrementAndDecrement]);
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!userIsAuthenticated) {
       if (cartProducts.length === 0) {
         localStorage.removeItem("cart");
       } else {

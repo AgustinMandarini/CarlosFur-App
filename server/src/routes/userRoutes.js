@@ -17,6 +17,7 @@ const {
 
 const { authenticateJWT } = require("../middleware/authenticateJWT");
 const { emailAuthJWT } = require("../middleware/emailAuthJWT");
+const { deleteUserHandler } = require("../handlers/UserHandlers/deleteUserHandler");
 
 const userRouter = Router();
 
@@ -29,5 +30,6 @@ userRouter.post("/change-password", postChangePasswordHandler);
 userRouter.get("/change-password", getChangePasswordHandler);
 userRouter.put("/update-password", emailAuthJWT, putUpdatePasswordHandler);
 userRouter.put("/:id", putUserHandler);
+userRouter.delete("/:id", deleteUserHandler);
 
 module.exports = userRouter;

@@ -53,7 +53,12 @@ function LoginBar() {
   const defaultAvatar =
     "https://cdn.icon-icons.com/icons2/1508/PNG/512/systemusers_104569.png";
 
-  const userName = user ? user.given_name : "Usuario";
+    const userName = isAuthenticated
+    ? user.given_name  // Usuario autenticado con Google
+    : loggedUser
+    ? `${loggedUser.user_name} ` // Usuario autenticado localmente
+    : "Usuario"; // Usuario no autenticado
+  
 
   return (
     <Navbar className={style.nav} expand="lg">

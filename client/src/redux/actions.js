@@ -411,10 +411,12 @@ export const fetchUserData = () => {
 
 //carrito
 export const getCart = (cartId) => {
+  console.log("El ID que entra a la action GET", cartId);
   return async (dispatch) => {
     try {
       const response = await axios.get(`${apiUrl}/cart/${cartId}`);
       const cartData = response.data;
+      console.log(cartData);
       // Actualiza el estado de Redux con la información del carrito
       dispatch({ type: GET_CART, payload: cartData });
 
@@ -424,24 +426,13 @@ export const getCart = (cartId) => {
     }
   };
 };
-
-export const postCartProduct = (payload) => {
-  return { type: POST_CART_PRODUCT, payload: payload };
-};
-export const deleteCartProduct = (payload) => {
-  return { type: DELETE_CART_PRODUCT, payload: payload };
-};
-
-export const deleteCartProductDirect = (payload) => {
-  return { type: DELETE_CART_PRODUCT_DIRECT, payload: payload };
-};
 export const postCart = (cart) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`${apiUrl}/cart`, cart);
       const payload = data.cartData;
       // Guardar la información en el LocalStorage
-
+      console.log("ID que se crea y se almacena", payload.id);
       localStorage.setItem("cartId", payload.id);
       localStorage.removeItem("cart");
 
@@ -453,6 +444,18 @@ export const postCart = (cart) => {
       console.log(error);
     }
   };
+};
+
+export const postCartProduct = (payload) => {
+  return { type: POST_CART_PRODUCT, payload: payload };
+};
+export const deleteCartProduct = (payload) => {
+  //NUNCA SE CONECTA AL BACK
+  return { type: DELETE_CART_PRODUCT, payload: payload };
+};
+
+export const deleteCartProductDirect = (payload) => {
+  return { type: DELETE_CART_PRODUCT_DIRECT, payload: payload };
 };
 export const deleteCart = (cartId) => {
   // borra todo el carro

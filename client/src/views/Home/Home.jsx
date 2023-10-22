@@ -18,22 +18,18 @@ const Home = () => {
   const checkUserExist = useCheckUserExists();
   const user = localStorage.getItem("user");
   const cartId = localStorage.getItem("cartId");
-  const { isAuthenticated } = useAuth0();
   const cartProducts = useSelector((state) => state.cartProducts);
-  console.log(cartProducts);
+
   useEffect(() => {
     checkUserExist();
     // dispatch(setProductsCopy());
     // eslint-disable-next-line
   }, []);
-
   // useSelectors para observar el estado global donde haga falta
   const globalProducts = useSelector((state) => state.muebles); //trae todos los muebles
   const filters = useSelector((state) => state.filter); //
   const sort = useSelector((state) => state.sort);
   const nameState = useSelector((state) => state.nameState);
-  const storage = useSelector((state) => state.localStorage);
-  const cart = useSelector((state) => state.cartProducts);
 
   // Paginado
   const [products, setProducts] = useState([]);
@@ -81,15 +77,18 @@ const Home = () => {
   );
 
   useEffect(() => {
-    const cartIdParse = cartId != null ? JSON.parse(cartId) : undefined;
-    if (isAuthenticated && cartIdParse !== undefined) {
-      dispatch(getCart(cartIdParse));
+    console.log("ID almacenado", localStorage.getItem("cartId"));
+    if (cartId) {
+      const cartIdParse = JSON.parse(cartId);
+      if (cartIdParse !== undefined) {
+        console.log("ID que se busca al levantar el componente", cartId);
+        dispatch(getCart(cartIdParse));
+      }
     }
   }, []);
 
   useEffect(() => {
-    const userParse = cartId != null && JSON.parse(user);
-    const cartIdParse = cartId != null ? JSON.parse(cartId) : undefined;
+    const userParse = user != null && JSON.parse(user);
 
     const newProducts = cartProducts.map((item) => ({
       id: item.id,
@@ -100,11 +99,7 @@ const Home = () => {
       userId: userParse.userId,
       products: newProducts,
     };
-    if (
-      isAuthenticated &&
-      cartIdParse !== undefined &&
-      data.products.length > 0
-    ) {
+    if (data.products.length > 0) {
       dispatch(postCart(data));
     }
   }, [cartProducts]);

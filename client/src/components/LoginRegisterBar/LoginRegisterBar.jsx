@@ -42,6 +42,7 @@ function LoginBar() {
     });
     dispatch(logOut());
     localStorage.removeItem("cartId");
+    localStorage.clear();
 
     logout({
       logoutParams: {

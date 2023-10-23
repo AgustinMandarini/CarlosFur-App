@@ -40,6 +40,7 @@ const Home = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const currentProducts = products.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  const userIsAuthenticated = localStorage.getItem("token") !== null;
 
   useEffect(() => {
     setProducts(globalProducts);
@@ -83,19 +84,15 @@ const Home = () => {
   );
 
   useEffect(() => {
-    console.log("ID almacenado", localStorage.getItem("cartId"));
-    if (cartId) {
-      const cartIdParse = JSON.parse(cartId);
-      if (cartIdParse !== undefined) {
-        console.log("ID que se busca al levantar el componente", cartId);
-        dispatch(getCart(cartIdParse));
-      }
+    const cartIdParse = cartId != null ? JSON.parse(cartId) : undefined;
+    if (userIsAuthenticated && cartIdParse != undefined) {
+      dispatch(getCart(cartIdParse));
     }
   }, []);
 
   useEffect(() => {
-    const userParse = user != null && JSON.parse(user);
-
+    const userParse = cartId != null && JSON.parse(user);
+    const cartIdParse = cartId != null ? JSON.parse(cartId) : undefined;
     const newProducts = cartProducts.map((item) => ({
       id: item.id,
       quantity: item.count,
@@ -105,15 +102,12 @@ const Home = () => {
       userId: userParse.userId,
       products: newProducts,
     };
-    if (data.products.length > 0) {
+    if (
+      userIsAuthenticated &&
+      cartIdParse === undefined &&
+      data.products.length > 0
+    ) {
       dispatch(postCart(data));
-    }
-  }, [cartProducts]);
-  useEffect(() => {
-    if (cartProducts.length === 0) {
-      localStorage.removeItem("cart");
-    } else {
-      updateLocalStorage(cartProducts);
     }
   }, [cartProducts]);
 

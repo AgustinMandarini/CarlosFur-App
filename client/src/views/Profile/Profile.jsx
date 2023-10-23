@@ -130,12 +130,12 @@ const Profile = () => {
   const { user: auth0User, isAuthenticated } = useAuth0(); // Obtén la información del usuario de Auth0
   const userIsAuthenticated = localStorage.getItem("token") !== null;
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3001/user/profile/${id}`
-        );
+        const response = await axios.get(`${apiUrl}/user/profile/${id}`);
         setUser(response.data);
         const admin = response.data.is_admin;
         console.log(admin);

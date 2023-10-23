@@ -48,28 +48,28 @@ const Home = () => {
   useEffect(
     () => {
       // if (nameState !== true) {
-        filters.productType =
-          filters.productType === "allOptions" ? "" : filters.productType;
-        filters.material =
-          filters.material === "allOptions" ? "" : filters.material;
-        filters.color = filters.color === "allOptions" ? "" : filters.color;
+      filters.productType =
+        filters.productType === "allOptions" ? "" : filters.productType;
+      filters.material =
+        filters.material === "allOptions" ? "" : filters.material;
+      filters.color = filters.color === "allOptions" ? "" : filters.color;
 
-        const uri = `http://localhost:3001/product?productTypeId=${
-          filters.productType
-        }&materialId=${filters.material}&colorId=${
-          filters.color
-        }&orderBy=price&orderDirection=${sort === "allOptions" ? "" : sort}`;
+      const uri = `${apiUrl}/product?productTypeId=${
+        filters.productType
+      }&materialId=${filters.material}&colorId=${
+        filters.color
+      }&orderBy=price&orderDirection=${sort === "allOptions" ? "" : sort}`;
 
-        axios
-          .get(uri)
-          .then((response) => {
-            const list = response.data; // Array con el resultado del filtro
-            setProducts(list); // Actualizar el estado local
-            setCurrentPage(1);
-          })
-          .catch((error) => {
-            console.error("Error al hacer la solicitud:", error);
-          });
+      axios
+        .get(uri)
+        .then((response) => {
+          const list = response.data; // Array con el resultado del filtro
+          setProducts(list); // Actualizar el estado local
+          setCurrentPage(1);
+        })
+        .catch((error) => {
+          console.error("Error al hacer la solicitud:", error);
+        });
       // }
     },
     // eslint-disable-next-line

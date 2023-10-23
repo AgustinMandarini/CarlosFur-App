@@ -29,7 +29,7 @@ const Home = () => {
   const globalProducts = useSelector((state) => state.muebles); //trae todos los muebles
   const filters = useSelector((state) => state.filter); //
   const sort = useSelector((state) => state.sort);
-  const nameState = useSelector((state) => state.nameState);
+  // const nameState = useSelector((state) => state.nameState);
   const userIsAuthenticated = localStorage.getItem("token") !== null;
   // Paginado
   const [products, setProducts] = useState([]);
@@ -47,7 +47,7 @@ const Home = () => {
   //Combinación de ordenamientos y filtros
   useEffect(
     () => {
-      if (nameState !== true) {
+      // if (nameState !== true) {
         filters.productType =
           filters.productType === "allOptions" ? "" : filters.productType;
         filters.material =
@@ -70,7 +70,7 @@ const Home = () => {
           .catch((error) => {
             console.error("Error al hacer la solicitud:", error);
           });
-      }
+      // }
     },
     // eslint-disable-next-line
     [sort, filters.productType, filters.color, filters.material, filters.price]

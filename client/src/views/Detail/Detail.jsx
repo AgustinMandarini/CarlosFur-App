@@ -111,11 +111,11 @@ const Detail = () => {
                 alt="image"
               />
             )}
-            <p className={style.p2}>{stateDetail.name}</p>
-            <p className={style.p2}>${stateDetail.price}</p>
           </div>
           <div className={style.texto}>
-            <p className={style.p}>{stateDetail.description}</p>
+            <p className={style.p2}>{stateDetail.name}</p>
+            <p className={style.description}>{stateDetail.description}</p>
+            <p className={style.price}>${stateDetail.price}</p>
             <p className={style.p}>Altura: {stateDetail.height} </p>
             <p className={style.p}>Profundidad: {stateDetail.depth} </p>
             <p className={style.p}>Ancho: {stateDetail.width}</p>

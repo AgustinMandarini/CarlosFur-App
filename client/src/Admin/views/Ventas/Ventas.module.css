@@ -1,4 +1,103 @@
-.container {
+/* .img {
+    width: 100px; 
+    height: 100px;
+    border: 1px solid #000; 
+  } */
+  .cntnProductos {
+    margin-top: 5rem;
+    border: 1px solid black;
+  
+    box-shadow: 8px 0px 10px rgba(148, 133, 122, 0.8);
+  }
+  .tittle {
+    justify-content: center;
+    align-items: center;
+    font-size: 2.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1.2rem;
+  }
+  .link {
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .button {
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 4px;
+    width: 70px;
+    border-radius: 0px;
+  }
+  .butttonDelete {
+    padding: 6px !important;
+    font-size: 14px !important;
+  }
+  .cntnTh {
+    justify-content: center !important;
+    letter-spacing: 1px;
+    padding: 9px !important;
+    align-items: center !important;
+  }
+  .cntnTr {
+    justify-content: center !important;
+    letter-spacing: 1px;
+    padding: 12px !important;
+    align-items: center !important;
+    font-size: 16px;
+  }
+  
+  .headerModal {
+    background-color: #ae9c8f;
+    font-size: 20px;
+    letter-spacing: 1px !important;
+    padding: 13px;
+    border: none !important;
+  }
+  .footerModal {
     display: flex;
-    flex-direction:column;
-}
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .buttonModal {
+    color: white;
+    padding: 2px 13px 2px 13px;
+    border: 2px solid black;
+    font-size: 12px !important;
+    font-weight: 500;
+    margin: 1rem;
+    background-color: black !important;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px !important;
+    border: none !important;
+    margin: 15px !important;
+  }
+
+  .cntnTh {
+    justify-content: center !important;
+    letter-spacing: 1px;
+    padding: 9px !important;
+    align-items: center !important;
+  }
+  
+  .cntnUsers {
+    margin-top: 5rem;
+    border: 1px solid black;
+  
+    box-shadow: 8px 0px 10px rgba(148, 133, 122, 0.8);
+  }
+  .tittle {
+    justify-content: center;
+    align-items: center;
+    font-size: 2.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1.2rem;
+  }
+  .cntnTittle {
+    padding: 6px;
+    justify-content: center !important;
+    align-items: center !important;
+  }

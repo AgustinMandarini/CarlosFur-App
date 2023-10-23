@@ -375,7 +375,7 @@ export const login = (payload) => {
           Authorization: `Bearer ${accessToken}`, // Asegúrate de tener el token aquí
         },
       });
-      const user = response.data;//trae la info del usuario
+      const user = response.data; //trae la info del usuario
       if (response.status === 200) {
         setToken(accessToken);
         //LOCALSTORAGE
@@ -460,7 +460,7 @@ export const postCart = (cart) => {
       // Guardar la información en el LocalStorage
       console.log("ID que se crea y se almacena", payload.id);
       localStorage.setItem("cartId", payload.id);
-      localStorage.removeItem("cart");
+      // localStorage.removeItem("cart");
 
       return dispatch({
         type: POST_CART,

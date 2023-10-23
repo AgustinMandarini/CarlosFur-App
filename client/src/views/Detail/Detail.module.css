@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   padding-top: 2rem;
 }
 
@@ -10,28 +10,62 @@
   margin: 1em;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 38%;
-  height: auto;
-  border-radius: 0.5rem;
+  justify-content: start;
+  align-items: start;
+  width: 48%;
+  height: 750px;
   border: 0.1em solid #36343479;
-  padding: 0.6rem;
+  /* padding: 0.6rem; */
   background-color: #ffffff;
   text-align: center;
+  box-shadow: 8px 0px 10px rgba(148, 133, 122, 0.8);
 }
 .p {
   display: flex;
   align-items: start;
+  margin: 3px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.151);
+  padding-bottom: 9px;
+  padding-top: 9px;
+
+  /* border: 1px solid black; */
 }
 .p2 {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 0.1rem;
+  align-items: start;
+  justify-content: start;
+  text-align: left;
+  font-size: 22px;
+  font-weight: 600;
+  width: 190px;
+  max-width: 200px;
+  letter-spacing: 1px;
+  /* margin: 8px; */
+  margin-top: 20px;
+}
+.description {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  width: 190px;
+  max-width: 200px;
+  text-align: left;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.623);
+  /* margin-top: 2px; */
+}
+.price {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  width: 190px;
+  max-width: 200px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 40px;
 }
 .imgContainer {
-  margin: 1em;
   display: flex;
   flex-direction: column;
   background-color: #88641b00;
@@ -40,54 +74,35 @@
 }
 .imgDetail {
   /* Establece un ancho fijo para todas las imágenes */
-  height: 20rem; /* Establece una altura fija para todas las imágenes */
-  max-width: 100%; /* Asegura que las imágenes no se amplíen más allá de 200px */
-  max-height: 100%; /* Asegura que las imágenes no se amplíen más allá de 200px */
-  border-radius: 1em;
-  border: 0.1em solid black;
-  width: 20rem;
+  height: 98%; /* Establece una altura fija para todas las imágenes */
+  max-height: 750px;
+  border-bottom: 0.1em solid rgba(148, 133, 122, 0.8);
+  border-right: 0.1em solid rgba(148, 133, 122, 0.8);
+
+  width: 25rem;
 }
 .imgContainer p {
-  margin-top: 0.8em;
+  /* margin-top: 0.8em; */
   font-weight: bold;
 }
 .texto {
   display: flex;
   flex-direction: column;
-  width: 10rem;
-  margin: 1.5em;
+  width: 30%;
+  margin-left: 2em;
+
+  /* margin-left: 2.9em; */
+
   align-items: left;
 }
 
 .goBackLink {
-  margin: 2em;
-}
-.counterContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 2rem;
-  width: 6.9rem;
-  margin-right: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.404);
-}
-.buttonCount {
-  color: white;
-  padding: 2px 13px 2px 13px;
-  border: 2px solid black;
-  font-size: 12px;
-  font-weight: 500;
-  /* margin: 1rem; */
-  background-color: black;
-  justify-content: center;
-  align-items: center;
-  /* height: 1.9rem; */
-}
-.buttonCount:hover {
-  background-color: #b1ada2a9;
-  font-weight: 600;
-  border: none;
-  color: black;
+  /* margin: 2em; */
+  /* margin: 1.4em;
+  margin-right: 9em; */
+  position: absolute;
+  left: 220px;
+  top: 220px;
 }
 
 .counterValue {
@@ -103,41 +118,4 @@
 .ImgandData {
   display: flex;
   flex-direction: row;
-}
-.butttons {
-  display: flex;
-  flex-direction: row;
-  /* justify-content: center; */
-  align-content: start;
-  width: 130px;
-  margin-top: 0.8rem;
-  padding: 0.2rem;
-}
-.propCounter {
-  display: flex;
-  color: black;
-  padding: 0px 8px 0px 8px;
-  border: none;
-  font-size: 14px;
-  font-weight: 800;
-  margin: 0.3rem;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0.7rem;
-  margin-top: 0.7rem;
-  background-color: white;
-}
-.buttonCount {
-  display: flex;
-  color: black;
-  padding: 0px 8px 0px 8px;
-  border: none;
-  font-size: 14px;
-  font-weight: 800;
-  margin: 0.3rem;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0.7rem;
-  margin-top: 0.7rem;
-  background-color: white;
 }

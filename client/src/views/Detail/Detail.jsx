@@ -77,14 +77,6 @@ const Detail = () => {
     setProduct(0);
   };
 
-  useEffect(() => {
-    if (cartProducts.length === 0) {
-      localStorage.removeItem("cart");
-    } else {
-      updateLocalStorage(cartProducts);
-    }
-  }, [cartProducts]);
-
   const getColorName = (colorId) => {
     const color = colorState.find((color) => color.id === colorId);
     return color ? color.name : "Desconocido";
@@ -119,11 +111,11 @@ const Detail = () => {
                 alt="image"
               />
             )}
-            <p className={style.p2}>{stateDetail.name}</p>
-            <p className={style.p2}>${stateDetail.price}</p>
           </div>
           <div className={style.texto}>
-            <p className={style.p}>{stateDetail.description}</p>
+            <p className={style.p2}>{stateDetail.name}</p>
+            <p className={style.description}>{stateDetail.description}</p>
+            <p className={style.price}>${stateDetail.price}</p>
             <p className={style.p}>Altura: {stateDetail.height} </p>
             <p className={style.p}>Profundidad: {stateDetail.depth} </p>
             <p className={style.p}>Ancho: {stateDetail.width}</p>
@@ -131,19 +123,6 @@ const Detail = () => {
             <p className={style.p}>
               Color: {getColorName(stateDetail.colorId)}
             </p>
-            <div className={style.butttons}>
-              <div className={style.counterContainer}>
-                <button className={style.buttonCount} onClick={decreaseCounter}>
-                  -
-                </button>
-
-                <p className={style.propCounter}>{countForProductID}</p>
-
-                <button className={style.buttonCount} onClick={increaseCounter}>
-                  +
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>

@@ -38,10 +38,12 @@ function LoginBar() {
 
   const handleLogout = () => {
     toast.info("Cerrando Sesión", {
-      position: toast.POSITION.BOTTOM_RIGHT,
+      position: toast.POSITION.TOP_CENTER,
     });
     dispatch(logOut());
     localStorage.removeItem("cartId");
+    localStorage.clear();
+
     logout({
       logoutParams: {
         returnTo: window.location.origin,
@@ -79,7 +81,10 @@ function LoginBar() {
           )}
           {userIsAuthenticated && (
             <div className={style.userInfo}>
-              <Link to={`/user/profile/${loggedUser ? loggedUser.id : ""}`}>
+              <Link
+                to={`/user/profile/${loggedUser ? loggedUser.id : ""}`}
+                className={style.linkUser}
+              >
                 <img
                   src={user ? user.picture : defaultAvatar}
                   alt="User Avatar"

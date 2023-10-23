@@ -10,7 +10,7 @@ import style from "./Home.module.css";
 import { useCheckUserExists } from "../../helpers/checkUserExist";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getCart, postCart } from "../../redux/actions";
-
+import { updateLocalStorage } from "../../components/LocalStorage/LocalStorageFunctions";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const Home = () => {
@@ -30,7 +30,7 @@ const Home = () => {
   const filters = useSelector((state) => state.filter); //
   const sort = useSelector((state) => state.sort);
   // const nameState = useSelector((state) => state.nameState);
-  const userIsAuthenticated = localStorage.getItem("token") !== null;
+
   // Paginado
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,6 +40,7 @@ const Home = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const currentProducts = products.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  const userIsAuthenticated = localStorage.getItem("token") !== null;
 
   useEffect(() => {
     setProducts(globalProducts);
@@ -47,6 +48,12 @@ const Home = () => {
   //Combinación de ordenamientos y filtros
   useEffect(
     () => {
+      // if (nameState !== true) {
+      filters.productType =
+        filters.productType === "allOptions" ? "" : filters.productType;
+      filters.material =
+        filters.material === "allOptions" ? "" : filters.material;
+      filters.color = filters.color === "allOptions" ? "" : filters.color;
       // if (nameState !== true) {
       filters.productType =
         filters.productType === "allOptions" ? "" : filters.productType;

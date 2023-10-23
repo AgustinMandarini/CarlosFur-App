@@ -16,22 +16,20 @@
   margin-right: 0.5rem;
 }
 
-/* Agrega estas reglas CSS a tu archivo de estilos (por ejemplo, LoginRegisterBar.module.css) */
-
-/* Estilo para la imagen del usuario */
 .userInfo img {
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 47px;
+  height: 47px;
   object-fit: cover;
-  margin-right: 5px;
+  margin-right: 8px;
 }
 
 /* Estilo para el nombre del usuario */
 .userInfo .userName {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
   color: #333;
+  letter-spacing: 1px;
 }
 
 /* Estilo para el botón "Log Out" */
@@ -50,4 +48,7 @@
   align-items: center;
   margin-right: 20px;
 }
-
+.linkUser {
+  text-decoration: none;
+  margin-right: 7px;
+}

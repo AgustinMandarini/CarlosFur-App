@@ -3,26 +3,28 @@ import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getOrdersAdmin } from "./../../../redux/actions";
+import { getOrdersAdmin, getCarts } from "./../../../redux/actions";
 import style from "./Ventas.module.css";
 import PaymentType from "./PaymentType";
 
 
 const Ordenes = () => {
-  const [cart, setCart] = useState(null); 
   const orders = useSelector((state) => state.ordersAdmin);
-  const [selectedPaymentTypeId, setSelectedPaymentTypeId] = useState(null); 
+  const carts = useSelector((state) => state.cartsAdmin);
+  const [selectedPaymentTypeId, setSelectedPaymentTypeId] = useState(); 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getOrdersAdmin());
   }, []);
+  useEffect(() => {
+    dispatch(getCarts());
+  }, []);
 
+  // console.log("DELLLLFI", carts)
   // const filteredOrders = selectedPaymentTypeId.name
   //   ? orders.filter((order) => order.paymentTypeId && order.paymentTypeId.name === selectedPaymentTypeId)
   //   : orders;
-
-  console.log("aaa", orders)
 
   return (
     
@@ -64,30 +66,33 @@ const Ordenes = () => {
           </tr>
         </thead>
         <tbody>
-        {Array.isArray(orders) &&
-  orders.map((order) => (
-    <tr key={order.id} className={style.td}>
-      <td className={style.cntnTr}>{order.id}</td>
-      <td className={style.cntnTr}>{order.mercadoPagoId}</td>
-      <td className={style.cntnTr}>{order.cartData?.total_amount}</td>
-      <td className={style.cntnTr}>{order.saleDate}</td>
-      <td>
-        <Button variant="secondary">
-          <Link
-            to={`/admin/detalle/${order.cartId}`} 
-            className={style.link}
-            >
-            Ver detalle
-          </Link>
-        </Button>
-        
-                </td>
-      <PaymentType paymentTypeId={order.paymentTypeId} />
-              </tr>
-            ))}
+        {Array.isArray(orders) && Array.isArray(carts) &&
+            orders.map((order) => {
+              const cart = carts.find((cart) => cart.id === order.cartId);
+
+              return (
+                <tr key={order.id} className={style.td}>
+                  <td className={style.cntnTr}>{order.id}</td>
+                  <td className={style.cntnTr}>{order.mercadoPagoId}</td>
+                  <td className={style.cntnTr}>
+                    {cart ? cart.total_amount : 'N/A'}
+                  </td>
+                  <td className={style.cntnTr}>{order.saleDate}</td>
+                  <td>
+
+                    <Button variant="primary">
+                      <Link to={`/admin/detalle/${order.cartId}`} className={style.link}>
+                        <strong>Ver detalle</strong>
+                      </Link>
+                    </Button>
+                    
+                  </td>
+                  <PaymentType paymentTypeId={order.paymentTypeId} />
+                </tr>
+              );
+            })}
         </tbody>
       </Table>
-      
     </div>
   );
 };

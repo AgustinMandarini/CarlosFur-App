@@ -52,7 +52,7 @@ const Ordenes = () => {
           <div className={style.cntnUsers}> </div>
             
       <div className={style.cntnTittle}>
-      <h1>Ventas registradas</h1>
+      <h1>Registro de ventas</h1>
       </div>
       <Table striped bordered hover>
         <thead>
@@ -85,7 +85,7 @@ const Ordenes = () => {
                         <strong>Ver detalle</strong>
                       </Link>
                     </Button>
-                    
+
                   </td>
                   <PaymentType paymentTypeId={order.paymentTypeId} />
                 </tr>

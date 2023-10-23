@@ -63,7 +63,7 @@ const Card = (props) => {
   useEffect(() => {
     if (!userIsAuthenticated) {
       if (cartProducts.length === 0) {
-        localStorage.removeItem("cartProducts");
+        localStorage.removeItem("cart");
       } else {
         updateLocalStorage(cartProducts);
       }

@@ -38,7 +38,7 @@ const CartProductContainer = () => {
         };
         if (userIsAuthenticated && cartIdParse) {
           dispatch(updateCart(cartIdParse, data));
-          setCheckIncrementAndDecrement(false);
+          setCheckIncrementAndDecrement(true);
         }
       }
     }
@@ -50,6 +50,7 @@ const CartProductContainer = () => {
         localStorage.removeItem("cart");
       } else {
         updateLocalStorage(cartProducts);
+        localStorage.getItem("cart");
       }
     }
   }, [cartProducts]);

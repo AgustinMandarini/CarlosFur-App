@@ -78,6 +78,7 @@ function App() {
       {/* //Dashboard Admin */}
       <Route path="/admin" component={Admin} />
       <Route path="/user/profile/:id" component={Profile} />
+      
     </div>
   );
 }

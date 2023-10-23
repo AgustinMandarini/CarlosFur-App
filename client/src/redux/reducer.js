@@ -2,7 +2,9 @@
 import {
   GET_PRODUCTS,
   GET_PRODUCTS_ADMIN,
+  GET_ORDERS_ADMIN,
   GET_DETAIL,
+  GET_CART_DETAIL,
   GET_USERS,
   POST_PRODUCT,
   GET_PRODUCT_TYPE,
@@ -43,6 +45,7 @@ import {
 
 const initialState = {
   muebles: [],
+  ordersAdmin: [],
   productsAdmin: [],
   allMuebles: [],
   detail: [],
@@ -67,6 +70,7 @@ const initialState = {
   colorById: [],
   materialId: [],
   tipoDeProductoById: [],
+  cartDetail: []
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -94,11 +98,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         productsAdmin: action.payload,
       };
+    case GET_ORDERS_ADMIN:
+      return {
+        ...state,
+        ordersAdmin: action.payload,
+      };
 
     case GET_DETAIL:
       return {
         ...state,
         detail: action.payload,
+      };
+    case GET_CART_DETAIL:
+      return {
+        ...state,
+        cartDetail: action.payload,
       };
     case PUT_PRODUCT:
       return {

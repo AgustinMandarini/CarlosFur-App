@@ -4,7 +4,7 @@ const getCartById = require("../../controllers/CartController/getCartByIdControl
 const createOrder = async (req, res) => {
   console.log("ENTRA A LA RUTA CREATEORDER??");
   try {
-    const { collection_id, cartId } = req.body;
+    const { collection_id, cartId, paymentTypeId } = req.body;
     console.log("HAY COLL Y CART? : " + collection_id, cartId);
 
     if (!collection_id) {
@@ -25,6 +25,7 @@ const createOrder = async (req, res) => {
       mercadoPagoId: collection_id,
       saleDate,
       cartId,
+      paymentTypeId
     });
 
     const cartData = {
@@ -43,6 +44,7 @@ const createOrder = async (req, res) => {
       ...newOrder.toJSON(),
       cartInfo: cartData,
     };
+
 
     console.log("ORDERWITHCART: " + orderWithCart);
 

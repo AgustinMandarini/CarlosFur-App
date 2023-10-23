@@ -54,11 +54,11 @@ const Home = () => {
           filters.material === "allOptions" ? "" : filters.material;
         filters.color = filters.color === "allOptions" ? "" : filters.color;
 
-        const uri = `http://localhost:3001/product?productTypeId=${
-          filters.productType
-        }&materialId=${filters.material}&colorId=${
-          filters.color
-        }&orderBy=price&orderDirection=${sort === "allOptions" ? "" : sort}`;
+      const uri = `${apiUrl}/product?productTypeId=${
+        filters.productType
+      }&materialId=${filters.material}&colorId=${
+        filters.color
+      }&orderBy=price&orderDirection=${sort === "allOptions" ? "" : sort}`;
 
         axios
           .get(uri)
@@ -71,7 +71,7 @@ const Home = () => {
             console.error("Error al hacer la solicitud:", error);
           });
       }
-    },
+
     // eslint-disable-next-line
     [sort, filters.productType, filters.color, filters.material, filters.price]
   );

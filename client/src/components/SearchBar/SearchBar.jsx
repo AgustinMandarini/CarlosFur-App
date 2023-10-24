@@ -11,30 +11,27 @@ const SearchBar = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (products === "") {
+      dispatch(getProductByName(products));
+      dispatch(setName(false));
+    }
+  }, [products]);
 
+  useEffect(() => {
     const performSearch = async () => {
       dispatch(getProductByName(products));
       dispatch(setName(true));
     };
 
-    const timer = setTimeout(performSearch, 500); 
+    const timer = setTimeout(performSearch, 500);
 
     return () => clearTimeout(timer);
   }, [products, dispatch]);
-  
-
-    const handleOnClick = (e) => {
-    e.preventDefault();
-    dispatch(getProductByName(products));
-    dispatch(setName(true));
-  };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setNameProducts(e.target.value);
   };
-
 
   return (
     <div className={style.divSerchBar}>
@@ -45,9 +42,6 @@ const SearchBar = () => {
             onChange={handleSubmit}
             className={style.inputSearch}
           />
-          <Button className="ms-1" variant="dark" onClick={handleOnClick}>
-            Buscar
-          </Button>
         </InputGroup>
       )}
     </div>
@@ -55,9 +49,6 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
-
-
-
 
 // import { React, useState } from "react";
 // import style from "./SearchBar.module.css";
@@ -76,18 +67,6 @@ export default SearchBar;
 //     e.preventDefault();
 //     dispatch(getProductByName(products));
 //     dispatch(setName(true));
-//   };
-
-//   useEffect(() => {
-//     if (products === "") {
-//       dispatch(getProductByName(products));
-//       dispatch(setName(false));
-//     }
-//   }, [products]);
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     setNameProducts(e.target.value);
 //   };
 
 //   return (

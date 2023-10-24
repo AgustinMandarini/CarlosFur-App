@@ -49,11 +49,11 @@ const Home = () => {
   useEffect(
     () => {
       // if (!nameState) {
-        filters.productType =
-          filters.productType === "allOptions" ? "" : filters.productType;
-        filters.material =
-          filters.material === "allOptions" ? "" : filters.material;
-        filters.color = filters.color === "allOptions" ? "" : filters.color;
+      filters.productType =
+        filters.productType === "allOptions" ? "" : filters.productType;
+      filters.material =
+        filters.material === "allOptions" ? "" : filters.material;
+      filters.color = filters.color === "allOptions" ? "" : filters.color;
       // if (nameState !== true) {
       filters.productType =
         filters.productType === "allOptions" ? "" : filters.productType;
@@ -99,10 +99,12 @@ const Home = () => {
   useEffect(() => {
     const userParse = cartId != null && JSON.parse(user);
     const cartIdParse = cartId != null ? JSON.parse(cartId) : undefined;
-    const newProducts = cartProducts.map((item) => ({
-      id: item.id,
-      quantity: item.count,
-    }));
+    const newProducts = cartProducts
+      .filter((item) => item && item.id !== undefined)
+      .map((item) => ({
+        id: item.id,
+        quantity: item.count,
+      }));
 
     const data = {
       userId: userParse.userId,

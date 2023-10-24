@@ -11,6 +11,8 @@ import { useParams } from "react-router-dom";
 import imagenDefault from "./../../imagenes/default.png";
 import { updateLocalStorage } from "../../components/LocalStorage/LocalStorageFunctions";
 import { updateCart } from "../../redux/actions";
+import Reviews from "../Reviews/Reviews";
+
 const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -111,6 +113,9 @@ const Detail = () => {
                 alt="image"
               />
             )}
+            <div>
+              <Reviews id={id} />
+            </div>
           </div>
           <div className={style.texto}>
             <p className={style.p2}>{stateDetail.name}</p>
@@ -123,6 +128,11 @@ const Detail = () => {
             <p className={style.p}>
               Color: {getColorName(stateDetail.colorId)}
             </p>
+            <div className={style.counterContainer}>
+              <button className={style.buttonCount} onClick={increaseCounter}>
+                Agregar al carrito
+              </button>
+            </div>
           </div>
         </div>
       </div>

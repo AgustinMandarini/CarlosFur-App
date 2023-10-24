@@ -47,7 +47,8 @@ const Profile = () => {
 
   if (isAuthenticated && auth0User) {
     // Si el usuario se autentica con Google y la información está disponible
-    userName = auth0User.given_name;
+    console.log(auth0User);
+    userName = auth0User.name;
   } else if (user) {
     // Si el usuario se autentica localmente
     userName = user.first_name + (user.last_name ? ` ${user.last_name}` : "");

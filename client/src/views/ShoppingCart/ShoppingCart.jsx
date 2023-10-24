@@ -19,6 +19,7 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
   const cartProducts = useSelector((state) => state.cartProducts) || [];
   const storage = useSelector((state) => state.localStorage);
   const loggedUser = useSelector((state) => state.loggedUser);
+  const cart = useSelector((state) => state.cart);
   const { isAuthenticated } = useAuth0();
   const [order, setOrder] = useState(false);
   const history = useHistory();
@@ -80,22 +81,31 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
   };
 
   /* AGUS, LA INFO QUE TENÉS QUE MANDAR ESTÁ EN ESTOS CONSOLE.LOGS */
-  /* console.log("localStorage", storage);
-  console.log("email", loggedUser.e_mail); */
+  // console.log("localStorage", storage);
+  // console.log("email", loggedUser.e_mail);
   useEffect(() => {
     const fetchData = async () => {
       const urlParams = new URLSearchParams(window.location.search);
+      console.log("urlPArams: " + urlParams);
       const collectionStatus = urlParams.get("collection_status");
       const status = urlParams.get("status");
+      const collection_id = urlParams.get("collection_id");
+      const payment_type = urlParams.get("payment_type");
       /* AGUS, EN ALGUNA PARTE DE ESTE useEffect HAY QUE MANDAR LA ORDER CON createOrderHandler.
       ACORDATE DE MODIFICAR EL CONTROLLER PARA PODER INCLUIR EL MAIL. */
-      if (
-        (collectionStatus === "approved" || status === "approved") &&
-        (collectionStatus || status)
-      ) {
+      console.log("COLLECTION STATUS: " + collectionStatus);
+      console.log("status: " + status);
+      if (collectionStatus === "approved" || status === "approved") {
         try {
+          const orderData = {
+            collection_id: collection_id,
+            cartId: localStorage.getItem("cartId"),
+            payment_type: payment_type,
+            e_mail: loggedUser.e_mail,
+          };
           const response = await axios.post(
-            `${REACT_APP_API_URL}/order` /*  acá va lo que hay que mandar */
+            `${REACT_APP_API_URL}/order`,
+            orderData /*  acá va lo que hay que mandar */
           );
           if (response.status === 201) {
             toast.success("Compra realizada", {
@@ -103,7 +113,7 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
               autoClose: 3000,
             });
             dispatch(emptyCart());
-            localStorage.clear();
+            localStorage.removeItem("cart");
             setOrder(false);
             setTimeout(() => {
               window.location.href = CALLBACK_URL;

@@ -11,18 +11,35 @@ const putProductController = async (id, requestData) => {
     if(price){
       product.price = price;
     }
-   
-   product.height = height;
-   product.depth = depth;
-   product.width = width;
-   product.weight = weight;
-   product.descrption = descrption;
-   product.stock = stock;
+    if(height){
+      product.height = height;
+    }
+    if(depth){
+      product.depth = depth;
+    }
+    if(width){
+      product.width = width;
+    }
+    if(weight){
+      product.weight = weight;
+    }
+    if(descrption){
+      product.descrption = descrption;
+    }
+    if(stock){
+      product.stock = stock;
+    }
+    if(imagePath){
+      product.imagePath = imagePath;
+    }
+    if(enabled_product){
+      product.enabled_product = enabled_product;
+    }
    product.productTypeId = productTypeId;
    product.colorId = colorId;
    product.materialId = materialId;
-   product.imagePath = imagePath;
-   product.enabled_product = enabled_product;
+
+   
     
     await product.save();
       return product

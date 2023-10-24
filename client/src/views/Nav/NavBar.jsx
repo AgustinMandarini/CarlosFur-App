@@ -20,10 +20,10 @@ const NavBar = () => {
   const [navResponsive, setNavResponsive] = useState(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {}, [cartProducts]);
-
   const cartItemCount = cartProducts.reduce((count, product) => {
-    return count + product.count;
+    if (product && product.count !== undefined) {
+      return count + product.count;
+    }
   }, 0);
 
   return (

@@ -33,21 +33,24 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
     const productMap = {};
 
     cartProducts.forEach((product) => {
-      const productId = product.id;
-      if (!productMap[productId]) {
-        productMap[productId] = {
-          description: product.name,
-          unit_price: product.price,
-          total_price: product.price,
-          quantity: product.count,
-          currency_id: "ARS",
-        };
-      } else {
-        productMap[productId].total_price += product.unit_price;
+      if (product && product.id !== undefined) {
+        const productId = product.id;
+        if (!productMap[productId]) {
+          productMap[productId] = {
+            description: product.name,
+            unit_price: product.price,
+            total_price: product.price,
+            quantity: product.count,
+            currency_id: "ARS",
+          };
+        } else {
+          productMap[productId].total_price += product.unit_price;
+        }
       }
     });
 
     const result = Object.values(productMap);
+
     return result;
   }
 

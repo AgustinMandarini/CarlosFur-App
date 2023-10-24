@@ -125,7 +125,7 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
     };
 
     fetchData();
-  }, [preferenceId]);
+  }, []);
 
   return (
     handleShow && (

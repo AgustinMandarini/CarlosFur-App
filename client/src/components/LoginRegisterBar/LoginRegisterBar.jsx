@@ -18,7 +18,6 @@ function LoginBar() {
   let cartArray = [];
 
   if (cartProducts.length > 0) {
-    console.log("Esto es cartProducts cuando entra", cartProducts);
     cartArray = cartProducts.reduce((result, product) => {
       if (product && product.id !== undefined) {
         const existingProduct = result.find((item) => item.id === product.id);
@@ -31,7 +30,6 @@ function LoginBar() {
           });
         }
       }
-      console.log("No sale");
       return result;
     }, []);
   }

@@ -38,10 +38,12 @@ const Detail = () => {
     if (user && cartId) {
       const userParse = JSON.parse(user);
       const cartIdParse = JSON.parse(cartId);
-      const newProducts = cartProducts.map((item) => ({
-        id: item.id,
-        quantity: item.count,
-      }));
+      const newProducts = cartProducts
+        .filter((item) => item && item.id !== undefined)
+        .map((item) => ({
+          id: item.id,
+          quantity: item.count,
+        }));
 
       const data = {
         userId: userParse.userId,

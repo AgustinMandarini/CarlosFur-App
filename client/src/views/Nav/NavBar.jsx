@@ -21,7 +21,9 @@ const NavBar = () => {
   const dispatch = useDispatch();
 
   const cartItemCount = cartProducts.reduce((count, product) => {
-    return count + product.count;
+    if (product && product.count !== undefined) {
+      return count + product.count;
+    }
   }, 0);
 
   return (

@@ -13,7 +13,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Card = (props) => {
   const dispatch = useDispatch();
-  const cartProducts = useSelector((state) => state.cartProducts);
+  const cartProducts = useSelector((state) => state.cartProducts) || [];
   const user = localStorage.getItem("user");
   const cartId = localStorage.getItem("cartId");
 

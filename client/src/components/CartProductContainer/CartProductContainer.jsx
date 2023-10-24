@@ -8,7 +8,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const CartProductContainer = () => {
   const dispatch = useDispatch();
-  const cartProducts = useSelector((state) => state.cartProducts);
+  const cartProducts = useSelector((state) => state.cartProducts) || [];
   const userIsAuthenticated = localStorage.getItem("token") !== null;
   const user = localStorage.getItem("user");
   const cartId = localStorage.getItem("cartId");

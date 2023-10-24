@@ -1,9 +1,428 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Nueva Compra</title>
-  </head>
-  <body>
-    <h1>Hola</h1>
-  </body>
-</html>
+<div>
+  <h1>DETALLE DE TU ORDEN REALIZADA</h1>
+  <h2>ORDEN {{ orderId }}</h2>
+  <table cellspacing="0" border="0" width="99%">
+    <tbody>
+      <tr>
+        <td width="15%" colspan="2"><b>DATOS DE CONTACTO</b></td>
+      </tr>
+      <tr>
+        <td width="15%">Fecha</td>
+        <td>{{ saleDate }}</td>
+      </tr>
+      <tr>
+        <td width="15%">Nombre de usuario</td>
+        <td>{{ user_name }}</td>
+      </tr>
+      <tr>
+        <td width="15%">E-MAIL</td>
+        <td>
+          <a href="mailto:agustinmandarini@hotmail.com" data-linkindex="5"
+            >{{ e_mail }}</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="clear: both" aria-hidden="true">&nbsp;</div>
+  <!-- <table cellspacing="0" border="0" width="49%" style="float: left">
+    <tbody>
+      <tr>
+        <td width="15%" colspan="2"><b>DATOS DE ENVIO</b></td>
+      </tr>
+      <tr>
+        <td width="15%"><strong>Sucursal:</strong></td>
+        <td>
+          NIS: R0100 | Localidad: SAN CARLOS DE BARILOCHE ( Calle: PTO FRANCISCO
+          P MORENO | Nro.: 175 | C.P.: 8400 )
+        </td>
+      </tr>
+      <tr>
+        <td width="15%">Provincia</td>
+        <td>Rio Negro</td>
+      </tr>
+    </tbody>
+  </table> -->
+  <div style="clear: both" aria-hidden="true">&nbsp;</div>
+  <div class="R1UVb" style="height: 143px; width: 100%">
+    <div class="qF8_5">
+      </button>
+    </div>
+    <table
+      cellspacing="0"
+      border="0"
+      width="99%"
+      min-scale="0.5701107011070111"
+      style="transform: scale(0.570111, 0.570111); transform-origin: left top"
+    >
+      <thead align="left">
+        <tr
+          style="
+            color: rgb(255, 255, 255);
+            background-color: rgb(0, 0, 0);
+            text-align: center;
+          "
+        >
+          <th>Artículo</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each products}}
+        <tr style="text-align: center">
+          <td>
+            <span>{{ this.name }}</span>
+          </td>
+          <td><span>{{ this.price }}</span></td>
+          <td>{{ this.product_quantity }}</td>
+          <td><span>{{ this.price }}</span></td>
+        </tr>
+        {{/each}}
+      </tbody>
+      <tfoot
+        style="
+          color: rgb(255, 255, 255);
+          background-color: rgb(68, 68, 68);
+          text-align: center;
+        "
+      >
+        <tr>
+          <td colspan="1"></td>
+          <td>Total:</td>
+          <td></td>
+          <td>
+            <span style="color: rgb(219, 201, 0); font-weight: bold"
+              >{{ total_amount }}</span
+            >
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div style="clear: both" aria-hidden="true">&nbsp;</div>
+  <p style="text-align: start; text-indent: 0px">
+    <span style="font-size: small"
+      ><span style="color: rgb(34, 34, 34)"
+        ><span style="font-family: Arial, Helvetica, sans-serif"
+          ><span style="font-style: normal"
+            ><span style="font-variant-ligatures: normal"
+              ><span style="font-variant-caps: normal"
+                ><span style="font-weight: 400"
+                  ><span style="letter-spacing: normal"
+                    ><span
+                      ><span style="text-transform: none"
+                        ><span style="white-space: normal"
+                          ><span
+                            ><span style="word-spacing: 0px"
+                              ><span
+                                style="background-color: rgb(255, 255, 255)"
+                                ><span
+                                  ><span style="text-decoration-style: initial"
+                                    ><span
+                                      style="text-decoration-color: initial"
+                                      ><b>IMPORTANTE</b>&nbsp;Si pagaste
+                                      mediante depósito o transferencia, una vez
+                                      realizada la operación bancaria por favor
+                                      envianos el&nbsp;comprobante&nbsp;en
+                                      respuesta a éste e-mail. Toda comunicación
+                                      será por éste medio.</span
+                                    ></span
+                                  ></span
+                                ></span
+                              ></span
+                            ><u></u> </span></span></span></span></span></span></span></span></span></span></span
+    ></span>
+  </p>
+  <p style="text-align: start; text-indent: 0px">
+    <span style="font-size: small"
+      ><span style="color: rgb(34, 34, 34)"
+        ><span style="font-family: Arial, Helvetica, sans-serif"
+          ><span style="font-style: normal"
+            ><span style="font-variant-ligatures: normal"
+              ><span style="font-variant-caps: normal"
+                ><span style="font-weight: 400"
+                  ><span style="letter-spacing: normal"
+                    ><span
+                      ><span style="text-transform: none"
+                        ><span style="white-space: normal"
+                          ><span
+                            ><span style="word-spacing: 0px"
+                              ><span
+                                style="background-color: rgb(255, 255, 255)"
+                                ><span
+                                  ><span style="text-decoration-style: initial"
+                                    ><span
+                                      style="text-decoration-color: initial"
+                                      ><strong
+                                        ><span style="font-size: 14px"
+                                          ><span style="color: rgb(0, 0, 0)"
+                                            >Recordá que tu orden no será
+                                            reservada&nbsp;hasta acreditado el
+                                            pago. De no acreditarse dentro de
+                                            las 24hs, la misma será
+                                            cancelada.</span
+                                          ></span
+                                        ></strong
+                                      ></span
+                                    ></span
+                                  ></span
+                                ></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ><u></u> </span></span></span></span></span></span></span></span
+    ></span>
+  </p>
+  <p style="text-align: start; text-indent: 0px">
+    <span style="font-size: small"
+      ><span style="color: rgb(34, 34, 34)"
+        ><span style="font-family: Arial, Helvetica, sans-serif"
+          ><span style="font-style: normal"
+            ><span style="font-variant-ligatures: normal"
+              ><span style="font-variant-caps: normal"
+                ><span style="font-weight: 400"
+                  ><span style="letter-spacing: normal"
+                    ><span
+                      ><span style="text-transform: none"
+                        ><span style="white-space: normal"
+                          ><span
+                            ><span style="word-spacing: 0px"
+                              ><span
+                                style="background-color: rgb(255, 255, 255)"
+                                ><span
+                                  ><span style="text-decoration-style: initial"
+                                    ><span
+                                      style="text-decoration-color: initial"
+                                      ><span style="font-size: 14px"
+                                        ><span
+                                          style="
+                                            font-family: Arial, Helvetica,
+                                              sans-serif;
+                                          "
+                                          ><span style="line-height: normal"
+                                            >Una vez procesado
+                                            tu&nbsp;pedido&nbsp;nos
+                                            comunicaremos por cualquier novedad
+                                            y envío si fuera
+                                            necesario&nbsp;(para más
+                                            información&nbsp;</span
+                                          >
+
+  <p style="text-align: start; text-indent: 0px">
+    <span style="font-size: small"
+      ><span style="color: rgb(34, 34, 34)"
+        ><span style="font-family: Arial, Helvetica, sans-serif"
+          ><span style="font-style: normal"
+            ><span style="font-variant-ligatures: normal"
+              ><span style="font-variant-caps: normal"
+                ><span style="font-weight: 400"
+                  ><span style="letter-spacing: normal"
+                    ><span
+                      ><span style="text-transform: none"
+                        ><span style="white-space: normal"
+                          ><span
+                            ><span style="word-spacing: 0px"
+                              ><span
+                                style="background-color: rgb(255, 255, 255)"
+                                ><span
+                                  ><span style="text-decoration-style: initial"
+                                    ><span
+                                      style="text-decoration-color: initial"
+                                      ><strong
+                                        ><span style="font-size: 16px"
+                                          ><span style="color: rgb(0, 0, 0)"
+                                            >¡Muchas gracias por confiar en
+                                            nosotros!</span
+                                          ></span
+                                        ></strong
+                                      ></span
+                                    ></span
+                                  ></span
+                                ></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            ></span
+          ></span
+        ></span
+      ></span
+    >
+  </p>
+  <p style="text-align: start; text-indent: 0px">
+    <br aria-hidden="true" /><span style="font-size: small"
+      ><span style="color: rgb(34, 34, 34)"
+        ><span style="font-family: Arial, Helvetica, sans-serif"
+          ><span style="font-style: normal"
+            ><span style="font-variant-ligatures: normal"
+              ><span style="font-variant-caps: normal"
+                ><span style="font-weight: 400"
+                  ><span style="letter-spacing: normal"
+                    ><span
+                      ><span style="text-transform: none"
+                        ><span style="white-space: normal"
+                          ><span
+                            ><span style="word-spacing: 0px"
+                              ><span
+                                style="background-color: rgb(255, 255, 255)"
+                                ><span
+                                  ><span style="text-decoration-style: initial"
+                                    ><span
+                                      style="text-decoration-color: initial"
+                                      ><b
+                                        style="
+                                          font-family: tahoma, sans-serif;
+                                          font-size: small;
+                                          line-height: normal;
+                                          color: rgb(255, 0, 0);
+                                        "
+                                        ><font color="#000000"
+                                          ><span
+                                            data-markjs="true"
+                                            class="markwmipbi50a"
+                                            data-ogac=""
+                                            data-ogab=""
+                                            data-ogsc=""
+                                            data-ogsb=""
+                                            style="
+                                              background-color: rgb(
+                                                255,
+                                                241,
+                                                0
+                                              );
+                                              color: black;
+                                            "
+                                            >Naka</span
+                                          >
+                                          Outdoors</font
+                                        ></b
+                                      ><br aria-hidden="true" />Ramallo 2307 -
+                                      Núñez - Cap. Fed. Bs As -&nbsp;(011)
+                                      3965-7794<br aria-hidden="true" />Lu-Vi de
+                                      11 a 19hs / Sá de 10:30 a 17hs<br
+                                        aria-hidden="true"
+                                      />Web:&nbsp;<a
+                                        href="http://www.nakaoutdoors.com.ar/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        data-auth="NotApplicable"
+                                        style="color: rgb(17, 85, 204)"
+                                        data-linkindex="10"
+                                        >www.<span
+                                          data-markjs="true"
+                                          class="markwmipbi50a"
+                                          data-ogac=""
+                                          data-ogab=""
+                                          data-ogsc=""
+                                          data-ogsb=""
+                                          style="
+                                            background-color: rgb(255, 241, 0);
+                                            color: black;
+                                          "
+                                          >naka</span
+                                        >outdoors.com.ar</a
+                                      >&nbsp;<br
+                                        aria-hidden="true"
+                                      />Mail:&nbsp;<a
+                                        href="mailto:ventas@nakaoutdoors.com.ar"
+                                        style="color: rgb(17, 85, 204)"
+                                        data-linkindex="11"
+                                        >ventas@<span
+                                          data-markjs="true"
+                                          class="markwmipbi50a"
+                                          data-ogac=""
+                                          data-ogab=""
+                                          data-ogsc=""
+                                          data-ogsb=""
+                                          style="
+                                            background-color: rgb(255, 241, 0);
+                                            color: black;
+                                          "
+                                          >naka</span
+                                        >outdoors.com.ar</a
+                                      ><br
+                                        aria-hidden="true"
+                                      />Facebook:&nbsp;<a
+                                        href="https://www.facebook.com/nakaoutdoors"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        data-auth="NotApplicable"
+                                        style="color: rgb(17, 85, 204)"
+                                        data-linkindex="12"
+                                        >www.facebook.com/<span
+                                          data-markjs="true"
+                                          class="markwmipbi50a"
+                                          data-ogac=""
+                                          data-ogab=""
+                                          data-ogsc=""
+                                          data-ogsb=""
+                                          style="
+                                            background-color: rgb(255, 241, 0);
+                                            color: black;
+                                          "
+                                          >naka</span
+                                        >outdoorss</a
+                                      ><br
+                                        aria-hidden="true"
+                                      />Instagram:&nbsp;<a
+                                        href="https://www.instagram.com/nakaoutdoors/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        data-auth="NotApplicable"
+                                        style="color: rgb(17, 85, 204)"
+                                        data-linkindex="13"
+                                        >www.instagram.com/<span
+                                          data-markjs="true"
+                                          class="markwmipbi50a"
+                                          data-ogac=""
+                                          data-ogab=""
+                                          data-ogsc=""
+                                          data-ogsb=""
+                                          style="
+                                            background-color: rgb(255, 241, 0);
+                                            color: black;
+                                          "
+                                          >naka</span
+                                        >outdoors</a
+                                      ><br
+                                        aria-hidden="true"
+                                      />--------------------------------------------------------------------------------------<br
+                                        aria-hidden="true"
+                                      />Recibí primero nuestras ofertas y
+                                      novedades. Suscribite al
+                                      Newsletter.&nbsp;<a
+                                        href="http://www.nakaoutdoors.com.ar/newsletters.html"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        data-auth="NotApplicable"
+                                        style="color: rgb(17, 85, 204)"
+                                        data-linkindex="14"
+                                        >Suscribirse</a
+                                      ></span
+                                    ></span
+                                  ></span
+                                ></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            ></span
+          ></span
+        ></span
+      ></span
+    >
+  </p>
+</div>

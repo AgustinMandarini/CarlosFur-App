@@ -12,7 +12,8 @@ const nodeMailerConfig = async (
   e_mail,
   user_name,
   emailType = "welcome",
-  resetPassURL
+  resetPassURL,
+  orderWithCart
 ) => {
   // Configuracion de mail para enviar al usuario recien creado
   const transporter = nodemailer.createTransport({
@@ -56,8 +57,17 @@ const nodeMailerConfig = async (
     );
     const source = fs.readFileSync(rutaAlEmailTemplate, "utf-8").toString();
     const template = handlebars.compile(source);
+    const replacements = {
+      orderId: orderWithCart.mercadoPagoId,
+      saleDate: orderWithCart.saleDate,
+      payment_type: orderWithCart,
+      e_mail: e_mail,
+      user_name: user_name,
+      products: orderWithCart.cartInfo.products,
+      total_amount: orderWithCart.cartInfo.total_amount,
+    };
 
-    htmlToSend = template();
+    htmlToSend = template(replacements);
   }
   if (emailType === "newPassword") {
     // Construye la ruta absoluta al archivo welcomeEmail.html

@@ -86,17 +86,16 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
   useEffect(() => {
     const fetchData = async () => {
       const urlParams = new URLSearchParams(window.location.search);
-      console.log("urlPArams: " + urlParams);
       const collectionStatus = urlParams.get("collection_status");
       const status = urlParams.get("status");
       const collection_id = urlParams.get("collection_id");
       const payment_type = urlParams.get("payment_type");
       /* AGUS, EN ALGUNA PARTE DE ESTE useEffect HAY QUE MANDAR LA ORDER CON createOrderHandler.
       ACORDATE DE MODIFICAR EL CONTROLLER PARA PODER INCLUIR EL MAIL. */
-      console.log("COLLECTION STATUS: " + collectionStatus);
-      console.log("status: " + status);
+      console.log("ORDER: " + order);
       if (collectionStatus === "approved" || status === "approved") {
         try {
+          console.log("si order es true, entra aca");
           const orderData = {
             collection_id: collection_id,
             cartId: localStorage.getItem("cartId"),
@@ -126,7 +125,7 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
     };
 
     fetchData();
-  }, [order]);
+  }, [preferenceId]);
 
   return (
     handleShow && (

@@ -51,24 +51,24 @@ const Profile = () => {
             <Row>
               <Col md="12">
                 <CardSubtitle tag="h6" className="mb-2 text-muted">
-                  <strong>Nombre:</strong> {user.first_name}
+                  <strong>Nombre:</strong> {user.user_name}
                 </CardSubtitle>
               </Col>
-              <Col md="12">
+              {/* <Col md="12">
                 <CardSubtitle tag="h6" className="mb-2 text-muted">
                   <strong>Apellido:</strong> {user.last_name || "N/A"}
                 </CardSubtitle>
-              </Col>
+              </Col> */}
               <Col md="12">
                 <CardSubtitle tag="h6" className="mb-2 text-muted">
                   <strong>Email:</strong> {user.e_mail || "N/A"}
                 </CardSubtitle>
               </Col>
-              <Col md="12">
+              {/* <Col md="12">
                 <CardSubtitle tag="h6" className="mb-2 text-muted">
                   <strong>Teléfono:</strong> {user.phone || "N/A"}
                 </CardSubtitle>
-              </Col>
+              </Col> */}
               {user.is_admin && (
                 <Col md="12">
                   <button

@@ -47,7 +47,7 @@ const Home = () => {
   //Combinación de ordenamientos y filtros
   useEffect(
     () => {
-      // if (nameState !== true) {
+      // if (!nameState) {
         filters.productType =
           filters.productType === "allOptions" ? "" : filters.productType;
         filters.material =

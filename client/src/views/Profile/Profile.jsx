@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import styles from "./Profile.module.css";
-import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+} from "reactstrap";
 import { useAuth0 } from "@auth0/auth0-react"; // Importa useAuth0
 
 const Profile = () => {
@@ -30,16 +38,33 @@ const Profile = () => {
   }
 
   const userImage = isAuthenticated ? auth0User.picture : null;
-  const defaultAvatar = "https://cdn.icon-icons.com/icons2/1508/PNG/512/systemusers_104569.png";
+  const defaultAvatar =
+    "https://cdn.icon-icons.com/icons2/1508/PNG/512/systemusers_104569.png";
 
+  // let userName = "Usuario"; // Nombre por defecto
+
+  let userName = "";
+
+  if (isAuthenticated && auth0User) {
+    // Si el usuario se autentica con Google y la información está disponible
+    userName = auth0User.given_name;
+  } else if (user) {
+    // Si el usuario se autentica localmente
+    userName = user.first_name + (user.last_name ? ` ${user.last_name}` : "");
+  }
+  
   return (
     <Container className={`${styles.profileContainer} ${styles.Background}`}>
       <Row>
         <Col md="8">
           <Card className={styles.profileCard}>
-            <img src={userImage || defaultAvatar} alt="User Avatar" className={styles.profileImage} />
+            <img
+              src={userImage || defaultAvatar}
+              alt="User Avatar"
+              className={styles.profileImage}
+            />
             <CardTitle tag="h5" className={styles.profileName}>
-              {user.first_name ? `${user.first_name} ${user.last_name}` : user.user_name}
+              {userName}
             </CardTitle>
           </Card>
         </Col>
@@ -51,29 +76,21 @@ const Profile = () => {
             <Row>
               <Col md="12">
                 <CardSubtitle tag="h6" className="mb-2 text-muted">
-                  <strong>Nombre:</strong> {user.user_name}
+                  <strong>Nombre:</strong> {userName}
                 </CardSubtitle>
               </Col>
-              {/* <Col md="12">
-                <CardSubtitle tag="h6" className="mb-2 text-muted">
-                  <strong>Apellido:</strong> {user.last_name || "N/A"}
-                </CardSubtitle>
-              </Col> */}
               <Col md="12">
                 <CardSubtitle tag="h6" className="mb-2 text-muted">
                   <strong>Email:</strong> {user.e_mail || "N/A"}
                 </CardSubtitle>
               </Col>
-              {/* <Col md="12">
-                <CardSubtitle tag="h6" className="mb-2 text-muted">
-                  <strong>Teléfono:</strong> {user.phone || "N/A"}
-                </CardSubtitle>
-              </Col> */}
               {user.is_admin && (
                 <Col md="12">
                   <button
                     className={styles.botonAdmin}
-                    onClick={() => (window.location.href = "http://localhost:3000/admin")}
+                    onClick={() =>
+                      (window.location.href = "http://localhost:3000/admin")
+                    }
                   >
                     Ir al Panel de Administración
                   </button>

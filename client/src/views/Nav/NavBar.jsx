@@ -16,11 +16,10 @@ const NavBar = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const cartProducts = useSelector((state) => state.cartProducts);
+  const cartProducts = useSelector((state) => state.cartProducts) || [];
+
   const [navResponsive, setNavResponsive] = useState(false);
   const dispatch = useDispatch();
-
-  useEffect(() => {}, [cartProducts]);
 
   const cartItemCount = cartProducts.reduce((count, product) => {
     return count + product.count;

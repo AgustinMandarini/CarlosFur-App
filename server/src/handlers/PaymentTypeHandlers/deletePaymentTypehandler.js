@@ -1,14 +1,18 @@
-const { deletePaymentType } = require("../../controllers/PaymentTypeController/deletePaymentTypeController");
+const {
+  deletePaymentType,
+} = require("../../controllers/PaymentTypeController/deletePaymentTypeController");
 
 const deletePaymentTypeHandler = async (req, res) => {
   try {
-    const { id } = req.params; 
+    const { paymentTypeId } = req.params;
+    const paymentType = await deletePaymentType(paymentTypeId);
 
-    const result = await deletePaymentType(id);
-
-    return res.status(200).json(result);
+    if (paymentType) {
+      res.status(200).json(paymentType);
+    } else {
+      res.status(404).json({ error: "PaymentType not found" });
+    }
   } catch (error) {
-    console.error("Error handling delete paymentType request:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };

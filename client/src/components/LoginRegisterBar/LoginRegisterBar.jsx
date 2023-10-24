@@ -15,7 +15,7 @@ function LoginBar() {
 
   const userIsAuthenticated = localStorage.getItem("token") !== null;
 
-  const cartProducts = useSelector((state) => state.cartProducts);
+  const cartProducts = useSelector((state) => state.cartProducts) || [];
 
   let cartArray = [];
 

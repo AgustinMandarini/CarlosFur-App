@@ -32,7 +32,7 @@ function App() {
   const { pathname } = location;
   const dispatch = useDispatch();
   const { isLoading, isAuthenticated } = useAuth0();
-  const cartProducts = useSelector((state) => state.cartProducts);
+  const cartProducts = useSelector((state) => state.cartProducts) || [];
 
   const userIsAuthenticated = localStorage.getItem("token") !== null;
 
@@ -78,7 +78,6 @@ function App() {
       {/* //Dashboard Admin */}
       <Route path="/admin" component={Admin} />
       <Route path="/user/profile/:id" component={Profile} />
-      
     </div>
   );
 }

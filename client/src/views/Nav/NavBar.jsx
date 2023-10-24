@@ -16,7 +16,7 @@ const NavBar = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const cartProducts = useSelector((state) => state.cartProducts);
+  const cartProducts = useSelector((state) => state.cartProducts) || [];
   const [navResponsive, setNavResponsive] = useState(false);
   const dispatch = useDispatch();
 

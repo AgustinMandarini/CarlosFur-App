@@ -1,17 +1,20 @@
-const { deleteMaterial } = require("../../controllers/MaterialController/deleteMaterialController");
+const {
+  deleteMaterial,
+} = require("../../controllers/MaterialController/deleteMaterialController");
 
 const deleteMaterialHandler = async (req, res) => {
   try {
-    const { materialId } = req.params; 
+    const { materialId } = req.params;
+    const material = await deleteMaterial(materialId);
 
-    const result = await deleteMaterial(materialId);
-
-    return res.status(200).json(result);
+    if (material) {
+      res.status(200).json(material);
+    } else {
+      res.status(404).json({ error: "Material not found" });
+    }
   } catch (error) {
-    console.error("Error handling delete material request:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
 
 module.exports = { deleteMaterialHandler };
-

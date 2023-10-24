@@ -22,7 +22,7 @@ const Detail = () => {
   }, [dispatch, id]);
 
   const stateDetail = useSelector((state) => state.detail);
-  const cartProducts = useSelector((state) => state.cartProducts);
+  const cartProducts = useSelector((state) => state.cartProducts) || [];
   const colorState = useSelector((state) => state.colorState);
 
   const countForProductID = cartProducts.reduce((count, product) => {

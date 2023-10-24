@@ -18,7 +18,7 @@ const Home = () => {
   const checkUserExist = useCheckUserExists();
   const user = localStorage.getItem("user");
   const cartId = localStorage.getItem("cartId");
-  const cartProducts = useSelector((state) => state.cartProducts);
+  const cartProducts = useSelector((state) => state.cartProducts) || [];
 
   useEffect(() => {
     checkUserExist();

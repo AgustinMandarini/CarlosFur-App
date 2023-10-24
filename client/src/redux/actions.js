@@ -86,6 +86,16 @@ export const getOrdersAdmin = () => {
     });
   };
 };
+export const getCarts = () => {
+  return async function (dispatch) {
+    const apiData = await axios.get(`${apiUrl}/cart`);
+    const carts = apiData.data;
+    return dispatch({
+      type: GET_CARTS,
+      payload: carts,
+    });
+  };
+};
 
 export const postProduct = (payload) => {
   return async (dispatch) => {

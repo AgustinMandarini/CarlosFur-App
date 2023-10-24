@@ -23,22 +23,15 @@ const Ordenes = () => {
   }, []);
   
   // console.log("DELLLLFI", carts)
-  console.log("lasorderssss", selectedPaymentTypeId);
-  
     
   const filteredOrders = selectedPaymentTypeId
   ? orders.filter((order) => {
-    // Agrega este log para verificar las órdenes que se están filtrando
-    // console.log('Orden:', order.id, 'Forma de pago:', order.paymentTypeId);
+    
     return order.paymentTypeId === selectedPaymentTypeId;
   })
   : orders;
-
-  console.log("hoolis", orders.paymentTypeId)
-
-// Agrega este log para verificar las órdenes que pasaron el filtro
-// console.log('Órdenes filtradas:', filteredOrders);
-
+  
+  
   return (
     
     <div>
@@ -82,6 +75,7 @@ const Ordenes = () => {
         <tbody>
         {Array.isArray(orders) && Array.isArray(carts) &&
             filteredOrders.map((order) => {
+              // console.log("hoolis", filteredOrders)
               const cart = carts.find((cart) => cart.id === order.cartId);
 
               return (

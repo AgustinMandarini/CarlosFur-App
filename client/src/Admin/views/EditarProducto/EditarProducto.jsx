@@ -45,7 +45,8 @@ const EditarProducto = () => {
     dispatch(getColorById(stateDetail.colorId));
     dispatch(getMaterialById(stateDetail.materialId));
     dispatch(getProductTypeById(stateDetail.productTypeId));
-  }, [getDetail, stateDetail]);
+  },[getDetail, stateDetail]);
+  
 
   useEffect(() => {
     setForm({
@@ -126,14 +127,14 @@ const EditarProducto = () => {
         <div onClick={toggleEdit}>
           <img src={edit} alt="" className={style.edit} />
         </div>
-        {/*NOMBRE*/}
+        {/NOMBRE/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
               Nombre:
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {form && form.name ? form.name : stateDetail.name}
+              {stateDetail && stateDetail.name}
             </Form.Label>
             {showFilters && (
               <div className={style.divinputError}>
@@ -154,13 +155,13 @@ const EditarProducto = () => {
           </Form.Group>
         </div>
         <div className={style.editContainer}>
-          {/*PRECIO*/}
+          {/PRECIO/}
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
               Precio:{" "}
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {form && form.price ? form.price : stateDetail.price}
+              {stateDetail && stateDetail.price}
             </Form.Label>
 
             {showFilters && (
@@ -181,14 +182,14 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*ALTURA*/}
+        {/ALTURA/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
               Altura:{" "}
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {form && form.height ? form.height : stateDetail.height}
+              {stateDetail && stateDetail.height}
             </Form.Label>
 
             {showFilters && (
@@ -209,14 +210,14 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*PROFUNDIDAD*/}
+        {/PROFUNDIDAD/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
               Profundidad
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {form && form.depth ? form.depth : stateDetail.depth}
+              {stateDetail && stateDetail.depth}
             </Form.Label>
 
             {showFilters && (
@@ -237,14 +238,14 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*ANCHO*/}
+        {/ANCHO/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
               Ancho:
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {form && form.width ? form.width : stateDetail.width}
+              {stateDetail && stateDetail.width}
             </Form.Label>
 
             {showFilters && (
@@ -265,14 +266,14 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*PESO*/}
+        {/PESO/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
               Peso:
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {form && form.weight ? form.weight : stateDetail.weight}
+              {stateDetail && stateDetail.weight ? stateDetail.weight : stateDetail.weight}
             </Form.Label>
 
             {showFilters && (
@@ -293,14 +294,14 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*STOCK*/}
+        {/STOCK/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
               Stock:
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {form && form.stock ? form.stock : stateDetail.stock}
+              {stateDetail && stateDetail.stock}
             </Form.Label>
 
             {showFilters && (
@@ -321,7 +322,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*COLOR*/}
+        {/COLOR/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -361,7 +362,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*MATERIAL*/}
+        {/MATERIAL/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -401,7 +402,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*TIPO DE PRODUCTo*/}
+        {/TIPO DE PRODUCTo/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -445,7 +446,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*DESCRIPCION*/}
+        {/DESCRIPCION/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -472,7 +473,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*IMAGEN*/}
+        {/IMAGEN/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label

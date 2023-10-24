@@ -98,10 +98,12 @@ const Home = () => {
   useEffect(() => {
     const userParse = cartId != null && JSON.parse(user);
     const cartIdParse = cartId != null ? JSON.parse(cartId) : undefined;
-    const newProducts = cartProducts.map((item) => ({
-      id: item.id,
-      quantity: item.count,
-    }));
+    const newProducts = cartProducts
+      .filter((item) => item && item.id !== undefined)
+      .map((item) => ({
+        id: item.id,
+        quantity: item.count,
+      }));
 
     const data = {
       userId: userParse.userId,

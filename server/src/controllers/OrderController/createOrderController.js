@@ -4,10 +4,8 @@ const getCartById = require("../../controllers/CartController/getCartByIdControl
 const { nodeMailerConfig } = require("../Utils/nodeMailerConfig");
 
 const createOrder = async (req, res) => {
-  console.log("ENTRA A LA RUTA CREATEORDER??");
   try {
     const { collection_id, cartId, payment_type, e_mail } = req.body;
-    console.log("HAY COLL Y CART? : " + collection_id, cartId, payment_type);
 
     if (!collection_id) {
       return res
@@ -55,14 +53,10 @@ const createOrder = async (req, res) => {
       cartInfo: cartData,
     };
 
-    console.log("ORDERWITHCART: " + JSON.stringify(orderWithCart));
-    console.log("DATE: " + orderWithCart.saleDate);
-    console.log("ORDERWITHCART: " + orderWithCart);
-    console.log("USER: " + orderWithCart.cartInfo.user_name);
     orderWithCart.cartInfo.products.forEach((prod) => {
       console.log("\t-" + prod);
     });
-    console.log("TOTAL: " + orderWithCart.cartInfo.total_amount);
+
     await nodeMailerConfig(
       e_mail,
       (user_name = orderWithCart.cartInfo.user_name),

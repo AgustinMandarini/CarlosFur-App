@@ -13,7 +13,7 @@ const putProductHandler = async (req, res) => {
     }
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ message: "Error al deshabilitar el producto" });
+    res.status(500).json({ message: "Error al editar el producto" });
   }
 };
 

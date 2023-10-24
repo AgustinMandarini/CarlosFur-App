@@ -1,18 +1,10 @@
 const { PaymentType } = require("../../db");
 
-const deletePaymentType = async (id) => {
-  try {
-    const paymentType = await PaymentType.findByPk(id);
-
-    if (!paymentType) {
-      throw new Error("PaymentType not found");
-    }
-
+const deletePaymentType = async (paymentTypeId) => {
+  const paymentType = await PaymentType.findByPk(paymentTypeId);
+  if (paymentType) {
     await paymentType.destroy();
-
     return { message: "PaymentType deleted successfully" };
-  } catch (error) {
-    throw error;
   }
 };
 

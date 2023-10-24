@@ -1,8 +1,16 @@
 const { Router } = require("express");
-const { getMaterialHandler } = require("../handlers/MaterialHandlers/getMaterialHandler");
-const { createMaterialHandler } = require("../handlers/MaterialHandlers/createMaterialHandler");
-const { deleteMaterialHandler } = require("../handlers/MaterialHandlers/deleteMaterialHandler")
-const { getMaterialByIdHandler } = require("../handlers/MaterialHandlers/getMaterialByIdHandler")
+const {
+  getMaterialHandler,
+} = require("../handlers/MaterialHandlers/getMaterialHandler");
+const {
+  createMaterialHandler,
+} = require("../handlers/MaterialHandlers/createMaterialHandler");
+const {
+  deleteMaterialHandler,
+} = require("../handlers/MaterialHandlers/deleteMaterialHandler");
+const {
+  getMaterialByIdHandler,
+} = require("../handlers/MaterialHandlers/getMaterialByIdHandler");
 
 const materialRouter = Router();
 

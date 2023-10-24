@@ -1,13 +1,13 @@
 const {
-  findAllTypes,
+  getAllProductTypes,
 } = require("../../controllers/ProductTypeController/getProductTypeController.js");
 
 const getProductTypeHandler = async (req, res) => {
   try {
-    const allTypes = await findAllTypes();
-    res.status(200).send(allTypes);
+    const allProductTypes = await getAllProductTypes();
+    res.status(200).send(allProductTypes);
   } catch (error) {
-    res.status(400).json({ error: error.mesagge });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 

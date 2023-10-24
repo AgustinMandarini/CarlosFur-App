@@ -5,7 +5,6 @@ const createColor = async (name, description) => {
     name,
     description,
   });
-
   return newColor;
 };
 

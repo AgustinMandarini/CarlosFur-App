@@ -16,7 +16,7 @@ const CALLBACK_URL = process.env.REACT_APP_AUTH0_CALLBACK_URL;
 
 const ShoppingCart = ({ show, handleClose, handleShow }) => {
   const dispatch = useDispatch();
-  const cartProducts = useSelector((state) => state.cartProducts);
+  const cartProducts = useSelector((state) => state.cartProducts) || [];
   const storage = useSelector((state) => state.localStorage);
   const loggedUser = useSelector((state) => state.loggedUser);
   const cart = useSelector((state) => state.cart);

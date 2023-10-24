@@ -1,8 +1,16 @@
 const { Router } = require("express");
-const { getColorHandler } = require("../handlers/ColorHandlers/getColorHandler");
-const { createColorHandler } = require("../handlers/ColorHandlers/createColorHandler");
-const { deleteColorHandler } = require("../handlers/ColorHandlers/deleteColorHandler");
-const { getColorByIdHandler } = require("../handlers/ColorHandlers/getColorByIdHandler");
+const {
+  getColorHandler,
+} = require("../handlers/ColorHandlers/getColorHandler");
+const {
+  createColorHandler,
+} = require("../handlers/ColorHandlers/createColorHandler");
+const {
+  deleteColorHandler,
+} = require("../handlers/ColorHandlers/deleteColorHandler");
+const {
+  getColorByIdHandler,
+} = require("../handlers/ColorHandlers/getColorByIdHandler");
 
 const colorRouter = Router();
 

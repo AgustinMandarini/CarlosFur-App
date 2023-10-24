@@ -1,14 +1,18 @@
-const { deleteProductType } = require("../../controllers/ProductTypeController/deleteProductTypeController");
+const {
+  deleteProductType,
+} = require("../../controllers/ProductTypeController/deleteProductTypeController");
 
 const deleteProductTypeHandler = async (req, res) => {
   try {
-    const { id } = req.params; 
+    const { productTypeId } = req.params;
+    const productType = await deleteProductType(productTypeId);
 
-    const result = await deleteProductType(id);
-
-    return res.status(200).json(result);
+    if (productType) {
+      res.status(200).json(productType);
+    } else {
+      res.status(404).json({ error: "ProductType not found" });
+    }
   } catch (error) {
-    console.error("Error handling delete product type request:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };

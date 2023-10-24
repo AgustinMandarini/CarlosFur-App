@@ -18,7 +18,7 @@ const Home = () => {
   const checkUserExist = useCheckUserExists();
   const user = localStorage.getItem("user");
   const cartId = localStorage.getItem("cartId");
-  const cartProducts = useSelector((state) => state.cartProducts);
+  const cartProducts = useSelector((state) => state.cartProducts) || [];
 
   useEffect(() => {
     checkUserExist();
@@ -48,6 +48,12 @@ const Home = () => {
   //Combinación de ordenamientos y filtros
   useEffect(
     () => {
+      // if (!nameState) {
+        filters.productType =
+          filters.productType === "allOptions" ? "" : filters.productType;
+        filters.material =
+          filters.material === "allOptions" ? "" : filters.material;
+        filters.color = filters.color === "allOptions" ? "" : filters.color;
       // if (nameState !== true) {
       filters.productType =
         filters.productType === "allOptions" ? "" : filters.productType;

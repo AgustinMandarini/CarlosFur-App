@@ -5,7 +5,6 @@ const createMaterial = async (name, description) => {
     name,
     description,
   });
-
   return newMaterial;
 };
 

@@ -20,7 +20,9 @@ const SearchBar = () => {
   useEffect(() => {
     const performSearch = async () => {
       dispatch(getProductByName(products));
-      dispatch(setName(true));
+      if (products !== "") {
+        dispatch(setName(true));
+      }
     };
 
     const timer = setTimeout(performSearch, 500);

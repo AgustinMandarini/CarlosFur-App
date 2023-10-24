@@ -11,33 +11,47 @@ import PaymentType from "./PaymentType";
 const Ordenes = () => {
   const orders = useSelector((state) => state.ordersAdmin);
   const carts = useSelector((state) => state.cartsAdmin);
-  const [selectedPaymentTypeId, setSelectedPaymentTypeId] = useState(); 
+  const [selectedPaymentTypeId, setSelectedPaymentTypeId] = useState(""); 
   const dispatch = useDispatch();
 
+  
   useEffect(() => {
     dispatch(getOrdersAdmin());
   }, []);
   useEffect(() => {
     dispatch(getCarts());
   }, []);
-
+  
   // console.log("DELLLLFI", carts)
-  // const filteredOrders = selectedPaymentTypeId.name
-  //   ? orders.filter((order) => order.paymentTypeId && order.paymentTypeId.name === selectedPaymentTypeId)
-  //   : orders;
+  console.log("lasorderssss", selectedPaymentTypeId);
+  
+    
+  const filteredOrders = selectedPaymentTypeId
+  ? orders.filter((order) => {
+    // Agrega este log para verificar las órdenes que se están filtrando
+    // console.log('Orden:', order.id, 'Forma de pago:', order.paymentTypeId);
+    return order.paymentTypeId === selectedPaymentTypeId;
+  })
+  : orders;
+
+  console.log("hoolis", orders.paymentTypeId)
+
+// Agrega este log para verificar las órdenes que pasaron el filtro
+// console.log('Órdenes filtradas:', filteredOrders);
 
   return (
     
     <div>
           <span>
           <select
-          value={selectedPaymentTypeId}
-          onChange={(e) => setSelectedPaymentTypeId(e.target.value)}
-         >
-         <option>Formas de pago:</option>
-         <option value="Efectivo">Efectivo</option>
-         <option value="Tarjeta de debito">Tarjeta de débito</option>
-         </select>
+  value={selectedPaymentTypeId}
+  onChange={(e) => setSelectedPaymentTypeId(e.target.value)}
+>
+  <option value="">Formas de pago:</option>
+  <option value="Efectivo">Efectivo</option>
+  <option value="Tarjeta de débito">Tarjeta de débito</option>
+</select>
+
           </span>
           
           <span>
@@ -67,7 +81,7 @@ const Ordenes = () => {
         </thead>
         <tbody>
         {Array.isArray(orders) && Array.isArray(carts) &&
-            orders.map((order) => {
+            filteredOrders.map((order) => {
               const cart = carts.find((cart) => cart.id === order.cartId);
 
               return (

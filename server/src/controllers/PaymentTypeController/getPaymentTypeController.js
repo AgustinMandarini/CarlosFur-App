@@ -1,13 +1,13 @@
 const { PaymentType } = require("../../db.js");
 
-const findAllTypes = async () => {
-  const allTypesArray = await PaymentType.findAll({
+const getAllPaymentTypes = async () => {
+  const allPaymentTypesResult = await PaymentType.findAll({
     model: PaymentType,
-    attributes: [ "id","name"],
+    attributes: ["id", "name"],
   });
-  return allTypesArray;
+  return allPaymentTypesResult;
 };
 
 module.exports = {
-  findAllTypes,
+  getAllPaymentTypes,
 };

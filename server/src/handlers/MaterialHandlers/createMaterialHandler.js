@@ -1,4 +1,6 @@
-const { createMaterial } = require("../../controllers/MaterialController/createMaterialController");
+const {
+  createMaterial,
+} = require("../../controllers/MaterialController/createMaterialController");
 
 const createMaterialHandler = async (req, res) => {
   try {
@@ -6,7 +8,8 @@ const createMaterialHandler = async (req, res) => {
     const newMaterial = await createMaterial(name, description);
     res.status(201).json(newMaterial);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
+
 module.exports = { createMaterialHandler };

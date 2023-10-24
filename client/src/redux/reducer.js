@@ -41,6 +41,7 @@ import {
   DELETE_CART_PRODUCT_DIRECT,
   EMPTY_CART,
   GET_COLOR_BYID,
+  GET_CARTS
 } from "./types";
 
 const initialState = {
@@ -70,7 +71,8 @@ const initialState = {
   colorById: [],
   materialId: [],
   tipoDeProductoById: [],
-  cartDetail: []
+  cartDetail: [],
+  carts: []
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -103,6 +105,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         ordersAdmin: action.payload,
       };
+      
+    case GET_CARTS:
+      return {
+        ...state,
+        cartsAdmin: action.payload,
+      };
+
 
     case GET_DETAIL:
       return {

@@ -1,17 +1,17 @@
-const { Cart, Product, User } = require('../../db');
+const { Cart, Product, User } = require("../../db");
 
 const updateCart = async (cartId, products, userId) => {
   try {
     const cart = await Cart.findByPk(cartId);
 
     if (!cart) {
-      return { status: 404, data: { error: 'Cart not found' } };
+      return { status: 404, data: { error: "Cart not found" } };
     }
 
     if (userId) {
       const user = await User.findByPk(userId);
       if (!user) {
-        return { status: 400, data: { error: 'User not found' } };
+        return { status: 400, data: { error: "User not found" } };
       }
 
       cart.userId = userId;
@@ -27,7 +27,9 @@ const updateCart = async (cartId, products, userId) => {
 
     // Update cart's products and recalculate total amount
     for (const product of products) {
-      const databaseProduct = databaseProducts.find((dbProduct) => dbProduct.id === product.id);
+      const databaseProduct = databaseProducts.find(
+        (dbProduct) => dbProduct.id === product.id
+      );
       if (!databaseProduct) {
         continue;
       }
@@ -39,27 +41,29 @@ const updateCart = async (cartId, products, userId) => {
     }
 
     cart.total_amount = totalAmount;
-    
+
     const cartProducts = await cart.getProducts();
     for (const cartProduct of cartProducts) {
-      if (!productIds.includes(cartProduct.id)) {
-        await cart.removeProduct(cartProduct);
+      if (cartProduct && cartProduct.id !== undefined) {
+        if (!productIds.includes(cartProduct.id)) {
+          await cart.removeProduct(cartProduct);
+        }
       }
     }
 
     // Retrieve the updated cart from the database
-    
+
     const updatedCart = await Cart.findByPk(cart.cartId, {
-      include: [{ model: Product, as: 'products', attributes: ['id'] }],
+      include: [{ model: Product, as: "products", attributes: ["id"] }],
     });
     console.log(cartId);
     console.log(updatedCart);
     await cart.save();
     return { status: 200, data: updatedCart };
   } catch (error) {
-    console.error('Error in updateCart:', error);
-    return { status: 500, data: { error: 'Internal server error' } };
+    console.error("Error in updateCart:", error);
+    return { status: 500, data: { error: "Internal server error" } };
   }
-}
+};
 
 module.exports = { updateCart };

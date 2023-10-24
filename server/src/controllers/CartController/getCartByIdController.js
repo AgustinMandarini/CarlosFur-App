@@ -14,16 +14,17 @@ const getCartById = async (cartId) => {
       ],
     });
 
+    
     if (!cart) {
       return null;
     }
-
+    
     const user = await User.findByPk(cart.userId);
-
+    
     if (!user) {
-      return null;
+      return cart;
     }
-
+    
     // Formatear la respuesta
     const formattedCart = {
       id: cart.id,
@@ -36,7 +37,7 @@ const getCartById = async (cartId) => {
         productId: product.cart_products.productId,
       })),
     };
-
+    
     return formattedCart;
   } catch (error) {
     console.error('Error in getCartById:', error);

@@ -14,6 +14,7 @@ const getOrderById = async (orderId) => {
       id: order.id,
       mercadoPagoId: order.mercadoPagoId,
       saleDate: order.saleDate,
+      paymentTypeId: order.paymentTypeId
     };
 
     return formattedOrder;

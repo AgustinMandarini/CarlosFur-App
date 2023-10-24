@@ -19,7 +19,7 @@ const LoginForm = () => {
 
   const mostrarNotificacionBienvenida = () => {
     toast.success("Iniciando Sesión", {
-      position: toast.POSITION.BOTTOM_RIGHT,
+      position: toast.POSITION.TOP_CENTER,
     });
   };
 

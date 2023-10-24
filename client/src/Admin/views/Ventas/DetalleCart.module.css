@@ -1,0 +1,35 @@
+.formConteiner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 26rem;
+    border: 1px solid black;
+    padding: 3rem;
+    background-color: white;
+    box-shadow: 8px 0px 10px rgba(148, 133, 122, 0.8);
+  }
+
+  .link {
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .button {
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 4px;
+    width: 70px;
+    border-radius: 0px;
+  }
+
+  .cntnForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    flex-direction: column;
+  }

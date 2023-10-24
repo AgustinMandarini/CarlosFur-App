@@ -1,13 +1,13 @@
 const { ProductType } = require("../../db.js");
 
-const findAllTypes = async () => {
-  const allTypesArray = await ProductType.findAll({
+const getAllProductTypes = async () => {
+  const allProductTypesResult = await ProductType.findAll({
     model: ProductType,
-    attributes: [ "id","name"],
+    attributes: ["id", "name"],
   });
-  return allTypesArray;
+  return allProductTypesResult;
 };
 
 module.exports = {
-  findAllTypes,
+  getAllProductTypes,
 };

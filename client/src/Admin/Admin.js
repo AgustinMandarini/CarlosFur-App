@@ -1,6 +1,7 @@
 import { Route } from "react-router-dom";
 import Productos from "./views/Productos/Productos";
 import Ventas from "./views/Ventas/Ventas";
+import DetalleCart from "./views/Ventas/DetalleCart";
 import Usuarios from "./views/Usuarios/Usuarios";
 import NavBar from "./components/NavBar/NavBar";
 import EditarProducto from "./views/EditarProducto/EditarProducto"
@@ -33,6 +34,7 @@ function Admin() {
         <Route  path="/admin/crear/color" component={CrearColor} />
         <Route  path="/admin/crear/material" component={CrearMaterial} />
         <Route  path="/admin/crear/tipo-de-producto" component={CrearTipoProducto} />
+        <Route path="/admin/detalle/:cartId" component={DetalleCart} />
       </div>
     </div>
   );

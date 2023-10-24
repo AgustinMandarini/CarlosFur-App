@@ -3,7 +3,9 @@ import {
   DELETE_CART_PRODUCT,
   GET_COLOR,
   GET_COLOR_BYID,
+  GET_ORDERS_ADMIN,
   GET_DETAIL,
+  GET_CART_DETAIL,
   GET_MATERIAL,
   GET_MATERIAL_BYID,
   GET_PRODUCTS,
@@ -70,6 +72,16 @@ export const getProductsAdmin = () => {
     return dispatch({
       type: GET_PRODUCTS_ADMIN,
       payload: product,
+    });
+  };
+};
+export const getOrdersAdmin = () => {
+  return async function (dispatch) {
+    const apiData = await axios.get(`${apiUrl}/order`);
+    const order = apiData.data;
+    return dispatch({
+      type: GET_ORDERS_ADMIN,
+      payload: order,
     });
   };
 };
@@ -150,6 +162,20 @@ export const getDetail = (id) => {
       dispatch({
         type: GET_DETAIL,
         payload: detail,
+      });
+    } catch (error) {
+      console.error("Error en la acción getDetail:", error);
+    }
+  };
+};
+export const getCartDetail = (id) => {
+  return async function (dispatch) {
+    try {
+      const apiData = await axios.get(`${apiUrl}/admin/ventas/${id}`);
+      const cartDetail = apiData.data;
+      dispatch({
+        type: GET_CART_DETAIL,
+        payload: cartDetail,
       });
     } catch (error) {
       console.error("Error en la acción getDetail:", error);
@@ -349,7 +375,7 @@ export const login = (payload) => {
           Authorization: `Bearer ${accessToken}`, // Asegúrate de tener el token aquí
         },
       });
-      const user = response.data;//trae la info del usuario
+      const user = response.data; //trae la info del usuario
       if (response.status === 200) {
         setToken(accessToken);
         //LOCALSTORAGE
@@ -434,7 +460,7 @@ export const postCart = (cart) => {
       // Guardar la información en el LocalStorage
       console.log("ID que se crea y se almacena", payload.id);
       localStorage.setItem("cartId", payload.id);
-      localStorage.removeItem("cart");
+      // localStorage.removeItem("cart");
 
       return dispatch({
         type: POST_CART,

@@ -41,6 +41,7 @@ import {
   DELETE_CART_PRODUCT_DIRECT,
   EMPTY_CART,
   GET_PRODUCT_TYPE_BYID,
+  GET_CARTS
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -82,6 +83,16 @@ export const getOrdersAdmin = () => {
     return dispatch({
       type: GET_ORDERS_ADMIN,
       payload: order,
+    });
+  };
+};
+export const getCarts = () => {
+  return async function (dispatch) {
+    const apiData = await axios.get(`${apiUrl}/cart`);
+    const carts = apiData.data;
+    return dispatch({
+      type: GET_CARTS,
+      payload: carts,
     });
   };
 };

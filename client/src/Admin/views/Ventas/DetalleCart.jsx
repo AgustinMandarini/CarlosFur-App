@@ -46,9 +46,9 @@ const DetalleCart = () => {
             <h4>User Name: </h4>{cart.user_name} <br />
             <h4>User Id: </h4>{cart.user_id} <br />
          
-        <Button variant="secondary">{" "}
+        <Button variant="primary">{" "}
          <Link to="/admin/ventas" className={style.link}>
-            Volver
+         <strong>Volver</strong>
          </Link>
         </Button>{""}
     

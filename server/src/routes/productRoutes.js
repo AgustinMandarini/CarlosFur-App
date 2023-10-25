@@ -6,10 +6,13 @@ const { putProductHandler } = require("../handlers/ProductHandlers/putProductHan
 const { enableAndDisableProductHandler } = require("../handlers/ProductHandlers/enableAndDisableProductHandler");
 const { deleteProductHandler } = require("../handlers/ProductHandlers/deleteProductHandler");
 const { getProductAdminHandler } = require("../handlers/ProductHandlers/getProductAdminHandler")
-
+// const authenticate = require("../middleware/authenticate");
 const productRouter = Router();
 
+// Ruta protegida por el middleware de autenticación
+// productRouter.get("/admin", authenticate, getProductAdminHandler);
 productRouter.get("/admin", getProductAdminHandler);
+
 productRouter.get("", getProductHandler);
 productRouter.get("/:id", getProductByIdHandler);
 productRouter.post("", postProductHandler);

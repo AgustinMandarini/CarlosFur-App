@@ -42,7 +42,10 @@ import {
   EMPTY_CART,
   GET_COLOR_BYID,
   GET_CARTS,
+
   GET_REVIEW_BY_PRODUCT_ID,
+
+
 } from "./types";
 
 const initialState = {
@@ -74,7 +77,9 @@ const initialState = {
   tipoDeProductoById: [],
   cartDetail: [],
   carts: [],
+
   reviews: [],
+
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -194,9 +199,9 @@ const rootReducer = (state = initialState, action) => {
     case POST_CART_PRODUCT:
       const productId = action.payload;
       // Busca el producto en el carrito actual
-      const existingProductIndex = state.cartProducts.findIndex(
-        (product) => product.id === productId
-      );
+      const existingProductIndex = state.cartProducts
+        .filter((product) => product && product.id !== undefined)
+        .findIndex((product) => product.id === productId);
       if (existingProductIndex !== -1) {
         // Si el producto ya existe en el carrito, incrementa su count
         const updatedCartProducts = [...state.cartProducts];

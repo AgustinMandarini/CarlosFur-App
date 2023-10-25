@@ -7,7 +7,7 @@ import validation from "./validation";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-const CrearProducto = () => {
+const CrearColor = () => {
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({});

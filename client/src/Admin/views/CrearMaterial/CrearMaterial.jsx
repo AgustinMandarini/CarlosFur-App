@@ -7,7 +7,7 @@ import validation from "./validation";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-const CrearProducto = () => {
+const CrearMaterial = () => {
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({});
@@ -111,4 +111,4 @@ const CrearProducto = () => {
   );
 };
 
-export default CrearProducto;
+export default CrearMaterial;

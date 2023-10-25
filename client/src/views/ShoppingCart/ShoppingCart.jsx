@@ -86,7 +86,6 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
   useEffect(() => {
     const fetchData = async () => {
       const urlParams = new URLSearchParams(window.location.search);
-      console.log("urlPArams: " + urlParams);
       const collectionStatus = urlParams.get("collection_status");
       const status = urlParams.get("status");
       const collection_id = urlParams.get("collection_id");
@@ -106,6 +105,7 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
             `${REACT_APP_API_URL}/order`,
             orderData /*  acá va lo que hay que mandar */
           );
+
           if (response.status === 201) {
             toast.success("Compra realizada", {
               position: toast.POSITION.BOTTOM_RIGHT,

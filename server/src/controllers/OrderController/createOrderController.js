@@ -1,4 +1,5 @@
 const { Order } = require("../../db");
+const { Product } = require("../../db");
 const { PaymentType } = require("../../db");
 const getCartById = require("../../controllers/CartController/getCartByIdController");
 const { nodeMailerConfig } = require("../Utils/nodeMailerConfig");
@@ -137,13 +138,15 @@ const createOrder = async (req, res) => {
       (resetPassURL = null),
       orderWithCart
     );
+
+    // Libera el semaforo. Es decir libera la espera
+    semaphore.release();
+
     return res.status(201).json(orderWithCart);
   } catch (error) {
     console.error("Error creating order:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
-
-  semaphore.release();
 };
 
 module.exports = { createOrder };

@@ -71,6 +71,10 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
     if (userIsAuthenticated) {
       const id = await createPreference();
       if (id) {
+        toast.info("Generando link de compra.", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 3000,
+        });
         setOrder(true);
         setPreferenceId(id);
       }
@@ -109,7 +113,7 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
           );
           if (response.status === 201) {
             toast.success("Compra realizada", {
-              position: toast.POSITION.TOP_CENTER,
+              position: toast.POSITION.BOTTOM_RIGHT,
               autoClose: 3000,
             });
             dispatch(emptyCart());

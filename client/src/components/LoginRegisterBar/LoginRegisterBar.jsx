@@ -38,7 +38,7 @@ function LoginBar() {
 
   const handleLogout = () => {
     toast.info("Cerrando Sesión", {
-      position: toast.POSITION.TOP_CENTER,
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
     dispatch(logOut());
     localStorage.removeItem("cartId");

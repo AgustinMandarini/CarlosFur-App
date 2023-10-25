@@ -96,7 +96,7 @@ export const postProduct = (payload) => {
       if (response.status === 200) {
         dispatch({ type: POST_PRODUCT, payload: producto });
         toast.success("Producto Creado", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 3000,
         });
 
@@ -105,8 +105,8 @@ export const postProduct = (payload) => {
         }, 3000);
       }
     } catch (error) {
-      toast.error("No se pudo crear el producto", {
-        position: toast.POSITION.TOP_CENTER,
+      toast.error("No se pudo crear el producto",{
+        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
       });
     }

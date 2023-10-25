@@ -52,7 +52,7 @@ const ResetPassword = () => {
           }
         );
         toast.success("Contraseña actualizada exitosamente!", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 3000,
         });
         history.push("/home");
@@ -61,13 +61,13 @@ const ResetPassword = () => {
           toast.error(
             "El token ha vencido. Solicita un nuevo enlace de restablecimiento.",
             {
-              position: toast.POSITION.TOP_CENTER,
+              position: toast.POSITION.BOTTOM_RIGHT,
               autoClose: 3000,
             }
           );
         } else {
           toast.error(`${error}`, {
-            position: toast.POSITION.TOP_CENTER,
+            position: toast.POSITION.BOTTOM_RIGHT,
             autoClose: 3000,
           });
         }

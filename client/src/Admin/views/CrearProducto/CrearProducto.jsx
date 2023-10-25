@@ -65,7 +65,7 @@ const CrearProducto = () => {
       };
     } else {
       toast.error("No es un formato de imagen válido", {
-        position: toast.POSITION.TOP_CENTER,
+        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
       });
     }
@@ -264,7 +264,7 @@ const CrearProducto = () => {
               className={style.select}
             >
               <option>Seleccionar material</option>
-              {stateMaterial &&
+              {Array.isArray(stateMaterial) &&
                 stateMaterial.map((tipo, index) => {
                   return (
                     <option key={index} value={tipo.id} name={tipo.name}>

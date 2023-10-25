@@ -20,9 +20,10 @@ const getUserHandler = async (req, res) => {
 };
 
 const getUserByIdHandler = async (req, res) => {
+  console.log(res);
   try {
-    const { id } = req.params;
-    const user = await findUserById(id);
+    const { userId } = req.params;
+    const user = await findUserById(userId);
 
     res.status(200).send(user);
   } catch (error) {

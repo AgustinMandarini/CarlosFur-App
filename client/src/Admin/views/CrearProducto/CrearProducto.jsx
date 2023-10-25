@@ -264,7 +264,7 @@ const CrearProducto = () => {
               className={style.select}
             >
               <option>Seleccionar material</option>
-              {Array.isArray(stateMaterial) &&
+              {stateMaterial &&
                 stateMaterial.map((tipo, index) => {
                   return (
                     <option key={index} value={tipo.id} name={tipo.name}>

@@ -21,12 +21,10 @@ const Card = (props) => {
 
   const countForProductID = useSelector((state) =>
     state.cartProducts.reduce((count, product) => {
-      if (product && product.id !== undefined) {
-        if (product.id === props.id) {
-          return count + product.count;
-        }
-        return count;
+      if (product.id === props.id) {
+        return count + product.count;
       }
+      return count;
     }, 0)
   );
 
@@ -47,12 +45,10 @@ const Card = (props) => {
     if (user && cartId) {
       const userParse = JSON.parse(user);
       const cartIdParse = JSON.parse(cartId);
-      const newProducts = cartProducts
-        .filter((item) => item && item.id !== undefined)
-        .map((item) => ({
-          id: item.id,
-          quantity: item.count,
-        }));
+      const newProducts = cartProducts.map((item) => ({
+        id: item.id,
+        quantity: item.count,
+      }));
 
       const data = {
         userId: userParse.userId,

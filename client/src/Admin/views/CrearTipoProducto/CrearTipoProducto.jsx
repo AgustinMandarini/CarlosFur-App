@@ -37,7 +37,6 @@ const CrearTipoProducto = () => {
   };
 
   const handleAcept = () => {
-    window.location.href = "http://localhost:3000/admin/crear/producto"
     setModal(false);
   };
 

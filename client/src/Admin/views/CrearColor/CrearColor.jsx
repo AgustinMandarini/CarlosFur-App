@@ -7,7 +7,7 @@ import validation from "./validation";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-const CrearColor = () => {
+const CrearProducto = () => {
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({});
@@ -37,7 +37,6 @@ const CrearColor = () => {
   };
 
   const handleAcept = () => {
-    window.location.href = "http://localhost:3000/admin/crear/producto"
     setModal(false);
   };
 

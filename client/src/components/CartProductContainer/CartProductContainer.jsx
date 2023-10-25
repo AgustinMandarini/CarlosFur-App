@@ -17,9 +17,7 @@ const CartProductContainer = () => {
 
   const calculateTotalPrice = (cartProducts) => {
     return cartProducts.reduce((total, product) => {
-      if (product && product.id !== undefined) {
-        return total + product.price * product.count;
-      }
+      return total + product.price * product.count;
     }, 0);
   };
   const cartTotal = calculateTotalPrice(cartProducts);
@@ -29,12 +27,10 @@ const CartProductContainer = () => {
       if (user && cartId) {
         const userParse = JSON.parse(user);
         const cartIdParse = JSON.parse(cartId);
-        const newProducts = cartProducts
-          .filter((item) => item && item.id !== undefined)
-          .map((item) => ({
-            id: item.id,
-            quantity: item.count,
-          }));
+        const newProducts = cartProducts.map((item) => ({
+          id: item.id,
+          quantity: item.count,
+        }));
 
         const data = {
           userId: userParse.userId,

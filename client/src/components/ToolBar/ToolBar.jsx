@@ -18,16 +18,22 @@ const ToolBar = () => {
   const materialList = useSelector((state) => state.materialState);
   const coloresList = useSelector((state) => state.colorState);
   const nameState = useSelector((state) => state.nameState);
+  const [showFilters, setShowFilters] = useState(false);
+
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
 
   useEffect(() => {
     if (nameState === true) {
-      const defaultOptionValue = "allOptions";
+      const defaultOptionValue = "allOptions"; // Valor que debe coincidir con las opciones que quieres seleccionar
 
       const selects = document.querySelectorAll(`.${style.select}`);
       selects.forEach((select) => {
         select.value = defaultOptionValue;
       });
 
+      // Dispara manualmente los eventos "change" para que se refleje en el estado de Redux
       selects.forEach((select) => {
         const event = new Event("change", { bubbles: true });
         select.dispatchEvent(event);
@@ -75,6 +81,10 @@ const ToolBar = () => {
                 ))}
             </Form.Select>
           </div>
+
+          {/* <div className={style.filterIcon} onClick={toggleFilters}>
+            <span>Filtrados</span>
+          </div> */}
 
           <div className={style.divSelect}>
             <Form.Select

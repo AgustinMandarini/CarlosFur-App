@@ -8,6 +8,10 @@
   margin-top: 4rem;
   margin-bottom: 1em;
 }
+.active > .page-link,
+.page-link.active {
+  background-color: white !important;
+}
 
 @media screen and (max-width: 768px) {
   .container button {

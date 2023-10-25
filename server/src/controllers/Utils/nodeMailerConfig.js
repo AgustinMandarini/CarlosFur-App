@@ -57,6 +57,10 @@ const nodeMailerConfig = async (
     );
     const source = fs.readFileSync(rutaAlEmailTemplate, "utf-8").toString();
     const template = handlebars.compile(source);
+    console.log(
+      "PRODUCTOS DESDE EL MAIL: " +
+        JSON.stringify(orderWithCart.cartInfo.products[0])
+    );
     const replacements = {
       orderId: orderWithCart.mercadoPagoId,
       saleDate: orderWithCart.saleDate,

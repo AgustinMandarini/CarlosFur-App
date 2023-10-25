@@ -21,7 +21,6 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
   const loggedUser = useSelector((state) => state.loggedUser);
   const cart = useSelector((state) => state.cart);
   const { isAuthenticated } = useAuth0();
-  const [order, setOrder] = useState(false);
   const history = useHistory();
   const userIsAuthenticated = localStorage.getItem("token") !== null;
 
@@ -74,7 +73,6 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
     if (userIsAuthenticated) {
       const id = await createPreference();
       if (id) {
-        setOrder(true);
         setPreferenceId(id);
       }
     } else {
@@ -83,9 +81,6 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
     }
   };
 
-  /* AGUS, LA INFO QUE TENÉS QUE MANDAR ESTÁ EN ESTOS CONSOLE.LOGS */
-  // console.log("localStorage", storage);
-  // console.log("email", loggedUser.e_mail);
   useEffect(() => {
     const fetchData = async () => {
       const urlParams = new URLSearchParams(window.location.search);
@@ -95,10 +90,8 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
       const payment_type = urlParams.get("payment_type");
       /* AGUS, EN ALGUNA PARTE DE ESTE useEffect HAY QUE MANDAR LA ORDER CON createOrderHandler.
       ACORDATE DE MODIFICAR EL CONTROLLER PARA PODER INCLUIR EL MAIL. */
-      console.log("ORDER: " + order);
       if (collectionStatus === "approved" || status === "approved") {
         try {
-          console.log("si order es true, entra aca");
           const orderData = {
             collection_id: collection_id,
             cartId: localStorage.getItem("cartId"),
@@ -116,7 +109,6 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
             });
             dispatch(emptyCart());
             localStorage.removeItem("cart");
-            setOrder(false);
             setTimeout(() => {
               window.location.href = CALLBACK_URL;
             }, 4000);

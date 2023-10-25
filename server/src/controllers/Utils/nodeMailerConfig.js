@@ -57,10 +57,7 @@ const nodeMailerConfig = async (
     );
     const source = fs.readFileSync(rutaAlEmailTemplate, "utf-8").toString();
     const template = handlebars.compile(source);
-    console.log(
-      "PRODUCTOS DESDE EL MAIL: " +
-        JSON.stringify(orderWithCart.cartInfo.products[0])
-    );
+
     const replacements = {
       orderId: orderWithCart.mercadoPagoId,
       saleDate: orderWithCart.saleDate,
@@ -88,11 +85,13 @@ const nodeMailerConfig = async (
     htmlToSend = template(replacements);
   }
 
-  await transporter.sendMail({
+  const sentEmail = await transporter.sendMail({
     from: `"MSC Amoblamientos 👻" ${gmailUser}`,
     to: e_mail,
     subject: "MSC Amoblamientos",
     html: htmlToSend,
   });
+
+  console.log("EMAIL ENVIADO: " + JSON.stringify(sentEmail));
 };
 module.exports = { nodeMailerConfig };

@@ -2,7 +2,6 @@
   justify-content: center;
   align-items: center;
   align-content: center;
-  width: 25rem;
 }
 .headerModal {
   background-color: #ae9c8f;
@@ -57,6 +56,7 @@
   padding-left: 3px;
   justify-content: center;
   align-items: center;
+  margin: 5px;
 }
 
 .btnEnviar {
@@ -66,7 +66,7 @@
   border: 2px solid black;
   font-size: 12px;
   font-weight: 500;
-  /* margin: 1rem; */
+  margin-bottom: 1.5rem;
   background-color: black;
   justify-content: center;
   align-items: center;
@@ -77,4 +77,34 @@
   /* font-weight: 600;; */
   border: white;
   color: black;
+}
+.reviewItem {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.158);
+  padding-bottom: 4px;
+  padding-top: 4px;
+
+  padding-left: 3px;
+}
+.cntn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 0px;
+  margin: 0px;
+  color: rgba(0, 0, 0, 0.664);
+}
+.reviewItemInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px; /* Agrega margen para separar los elementos en el div */
 }

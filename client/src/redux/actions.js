@@ -42,6 +42,7 @@ import {
   EMPTY_CART,
   GET_PRODUCT_TYPE_BYID,
   POST_REVIEW,
+  GET_REVIEW_BY_PRODUCT_ID,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -566,6 +567,17 @@ export const createReview = (review) => {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
       });
+    }
+  };
+};
+export const getReviewByProductId = (productId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/review/product/${productId}`);
+      const data = response.data;
+      dispatch({ type: GET_REVIEW_BY_PRODUCT_ID, payload: data });
+    } catch (error) {
+      console.error("No se encontraron reviews de este producto ", error);
     }
   };
 };

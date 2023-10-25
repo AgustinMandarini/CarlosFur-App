@@ -196,33 +196,55 @@ const rootReducer = (state = initialState, action) => {
         cartProducts: newProducts,
       };
 
-    case POST_CART_PRODUCT:
-      const productId = action.payload;
-      // Busca el producto en el carrito actual
-      const existingProductIndex = state.cartProducts
-        .filter((product) => product && product.id !== undefined)
-        .findIndex((product) => product.id === productId);
-      if (existingProductIndex !== -1) {
-        // Si el producto ya existe en el carrito, incrementa su count
-        const updatedCartProducts = [...state.cartProducts];
-        updatedCartProducts[existingProductIndex].count += 1;
-        return {
-          ...state,
-          cartProducts: updatedCartProducts,
-        };
-      } else {
-        // Si el producto no existe en el carrito, agrégalo con count igual a 1
-        const productToAdd = state.muebles.find(
-          (mueble) => mueble.id === productId
-        );
-
-        return {
-          ...state,
-          cartProducts: [...state.cartProducts, { ...productToAdd, count: 1 }],
-          cartTotal:
-            state.cartTotal + action.payload.price * action.payload.quantity,
-        };
-      }
+      case POST_CART_PRODUCT:
+        const productId = action.payload;
+  // Busca el producto en el carrito actual
+  const existingProductIndex = state.cartProducts.findIndex(
+    (product) => product.id === productId
+  );
+  
+  if (existingProductIndex !== -1) {
+    // Si el producto ya existe en el carrito, verifica si ha alcanzado la cantidad máxima de stock
+    const existingProduct = state.cartProducts[existingProductIndex];
+    if (existingProduct.count < existingProduct.stock) {
+      // Si no ha alcanzado la cantidad máxima, incrementa su count
+      const updatedCartProducts = [...state.cartProducts];
+      updatedCartProducts[existingProductIndex].count += 1;
+      return {
+        ...state,
+        cartProducts: updatedCartProducts,
+      };
+    } else {
+      // Si ha alcanzado la cantidad máxima, muestra una notificación de toast
+      toast.error("Este producto ha alcanzado la cantidad máxima en stock.", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 3000,
+      });
+      return state;
+    }
+  } else {
+    // Si el producto no existe en el carrito, agrégalo con count igual a 1
+    const productToAdd = state.muebles.find(
+      (mueble) => mueble.id === productId
+    );
+  
+    if (productToAdd && productToAdd.stock > 0) {
+      // Verifica si hay suficiente stock antes de agregar al carrito
+      productToAdd.count = 1;
+      return {
+        ...state,
+        cartProducts: [...state.cartProducts, productToAdd],
+        cartTotal: state.cartTotal + action.payload.price * action.payload.quantity,
+      };
+    } else {
+      // No hay suficiente stock para agregar el producto al carrito
+      toast.error("No hay suficiente stock para este producto.", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 3000,
+      });
+      return state;
+    }
+  }
 
     case DELETE_CART_PRODUCT:
       const productId2 = action.payload;

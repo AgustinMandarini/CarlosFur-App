@@ -42,10 +42,9 @@ import {
   EMPTY_CART,
   GET_COLOR_BYID,
   GET_CARTS,
-
+  GET_REVIEWS,
   GET_REVIEW_BY_PRODUCT_ID,
-
-
+  DELETE_REVIEW,
 } from "./types";
 
 const initialState = {
@@ -77,9 +76,8 @@ const initialState = {
   tipoDeProductoById: [],
   cartDetail: [],
   carts: [],
-
+  totalReviews: [],
   reviews: [],
-
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -428,7 +426,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         reviews: action.payload,
       };
+    case GET_REVIEWS:
+      return {
+        ...state,
+        totalReviews: action.payload,
+      };
+    case DELETE_REVIEW:
+      const reviewIdToDelete = action.payload; // ID de la revisión a eliminar
+      const updatedTotalReviews = state.totalReviews.filter(
+        (review) => review.id !== reviewIdToDelete
+      );
 
+      return {
+        ...state,
+        totalReviews: updatedTotalReviews,
+      };
     default:
       return { ...state };
   }

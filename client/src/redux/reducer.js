@@ -42,6 +42,10 @@ import {
   EMPTY_CART,
   GET_COLOR_BYID,
   GET_CARTS,
+
+  GET_REVIEW_BY_PRODUCT_ID,
+
+
 } from "./types";
 
 const initialState = {
@@ -73,6 +77,9 @@ const initialState = {
   tipoDeProductoById: [],
   cartDetail: [],
   carts: [],
+
+  reviews: [],
+
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -82,11 +89,11 @@ const rootReducer = (state = initialState, action) => {
         materialState: action.payload,
       };
 
-      case GET_CARTS:
-        return {
-          ...state,
-          cartsAdmin: action.payload,
-        };
+    case GET_CARTS:
+      return {
+        ...state,
+        cartsAdmin: action.payload,
+      };
 
     case GET_MATERIAL_BYID:
       return {
@@ -414,6 +421,11 @@ const rootReducer = (state = initialState, action) => {
       // En caso contrario, no hagas nada y simplemente devuelve el estado actual
       return state;
     }
+    case GET_REVIEW_BY_PRODUCT_ID:
+      return {
+        ...state,
+        reviews: action.payload,
+      };
 
     default:
       return { ...state };

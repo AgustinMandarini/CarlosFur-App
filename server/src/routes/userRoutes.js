@@ -37,5 +37,4 @@ userRouter.get("/admin/:userId",  authenticate, getUserByIdHandler);
 // userRouter.get("/admin/:userId/product/admin",  getProductAdminHandler);
 
 
-
 module.exports = userRouter;

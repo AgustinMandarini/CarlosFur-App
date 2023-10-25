@@ -31,7 +31,7 @@ function Admin() {
         <button>Home</button>
       </Link>
       <div className="AdminContent">
-        <Route exact path="/user/admin/:userId/productos" component={Productos} />
+        <Route exact path="/admin/productos" component={Productos} />
         <Route path="/admin/productos/editar/:id" component={EditarProducto} />
         <Route path="/admin/ventas" component={Ventas} />
         <Route path="/admin/usuarios" component={Usuarios} />

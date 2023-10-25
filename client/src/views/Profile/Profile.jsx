@@ -29,7 +29,7 @@ const Profile = () => {
       }
     };
 
-    fetchUserProfile();
+    fetchUserProfile(); // Llamar a la función fetchUserProfile aquí
   }, [id]);
 
   if (!user) {
@@ -73,13 +73,14 @@ const Profile = () => {
             </CardTitle>
             <Row>
               <Col md="12">
-                <CardSubtitle tag="h6" className="mb-2 text-muted">
-                  <strong>Nombre:</strong> {userName}
+                <CardSubtitle tag="h6" className={styles.subtitle}>
+                  <strong className={styles.strong}>Nombre: </strong> {userName}
                 </CardSubtitle>
               </Col>
               <Col md="12">
-                <CardSubtitle tag="h6" className="mb-2 text-muted">
-                  <strong>Email:</strong> {user.e_mail || "N/A"}
+                <CardSubtitle tag="h6" className={styles.subtitle}>
+                  <strong className={styles.strong}>Email: </strong>{" "}
+                  {user.e_mail || "N/A"}
                 </CardSubtitle>
               </Col>
               {isAdmin ? (
@@ -91,16 +92,17 @@ const Profile = () => {
                         window.location.href = `http://localhost:3000/user/admin/${id}`;
                       } else {
                         // Mostrar un mensaje de acceso denegado en lugar de redirigir
-                        alert("Acceso denegado para no administradores");
+                        alert("");
                       }
-                    }}                  >
+                    }}
+                  >
                     Ir al Panel de Administración
                   </button>
                 </Col>
               ) : (
                 <Col md="12">
                   <div className={styles.accesoDenegado}>
-                    Acceso denegado para no administradores.
+                    
                   </div>
                 </Col>
               )}

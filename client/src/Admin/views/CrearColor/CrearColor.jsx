@@ -111,5 +111,4 @@ const CrearColor = () => {
   );
 };
 
-export default CrearColor;
-
+export default CrearProducto;

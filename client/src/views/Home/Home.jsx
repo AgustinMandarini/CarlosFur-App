@@ -34,7 +34,7 @@ const Home = () => {
   // Paginado
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(5);
+  const [productsPerPage] = useState(6);
   const indexOfLastRecipe = currentPage * productsPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - productsPerPage;
 
@@ -49,11 +49,11 @@ const Home = () => {
   useEffect(
     () => {
       // if (!nameState) {
-        filters.productType =
-          filters.productType === "allOptions" ? "" : filters.productType;
-        filters.material =
-          filters.material === "allOptions" ? "" : filters.material;
-        filters.color = filters.color === "allOptions" ? "" : filters.color;
+      filters.productType =
+        filters.productType === "allOptions" ? "" : filters.productType;
+      filters.material =
+        filters.material === "allOptions" ? "" : filters.material;
+      filters.color = filters.color === "allOptions" ? "" : filters.color;
       // if (nameState !== true) {
       filters.productType =
         filters.productType === "allOptions" ? "" : filters.productType;

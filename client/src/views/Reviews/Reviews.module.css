@@ -1,0 +1,80 @@
+.cntnReview {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 25rem;
+}
+.headerModal {
+  background-color: #ae9c8f;
+  letter-spacing: 1px !important;
+  padding: 13px;
+  border: none !important;
+}
+.modalTittle {
+  font-size: 17px !important;
+}
+.footerModal {
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+  font-size: 18px !important;
+}
+.buttonModal {
+  color: white;
+  padding: 2px 13px 2px 13px;
+  border: 2px solid black;
+  font-size: 12px !important;
+  font-weight: 500;
+  margin: 1rem;
+  background-color: black !important;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px !important;
+  border: none !important;
+}
+.buttonModal:focus {
+  box-shadow: none !important;
+}
+.tittle {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  margin-top: 0.9rem;
+  margin-bottom: 0.8rem;
+}
+.cntnIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.9rem;
+}
+.textarea {
+  border: 1px solid rgba(0, 0, 0, 0.452);
+
+  font-size: 12px;
+  width: 19rem;
+  font-weight: 600;
+  padding-left: 3px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnEnviar {
+  margin-top: 10px;
+  color: white;
+  padding: 2px 13px 2px 13px;
+  border: 2px solid black;
+  font-size: 12px;
+  font-weight: 500;
+  /* margin: 1rem; */
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+  width: 87px;
+}
+.btnEnviar:hover {
+  background-color: #b1ada2a9;
+  /* font-weight: 600;; */
+  border: white;
+  color: black;
+}

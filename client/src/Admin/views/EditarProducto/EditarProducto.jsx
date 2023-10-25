@@ -47,20 +47,6 @@ const EditarProducto = () => {
     dispatch(getProductTypeById(stateDetail.productTypeId));
   }, [getDetail, stateDetail]);
 
-  useEffect(() => {
-    setForm({
-      name: stateDetail.name,
-      price: stateDetail.price,
-      height: stateDetail.height,
-      depth: stateDetail.depth,
-      width: stateDetail.width,
-      weight: stateDetail.weight,
-      stock: stateDetail.stock,
-      colorId: stateDetail.colorId,
-      materialId: stateDetail.materialId,
-      productTypeId: stateDetail.productTypeId,
-    });
-  }, []);
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -140,6 +126,7 @@ const EditarProducto = () => {
                   Ingrese nuevo nombre:
                 </Form.Label>
                 <Form.Control
+                placeholder={stateDetail.name}
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -167,6 +154,7 @@ const EditarProducto = () => {
                   Ingrese nuevo precio:
                 </Form.Label>
                 <Form.Control
+                    placeholder={stateDetail.price}
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -194,6 +182,7 @@ const EditarProducto = () => {
                   Ingrese nueva altura:{" "}
                 </Form.Label>
                 <Form.Control
+                    placeholder={stateDetail.height}
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -221,6 +210,7 @@ const EditarProducto = () => {
                   Ingrese nueva profundidad:{" "}
                 </Form.Label>
                 <Form.Control
+                    placeholder={stateDetail.depth}
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -248,6 +238,7 @@ const EditarProducto = () => {
                   Ingrese nuevo ancho:{" "}
                 </Form.Label>
                 <Form.Control
+                    placeholder={stateDetail.width}
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -277,6 +268,7 @@ const EditarProducto = () => {
                   Ingrese nuevo peso:{" "}
                 </Form.Label>
                 <Form.Control
+                    placeholder={stateDetail.weight}
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -304,6 +296,7 @@ const EditarProducto = () => {
                   Ingrese nuevo stock:{" "}
                 </Form.Label>
                 <Form.Control
+                    placeholder={stateDetail.stock}
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -452,6 +445,7 @@ const EditarProducto = () => {
                   Ingrese nueva descripcion:
                 </Form.Label>
                 <Form.Control
+                    placeholder={stateDetail.description}
                   size="sm"
                   type="text"
                   value={form.description}

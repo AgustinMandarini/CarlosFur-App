@@ -1,0 +1,6 @@
+.cntnStars {
+  display: flex;
+  margin: 0.2px;
+  justify-content: center;
+  align-items: center;
+}

@@ -61,7 +61,6 @@ Cart.belongsToMany(Product, { through: "cart_products" });
 Product.belongsToMany(Cart, { through: "cart_products" });
 
 Cart.hasOne(Order, { foreignKey: "cartId" });
-Order.hasOne(Cart, { foreignKey: "cartId" });
 
 Review.belongsTo(Product, { foreignKey: "productId" });
 Product.hasMany(Review, { foreignKey: "productId" });

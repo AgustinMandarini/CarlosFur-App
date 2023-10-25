@@ -42,6 +42,7 @@ import {
   EMPTY_CART,
   GET_PRODUCT_TYPE_BYID,
   POST_REVIEW,
+  GET_REVIEW_BY_PRODUCT_ID,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -83,16 +84,6 @@ export const getOrdersAdmin = () => {
     return dispatch({
       type: GET_ORDERS_ADMIN,
       payload: order,
-    });
-  };
-};
-export const getCarts = () => {
-  return async function (dispatch) {
-    const apiData = await axios.get(`${apiUrl}/cart`);
-    const carts = apiData.data;
-    return dispatch({
-      type: GET_CARTS,
-      payload: carts,
     });
   };
 };
@@ -576,6 +567,17 @@ export const createReview = (review) => {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
       });
+    }
+  };
+};
+export const getReviewByProductId = (productId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/review/product/${productId}`);
+      const data = response.data;
+      dispatch({ type: GET_REVIEW_BY_PRODUCT_ID, payload: data });
+    } catch (error) {
+      console.error("No se encontraron reviews de este producto ", error);
     }
   };
 };

@@ -45,8 +45,7 @@ const EditarProducto = () => {
     dispatch(getColorById(stateDetail.colorId));
     dispatch(getMaterialById(stateDetail.materialId));
     dispatch(getProductTypeById(stateDetail.productTypeId));
-  },[getDetail, stateDetail]);
-  
+  }, [getDetail, stateDetail]);
 
   useEffect(() => {
     setForm({
@@ -134,7 +133,7 @@ const EditarProducto = () => {
               Nombre:
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail && stateDetail.name}
+              {form && form.name ? form.name : stateDetail.name}
             </Form.Label>
             {showFilters && (
               <div className={style.divinputError}>
@@ -142,7 +141,6 @@ const EditarProducto = () => {
                   Ingrese nuevo nombre:
                 </Form.Label>
                 <Form.Control
-                 placeholder={stateDetail.name}
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -162,7 +160,7 @@ const EditarProducto = () => {
               Precio:{" "}
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail && stateDetail.price}
+              {form && form.price ? form.price : stateDetail.price}
             </Form.Label>
 
             {showFilters && (
@@ -171,7 +169,6 @@ const EditarProducto = () => {
                   Ingrese nuevo precio:
                 </Form.Label>
                 <Form.Control
-                  placeholder={stateDetail.price}
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -191,7 +188,7 @@ const EditarProducto = () => {
               Altura:{" "}
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail && stateDetail.height}
+              {form && form.height ? form.height : stateDetail.height}
             </Form.Label>
 
             {showFilters && (
@@ -200,8 +197,6 @@ const EditarProducto = () => {
                   Ingrese nueva altura:{" "}
                 </Form.Label>
                 <Form.Control
-                  placeholder={stateDetail.height
-                  }
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -221,7 +216,7 @@ const EditarProducto = () => {
               Profundidad
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail && stateDetail.depth}
+              {form && form.depth ? form.depth : stateDetail.depth}
             </Form.Label>
 
             {showFilters && (
@@ -230,7 +225,6 @@ const EditarProducto = () => {
                   Ingrese nueva profundidad:{" "}
                 </Form.Label>
                 <Form.Control
-                  placeholder={stateDetail.depth}
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -250,7 +244,7 @@ const EditarProducto = () => {
               Ancho:
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail && stateDetail.width}
+              {form && form.width ? form.width : stateDetail.width}
             </Form.Label>
 
             {showFilters && (
@@ -259,7 +253,6 @@ const EditarProducto = () => {
                   Ingrese nuevo ancho:{" "}
                 </Form.Label>
                 <Form.Control
-                  placeholder={stateDetail.width}
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -279,7 +272,7 @@ const EditarProducto = () => {
               Peso:
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail && stateDetail.weight ? stateDetail.weight : stateDetail.weight}
+              {form && form.weight ? form.weight : stateDetail.weight}
             </Form.Label>
 
             {showFilters && (
@@ -288,7 +281,6 @@ const EditarProducto = () => {
                   Ingrese nuevo peso:{" "}
                 </Form.Label>
                 <Form.Control
-                  placeholder={stateDetail.weight}
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -308,7 +300,7 @@ const EditarProducto = () => {
               Stock:
             </Form.Label>
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
-              {stateDetail && stateDetail.stock}
+              {form && form.stock ? form.stock : stateDetail.stock}
             </Form.Label>
 
             {showFilters && (
@@ -317,7 +309,6 @@ const EditarProducto = () => {
                   Ingrese nuevo stock:{" "}
                 </Form.Label>
                 <Form.Control
-                  placeholder={stateDetail.stock}
                   onChange={changeHandler}
                   size="sm"
                   type="text"
@@ -349,7 +340,6 @@ const EditarProducto = () => {
             {showFilters && (
               <div className={style.divinputErrorType}>
                 <Form.Select
-                  placeholder={stateDetail.colorId}
                   size="sm"
                   onChange={handleSelectMuebles}
                   value={form.color}
@@ -471,7 +461,6 @@ const EditarProducto = () => {
                   Ingrese nueva descripcion:
                 </Form.Label>
                 <Form.Control
-                  placeholder={stateDetail.description}
                   size="sm"
                   type="text"
                   value={form.description}

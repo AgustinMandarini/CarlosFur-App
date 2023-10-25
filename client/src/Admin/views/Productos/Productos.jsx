@@ -30,23 +30,11 @@ const Productos = () => {
     setShowDeleteModal(true);
   };
 
-  // const confirmDelete = () => {
-  //   if (productIdToDelete !== null) {
-  //     dispatch(deleteProduct(productIdToDelete));
-  //     dispatch(getProductsAdmin());
-  //     setShowDeleteModal(false);
-  //     window.location.reload();
-  //   }
-  // };
   const confirmDelete = () => {
     if (productIdToDelete !== null) {
-      dispatch(deleteProduct(productIdToDelete))
-        .then(() => {
-          dispatch(getProductsAdmin())
-            .then(() => {
-              setShowDeleteModal(false);
-            });
-        });
+      dispatch(deleteProduct(productIdToDelete));
+      dispatch(getProductsAdmin());
+      setShowDeleteModal(false);
     }
   };
 

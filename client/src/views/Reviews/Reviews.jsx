@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./Reviews.module.css";
-import { createReview } from "../../redux/actions";
+import { createReview, getReviewByProductId } from "../../redux/actions";
 import Button from "react-bootstrap/Button";
 import { FaStar } from "react-icons/fa";
 import Modal from "react-bootstrap/Modal";
+import StarRating from "./StartRating";
 
 const Reviews = ({ id }) => {
   const [values, setValues] = useState("");
@@ -16,6 +17,8 @@ const Reviews = ({ id }) => {
   const handleShow = () => setShow(true);
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.loggedUser);
+  const reviews = useSelector((state) => state.reviews);
+  console.log(reviews, "aca");
 
   const handleClick = (value) => {
     setCurrentValue(value);
@@ -46,10 +49,12 @@ const Reviews = ({ id }) => {
         userId: userId.id,
         description: values,
         rating: currentValue,
-        reviewDate: new Date().toISOString(),
+        reviewDate: new Date().toLocaleDateString(undefined, options),
       };
 
       await dispatch(createReview(reviewData));
+      dispatch(getReviewByProductId(id));
+
       setValues("");
       setCurrentValue(0);
       handleShow();
@@ -61,7 +66,6 @@ const Reviews = ({ id }) => {
       setShowSecondModal(false);
     }
   };
-
   const handleMouseOver = (value) => {
     setHoverValue(value);
   };
@@ -69,11 +73,16 @@ const Reviews = ({ id }) => {
   const handleMouseLeave = () => {
     setHoverValue(undefined);
   };
+  const options = { year: "numeric", month: "long", day: "numeric" };
 
   const colors = {
     orange: "#FFBA5A",
     grey: "#a9a9a9",
   };
+
+  useEffect(() => {
+    dispatch(getReviewByProductId(id));
+  }, [dispatch]);
 
   return (
     <div className={style.cntnReview}>
@@ -100,7 +109,6 @@ const Reviews = ({ id }) => {
           );
         })}
       </div>
-
       <div>
         <div>
           <textarea
@@ -114,6 +122,24 @@ const Reviews = ({ id }) => {
         <button onClick={() => handleSubmit()} className={style.btnEnviar}>
           Enviar
         </button>
+      </div>
+      <div>
+        {reviews.length > 0 && <p>Reviews</p>}
+
+        {reviews && reviews.reviews
+          ? reviews.reviews.map((review, index) => (
+              <div key={index} className={style.reviewItem}>
+                <div className={style.reviewItemInner}>
+                  <p className={style.p}> {review.user.user_name}</p>
+                  <StarRating rating={review.rating} />
+                </div>
+                <div className={style.reviewItemInner}>
+                  <p className={style.p}>{review.reviewDate}</p>
+                  <p className={style.p}>{review.description}</p>
+                </div>
+              </div>
+            ))
+          : "Cargando reseñas..."}
       </div>
 
       <Modal show={show}>

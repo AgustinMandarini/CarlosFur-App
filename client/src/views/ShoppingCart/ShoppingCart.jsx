@@ -33,20 +33,22 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
   function transformCartProducts(cartProducts) {
     const productMap = {};
 
-    cartProducts.forEach((product) => {
-      const productId = product.id;
-      if (!productMap[productId]) {
-        productMap[productId] = {
-          description: product.name,
-          unit_price: product.price,
-          total_price: product.price,
-          quantity: product.count,
-          currency_id: "ARS",
-        };
-      } else {
-        productMap[productId].total_price += product.unit_price;
-      }
-    });
+    cartProducts
+      .filter((product) => product && product.id !== undefined)
+      .forEach((product) => {
+        const productId = product.id;
+        if (!productMap[productId]) {
+          productMap[productId] = {
+            description: product.name,
+            unit_price: product.price,
+            total_price: product.price,
+            quantity: product.count,
+            currency_id: "ARS",
+          };
+        } else {
+          productMap[productId].total_price += product.unit_price;
+        }
+      });
 
     const result = Object.values(productMap);
     return result;
@@ -72,7 +74,6 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
     if (userIsAuthenticated) {
       const id = await createPreference();
       if (id) {
-
         toast.info("Generando link de compra.", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 3000,
@@ -87,7 +88,6 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
   };
 
   useEffect(() => {
-
     const fetchData = async () => {
       const urlParams = new URLSearchParams(window.location.search);
       console.log("urlPArams: " + urlParams);

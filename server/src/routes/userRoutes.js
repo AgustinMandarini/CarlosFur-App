@@ -19,6 +19,7 @@ const { authenticateJWT } = require("../middleware/authenticateJWT");
 const { emailAuthJWT } = require("../middleware/emailAuthJWT");
 const { deleteUserHandler } = require("../handlers/UserHandlers/deleteUserHandler");
 const authenticate = require("../middleware/authenticate");
+const { getProductAdminHandler } = require("../handlers/ProductHandlers/getProductAdminHandler")
 
 const userRouter = Router();
 
@@ -33,6 +34,8 @@ userRouter.put("/update-password", emailAuthJWT, putUpdatePasswordHandler);
 userRouter.put("/:id", putUserHandler);
 userRouter.delete("/:id", deleteUserHandler);
 userRouter.get("/admin/:userId",  authenticate, getUserByIdHandler);
+// userRouter.get("/admin/:userId/product/admin",  getProductAdminHandler);
+
 
 
 module.exports = userRouter;

@@ -29,7 +29,7 @@ const NavBar = () => {
             </div>
           )}
         </div>
-        <Link to="/admin/productos" className={style.link}>
+        <Link to="user/admin/:userId/productos" className={style.link}>
           <IconBox stroke="1.3" className={style.icon} /> Productos
         </Link>
         <Link to="/admin/ventas" className={style.link}>

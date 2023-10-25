@@ -20,7 +20,6 @@ const getUserHandler = async (req, res) => {
 };
 
 const getUserByIdHandler = async (req, res) => {
-  console.log(res);
   try {
     const { userId } = req.params;
     const user = await findUserById(userId);

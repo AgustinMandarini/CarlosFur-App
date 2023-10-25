@@ -32,24 +32,21 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
     const productMap = {};
 
     cartProducts.forEach((product) => {
-      if (product && product.id !== undefined) {
-        const productId = product.id;
-        if (!productMap[productId]) {
-          productMap[productId] = {
-            description: product.name,
-            unit_price: product.price,
-            total_price: product.price,
-            quantity: product.count,
-            currency_id: "ARS",
-          };
-        } else {
-          productMap[productId].total_price += product.unit_price;
-        }
+      const productId = product.id;
+      if (!productMap[productId]) {
+        productMap[productId] = {
+          description: product.name,
+          unit_price: product.price,
+          total_price: product.price,
+          quantity: product.count,
+          currency_id: "ARS",
+        };
+      } else {
+        productMap[productId].total_price += product.unit_price;
       }
     });
 
     const result = Object.values(productMap);
-
     return result;
   }
 
@@ -73,6 +70,11 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
     if (userIsAuthenticated) {
       const id = await createPreference();
       if (id) {
+        toast.info("Generando link de compra.", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 3000,
+        });
+
         setPreferenceId(id);
       }
     } else {
@@ -84,12 +86,14 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
   useEffect(() => {
     const fetchData = async () => {
       const urlParams = new URLSearchParams(window.location.search);
+      console.log("urlPArams: " + urlParams);
       const collectionStatus = urlParams.get("collection_status");
       const status = urlParams.get("status");
       const collection_id = urlParams.get("collection_id");
       const payment_type = urlParams.get("payment_type");
       /* AGUS, EN ALGUNA PARTE DE ESTE useEffect HAY QUE MANDAR LA ORDER CON createOrderHandler.
       ACORDATE DE MODIFICAR EL CONTROLLER PARA PODER INCLUIR EL MAIL. */
+
       if (collectionStatus === "approved" || status === "approved") {
         try {
           const orderData = {
@@ -104,7 +108,7 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
           );
           if (response.status === 201) {
             toast.success("Compra realizada", {
-              position: toast.POSITION.TOP_CENTER,
+              position: toast.POSITION.BOTTOM_RIGHT,
               autoClose: 3000,
             });
             dispatch(emptyCart());

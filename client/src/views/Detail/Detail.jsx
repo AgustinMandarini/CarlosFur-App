@@ -11,6 +11,8 @@ import { useParams } from "react-router-dom";
 import imagenDefault from "./../../imagenes/default.png";
 import { updateLocalStorage } from "../../components/LocalStorage/LocalStorageFunctions";
 import { updateCart } from "../../redux/actions";
+import Reviews from "../Reviews/Reviews";
+
 const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -38,12 +40,10 @@ const Detail = () => {
     if (user && cartId) {
       const userParse = JSON.parse(user);
       const cartIdParse = JSON.parse(cartId);
-      const newProducts = cartProducts
-        .filter((item) => item && item.id !== undefined)
-        .map((item) => ({
-          id: item.id,
-          quantity: item.count,
-        }));
+      const newProducts = cartProducts.map((item) => ({
+        id: item.id,
+        quantity: item.count,
+      }));
 
       const data = {
         userId: userParse.userId,
@@ -96,35 +96,51 @@ const Detail = () => {
       </Button>
 
       <div className={style.cntnCardDetail}>
-        <div className={style.ImgandData}>
-          <div className={style.imgContainer}>
-            {stateDetail.imagePath ? (
-              <>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <div className={style.ImgandData}>
+            <div className={style.imgContainer}>
+              {stateDetail.imagePath ? (
+                <>
+                  <img
+                    src={stateDetail.imagePath}
+                    className={style.imgDetail}
+                    alt="image"
+                  />
+                </>
+              ) : (
                 <img
-                  src={stateDetail.imagePath}
+                  src={imagenDefault}
                   className={style.imgDetail}
                   alt="image"
                 />
-              </>
-            ) : (
-              <img
-                src={imagenDefault}
-                className={style.imgDetail}
-                alt="image"
-              />
-            )}
+              )}
+            </div>
+            <div className={style.texto}>
+              <p className={style.p2}>{stateDetail.name}</p>
+              <p className={style.description}>{stateDetail.description}</p>
+              <p className={style.price}>${stateDetail.price}</p>
+              <p className={style.p}>Altura: {stateDetail.height} </p>
+              <p className={style.p}>Profundidad: {stateDetail.depth} </p>
+              <p className={style.p}>Ancho: {stateDetail.width}</p>
+              <p className={style.p}>Peso: {stateDetail.weight}</p>
+              <p className={style.p}>
+                Color: {getColorName(stateDetail.colorId)}
+              </p>
+              <div className={style.counterContainer}>
+                <button className={style.buttonCount} onClick={increaseCounter}>
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
           </div>
-          <div className={style.texto}>
-            <p className={style.p2}>{stateDetail.name}</p>
-            <p className={style.description}>{stateDetail.description}</p>
-            <p className={style.price}>${stateDetail.price}</p>
-            <p className={style.p}>Altura: {stateDetail.height} </p>
-            <p className={style.p}>Profundidad: {stateDetail.depth} </p>
-            <p className={style.p}>Ancho: {stateDetail.width}</p>
-            <p className={style.p}>Peso: {stateDetail.weight}</p>
-            <p className={style.p}>
-              Color: {getColorName(stateDetail.colorId)}
-            </p>
+          <div>
+            <Reviews id={id} />
           </div>
         </div>
       </div>

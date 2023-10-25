@@ -15,21 +15,26 @@ import { useAuth0 } from "@auth0/auth0-react"; // Importa useAuth0
 
 const Profile = () => {
   const [user, setUser] = useState(null);
+  const [error, setError] = useState(null); // Nuevo estado para el mensaje de error
   const { id } = useParams();
   const { user: auth0User, isAuthenticated } = useAuth0(); // Obtén la información del usuario de Auth0
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/user/profile/${id}`);
-        setUser(response.data);
-      } catch (error) {
+  const fetchUserProfile = async () => {
+    try {
+      const response = await axios.get(`${apiUrl}/user/profile/${id}`);
+      setUser(response.data);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setError("No estás autorizado");
+      } else {
+        setError("Error al obtener el perfil del usuario.");
         console.error("Error al obtener el perfil:", error.message);
       }
-    };
-
+    }
+  };
+  useEffect(() => {
     fetchUserProfile();
   }, [id]);
 
@@ -41,19 +46,14 @@ const Profile = () => {
   const defaultAvatar =
     "https://cdn.icon-icons.com/icons2/1508/PNG/512/systemusers_104569.png";
 
-  // let userName = "Usuario"; // Nombre por defecto
-
   let userName = "";
 
   if (isAuthenticated && auth0User) {
-    // Si el usuario se autentica con Google y la información está disponible
-    console.log(auth0User);
     userName = auth0User.name;
   } else if (user) {
-    // Si el usuario se autentica localmente
     userName = user.first_name + (user.last_name ? ` ${user.last_name}` : "");
   }
-  
+
   return (
     <Container className={`${styles.profileContainer} ${styles.Background}`}>
       <Row>
@@ -76,13 +76,14 @@ const Profile = () => {
             </CardTitle>
             <Row>
               <Col md="12">
-                <CardSubtitle tag="h6" className="mb-2 text-muted">
-                  <strong>Nombre:</strong> {userName}
+                <CardSubtitle tag="h6" className={styles.subtitle}>
+                  <strong className={styles.strong}>Nombre: </strong> {userName}
                 </CardSubtitle>
               </Col>
               <Col md="12">
-                <CardSubtitle tag="h6" className="mb-2 text-muted">
-                  <strong>Email:</strong> {user.e_mail || "N/A"}
+                <CardSubtitle tag="h6" className={styles.subtitle}>
+                  <strong className={styles.strong}>Email: </strong>{" "}
+                  {user.e_mail || "N/A"}
                 </CardSubtitle>
               </Col>
               {user.is_admin && (
@@ -101,9 +102,13 @@ const Profile = () => {
           </Card>
         </Col>
       </Row>
+      {error && (
+        <div className={styles.errorContainer}>
+          <p className={styles.errorMessage}>{error}</p>
+        </div>
+      )}
     </Container>
   );
 };
 
 export default Profile;
-

@@ -41,6 +41,8 @@ import {
   DELETE_CART_PRODUCT_DIRECT,
   EMPTY_CART,
   GET_PRODUCT_TYPE_BYID,
+  POST_REVIEW,
+  GET_REVIEW_BY_PRODUCT_ID,
   GET_CARTS
 } from "./types";
 import { toast } from "react-toastify";
@@ -66,6 +68,17 @@ export const getProducts = () => {
   };
 };
 
+export const getCarts = () => {
+  return async function (dispatch) {
+    const apiData = await axios.get(`${apiUrl}/cart`);
+    const carts = apiData.data;
+    return dispatch({
+      type: GET_CARTS,
+      payload: carts,
+    });
+  };
+};
+
 export const getProductsAdmin = () => {
   return async function (dispatch) {
     const apiData = await axios.get(`${apiUrl}/product/admin`);
@@ -86,16 +99,6 @@ export const getOrdersAdmin = () => {
     });
   };
 };
-export const getCarts = () => {
-  return async function (dispatch) {
-    const apiData = await axios.get(`${apiUrl}/cart`);
-    const carts = apiData.data;
-    return dispatch({
-      type: GET_CARTS,
-      payload: carts,
-    });
-  };
-};
 
 export const postProduct = (payload) => {
   return async (dispatch) => {
@@ -105,7 +108,7 @@ export const postProduct = (payload) => {
       if (response.status === 200) {
         dispatch({ type: POST_PRODUCT, payload: producto });
         toast.success("Producto Creado", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 3000,
         });
 
@@ -114,8 +117,8 @@ export const postProduct = (payload) => {
         }, 3000);
       }
     } catch (error) {
-      toast.error("No se pudo crear el producto", {
-        position: toast.POSITION.TOP_CENTER,
+      toast.error("No se pudo crear el producto",{
+        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
       });
     }
@@ -562,4 +565,31 @@ export const putEnableDisable = (id) => {
 
 export const emptyCart = () => {
   return { type: EMPTY_CART };
+};
+//reviews
+export const createReview = (review) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${apiUrl}/review`, review);
+      const reviews = response.data;
+      dispatch({ type: POST_REVIEW, reviews });
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+      toast.error("error al enviar tu review", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 3000,
+      });
+    }
+  };
+};
+export const getReviewByProductId = (productId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/review/product/${productId}`);
+      const data = response.data;
+      dispatch({ type: GET_REVIEW_BY_PRODUCT_ID, payload: data });
+    } catch (error) {
+      console.error("No se encontraron reviews de este producto ", error);
+    }
+  };
 };

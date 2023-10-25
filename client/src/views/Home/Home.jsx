@@ -34,7 +34,7 @@ const Home = () => {
   // Paginado
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(6);
+  const [productsPerPage] = useState(5);
   const indexOfLastRecipe = currentPage * productsPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - productsPerPage;
 
@@ -45,6 +45,7 @@ const Home = () => {
   useEffect(() => {
     setProducts(globalProducts);
   }, [globalProducts]);
+
   //Combinación de ordenamientos y filtros
   useEffect(
     () => {

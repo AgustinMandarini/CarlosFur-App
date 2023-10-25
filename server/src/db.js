@@ -61,6 +61,7 @@ Cart.belongsToMany(Product, { through: "cart_products" });
 Product.belongsToMany(Cart, { through: "cart_products" });
 
 Cart.hasOne(Order, { foreignKey: "cartId" });
+Order.belongsTo(Cart, { foreignKey: "cartId" });
 
 Review.belongsTo(Product, { foreignKey: "productId" });
 Product.hasMany(Review, { foreignKey: "productId" });
@@ -69,6 +70,7 @@ Review.belongsTo(User, { foreignKey: "userId" });
 User.hasMany(Review, { foreignKey: "userId" });
 
 Order.hasOne(Review, { foreignKey: "orderId" });
+Review.belongsTo(Order, { foreignKey: "orderId" });
 
 Order.belongsTo(PaymentType, { foreignKey: "paymentTypeId" });
 PaymentType.hasMany(Order, { foreignKey: "paymentTypeId" });

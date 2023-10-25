@@ -21,16 +21,19 @@ function LoginBar() {
 
   if (cartProducts.length > 0) {
     cartArray = cartProducts.reduce((result, product) => {
-      const existingProduct = result.find((item) => item.id === product.id);
-      if (existingProduct) {
-        existingProduct.quantity += 1;
-      } else {
-        result.push({
-          id: product.id,
-          quantity: 1,
-        });
+      if (product && product.id !== undefined) {
+
+        const existingProduct = result.find((item) => item.id === product.id);
+        if (existingProduct) {
+          existingProduct.quantity += 1;
+        } else {
+          result.push({
+            id: product.id,
+            quantity: 1,
+          });
+        }
+        return result;
       }
-      return result;
     }, []);
   }
 

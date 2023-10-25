@@ -22,9 +22,11 @@ const NavBar = () => {
 
   useEffect(() => {}, [cartProducts]);
 
-  const cartItemCount = cartProducts.reduce((count, product) => {
-    return count + product.count;
-  }, 0);
+  const cartItemCount = cartProducts
+    .filter((product) => product && product.id !== undefined)
+    .reduce((count, product) => {
+      return count + product.count;
+    }, 0);
 
   return (
     <>

@@ -41,7 +41,10 @@ import {
   DELETE_CART_PRODUCT_DIRECT,
   EMPTY_CART,
   GET_COLOR_BYID,
-  GET_CARTS
+  GET_CARTS,
+  GET_REVIEWS,
+  GET_REVIEW_BY_PRODUCT_ID,
+  DELETE_REVIEW,
 } from "./types";
 
 const initialState = {
@@ -72,7 +75,9 @@ const initialState = {
   materialId: [],
   tipoDeProductoById: [],
   cartDetail: [],
-  carts: []
+  carts: [],
+  totalReviews: [],
+  reviews: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -82,11 +87,11 @@ const rootReducer = (state = initialState, action) => {
         materialState: action.payload,
       };
 
-      case GET_CARTS:
-        return {
-          ...state,
-          cartsAdmin: action.payload,
-        };
+    case GET_CARTS:
+      return {
+        ...state,
+        cartsAdmin: action.payload,
+      };
 
     case GET_MATERIAL_BYID:
       return {
@@ -111,13 +116,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         ordersAdmin: action.payload,
       };
-      
+
     case GET_CARTS:
       return {
         ...state,
         cartsAdmin: action.payload,
       };
-
 
     case GET_DETAIL:
       return {
@@ -193,9 +197,9 @@ const rootReducer = (state = initialState, action) => {
     case POST_CART_PRODUCT:
       const productId = action.payload;
       // Busca el producto en el carrito actual
-      const existingProductIndex = state.cartProducts.findIndex(
-        (product) => product.id === productId
-      );
+      const existingProductIndex = state.cartProducts
+        .filter((product) => product && product.id !== undefined)
+        .findIndex((product) => product.id === productId);
       if (existingProductIndex !== -1) {
         // Si el producto ya existe en el carrito, incrementa su count
         const updatedCartProducts = [...state.cartProducts];
@@ -214,15 +218,15 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           cartProducts: [...state.cartProducts, { ...productToAdd, count: 1 }],
           cartTotal:
-            state.cartTotal + (action.payload.price * action.payload.quantity),
+            state.cartTotal + action.payload.price * action.payload.quantity,
         };
       }
 
     case DELETE_CART_PRODUCT:
       const productId2 = action.payload;
-      const productToDelete = state.cartProducts.find(
-        (product) => product.id === productId2
-      );
+      const productToDelete = state.cartProducts
+        .filter((product) => product && product.id !== undefined)
+        .find((product) => product.id === productId2);
 
       if (!productToDelete) {
         return state; // No se hace nada si el producto no se encuentra
@@ -230,9 +234,9 @@ const rootReducer = (state = initialState, action) => {
 
       if (productToDelete.count <= 1) {
         // Si el count es menor o igual a 1, elimina el producto del carrito
-        const updatedCartProducts = state.cartProducts.filter(
-          (product) => product.id !== productId2
-        );
+        const updatedCartProducts = state.cartProducts
+          .filter((item) => item && item.id !== undefined)
+          .filter((product) => product.id !== productId2);
 
         // Actualiza el estado de Redux
         const newState = {
@@ -241,19 +245,18 @@ const rootReducer = (state = initialState, action) => {
         };
 
         // Actualiza el localStorage
-        localStorage.setItem(
-          "cart",
-          JSON.stringify(updatedCartProducts)
-        );
+        localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
 
         return newState;
       } else {
         // Si el count es mayor que 1, disminuye el count en 1
-        const updatedCartProducts = state.cartProducts.map((product) =>
-          product.id === productId2
-            ? { ...product, count: product.count - 1 }
-            : product
-        );
+        const updatedCartProducts = state.cartProducts
+          .filter((product) => product && product.id !== undefined)
+          .map((product) =>
+            product.id === productId2
+              ? { ...product, count: product.count - 1 }
+              : product
+          );
 
         // Actualiza el estado de Redux
         const newState = {
@@ -262,10 +265,7 @@ const rootReducer = (state = initialState, action) => {
         };
 
         // Actualiza el localStorage
-        localStorage.setItem(
-          "cart",
-          JSON.stringify(updatedCartProducts)
-        );
+        localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
 
         return newState;
       }
@@ -392,9 +392,9 @@ const rootReducer = (state = initialState, action) => {
 
     case DELETE_CART_PRODUCT_DIRECT: {
       const productId3 = action.payload;
-      const productToDelete = state.cartProducts.find(
-        (product) => product.id === productId3
-      );
+      const productToDelete = state.cartProducts
+        .filter((product) => product && product.id !== undefined)
+        .find((product) => product.id === productId3);
 
       if (!productToDelete) {
         return state; // No se hace nada si el producto no se encuentra
@@ -403,9 +403,9 @@ const rootReducer = (state = initialState, action) => {
       if (productToDelete.count > 0) {
         // Solo si el contador es mayor que cero
         // Elimina el producto del carrito
-        const updatedCartProducts = state.cartProducts.filter(
-          (product) => product.id !== productId3
-        );
+        const updatedCartProducts = state.cartProducts
+          .filter((product) => product && product.id !== undefined)
+          .filter((product) => product.id !== productId3);
 
         // Actualiza el estado de Redux
         const newState = {
@@ -414,17 +414,33 @@ const rootReducer = (state = initialState, action) => {
         };
 
         // Actualiza el localStorage
-        localStorage.setItem(
-          "cart",
-          JSON.stringify(updatedCartProducts)
-        );
+        localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
 
         return newState;
       }
       // En caso contrario, no hagas nada y simplemente devuelve el estado actual
       return state;
     }
+    case GET_REVIEW_BY_PRODUCT_ID:
+      return {
+        ...state,
+        reviews: action.payload,
+      };
+    case GET_REVIEWS:
+      return {
+        ...state,
+        totalReviews: action.payload,
+      };
+    case DELETE_REVIEW:
+      const reviewIdToDelete = action.payload; // ID de la revisión a eliminar
+      const updatedTotalReviews = state.totalReviews.filter(
+        (review) => review.id !== reviewIdToDelete
+      );
 
+      return {
+        ...state,
+        totalReviews: updatedTotalReviews,
+      };
     default:
       return { ...state };
   }

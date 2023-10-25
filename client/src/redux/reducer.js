@@ -41,11 +41,8 @@ import {
   DELETE_CART_PRODUCT_DIRECT,
   EMPTY_CART,
   GET_COLOR_BYID,
-  GET_REVIEW_BY_PRODUCT_ID,
+  GET_CARTS
 } from "./types";
-
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const initialState = {
   muebles: [],
@@ -75,7 +72,7 @@ const initialState = {
   materialId: [],
   tipoDeProductoById: [],
   cartDetail: [],
-  reviews: [],
+  carts: []
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -84,6 +81,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         materialState: action.payload,
       };
+
+      case GET_CARTS:
+        return {
+          ...state,
+          cartsAdmin: action.payload,
+        };
 
     case GET_MATERIAL_BYID:
       return {
@@ -108,6 +111,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         ordersAdmin: action.payload,
       };
+      
+    case GET_CARTS:
+      return {
+        ...state,
+        cartsAdmin: action.payload,
+      };
+
 
     case GET_DETAIL:
       return {
@@ -182,53 +192,31 @@ const rootReducer = (state = initialState, action) => {
 
     case POST_CART_PRODUCT:
       const productId = action.payload;
-// Busca el producto en el carrito actual
-const existingProductIndex = state.cartProducts.findIndex(
-  (product) => product.id === productId
-);
+      // Busca el producto en el carrito actual
+      const existingProductIndex = state.cartProducts.findIndex(
+        (product) => product.id === productId
+      );
+      if (existingProductIndex !== -1) {
+        // Si el producto ya existe en el carrito, incrementa su count
+        const updatedCartProducts = [...state.cartProducts];
+        updatedCartProducts[existingProductIndex].count += 1;
+        return {
+          ...state,
+          cartProducts: updatedCartProducts,
+        };
+      } else {
+        // Si el producto no existe en el carrito, agrégalo con count igual a 1
+        const productToAdd = state.muebles.find(
+          (mueble) => mueble.id === productId
+        );
 
-if (existingProductIndex !== -1) {
-  // Si el producto ya existe en el carrito, verifica si ha alcanzado la cantidad máxima de stock
-  const existingProduct = state.cartProducts[existingProductIndex];
-  if (existingProduct.count < existingProduct.stock) {
-    // Si no ha alcanzado la cantidad máxima, incrementa su count
-    const updatedCartProducts = [...state.cartProducts];
-    updatedCartProducts[existingProductIndex].count += 1;
-    return {
-      ...state,
-      cartProducts: updatedCartProducts,
-    };
-  } else {
-    // Si ha alcanzado la cantidad máxima, muestra una notificación de toast
-    toast.error("Este producto ha alcanzado la cantidad máxima en stock.", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 3000,
-    });
-    return state;
-  }
-} else {
-  // Si el producto no existe en el carrito, agrégalo con count igual a 1
-  const productToAdd = state.muebles.find(
-    (mueble) => mueble.id === productId
-  );
-
-  if (productToAdd && productToAdd.stock > 0) {
-    // Verifica si hay suficiente stock antes de agregar al carrito
-    productToAdd.count = 1;
-    return {
-      ...state,
-      cartProducts: [...state.cartProducts, productToAdd],
-      cartTotal: state.cartTotal + action.payload.price * action.payload.quantity,
-    };
-  } else {
-    // No hay suficiente stock para agregar el producto al carrito
-    toast.error("No hay suficiente stock para este producto.", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 3000,
-    });
-    return state;
-  }
-}
+        return {
+          ...state,
+          cartProducts: [...state.cartProducts, { ...productToAdd, count: 1 }],
+          cartTotal:
+            state.cartTotal + (action.payload.price * action.payload.quantity),
+        };
+      }
 
     case DELETE_CART_PRODUCT:
       const productId2 = action.payload;
@@ -253,7 +241,10 @@ if (existingProductIndex !== -1) {
         };
 
         // Actualiza el localStorage
-        localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
+        localStorage.setItem(
+          "cart",
+          JSON.stringify(updatedCartProducts)
+        );
 
         return newState;
       } else {
@@ -271,7 +262,10 @@ if (existingProductIndex !== -1) {
         };
 
         // Actualiza el localStorage
-        localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
+        localStorage.setItem(
+          "cart",
+          JSON.stringify(updatedCartProducts)
+        );
 
         return newState;
       }
@@ -420,18 +414,17 @@ if (existingProductIndex !== -1) {
         };
 
         // Actualiza el localStorage
-        localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
+        localStorage.setItem(
+          "cart",
+          JSON.stringify(updatedCartProducts)
+        );
 
         return newState;
       }
       // En caso contrario, no hagas nada y simplemente devuelve el estado actual
       return state;
     }
-    case GET_REVIEW_BY_PRODUCT_ID:
-      return {
-        ...state,
-        reviews: action.payload,
-      };
+
     default:
       return { ...state };
   }

@@ -7,6 +7,7 @@ import {
   IconUserSquareRounded,
   IconSquareRoundedPlus,
   IconBox,
+  IconHome2,
 } from "@tabler/icons-react";
 const NavBar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -39,6 +40,10 @@ const NavBar = () => {
         <Link to="/admin/usuarios" className={style.link}>
           <IconUserSquareRounded className={style.icon} stroke="1.3" />
           Usuarios
+        </Link>
+        <Link to="/home" className={style.link}>
+          <IconHome2 className={style.icon} stroke="1.3" />
+          Home
         </Link>
       </div>
     </div>

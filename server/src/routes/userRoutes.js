@@ -18,11 +18,12 @@ const {
 const { authenticateJWT } = require("../middleware/authenticateJWT");
 const { emailAuthJWT } = require("../middleware/emailAuthJWT");
 const { deleteUserHandler } = require("../handlers/UserHandlers/deleteUserHandler");
+const authenticate = require("../middleware/authenticate");
 
 const userRouter = Router();
 
 userRouter.get("/", getUserHandler);
-userRouter.get("/profile/:id", getUserByIdHandler);
+userRouter.get("/profile/:userId", getUserByIdHandler);
 userRouter.get("/profile/", getUserByEmailHandler);
 userRouter.post("/login", authenticateJWT, loginHandler);
 userRouter.post("/", postUserHandler);
@@ -31,4 +32,6 @@ userRouter.get("/change-password", getChangePasswordHandler);
 userRouter.put("/update-password", emailAuthJWT, putUpdatePasswordHandler);
 userRouter.put("/:id", putUserHandler);
 userRouter.delete("/:id", deleteUserHandler);
+userRouter.get("/admin/:userId",  authenticate, getUserByIdHandler);
+
 module.exports = userRouter;

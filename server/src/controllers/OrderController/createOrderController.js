@@ -1,6 +1,5 @@
 const { Order } = require("../../db");
 const { PaymentType } = require("../../db");
-const { Product } = require("../../db");
 const getCartById = require("../../controllers/CartController/getCartByIdController");
 const { nodeMailerConfig } = require("../Utils/nodeMailerConfig");
 
@@ -38,25 +37,13 @@ const createOrder = async (req, res) => {
       // id: cart.id,
       total_amount: cart.total_amount,
       user_name: cart.user_name,
-      products: await Promise.all(
-        cart.products.map(async (product) => {
-          const foundProduct = await Product.findOne({
-            where: { id: product.productId },
-          });
-          const unitPrice = foundProduct.price;
-          const productQuantity = product.product_quantity;
-          const subtotal = unitPrice * productQuantity;
-          return {
-            name: product.name,
-            product_quantity: productQuantity,
-            productId: product.productId,
-            unit_price: unitPrice,
-            subtotal: subtotal,
-          };
-        })
-      ),
+      products: cart.products.map((product) => ({
+        name: product.name,
+        product_quantity: product.product_quantity,
+        productId: product.productId,
+        price: product.price,
+      })),
     };
-    console.log("CARTDATA: " + JSON.stringify(cartData));
     // console.log("holis", cartData)
 
     const orderWithCart = {
@@ -65,6 +52,10 @@ const createOrder = async (req, res) => {
       e_mail: e_mail,
       cartInfo: cartData,
     };
+
+    orderWithCart.cartInfo.products.forEach((prod) => {
+      console.log("\t-" + prod);
+    });
 
     await nodeMailerConfig(
       e_mail,

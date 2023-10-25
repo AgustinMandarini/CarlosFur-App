@@ -82,6 +82,12 @@ const rootReducer = (state = initialState, action) => {
         materialState: action.payload,
       };
 
+      case GET_CARTS:
+        return {
+          ...state,
+          cartsAdmin: action.payload,
+        };
+
     case GET_MATERIAL_BYID:
       return {
         ...state,

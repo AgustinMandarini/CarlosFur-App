@@ -12,23 +12,23 @@ function LoginBar() {
   const { logout, isAuthenticated, user } = useAuth0();
   const dispatch = useDispatch();
   const loggedUser = useSelector((state) => state.loggedUser);
+
   const userIsAuthenticated = localStorage.getItem("token") !== null;
+
   const cartProducts = useSelector((state) => state.cartProducts) || [];
 
   let cartArray = [];
 
   if (cartProducts.length > 0) {
     cartArray = cartProducts.reduce((result, product) => {
-      if (product && product.id !== undefined) {
-        const existingProduct = result.find((item) => item.id === product.id);
-        if (existingProduct) {
-          existingProduct.quantity += 1;
-        } else {
-          result.push({
-            id: product.id,
-            quantity: 1,
-          });
-        }
+      const existingProduct = result.find((item) => item.id === product.id);
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        result.push({
+          id: product.id,
+          quantity: 1,
+        });
       }
       return result;
     }, []);
@@ -38,7 +38,7 @@ function LoginBar() {
 
   const handleLogout = () => {
     toast.info("Cerrando Sesión", {
-      position: toast.POSITION.TOP_CENTER,
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
     dispatch(logOut());
     localStorage.removeItem("cartId");

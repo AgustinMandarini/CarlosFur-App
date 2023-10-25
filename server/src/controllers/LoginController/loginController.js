@@ -1,4 +1,3 @@
-// getUserController.js
 const { User } = require("../../db.js");
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");

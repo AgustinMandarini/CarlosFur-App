@@ -1,4 +1,4 @@
-import { Route, Link} from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import Productos from "./views/Productos/Productos";
 import Ventas from "./views/Ventas/Ventas";
 import DetalleCart from "./views/Ventas/DetalleCart";
@@ -25,10 +25,7 @@ function Admin() {
       <nav className="AdminNav">
         <NavBar />
       </nav>
-      <Link to="/home">
-        {" "}
-        <button>Home</button>
-      </Link>
+
       <div className="AdminContent">
         <Route exact path="/admin/productos" component={Productos} />
         <Route path="/admin/productos/editar/:id" component={EditarProducto} />

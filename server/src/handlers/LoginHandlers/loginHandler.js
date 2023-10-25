@@ -1,4 +1,3 @@
-//getUserHandler.js
 const { loginUser } = require("../../controllers/LoginController/loginController");
 
 const loginHandler = async (req, res) => {

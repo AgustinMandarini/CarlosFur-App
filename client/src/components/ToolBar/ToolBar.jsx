@@ -20,10 +20,6 @@ const ToolBar = () => {
   const nameState = useSelector((state) => state.nameState);
   const [showFilters, setShowFilters] = useState(false);
 
-  const toggleFilters = () => {
-    setShowFilters(!showFilters);
-  };
-
   useEffect(() => {
     if (nameState === true) {
       const defaultOptionValue = "allOptions"; // Valor que debe coincidir con las opciones que quieres seleccionar

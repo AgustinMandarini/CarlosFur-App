@@ -10,9 +10,10 @@ import {
   IconHome2,
   IconStar,
 } from "@tabler/icons-react";
+import { useSelector } from "react-redux";
 const NavBar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  const loggedUser = useSelector((state) => state.loggedUser);
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -24,21 +25,21 @@ const NavBar = () => {
           <IconSquareRoundedPlus stroke="1.3" className={style.icon} /> Crear
           {isDropdownOpen && (
             <div className={style.dropdownContent}>
-              <Link to="/admin/crear/producto">Producto</Link>
-              <Link to="/admin/crear/color">Color</Link>
-              <Link to="/admin/crear/tipo-de-producto">Tipo de Producto</Link>
-              <Link to="/admin/crear/material">Material</Link>
+              <Link to={`/user/admin/${loggedUser.id}/crear/producto`}>Producto</Link>
+              <Link to={`/user/admin/${loggedUser.id}/crear/color`}>Color</Link>
+              <Link to={`/user/admin/${loggedUser.id}/crear/tipo-de-producto`}>Tipo de Producto</Link>
+              <Link to={`/user/admin/${loggedUser.id}/crear/material`}>Material</Link>
             </div>
           )}
         </div>
-        <Link to="user/admin/:userId/productos" className={style.link}>
+        <Link to={`/user/admin/${loggedUser.id}/productos`} className={style.link}> {/* cuando haglo clic en Productos*/}
           <IconBox stroke="1.3" className={style.icon} /> Productos
         </Link>
-        <Link to="/admin/ventas" className={style.link}>
+        <Link to={`/user/admin/${loggedUser.id}/ventas`} className={style.link}>
           <IconCoin stroke="1.3" className={style.icon} />
           Ventas
         </Link>
-        <Link to="/admin/usuarios" className={style.link}>
+        <Link to={`/user/admin/${loggedUser.id}/usuarios`} className={style.link}>
           <IconUserSquareRounded className={style.icon} stroke="1.3" />
           Usuarios
         </Link>

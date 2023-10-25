@@ -84,8 +84,9 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.158);
   padding-bottom: 4px;
   padding-top: 4px;
-
+  max-width: 320px;
   padding-left: 3px;
+  line-height: 15px;
 }
 .cntn {
   display: flex;

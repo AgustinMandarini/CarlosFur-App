@@ -61,20 +61,22 @@ const CartProductContainer = () => {
   return (
     <div className={style.cntnCart}>
       {cartProducts.length > 0 ? (
-        cartProducts.map((m) => {
-          return (
-            <div className={style.cntnCard} key={m.id}>
-              <CartProductCard
-                id={m.id}
-                name={m.name}
-                count={m.count}
-                totalPrice={m.price}
-                imagePath={m.imagePath}
-                setCheckIncrementAndDecrement={setCheckIncrementAndDecrement}
-              />
-            </div>
-          );
-        })
+        cartProducts
+          .filter((item) => item && item.id !== undefined)
+          .map((m) => {
+            return (
+              <div className={style.cntnCard} key={m.id}>
+                <CartProductCard
+                  id={m.id}
+                  name={m.name}
+                  count={m.count}
+                  totalPrice={m.price}
+                  imagePath={m.imagePath}
+                  setCheckIncrementAndDecrement={setCheckIncrementAndDecrement}
+                />
+              </div>
+            );
+          })
       ) : (
         <div className="noProducts">
           <h1>No se ha añadido nada al carrito</h1>

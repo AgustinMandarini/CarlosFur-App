@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
       last_name: {
         type: DataTypes.STRING,
         validate: {
-          len: [2, 30],
+          len: [0, 30],
         },
       },
       is_admin: {

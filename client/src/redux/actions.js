@@ -43,6 +43,7 @@ import {
   GET_PRODUCT_TYPE_BYID,
   POST_REVIEW,
   GET_REVIEW_BY_PRODUCT_ID,
+  GET_CARTS
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -63,6 +64,17 @@ export const getProducts = () => {
     return dispatch({
       type: GET_PRODUCTS,
       payload: product,
+    });
+  };
+};
+
+export const getCarts = () => {
+  return async function (dispatch) {
+    const apiData = await axios.get(`${apiUrl}/cart`);
+    const carts = apiData.data;
+    return dispatch({
+      type: GET_CARTS,
+      payload: carts,
     });
   };
 };

@@ -23,21 +23,21 @@ const NavBar = () => {
           <IconSquareRoundedPlus stroke="1.3" className={style.icon} /> Crear
           {isDropdownOpen && (
             <div className={style.dropdownContent}>
-              <Link to="/admin/crear/producto">Producto</Link>
-              <Link to="/admin/crear/color">Color</Link>
-              <Link to="/admin/crear/tipo-de-producto">Tipo de Producto</Link>
-              <Link to="/admin/crear/material">Material</Link>
+              <Link to="/user/admin/:userId/crear/producto">Producto</Link>
+              <Link to="/user/admin/:userId/crear/color">Color</Link>
+              <Link to="/user/admin/:userId/crear/tipo-de-producto">Tipo de Producto</Link>
+              <Link to="/user/admin/:userId/crear/material">Material</Link>
             </div>
           )}
         </div>
-        <Link to="/admin/productos" className={style.link}>
+        <Link to="/user/admin/:userId/productos" className={style.link}>
           <IconBox stroke="1.3" className={style.icon} /> Productos
         </Link>
-        <Link to="/admin/ventas" className={style.link}>
+        <Link to="/user/admin/:userId/ventas" className={style.link}>
           <IconCoin stroke="1.3" className={style.icon} />
           Ventas
         </Link>
-        <Link to="/admin/usuarios" className={style.link}>
+        <Link to="/user/admin/:userId/usuarios" className={style.link}>
           <IconUserSquareRounded className={style.icon} stroke="1.3" />
           Usuarios
         </Link>

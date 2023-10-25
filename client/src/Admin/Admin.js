@@ -25,20 +25,20 @@ function Admin() {
       <nav className="AdminNav">
         <NavBar />
       </nav>
-
+          
       <div className="AdminContent">
-        <Route exact path="/admin/productos" component={Productos} />
-        <Route path="/admin/productos/editar/:id" component={EditarProducto} />
-        <Route path="/admin/ventas" component={Ventas} />
-        <Route path="/admin/usuarios" component={Usuarios} />
-        <Route path="/admin/crear/producto" component={CrearProducto} />
-        <Route path="/admin/crear/color" component={CrearColor} />
-        <Route path="/admin/crear/material" component={CrearMaterial} />
+        <Route exact path="/user/admin/:userId/productos" component={Productos} />
+        <Route path="/user/admin/:userId/productos/editar/:id" component={EditarProducto} />
+        <Route path="/user/admin/:userId/ventas" component={Ventas} />
+        <Route path="/user/admin/:userId/usuarios" component={Usuarios} />
+        <Route path="/user/admin/:userId/crear/producto" component={CrearProducto} />
+        <Route path="/user/admin/:userId/crear/color" component={CrearColor} />
+        <Route path="/user/admin/:userId/crear/material" component={CrearMaterial} />
         <Route
-          path="/admin/crear/tipo-de-producto"
+          path="/user/admin/:userId/crear/tipo-de-producto"
           component={CrearTipoProducto}
         />
-        <Route path="/admin/detalle/:cartId" component={DetalleCart} />
+        <Route path="/user/admin/:userId/detalle/:cartId" component={DetalleCart} />
       </div>
     </div>
   );

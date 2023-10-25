@@ -8,8 +8,9 @@ const { deleteProductHandler } = require("../handlers/ProductHandlers/deleteProd
 const { getProductAdminHandler } = require("../handlers/ProductHandlers/getProductAdminHandler")
 
 const productRouter = Router();
-productRouter.get("", getProductHandler);
+
 productRouter.get("/admin", getProductAdminHandler);
+productRouter.get("", getProductHandler);
 productRouter.get("/:id", getProductByIdHandler);
 productRouter.post("", postProductHandler);
 productRouter.put("/:id", putProductHandler);

@@ -54,13 +54,11 @@ const Home = () => {
         filters.material =
           filters.material === "allOptions" ? "" : filters.material;
         filters.color = filters.color === "allOptions" ? "" : filters.color;
-
         filters.productType =
           filters.productType === "allOptions" ? "" : filters.productType;
         filters.material =
           filters.material === "allOptions" ? "" : filters.material;
         filters.color = filters.color === "allOptions" ? "" : filters.color;
-
         filters.productType =
           filters.productType === "allOptions" ? "" : filters.productType;
         filters.material =

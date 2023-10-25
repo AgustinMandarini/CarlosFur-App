@@ -126,7 +126,7 @@ const EditarProducto = () => {
         <div onClick={toggleEdit}>
           <img src={edit} alt="" className={style.edit} />
         </div>
-        {/*NOMBRE*/}
+        {/NOMBRE/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -154,7 +154,7 @@ const EditarProducto = () => {
           </Form.Group>
         </div>
         <div className={style.editContainer}>
-          {/*PRECIO*/}
+          {/PRECIO/}
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
               Precio:{" "}
@@ -181,7 +181,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*ALTURA*/}
+        {/ALTURA/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -209,7 +209,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*PROFUNDIDAD*/}
+        {/PROFUNDIDAD/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -237,7 +237,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*ANCHO*/}
+        {/ANCHO/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -265,7 +265,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*PESO*/}
+        {/PESO/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -293,7 +293,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*STOCK*/}
+        {/STOCK/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -321,7 +321,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*COLOR*/}
+        {/COLOR/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -361,7 +361,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*MATERIAL*/}
+        {/MATERIAL/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -401,7 +401,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*TIPO DE PRODUCTo*/}
+        {/TIPO DE PRODUCTo/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -445,7 +445,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*DESCRIPCION*/}
+        {/DESCRIPCION/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label className={showFilters ? style.labelEdit : style.label}>
@@ -472,7 +472,7 @@ const EditarProducto = () => {
             )}
           </Form.Group>
         </div>
-        {/*IMAGEN*/}
+        {/IMAGEN/}
         <div className={style.editContainer}>
           <Form.Group className={style.formGroup} controlId="formBasicEmail">
             <Form.Label

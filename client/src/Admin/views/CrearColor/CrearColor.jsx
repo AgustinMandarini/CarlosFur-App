@@ -61,7 +61,7 @@ const CrearProducto = () => {
           </div>
         </Form.Group>
 
-        {/*DESCRIPCION*/}
+        {/DESCRIPCION/}
         <Form.Group className={style.formGroup} controlId="formBasicEmail">
           <Form.Label className={style.label}>Descripcion: </Form.Label>
           <div className={style.divinputError}>
@@ -111,4 +111,5 @@ const CrearProducto = () => {
   );
 };
 
-export default CrearProducto;
+export default CrearColor;
+

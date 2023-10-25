@@ -31,5 +31,4 @@ userRouter.get("/change-password", getChangePasswordHandler);
 userRouter.put("/update-password", emailAuthJWT, putUpdatePasswordHandler);
 userRouter.put("/:id", putUserHandler);
 userRouter.delete("/:id", deleteUserHandler);
-
 module.exports = userRouter;

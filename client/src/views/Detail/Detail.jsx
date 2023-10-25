@@ -27,12 +27,14 @@ const Detail = () => {
   const cartProducts = useSelector((state) => state.cartProducts) || [];
   const colorState = useSelector((state) => state.colorState);
 
-  const countForProductID = cartProducts.reduce((count, product) => {
-    if (product.id === Number(id)) {
-      return count + product.count;
-    }
-    return count;
-  }, 0);
+  const countForProductID = cartProducts
+    .filter((product) => product && product.id !== undefined)
+    .reduce((count, product) => {
+      if (product.id === Number(id)) {
+        return count + product.count;
+      }
+      return count;
+    }, 0);
   const [counter, setCounter] = useState(0);
   const [product, setProduct] = useState(0);
   const handleUpdateCart = () => {
@@ -40,10 +42,12 @@ const Detail = () => {
     if (user && cartId) {
       const userParse = JSON.parse(user);
       const cartIdParse = JSON.parse(cartId);
-      const newProducts = cartProducts.map((item) => ({
-        id: item.id,
-        quantity: item.count,
-      }));
+      const newProducts = cartProducts
+        .filter((product) => product && product.id !== undefined)
+        .map((item) => ({
+          id: item.id,
+          quantity: item.count,
+        }));
 
       const data = {
         userId: userParse.userId,

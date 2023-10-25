@@ -19,6 +19,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  padding: 25px;
   box-shadow: 0 35px 60px -15px #070707;
 }
 
@@ -85,9 +86,10 @@
   text-decoration: none;
 }
 .linkReset {
-  font-size: 18px;
-  color: #0c00f7;
+  font-size: 15px;
+  color: black;
   text-decoration: none;
+  margin-top: 0px;
 }
 
 /* ... Otros estilos */

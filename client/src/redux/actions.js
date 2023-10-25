@@ -43,7 +43,9 @@ import {
   GET_PRODUCT_TYPE_BYID,
   POST_REVIEW,
   GET_REVIEW_BY_PRODUCT_ID,
-  GET_CARTS
+  GET_CARTS,
+  GET_REVIEWS,
+  DELETE_REVIEW,
 } from "./types";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -117,7 +119,7 @@ export const postProduct = (payload) => {
         }, 3000);
       }
     } catch (error) {
-      toast.error("No se pudo crear el producto",{
+      toast.error("No se pudo crear el producto", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
       });
@@ -590,6 +592,31 @@ export const getReviewByProductId = (productId) => {
       dispatch({ type: GET_REVIEW_BY_PRODUCT_ID, payload: data });
     } catch (error) {
       console.error("No se encontraron reviews de este producto ", error);
+    }
+  };
+};
+export const getReviews = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${apiUrl}/review/`);
+      const data = response.data;
+      dispatch({ type: GET_REVIEWS, payload: data });
+    } catch (error) {
+      console.error("No se encontraron reviews de este producto ", error);
+    }
+  };
+};
+export const deleteReview = (reviewId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`${apiUrl}/review/${reviewId}`);
+      const eliminado = response.data;
+      dispatch({
+        type: DELETE_REVIEW,
+        payload: eliminado,
+      });
+    } catch (error) {
+      console.error("Error en la acción putProduct:", error);
     }
   };
 };

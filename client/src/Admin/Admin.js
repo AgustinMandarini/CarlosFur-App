@@ -13,6 +13,7 @@ import "./Admin.css";
 import { useEffect } from "react";
 import { getProductsAdmin } from "./../redux/actions";
 import { useDispatch } from "react-redux";
+import Reviews from "./views/Reviews/Reviews";
 
 function Admin() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function Admin() {
           path="/admin/crear/tipo-de-producto"
           component={CrearTipoProducto}
         />
+        <Route path="/admin/reviews" component={Reviews} />
         <Route path="/admin/detalle/:cartId" component={DetalleCart} />
       </div>
     </div>

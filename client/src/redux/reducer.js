@@ -41,7 +41,7 @@ import {
   DELETE_CART_PRODUCT_DIRECT,
   EMPTY_CART,
   GET_COLOR_BYID,
-  GET_CARTS
+  GET_CARTS,
 } from "./types";
 
 const initialState = {
@@ -72,7 +72,7 @@ const initialState = {
   materialId: [],
   tipoDeProductoById: [],
   cartDetail: [],
-  carts: []
+  carts: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -111,13 +111,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         ordersAdmin: action.payload,
       };
-      
+
     case GET_CARTS:
       return {
         ...state,
         cartsAdmin: action.payload,
       };
-
 
     case GET_DETAIL:
       return {
@@ -193,9 +192,9 @@ const rootReducer = (state = initialState, action) => {
     case POST_CART_PRODUCT:
       const productId = action.payload;
       // Busca el producto en el carrito actual
-      const existingProductIndex = state.cartProducts.findIndex(
-        (product) => product.id === productId
-      );
+      const existingProductIndex = state.cartProducts
+        .filter((product) => product && product.id !== undefined)
+        .findIndex((product) => product.id === productId);
       if (existingProductIndex !== -1) {
         // Si el producto ya existe en el carrito, incrementa su count
         const updatedCartProducts = [...state.cartProducts];
@@ -214,7 +213,7 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           cartProducts: [...state.cartProducts, { ...productToAdd, count: 1 }],
           cartTotal:
-            state.cartTotal + (action.payload.price * action.payload.quantity),
+            state.cartTotal + action.payload.price * action.payload.quantity,
         };
       }
 
@@ -241,10 +240,7 @@ const rootReducer = (state = initialState, action) => {
         };
 
         // Actualiza el localStorage
-        localStorage.setItem(
-          "cart",
-          JSON.stringify(updatedCartProducts)
-        );
+        localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
 
         return newState;
       } else {
@@ -262,10 +258,7 @@ const rootReducer = (state = initialState, action) => {
         };
 
         // Actualiza el localStorage
-        localStorage.setItem(
-          "cart",
-          JSON.stringify(updatedCartProducts)
-        );
+        localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
 
         return newState;
       }
@@ -414,10 +407,7 @@ const rootReducer = (state = initialState, action) => {
         };
 
         // Actualiza el localStorage
-        localStorage.setItem(
-          "cart",
-          JSON.stringify(updatedCartProducts)
-        );
+        localStorage.setItem("cart", JSON.stringify(updatedCartProducts));
 
         return newState;
       }

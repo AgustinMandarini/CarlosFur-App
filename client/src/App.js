@@ -27,6 +27,7 @@ import {
 } from "./views";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import Footer from "./views/Footer/Footer";
 
 function App() {
   const location = useLocation();
@@ -98,11 +99,9 @@ function App() {
       <Route path="/forgottenPassword" component={ForgottenPassword}></Route>
       <Route path="/resetPassword/:e_mail" component={ResetPassword}></Route>
 
-      <Route
-        path="/user/admin/:userId"
-        component={isAdmin ? Admin : Home}
-      />      
+      <Route path="/user/admin/:userId" component={isAdmin ? Admin : Home} />
       <Route path="/user/profile/:id" component={Profile} />
+      <Footer />
     </div>
   );
 }

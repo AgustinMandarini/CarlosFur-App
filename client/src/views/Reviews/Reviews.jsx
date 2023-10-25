@@ -7,6 +7,8 @@ import { FaStar } from "react-icons/fa";
 import Modal from "react-bootstrap/Modal";
 import StarRating from "./StartRating";
 
+import { useHistory } from "react-router-dom";
+
 const Reviews = ({ id }) => {
   const [values, setValues] = useState("");
   const [currentValue, setCurrentValue] = useState(0);
@@ -18,7 +20,7 @@ const Reviews = ({ id }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.loggedUser);
   const reviews = useSelector((state) => state.reviews);
-  console.log(reviews, "aca");
+  const history = useHistory();
 
   const handleClick = (value) => {
     setCurrentValue(value);
@@ -40,6 +42,11 @@ const Reviews = ({ id }) => {
   const handleSubmit = async () => {
     if (currentValue === 0) {
       setShowSecondModal(true);
+      return;
+    }
+    if (!userId) {
+      history.push("/logIn");
+
       return;
     }
 

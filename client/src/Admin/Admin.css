@@ -22,3 +22,24 @@
   flex: 3; /* Ocupa el 100% del ancho disponible en la parte derecha */
   padding: 16px;
 }
+
+/* Media Query para tablet: ajustar el diseño para tabletas */
+@media (min-width: 768px) {
+  .Admin {
+    flex-direction: row; /* Volver a la disposición horizontal para tabletas */
+    justify-content: center; /* Centrar contenido horizontalmente */
+  }
+
+  .AdminNav {
+    width: auto; /* Restablecer el ancho */
+  }
+
+  .AdminContent {
+    flex: 3; /* Ocupar parte del ancho en tabletas */
+  }
+}
+
+/* Media Query para pantallas más grandes (por ejemplo, escritorios) si es necesario */
+@media (min-width: 1024px) {
+  /* Agregar estilos específicos para pantallas más grandes aquí */
+}

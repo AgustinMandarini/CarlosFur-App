@@ -35,7 +35,6 @@ const Profile = () => {
     }
   };
   useEffect(() => {
-
     fetchUserProfile();
   }, [id]);
 
@@ -77,13 +76,14 @@ const Profile = () => {
             </CardTitle>
             <Row>
               <Col md="12">
-                <CardSubtitle tag="h6" className="mb-2 text-muted">
-                  <strong>Nombre:</strong> {userName}
+                <CardSubtitle tag="h6" className={styles.subtitle}>
+                  <strong className={styles.strong}>Nombre: </strong> {userName}
                 </CardSubtitle>
               </Col>
               <Col md="12">
-                <CardSubtitle tag="h6" className="mb-2 text-muted">
-                  <strong>Email:</strong> {user.e_mail || "N/A"}
+                <CardSubtitle tag="h6" className={styles.subtitle}>
+                  <strong className={styles.strong}>Email: </strong>{" "}
+                  {user.e_mail || "N/A"}
                 </CardSubtitle>
               </Col>
               {user.is_admin && (

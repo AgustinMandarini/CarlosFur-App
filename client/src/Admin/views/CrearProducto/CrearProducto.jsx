@@ -65,7 +65,7 @@ const CrearProducto = () => {
       };
     } else {
       toast.error("No es un formato de imagen válido", {
-        position: toast.POSITION.TOP_CENTER,
+        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
       });
     }

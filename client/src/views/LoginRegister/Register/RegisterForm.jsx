@@ -71,7 +71,7 @@ const RegisterForm = () => {
         const data = response.data;
         if (Object.keys(data).length > 0 && data.user.e_mail === form.e_mail) {
           toast.error("Ya existe un usuario con ese nombre o email", {
-            position: toast.POSITION.TOP_CENTER,
+            position: toast.POSITION.BOTTOM_RIGHT,
             autoClose: 3000,
           });
         }
@@ -101,7 +101,7 @@ const RegisterForm = () => {
             ) {
               
               toast.success("Usuario creado exitosamente!", {
-                position: toast.POSITION.TOP_CENTER,
+                position: toast.POSITION.BOTTOM_RIGHT,
                 autoClose: 3000,
               });
               

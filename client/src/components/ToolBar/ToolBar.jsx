@@ -28,10 +28,12 @@ const ToolBar = () => {
     if (nameState === true) {
       const defaultOptionValue = "allOptions";
 
+
       const selects = document.querySelectorAll(`.${style.select}`);
       selects.forEach((select) => {
         select.value = defaultOptionValue;
       });
+
 
       selects.forEach((select) => {
         const event = new Event("change", { bubbles: true });

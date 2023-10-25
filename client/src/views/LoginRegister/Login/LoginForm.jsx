@@ -19,7 +19,7 @@ const LoginForm = () => {
 
   const mostrarNotificacionBienvenida = () => {
     toast.success("Iniciando Sesión", {
-      position: toast.POSITION.TOP_CENTER,
+      position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
 
@@ -65,7 +65,7 @@ const LoginForm = () => {
         }
       } catch (error) {
         toast.error("El usuario no se encuentra registrado", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 3000,
         });
       }

@@ -65,7 +65,7 @@
   width: 140px; /* Tamaño deseado para ambas imágenes */
   height: 140px; /* Tamaño deseado para ambas imágenes */
   border: 1px solid black;
-  /* object-fit: contain; */
+  object-fit: cover;
 }
 .img2 {
   width: 126px; /* Tamaño deseado para ambas imágenes */

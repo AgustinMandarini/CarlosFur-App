@@ -34,5 +34,4 @@ userRouter.put("/:id", putUserHandler);
 userRouter.delete("/:id", deleteUserHandler);
 userRouter.get("/admin/:userId",  authenticate, getUserByIdHandler);
 
-
 module.exports = userRouter;

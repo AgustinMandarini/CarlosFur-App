@@ -226,9 +226,9 @@ const rootReducer = (state = initialState, action) => {
 
     case DELETE_CART_PRODUCT:
       const productId2 = action.payload;
-      const productToDelete = state.cartProducts.find(
-        (product) => product.id === productId2
-      );
+      const productToDelete = state.cartProducts
+        .filter((product) => product && product.id !== undefined)
+        .find((product) => product.id === productId2);
 
       if (!productToDelete) {
         return state; // No se hace nada si el producto no se encuentra
@@ -236,9 +236,9 @@ const rootReducer = (state = initialState, action) => {
 
       if (productToDelete.count <= 1) {
         // Si el count es menor o igual a 1, elimina el producto del carrito
-        const updatedCartProducts = state.cartProducts.filter(
-          (product) => product.id !== productId2
-        );
+        const updatedCartProducts = state.cartProducts
+          .filter((item) => item && item.id !== undefined)
+          .filter((product) => product.id !== productId2);
 
         // Actualiza el estado de Redux
         const newState = {
@@ -252,11 +252,13 @@ const rootReducer = (state = initialState, action) => {
         return newState;
       } else {
         // Si el count es mayor que 1, disminuye el count en 1
-        const updatedCartProducts = state.cartProducts.map((product) =>
-          product.id === productId2
-            ? { ...product, count: product.count - 1 }
-            : product
-        );
+        const updatedCartProducts = state.cartProducts
+          .filter((product) => product && product.id !== undefined)
+          .map((product) =>
+            product.id === productId2
+              ? { ...product, count: product.count - 1 }
+              : product
+          );
 
         // Actualiza el estado de Redux
         const newState = {
@@ -392,9 +394,9 @@ const rootReducer = (state = initialState, action) => {
 
     case DELETE_CART_PRODUCT_DIRECT: {
       const productId3 = action.payload;
-      const productToDelete = state.cartProducts.find(
-        (product) => product.id === productId3
-      );
+      const productToDelete = state.cartProducts
+        .filter((product) => product && product.id !== undefined)
+        .find((product) => product.id === productId3);
 
       if (!productToDelete) {
         return state; // No se hace nada si el producto no se encuentra
@@ -403,9 +405,9 @@ const rootReducer = (state = initialState, action) => {
       if (productToDelete.count > 0) {
         // Solo si el contador es mayor que cero
         // Elimina el producto del carrito
-        const updatedCartProducts = state.cartProducts.filter(
-          (product) => product.id !== productId3
-        );
+        const updatedCartProducts = state.cartProducts
+          .filter((product) => product && product.id !== undefined)
+          .filter((product) => product.id !== productId3);
 
         // Actualiza el estado de Redux
         const newState = {

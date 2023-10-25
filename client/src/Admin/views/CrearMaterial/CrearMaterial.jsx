@@ -34,9 +34,11 @@ const CrearMaterial = () => {
       // Mostrar errores en los campos
       setErrors(validationErrors);
     }
+   
   };
 
   const handleAcept = () => {
+    window.location.href = "http://localhost:3000/admin/crear/producto"
     setModal(false);
   };
 
@@ -61,7 +63,7 @@ const CrearMaterial = () => {
           </div>
         </Form.Group>
 
-        {/DESCRIPCION/}
+      
         <Form.Group className={style.formGroup} controlId="formBasicEmail">
           <Form.Label className={style.label}>Descripcion: </Form.Label>
           <div className={style.divinputError}>

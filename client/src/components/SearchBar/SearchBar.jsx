@@ -11,30 +11,16 @@ const SearchBar = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-
-    const performSearch = async () => {
+    if (products !== "") {
       dispatch(getProductByName(products));
       dispatch(setName(true));
-    };
+    }
+  }, [products]);
 
-    const timer = setTimeout(performSearch, 500); 
-
-    return () => clearTimeout(timer);
-  }, [products, dispatch]);
-  
-
-    const handleOnClick = (e) => {
-    e.preventDefault();
-    dispatch(getProductByName(products));
-    dispatch(setName(true));
-  };
-
-
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
     e.preventDefault();
     setNameProducts(e.target.value);
   };
-
 
   return (
     <div className={style.divSerchBar}>
@@ -42,12 +28,9 @@ const SearchBar = () => {
         <InputGroup size="sm">
           <Form.Control
             placeholder="buscar mueble..."
-            onChange={handleSubmit}
+            onChange={handleChange}
             className={style.inputSearch}
           />
-          <Button className="ms-1" variant="dark" onClick={handleOnClick}>
-            Buscar
-          </Button>
         </InputGroup>
       )}
     </div>
@@ -55,9 +38,6 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
-
-
-
 
 // import { React, useState } from "react";
 // import style from "./SearchBar.module.css";

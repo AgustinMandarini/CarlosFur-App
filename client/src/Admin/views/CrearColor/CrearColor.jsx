@@ -112,8 +112,5 @@ const CrearColor = () => {
   );
 };
 
-<<<<<<< HEAD
 export default CrearColor;
-=======
-export default CrearColor;
->>>>>>> 8bd46649df8c2deb8e5867bfcf87c7b5195e2066
+

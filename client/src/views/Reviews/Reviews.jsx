@@ -124,7 +124,7 @@ const Reviews = ({ id }) => {
         </button>
       </div>
       <div>
-        {reviews.length > 0 && <p>Reviews</p>}
+        {reviews && reviews.length > 0 && <p>Reviews</p>}
 
         {reviews && reviews.reviews
           ? reviews.reviews.map((review, index) => (

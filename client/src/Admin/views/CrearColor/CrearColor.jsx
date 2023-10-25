@@ -7,7 +7,7 @@ import validation from "./validation";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-const CrearColor = () => {
+const CrearProducto = () => {
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({});
@@ -37,7 +37,7 @@ const CrearColor = () => {
   };
 
   const handleAcept = () => {
-    window.location.href = "http://localhost:3000/admin/crear/producto"
+    window.location.href = "http://localhost:3000/admin/crear/producto";
     setModal(false);
   };
 
@@ -62,7 +62,6 @@ const CrearColor = () => {
           </div>
         </Form.Group>
 
-       
         <Form.Group className={style.formGroup} controlId="formBasicEmail">
           <Form.Label className={style.label}>Descripcion: </Form.Label>
           <div className={style.divinputError}>

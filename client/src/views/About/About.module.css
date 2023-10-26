@@ -2,6 +2,20 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between; /* Cambia a 'space-between' para distribuir las tarjetas en filas */
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-color: #4158d0;
+  background-image: linear-gradient(
+    43deg,
+   
+    #d6c365 0%,
+     #f4efe7 46%,
+    #dbcca0 100%
+
+  );
+  padding-top: 110px;
+  overflow: hidden;
 }
 
 .aboutCard {
@@ -9,3 +23,30 @@
   margin-right: 10px; /* Espacio entre las tarjetas */
   margin-bottom: 10px; /* Espacio entre las filas */
 }
+
+
+/* skils style  */
+.skillsContainer{
+  padding: 0.5em;
+  margin:0.1rem;
+  background-color: #f1e8c7;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.623);
+}
+.skillBox{
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 1rem;
+}
+.skillImage{
+  width: 60px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-size: contain;
+ 
+}
+

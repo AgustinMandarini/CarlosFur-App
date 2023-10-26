@@ -37,7 +37,7 @@
   align-items: start !important;
   text-align: start !important;
   margin-top: 4px !important;
-  width: 320px;
+  max-width: 320px;
 }
 .strong {
   text-align: left;
@@ -87,7 +87,7 @@
   transition: background-color 0.3s, color 0.3s;
   height: 30px;
   width: 200px;
-  margin-top: 3%;
+  margin: 6px;
 
   /* Añadir estas propiedades para centrar el texto */
   text-align: center;

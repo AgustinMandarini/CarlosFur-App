@@ -133,7 +133,7 @@ const Reviews = ({ id }) => {
       <div>
         {reviews && reviews.length > 0 && <p>Reviews</p>}
 
-        {reviews && reviews.reviews
+        {reviews && reviews.reviews && reviews.review !== null
           ? reviews.reviews.map((review, index) => (
               <div key={index} className={style.reviewItem}>
                 <div className={style.reviewItemInner}>
@@ -155,7 +155,7 @@ const Reviews = ({ id }) => {
         </Modal.Header>
         <Modal.Footer className={style.footerModal}>
           <p>
-            Gracias <strong>{userId && userId.user_name}</strong>, tendremos en
+            Gracias <strong>{userId && userId?.user_name}</strong>, tendremos en
             cuenta tu opinión!
           </p>
           <Button className={style.buttonModal} onClick={handleAcept}>

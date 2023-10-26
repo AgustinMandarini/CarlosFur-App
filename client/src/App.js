@@ -47,18 +47,26 @@ function App() {
     }
   }, [dispatch, isAuthenticated]);
 
+  const carritoDelLocal = JSON.parse(localStorage.getItem("cart"));
+
   if (isLoading) {
-    return (
-      <div className="page-layout">
-        <PageLoader />
-      </div>
-    );
+    if (carritoDelLocal !== cartProducts) {
+      console.log("Cargando");
+      return (
+        <div className="page-layout">
+          <PageLoader />
+        </div>
+      );
+    }
   }
 
   const isAdmin = loggedUser ? loggedUser.is_admin : false;
 
   const isAdminRoute = pathname.startsWith("/admin");
 
+  console.log("carritoDelLocal:", carritoDelLocal);
+  console.log("cartProducts:", cartProducts);
+  console.log("Ya cargo");
   return (
     <div className="App">
       {location.pathname !== "/" && !isAdminRoute && <LoginRegisterBar />}
@@ -78,7 +86,6 @@ function App() {
       <Route path="/forgottenPassword" component={ForgottenPassword}></Route>
       <Route path="/resetPassword/:e_mail" component={ResetPassword}></Route>
 
-
       <Route
         path="/user/admin/:userId"
         render={({ match }) =>
@@ -89,7 +96,6 @@ function App() {
           )
         }
       />
-      
 
       <Route path="/user/profile/:id" component={Profile} />
       <Footer />
@@ -98,4 +104,3 @@ function App() {
 }
 
 export default App;
-

@@ -42,11 +42,13 @@ import {
   EMPTY_CART,
   GET_COLOR_BYID,
   GET_CARTS,
-
+  GET_REVIEWS,
   GET_REVIEW_BY_PRODUCT_ID,
-
-
+  DELETE_REVIEW,
 } from "./types";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialState = {
   muebles: [],
@@ -77,10 +79,10 @@ const initialState = {
   tipoDeProductoById: [],
   cartDetail: [],
   carts: [],
-
+  totalReviews: [],
   reviews: [],
-
 };
+
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MATERIAL:
@@ -202,26 +204,52 @@ const rootReducer = (state = initialState, action) => {
       const existingProductIndex = state.cartProducts
         .filter((product) => product && product.id !== undefined)
         .findIndex((product) => product.id === productId);
+
       if (existingProductIndex !== -1) {
-        // Si el producto ya existe en el carrito, incrementa su count
-        const updatedCartProducts = [...state.cartProducts];
-        updatedCartProducts[existingProductIndex].count += 1;
-        return {
-          ...state,
-          cartProducts: updatedCartProducts,
-        };
+        // Si el producto ya existe en el carrito, verifica si ha alcanzado la cantidad máxima de stock
+        const existingProduct = state.cartProducts[existingProductIndex];
+        if (existingProduct.count < existingProduct.stock) {
+          // Si no ha alcanzado la cantidad máxima, incrementa su count
+          const updatedCartProducts = [...state.cartProducts];
+          updatedCartProducts[existingProductIndex].count += 1;
+          return {
+            ...state,
+            cartProducts: updatedCartProducts,
+          };
+        } else {
+          // Si ha alcanzado la cantidad máxima, muestra una notificación de toast
+          toast.error(
+            "Este producto ha alcanzado la cantidad máxima en stock.",
+            {
+              position: toast.POSITION.BOTTOM_RIGHT,
+              autoClose: 3000,
+            }
+          );
+          return state;
+        }
       } else {
         // Si el producto no existe en el carrito, agrégalo con count igual a 1
         const productToAdd = state.muebles.find(
           (mueble) => mueble.id === productId
         );
 
-        return {
-          ...state,
-          cartProducts: [...state.cartProducts, { ...productToAdd, count: 1 }],
-          cartTotal:
-            state.cartTotal + action.payload.price * action.payload.quantity,
-        };
+        if (productToAdd && productToAdd.stock > 0) {
+          // Verifica si hay suficiente stock antes de agregar al carrito
+          productToAdd.count = 1;
+          return {
+            ...state,
+            cartProducts: [...state.cartProducts, productToAdd],
+            cartTotal:
+              state.cartTotal + action.payload.price * action.payload.quantity,
+          };
+        } else {
+          // No hay suficiente stock para agregar el producto al carrito
+          toast.error("No hay suficiente stock para este producto.", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: 3000,
+          });
+          return state;
+        }
       }
 
     case DELETE_CART_PRODUCT:
@@ -428,7 +456,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         reviews: action.payload,
       };
+    case GET_REVIEWS:
+      return {
+        ...state,
+        totalReviews: action.payload,
+      };
+    case DELETE_REVIEW:
+      const reviewIdToDelete = action.payload; // ID de la revisión a eliminar
+      const updatedTotalReviews = state.totalReviews.filter(
+        (review) => review.id !== reviewIdToDelete
+      );
 
+      return {
+        ...state,
+        totalReviews: updatedTotalReviews,
+      };
     default:
       return { ...state };
   }

@@ -28,16 +28,14 @@ const RegisterForm = () => {
       appState: {
         returnTo: "/home",
       },
-      
     });
   };
-
 
   const [form, setForm] = useState({
     user_name: "",
     e_mail: "",
-    first_name:"",
-    last_Name:"",
+    first_name: "",
+    last_Name: "",
     password: "",
     confPassword: "",
   });
@@ -63,7 +61,7 @@ const RegisterForm = () => {
       password: form.password,
       first_name: form.user_name,
       last_name: form.last_Name,
-      phone: form.phone
+      phone: form.phone,
     };
     try {
       const response = await axios.get(`${apiUrl}/user?e_mail=${form.e_mail}`);
@@ -81,7 +79,6 @@ const RegisterForm = () => {
       // generando un token desde la ruta /get
       try {
         const response = await axios.post(`${apiUrl}/user`, newUser);
-
         if (response.status === 201) {
           try {
             const response = await axios.get(
@@ -99,16 +96,14 @@ const RegisterForm = () => {
               Object.keys(data).length > 0 &&
               data.user.e_mail === form.e_mail
             ) {
-              
               toast.success("Usuario creado exitosamente!", {
                 position: toast.POSITION.BOTTOM_RIGHT,
                 autoClose: 3000,
               });
-              
+
               // Si el usuario está creado, lo tiene que logear
               dispatch(login(userInfoWithToken));
-              
-              
+
               if (newUser) {
                 try {
                   // const userEmail = newUser.e_mail;
@@ -118,10 +113,13 @@ const RegisterForm = () => {
                   // history.push(`/user/profile/${userId}`);
                   history.push(`/home`);
                 } catch (error) {
-                  console.error('Error al obtener el ID del usuario:', error.message);
+                  console.error(
+                    "Error al obtener el ID del usuario:",
+                    error.message
+                  );
                 }
               }
-        
+
               // history.push("/home");
             }
           } catch (error) {
@@ -134,10 +132,9 @@ const RegisterForm = () => {
     }
   };
 
-  useEffect(()=>{
-    if(loggedUser) history.push(`/home`);                
-  },[loggedUser])
-
+  useEffect(() => {
+    if (loggedUser) history.push(`/home`);
+  }, [loggedUser]);
 
   const submitHandler = (event) => {
     event.preventDefault();

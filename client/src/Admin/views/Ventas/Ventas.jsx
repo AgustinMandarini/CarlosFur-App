@@ -7,13 +7,12 @@ import { getOrdersAdmin, getCarts } from "./../../../redux/actions";
 import style from "./Ventas.module.css";
 import PaymentType from "./PaymentType";
 
-
 const Ordenes = () => {
   const orders = useSelector((state) => state.ordersAdmin);
   const carts = useSelector((state) => state.cartsAdmin);
   const [selectedPaymentTypeId, setSelectedPaymentTypeId] = useState(""); 
   const dispatch = useDispatch();
-
+  const loggedUser = useSelector((state) => state.loggedUser);
   
   useEffect(() => {
     dispatch(getOrdersAdmin());
@@ -89,7 +88,7 @@ const Ordenes = () => {
                   <td>
 
                     <Button variant="primary">
-                      <Link to={`/admin/detalle/${order.cartId}`} className={style.link}>
+                      <Link to={`/user/admin/${loggedUser.id}/detalle/${order.cartId}`} className={style.link}>
                         <strong>Ver detalle</strong>
                       </Link>
                     </Button>

@@ -1,13 +1,15 @@
-import { Route, useLocation } from "react-router-dom";
+import { Route, useLocation, Redirect } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { PageLoader } from "./components/PageLoader/pageLoader";
 import LoginRegisterBar from "./components/LoginRegisterBar/LoginRegisterBar";
 import GuardedRoute from "./helpers/GuardComponent";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { loadCartFromLocalStorage } from "./redux/actions";
 import { ToastContainer } from "react-toastify";
+import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
+import Admin from "./Admin/Admin";
 
 import "./App.css";
 import {
@@ -23,9 +25,9 @@ import {
   ForgottenPassword,
   ResetPassword,
 } from "./views";
-import Admin from "./Admin/Admin";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import Footer from "./views/Footer/Footer";
 
 function App() {
   const location = useLocation();
@@ -33,7 +35,7 @@ function App() {
   const dispatch = useDispatch();
   const { isLoading, isAuthenticated } = useAuth0();
   const cartProducts = useSelector((state) => state.cartProducts) || [];
-
+  const loggedUser = useSelector((state) => state.loggedUser);
   const userIsAuthenticated = localStorage.getItem("token") !== null;
 
   useEffect(() => {
@@ -43,7 +45,7 @@ function App() {
       const cartFromLocalStorage = JSON.parse(savedCart);
       dispatch(loadCartFromLocalStorage(cartFromLocalStorage));
     }
-  }, [dispatch]);
+  }, [dispatch, isAuthenticated]);
 
   if (isLoading) {
     return (
@@ -53,13 +55,14 @@ function App() {
     );
   }
 
+  const isAdmin = loggedUser ? loggedUser.is_admin : false;
+
   const isAdminRoute = pathname.startsWith("/admin");
-  // console.log(isAdminRoute);
+
   return (
     <div className="App">
       {location.pathname !== "/" && !isAdminRoute && <LoginRegisterBar />}
       {location.pathname !== "/" && !isAdminRoute && <NavBar />}
-
       <ToastContainer />
       <Route exact path="/" component={LandingPage} />
       <Route path="/home" render={() => <Home />} />
@@ -75,11 +78,24 @@ function App() {
       <Route path="/forgottenPassword" component={ForgottenPassword}></Route>
       <Route path="/resetPassword/:e_mail" component={ResetPassword}></Route>
 
-      {/* //Dashboard Admin */}
-      <Route path="/admin" component={Admin} />
+
+      <Route
+        path="/user/admin/:userId"
+        render={({ match }) =>
+          isAdmin ? (
+            <Admin />
+          ) : (
+            <Redirect to={`/user/profile/${match.params.userId}`} />
+          )
+        }
+      />
+      
+
       <Route path="/user/profile/:id" component={Profile} />
+      <Footer />
     </div>
   );
 }
 
 export default App;
+

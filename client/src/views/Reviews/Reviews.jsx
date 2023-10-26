@@ -7,6 +7,8 @@ import { FaStar } from "react-icons/fa";
 import Modal from "react-bootstrap/Modal";
 import StarRating from "./StartRating";
 
+import { useHistory } from "react-router-dom";
+
 const Reviews = ({ id }) => {
   const [values, setValues] = useState("");
   const [currentValue, setCurrentValue] = useState(0);
@@ -18,7 +20,7 @@ const Reviews = ({ id }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.loggedUser);
   const reviews = useSelector((state) => state.reviews);
-  console.log(reviews, "aca");
+  const history = useHistory();
 
   const handleClick = (value) => {
     setCurrentValue(value);
@@ -40,6 +42,11 @@ const Reviews = ({ id }) => {
   const handleSubmit = async () => {
     if (currentValue === 0) {
       setShowSecondModal(true);
+      return;
+    }
+    if (!userId) {
+      history.push("/logIn");
+
       return;
     }
 
@@ -126,7 +133,7 @@ const Reviews = ({ id }) => {
       <div>
         {reviews && reviews.length > 0 && <p>Reviews</p>}
 
-        {reviews && reviews.reviews
+        {reviews && reviews.reviews && reviews.review !== null
           ? reviews.reviews.map((review, index) => (
               <div key={index} className={style.reviewItem}>
                 <div className={style.reviewItemInner}>
@@ -148,7 +155,7 @@ const Reviews = ({ id }) => {
         </Modal.Header>
         <Modal.Footer className={style.footerModal}>
           <p>
-            Gracias <strong>{userId && userId.user_name}</strong>, tendremos en
+            Gracias <strong>{userId && userId?.user_name}</strong>, tendremos en
             cuenta tu opinión!
           </p>
           <Button className={style.buttonModal} onClick={handleAcept}>

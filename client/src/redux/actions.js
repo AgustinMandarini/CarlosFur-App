@@ -577,10 +577,6 @@ export const createReview = (review) => {
       dispatch({ type: POST_REVIEW, reviews });
     } catch (error) {
       console.error("Error fetching reviews:", error);
-      toast.error("error al enviar tu review", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 3000,
-      });
     }
   };
 };

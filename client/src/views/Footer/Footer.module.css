@@ -1,0 +1,61 @@
+.cntnFooter {
+  height: 29vh;
+  background-color: black;
+  display: flex;
+  flex-direction: column; /* Cambiamos a dirección de columna */
+  justify-content: center;
+  align-items: center; /* Centra verticalmente el contenido en cntnFooter */
+  color: #ae9c8f;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.brandMr {
+  font-family: "the seasons";
+  font-size: 4em;
+  margin-top: 0.1em; /* Ajusta el margen superior según tus necesidades */
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.divCopy {
+  text-align: center; /* Centra el contenido de .divCopy horizontalmente */
+  font-size: 14px;
+  color: #ae9c8f;
+  margin-bottom: -4em;
+}
+
+.pCopy {
+  color: #afa39a;
+}
+.divLinks {
+  position: absolute;
+  right: 1px;
+  width: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-top: 74px;
+}
+.divLinkIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px;
+}
+.link {
+  display: flex;
+  margin-left: 5px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #ae9c8f;
+  justify-content: start;
+  align-items: start;
+}
+.icon {
+  justify-content: center;
+  align-items: center;
+  margin-right: 7px;
+}

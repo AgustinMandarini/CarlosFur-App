@@ -1,63 +1,52 @@
-.cntnAbout {
+.container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Cambia a 'space-between' para distribuir las tarjetas en filas */
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-color: #4158d0;
+  background-image: linear-gradient(
+    43deg,
+   
+    #d6c365 0%,
+     #f4efe7 46%,
+    #dbcca0 100%
+
+  );
+  padding-top: 110px;
+  overflow: hidden;
+}
+
+.aboutCard {
+  width: calc(33.33% - 10px); /* Para que haya 3 tarjetas por fila con un espacio de 10px entre ellas */
+  margin-right: 10px; /* Espacio entre las tarjetas */
+  margin-bottom: 10px; /* Espacio entre las filas */
+}
+
+
+/* skils style  */
+.skillsContainer{
+  padding: 0.5em;
+  margin:0.1rem;
+  background-color: #f1e8c7;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.623);
+}
+.skillBox{
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* padding-top: 1em; */
-  margin-top: 2em;
-  margin-bottom: 3em;
+  gap: 10px;
+  margin-left: 1rem;
 }
-.divText {
-  margin-top: 30px;
-}
-.tittle {
-  margin: 1rem;
-}
-.cntnAbout h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 35px;
-  font-weight: 600;
-  /* margin-top: 85px; */
-  margin-bottom: 12px;
-}
-.line {
-  width: 48%;
-  border-top: 1px solid black;
-  height: 1px;
-}
-.divText p {
-  display: flex;
-  justify-content: center;
-  text-align: start;
-  line-height: 25px;
-  font-size: 15px;
-  width: 650px;
-  margin: 0px;
-}
-.pSubtitle {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-
-  font-size: 15px;
-  width: 650px;
-  margin: 1rem;
+.skillImage{
+  width: 60px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-size: contain;
+ 
 }
 
-/* Estilos responsive */
-@media screen and (max-width: 768px) {
-  .cntnAbout h1 {
-    font-size: 2em; /* Reducimos el tamaño del título */
-    margin: 0.5em;
-  }
-  .divText {
-    width: 80%;
-    text-align: center;
-  }
-  .divText p,
-  .pSubtitle {
-    max-width: 100%; /* Ocupa todo el ancho disponible en pantallas más pequeñas */
-  }
-}

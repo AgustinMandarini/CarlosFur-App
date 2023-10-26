@@ -1,14 +1,11 @@
 /* Profile.module.css */
 
 .profileContainer {
-  /* margin-top: 10px;
-    margin-left: 50px;
-    margin-right: 0px;
-    width: 3500px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 60px;
 }
 
 .profileCard {
@@ -16,7 +13,7 @@
   width: 280px !important;
   height: 400px !important;
   margin-top: 25px !important;
-  box-shadow: 4px 8px rgba(0, 0, 0, 0.2); /* Agrega sombra ancha de color marrón */
+  box-shadow: 8px 0px 10px rgba(148, 133, 122, 0.8);
 }
 
 .profileImage {
@@ -26,43 +23,51 @@
   border-radius: 50%;
   margin: auto;
   display: block;
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2); /* Agrega una sombra alrededor de la imagen */
 }
 .profileCard .profileName {
   color: white;
 }
 .subtitle {
   display: flex;
-  justify-content: centstarter !important;
+  justify-content: start !important;
   align-items: start !important;
   text-align: start !important;
   margin-top: 4px !important;
-  width: 320px;
+  max-width: 200px !important;
+  text-decoration: none;
 }
 .strong {
   text-align: left;
   margin-right: 5px;
+  max-width: 200px !important;
 }
 .profileName {
-  background-color: rgba(104, 0, 0, 0.671);
+  background-color: black;
   padding: 10px;
   margin-top: 10px;
-  box-shadow: 4px 8px rgba(0, 0, 0, 0.2); /* Agrega sombra ancha de color marrón */
+  font-size: 18px;
+
+  box-shadow: 8px 0px 10px rgba(148, 133, 122, 0.8);
 }
 
 .userInfoCard {
-  width: 310px !important;
-  height: 165px !important;
-  box-shadow: 4px 8px rgba(0, 0, 0, 0.2); /* Agrega sombra ancha de color marrón */
-  margin-left: -75px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: start !important;
+  width: 360px !important;
+  height: 225px !important;
+  box-shadow: 8px 0px 10px rgba(148, 133, 122, 0.8);
+  margin-left: -89px !important;
   margin-top: 135px !important;
 }
 
 .userInfoTitle {
-  background-color: rgba(104, 0, 0, 0.671); /* Azul Bootstrap */
-  height: 25px;
+  background-color: black /* Azul Bootstrap */;
+  /* height: 25px; */
   justify-content: center;
   align-items: center;
+  font-size: 15px;
+  padding: 10px;
 }
 
 .userInfoCard .userInfoTitle {
@@ -76,20 +81,17 @@
 }
 
 .botonAdmin {
-  top: 0;
-  right: 0;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
+  justify-content: center;
+  align-items: center;
+  width: 160px;
+  padding: 6px 8px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  height: 30px;
-  width: 200px;
-  margin-top: 3%;
-
-  /* Añadir estas propiedades para centrar el texto */
-  text-align: center;
-  line-height: 5px; /* Ajustar a la altura del botón */
+  border-radius: 5px;
+  color: white;
+  background-color: black;
+  margin-top: 28px;
+  font-size: 12px;
+}
+.link {
+  text-decoration: none !important;
 }

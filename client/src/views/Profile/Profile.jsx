@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import styles from "./Profile.module.css";
 import {
@@ -12,13 +12,14 @@ import {
   CardSubtitle,
 } from "reactstrap";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const { id } = useParams();
+  const loggedUser = useSelector((state) => state.loggedUser);
   const { user: auth0User, isAuthenticated } = useAuth0();
   const apiUrl = process.env.REACT_APP_API_URL;
-  const clientUrl = process.env.REACT_APP_CLIENT_URL;
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -86,26 +87,15 @@ const Profile = () => {
               </Col>
               {isAdmin ? (
                 <Col md="12">
-                  <button
-                    className={styles.botonAdmin}
-                    onClick={() => {
-                      if (isAdmin) {
-                        window.location.href = `${clientUrl}/user/admin/${id}`;
-                        // window.location.href = `http://localhost:3000/user/admin/${id}`;
-                      } else {
-                        // Mostrar un mensaje de acceso denegado en lugar de redirigir
-                        alert("");
-                      }
-                    }}
-                  >
-                    Panel de Administración
-                  </button>
+                  <Link to={`/user/admin/${loggedUser.id}`}>
+                    <div className={styles.botonAdmin}>
+                      Panel de Administración
+                    </div>
+                  </Link>
                 </Col>
               ) : (
                 <Col md="12">
-                  <div className={styles.accesoDenegado}>
-                    
-                  </div>
+                  <div className={styles.accesoDenegado}></div>
                 </Col>
               )}
             </Row>

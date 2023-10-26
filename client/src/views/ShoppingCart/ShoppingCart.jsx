@@ -96,7 +96,6 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
       const payment_type = urlParams.get("payment_type");
       /* AGUS, EN ALGUNA PARTE DE ESTE useEffect HAY QUE MANDAR LA ORDER CON createOrderHandler.
       ACORDATE DE MODIFICAR EL CONTROLLER PARA PODER INCLUIR EL MAIL. */
-
       if (collectionStatus === "approved" || status === "approved") {
         try {
           const orderData = {

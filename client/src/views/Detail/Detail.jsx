@@ -1,19 +1,18 @@
 import { React, useEffect, useState } from "react";
 import style from "./Detail.module.css";
-import {
-  getDetail,
-  postCartProduct,
-  deleteCartProduct,
-} from "../../redux/actions";
+import { getDetail, postCartProduct, getCart } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import imagenDefault from "./../../imagenes/default.png";
-import { updateLocalStorage } from "../../components/LocalStorage/LocalStorageFunctions";
 import { updateCart } from "../../redux/actions";
 import Reviews from "../Reviews/Reviews";
+import { useAuth0 } from "@auth0/auth0-react";
+import { PageLoader } from "../../components/PageLoader/pageLoader";
+import { updateLocalStorage } from "../../components/LocalStorage/LocalStorageFunctions";
 
 const Detail = () => {
+  const { isLoading, isAuthenticated } = useAuth0();
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = localStorage.getItem("user");
@@ -26,17 +25,8 @@ const Detail = () => {
   const stateDetail = useSelector((state) => state.detail);
   const cartProducts = useSelector((state) => state.cartProducts) || [];
   const colorState = useSelector((state) => state.colorState);
+  const userIsAuthenticated = localStorage.getItem("token") !== null;
 
-  const countForProductID = cartProducts
-    .filter((product) => product && product.id !== undefined)
-    .reduce((count, product) => {
-      if (product.id === Number(id)) {
-        return count + product.count;
-      }
-      return count;
-    }, 0);
-  const [counter, setCounter] = useState(0);
-  const [product, setProduct] = useState(0);
   const handleUpdateCart = () => {
     // Verifica si user y cartId están definidos antes de analizarlos
     if (user && cartId) {
@@ -60,33 +50,43 @@ const Detail = () => {
   };
 
   const increaseCounter = () => {
-    /* Contador */
-    setCounter(counter + 1);
-
-    /* Se suma el producto al carrito */
-    setProduct(1);
     dispatch(postCartProduct(Number(id)));
-    setProduct(0);
     handleUpdateCart();
   };
-  //put
-  const decreaseCounter = () => {
-    /* Contador */
-    if (counter > 0) {
-      setCounter(counter - 1);
-      handleUpdateCart();
-    }
 
-    /* Se quita el producto del carrito */
-    setProduct(-1);
-    dispatch(deleteCartProduct(Number(id)));
-    setProduct(0);
-  };
+  useEffect(() => {
+    if (!userIsAuthenticated) {
+      if (cartProducts.length === 0) {
+        localStorage.removeItem("cart");
+      } else {
+        updateLocalStorage(cartProducts);
+      }
+    }
+  }, [cartProducts]);
+
+  useEffect(() => {
+    const cartIdParse = cartId != null ? JSON.parse(cartId) : undefined;
+    if (userIsAuthenticated && cartIdParse != undefined) {
+      dispatch(getCart(cartIdParse));
+    }
+  }, []);
 
   const getColorName = (colorId) => {
     const color = colorState.find((color) => color.id === colorId);
     return color ? color.name : "Desconocido";
   };
+
+  const carritoDelLocal = JSON.parse(localStorage.getItem("cart"));
+
+  if (isLoading) {
+    if (carritoDelLocal !== cartProducts) {
+      return (
+        <div className="page-layout">
+          <PageLoader />
+        </div>
+      );
+    }
+  }
 
   return (
     <div className={style.cntnDetail}>

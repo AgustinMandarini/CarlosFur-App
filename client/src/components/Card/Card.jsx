@@ -19,29 +19,11 @@ const Card = (props) => {
 
   const userIsAuthenticated = localStorage.getItem("token") !== null;
 
-  const countForProductID = useSelector((state) =>
-    state.cartProducts.reduce((count, product) => {
-      if (product && product.id !== undefined) {
-        if (product.id === props.id) {
-          return count + product.count;
-        }
-        return count;
-      }
-    }, 0)
-  );
-
-  const [counter, setCounter] = useState(0);
-  const [product, setProduct] = useState(0);
-
   const increaseCounter = () => {
-    /* Contador */
-    setCounter(counter);
-    /* Se suma el producto al carrito */
-    setProduct(1);
     dispatch(postCartProduct(props.id));
-    setProduct(0);
     handleUpdateCart();
   };
+
   const handleUpdateCart = () => {
     // Verifica si user y cartId están definidos antes de analizarlos
     if (user && cartId) {

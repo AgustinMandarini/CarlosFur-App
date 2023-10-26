@@ -7,12 +7,8 @@ import Paginacion from "../../components/Paginacion/Paginacion";
 import ToolBar from "../../components/ToolBar/ToolBar";
 import style from "./Home.module.css";
 import { useCheckUserExists } from "../../helpers/checkUserExist";
-import { useAuth0 } from "@auth0/auth0-react";
 import { getCart, postCart } from "../../redux/actions";
-import Modal from "react-bootstrap/Modal";
-import Carousel from "react-bootstrap/Carousel";
 import { BsArrowDownSquare } from "react-icons/bs";
-import { updateLocalStorage } from "../../components/LocalStorage/LocalStorageFunctions";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 

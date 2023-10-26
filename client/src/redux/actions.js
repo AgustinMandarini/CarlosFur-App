@@ -453,12 +453,11 @@ export const fetchUserData = () => {
 
 //carrito
 export const getCart = (cartId) => {
-  console.log("El ID que entra a la action GET", cartId);
   return async (dispatch) => {
     try {
       const response = await axios.get(`${apiUrl}/cart/${cartId}`);
       const cartData = response.data;
-      console.log(cartData);
+
       // Actualiza el estado de Redux con la información del carrito
       dispatch({ type: GET_CART, payload: cartData });
 

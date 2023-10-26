@@ -47,18 +47,26 @@ function App() {
     }
   }, [dispatch, isAuthenticated]);
 
+  const carritoDelLocal = JSON.parse(localStorage.getItem("cart"));
+
   if (isLoading) {
-    return (
-      <div className="page-layout">
-        <PageLoader />
-      </div>
-    );
+    if (carritoDelLocal !== cartProducts) {
+      console.log("Cargando");
+      return (
+        <div className="page-layout">
+          <PageLoader />
+        </div>
+      );
+    }
   }
 
   const isAdmin = loggedUser ? loggedUser.is_admin : false;
 
   const isAdminRoute = pathname.startsWith("/admin");
 
+  console.log("carritoDelLocal:", carritoDelLocal);
+  console.log("cartProducts:", cartProducts);
+  console.log("Ya cargo");
   return (
     <div className="App">
       {location.pathname !== "/" && !isAdminRoute && <LoginRegisterBar />}

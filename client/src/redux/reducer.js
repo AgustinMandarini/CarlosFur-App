@@ -121,12 +121,6 @@ const rootReducer = (state = initialState, action) => {
         ordersAdmin: action.payload,
       };
 
-    case GET_CARTS:
-      return {
-        ...state,
-        cartsAdmin: action.payload,
-      };
-
     case GET_DETAIL:
       return {
         ...state,

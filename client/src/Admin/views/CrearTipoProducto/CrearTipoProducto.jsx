@@ -7,6 +7,8 @@ import validation from "./validation";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
+const clientURL = process.env.REACT_APP_CLIENT_URL;
+
 const CrearTipoProducto = () => {
   const dispatch = useDispatch();
 
@@ -37,7 +39,7 @@ const CrearTipoProducto = () => {
   };
 
   const handleAcept = () => {
-    window.location.href = "http://localhost:3000/admin/crear/producto"
+    window.location.href = `${clientURL}/admin/crear/producto`;
     setModal(false);
   };
 
@@ -62,7 +64,6 @@ const CrearTipoProducto = () => {
           </div>
         </Form.Group>
 
-        
         <Form.Group className={style.formGroup} controlId="formBasicEmail">
           <Form.Label className={style.label}>Descripcion: </Form.Label>
           <div className={style.divinputError}>

@@ -20,11 +20,13 @@
 .select {
   font-size: 0.8rem;
   margin-right: 0.5rem;
+  border: 1px solid #000 !important;
+
   /* margin-left: 0.5rem; */
 }
 .select:focus {
   border-color: #000 !important;
-  box-shadow: none !important;
+  box-shadow: 3px 0px 3px rgba(148, 133, 122, 0.8) !important;
 }
 
 .filterIcon {

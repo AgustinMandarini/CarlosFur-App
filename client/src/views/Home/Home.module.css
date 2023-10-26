@@ -17,9 +17,10 @@
   letter-spacing: 2px;
   box-shadow: 1;
 }
+
 .divImg {
   width: 100%;
-  height: 445px;
+  height: 413px;
   background-image: url(../../imagenes/members/Carrousel-Home2.jpg);
   margin-bottom: 20px;
   border-bottom: 1px solid black;
@@ -29,7 +30,7 @@
   top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 20px;
+  font-size: 20.1px;
   /* color: rgba(255, 255, 255, 0.836); */
   color: black;
   animation-name: icon;

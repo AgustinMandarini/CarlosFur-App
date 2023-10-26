@@ -5,8 +5,7 @@ import {
   IconUserSquareRounded,
   IconMail,
 } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
-
+import { HashLink as Link } from "react-router-hash-link";
 const Footer = () => {
   return (
     <div className={style.cntnFooter}>
@@ -21,7 +20,7 @@ const Footer = () => {
       </div>
       <div className={style.divLinks}>
         <div className={style.divLinkIcon}>
-          <Link to="/home" className={style.link}>
+          <Link smooth to="/home#top" className={style.link}>
             <IconHome2
               className={style.icon}
               color="white"
@@ -32,7 +31,7 @@ const Footer = () => {
           </Link>
         </div>
         <div className={style.divLinkIcon}>
-          <Link to="/about" className={style.link}>
+          <Link to="/about#top" className={style.link}>
             <IconUserSquareRounded
               className={style.icon}
               color="white"

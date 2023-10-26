@@ -120,7 +120,7 @@ const Home = () => {
       dispatch(postCart(data));
     }
   }, [cartProducts]);
-
+  //no
   return (
     <div className={style.cntnHome}>
       <div className={style.divImg}></div>

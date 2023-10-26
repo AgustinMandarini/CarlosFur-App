@@ -16,9 +16,18 @@ const LoginForm = () => {
   const { loginWithRedirect } = useAuth0();
   const history = useHistory();
   const loggedUser = useSelector((state) => state.loggedUser);
+  const [isFormValid, setIsFormValid] = useState(false);
 
-  const mostrarNotificacionBienvenida = () => {
+
+
+const mostrarNotificacionBienvenida2 = () => {
     toast.success("Iniciando Sesión", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
+}
+  
+  const mostrarNotificacionBienvenida = () => {
+    toast.success("Iniciando Sesión con cuenta de Google", {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
@@ -108,10 +117,13 @@ const LoginForm = () => {
     event.preventDefault();
     const validationErrors = validation(form);
     setErrors(validationErrors);
+  
     if (Object.keys(validationErrors).length === 0) {
-      handleLocalLogin();
+      mostrarNotificacionBienvenida2(); // Mostrar notificación de bienvenida
+      handleLocalLogin(); // Realizar el inicio de sesión
     }
   };
+  
 
   return (
     <div className={styles.container}>

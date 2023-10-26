@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import CardsContainer from "../../components/CardsContainer/Cardscontainer";
 import Paginacion from "../../components/Paginacion/Paginacion";
 import ToolBar from "../../components/ToolBar/ToolBar";
-// import { setProductsCopy } from "../../redux/actions";
 import style from "./Home.module.css";
 import { useCheckUserExists } from "../../helpers/checkUserExist";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getCart, postCart } from "../../redux/actions";
+import Modal from "react-bootstrap/Modal";
+import Carousel from "react-bootstrap/Carousel";
+import { BsArrowDownSquare } from "react-icons/bs";
 import { updateLocalStorage } from "../../components/LocalStorage/LocalStorageFunctions";
+
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const Home = () => {
@@ -34,7 +37,7 @@ const Home = () => {
   // Paginado
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(5);
+  const [productsPerPage] = useState(6);
   const indexOfLastRecipe = currentPage * productsPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - productsPerPage;
 
@@ -120,6 +123,8 @@ const Home = () => {
 
   return (
     <div className={style.cntnHome}>
+      <div className={style.divImg}></div>
+      <BsArrowDownSquare className={style.icon} stroke="5px" size="28px" />
       <h1 className={style.tittle}>MSC AMOBLAMIENTOS</h1>
       <div>
         <ToolBar />

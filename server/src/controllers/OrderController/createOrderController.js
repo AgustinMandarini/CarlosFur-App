@@ -10,6 +10,10 @@ const semaphore = new Semaphore(); // Crea una instancia del semáforo
 const createOrder = async (req, res) => {
   try {
     const { collection_id, cartId, payment_type, e_mail } = req.body;
+    console.log("POST ORDER - COLLECTION ID: " + collection_id);
+    console.log("POST ORDER - CART ID: " + cartId);
+    console.log("POST ORDER - PAYMENT TYPE: " + payment_type);
+    console.log("POST ORDER - EMAIL: " + e_mail);
 
     await semaphore.acquire(); // Adquiere el semáforo
 
@@ -17,6 +21,8 @@ const createOrder = async (req, res) => {
     const order = await Order.findOne({
       where: { mercadoPagoId: collection_id },
     });
+
+    console.log("POST ORDER - ORDER: " + order);
 
     if (!collection_id) {
       semaphore.release(); // Libera el semaforo. Es decir libera la espera
@@ -30,6 +36,8 @@ const createOrder = async (req, res) => {
       const saleDate = new Date();
 
       const cart = await getCartById(cartId);
+
+      console.log("POST ORDER - cart: " + JSON.stringify(cart));
 
       if (!cart) {
         semaphore.release(); // Libera el semaforo. Es decir libera la espera
@@ -54,6 +62,9 @@ const createOrder = async (req, res) => {
         user_name: cart.user_name,
         products: await Promise.all(
           cart.products.map(async (product) => {
+            console.log(
+              "POST ORDER - products.product: " + JSON.stringify(product)
+            );
             const foundProduct = await Product.findOne({
               where: { id: product?.productId },
             });
@@ -78,6 +89,10 @@ const createOrder = async (req, res) => {
         e_mail: e_mail,
         cartInfo: cartData,
       };
+
+      console.log(
+        "POST ORDER - orderWithCart: " + JSON.stringify(orderWithCart)
+      );
 
       await nodeMailerConfig(
         e_mail,

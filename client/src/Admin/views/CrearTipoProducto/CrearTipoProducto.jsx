@@ -1,13 +1,16 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postProductType } from "./../../../redux/actions";
 import style from "./CrearTipoProducto.module.css";
 import validation from "./validation";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
+const clientURL = process.env.REACT_APP_CLIENT_URL;
+
 const CrearTipoProducto = () => {
+  const loggedUser = useSelector((state) => state.loggedUser);
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({});
@@ -37,7 +40,7 @@ const CrearTipoProducto = () => {
   };
 
   const handleAcept = () => {
-    window.location.href = "http://localhost:3000/admin/crear/producto"
+    window.location.href = `${clientURL}/user/admin/${loggedUser.id}/crear/producto`;
     setModal(false);
   };
 
@@ -62,7 +65,6 @@ const CrearTipoProducto = () => {
           </div>
         </Form.Group>
 
-        
         <Form.Group className={style.formGroup} controlId="formBasicEmail">
           <Form.Label className={style.label}>Descripcion: </Form.Label>
           <div className={style.divinputError}>

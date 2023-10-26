@@ -23,7 +23,7 @@ function LoginBar() {
     cartArray = cartProducts.reduce((result, product) => {
       if (product && product.id !== undefined) {
         const existingProduct = result
-          .filter((product) => product && product.id !== undefined)
+          .filter((item) => item && item.id !== undefined)
           .find((item) => item.id === product.id);
         if (existingProduct) {
           existingProduct.quantity += 1;

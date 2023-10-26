@@ -102,7 +102,7 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
             collection_id: collection_id,
             cartId: localStorage.getItem("cartId"),
             payment_type: payment_type,
-            e_mail: loggedUser?.e_mail,
+            e_mail: loggedUser.e_mail,
           };
           const response = await axios.post(
             `${REACT_APP_API_URL}/order`,

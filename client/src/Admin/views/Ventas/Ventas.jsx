@@ -10,55 +10,50 @@ import PaymentType from "./PaymentType";
 const Ordenes = () => {
   const orders = useSelector((state) => state.ordersAdmin);
   const carts = useSelector((state) => state.cartsAdmin);
-  const [selectedPaymentTypeId, setSelectedPaymentTypeId] = useState(""); 
+  const [selectedPaymentTypeId, setSelectedPaymentTypeId] = useState("");
   const dispatch = useDispatch();
   const loggedUser = useSelector((state) => state.loggedUser);
-  
+
   useEffect(() => {
     dispatch(getOrdersAdmin());
   }, []);
   useEffect(() => {
     dispatch(getCarts());
   }, []);
-  
+
   // console.log("DELLLLFI", carts)
-    
+
   const filteredOrders = selectedPaymentTypeId
-  ? orders.filter((order) => {
-    
-    return order.paymentTypeId === selectedPaymentTypeId;
-  })
-  : orders;
-  
-  
+    ? orders.filter((order) => {
+        return order.paymentTypeId === selectedPaymentTypeId;
+      })
+    : orders;
+
   return (
-    
     <div>
-          <span>
-          <select
-  value={selectedPaymentTypeId}
-  onChange={(e) => setSelectedPaymentTypeId(e.target.value)}
->
-  <option value="">Formas de pago:</option>
-  <option value="Efectivo">Efectivo</option>
-  <option value="Tarjeta de débito">Tarjeta de débito</option>
-</select>
+      <span>
+        <select
+          value={selectedPaymentTypeId}
+          onChange={(e) => setSelectedPaymentTypeId(e.target.value)}
+        >
+          <option value="">Formas de pago:</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Tarjeta de débito">Tarjeta de débito</option>
+        </select>
+      </span>
 
-          </span>
-          
-          <span>
-          <select>
-            <option value="" >Ordenar por:</option>
-            <option value="asc">Productos más vendidos</option>
-            <option value="desc">Productos menos vendidos</option>
-          </select>
-          </span>
+      <span>
+        <select>
+          <option value="">Ordenar por:</option>
+          <option value="asc">Productos más vendidos</option>
+          <option value="desc">Productos menos vendidos</option>
+        </select>
+      </span>
 
-          
-          <div className={style.cntnUsers}> </div>
-            
+      <div className={style.cntnUsers}> </div>
+
       <div className={style.cntnTittle}>
-      <h1>Registro de ventas</h1>
+        <h1>Registro de ventas</h1>
       </div>
       <Table striped bordered hover>
         <thead>
@@ -72,7 +67,8 @@ const Ordenes = () => {
           </tr>
         </thead>
         <tbody>
-        {Array.isArray(orders) && Array.isArray(carts) &&
+          {Array.isArray(orders) &&
+            Array.isArray(carts) &&
             filteredOrders.map((order) => {
               // console.log("hoolis", filteredOrders)
               const cart = carts.find((cart) => cart.id === order.cartId);
@@ -82,17 +78,18 @@ const Ordenes = () => {
                   <td className={style.cntnTr}>{order.id}</td>
                   <td className={style.cntnTr}>{order.mercadoPagoId}</td>
                   <td className={style.cntnTr}>
-                    {cart ? cart.total_amount : 'N/A'}
+                    {cart ? cart.total_amount : "N/A"}
                   </td>
                   <td className={style.cntnTr}>{order.saleDate}</td>
                   <td>
-
                     <Button variant="primary">
-                      <Link to={`/user/admin/${loggedUser.id}/detalle/${order.cartId}`} className={style.link}>
+                      <Link
+                        to={`/user/admin/${loggedUser.id}/detalle/${order.cartId}`}
+                        className={style.link}
+                      >
                         <strong>Ver detalle</strong>
                       </Link>
                     </Button>
-
                   </td>
                   <PaymentType paymentTypeId={order.paymentTypeId} />
                 </tr>

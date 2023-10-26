@@ -20,7 +20,6 @@ const Profile = () => {
   const loggedUser = useSelector((state) => state.loggedUser);
   const { user: auth0User, isAuthenticated } = useAuth0();
   const apiUrl = process.env.REACT_APP_API_URL;
-  const clientUrl = process.env.REACT_APP_CLIENT_URL;
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -88,7 +87,6 @@ const Profile = () => {
               </Col>
               {isAdmin ? (
                 <Col md="12">
-                  {console.log("DESDE PROFILE: " + loggedUser.id)}
                   <Link to={`/user/admin/${loggedUser.id}`}>
                     <span className={styles.botonAdmin}>
                       Panel de Administración

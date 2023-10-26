@@ -7,6 +7,8 @@ import validation from "./validation";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
+const clientURL = process.env.REACT_APP_CLIENT_URL;
+
 const CrearProducto = () => {
   const dispatch = useDispatch();
 
@@ -37,7 +39,7 @@ const CrearProducto = () => {
   };
 
   const handleAcept = () => {
-    window.location.href = "http://localhost:3000/admin/crear/producto";
+    window.location.href = `${clientURL}/admin/crear/producto`;
     setModal(false);
   };
 

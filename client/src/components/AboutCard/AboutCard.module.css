@@ -1,0 +1,48 @@
+
+  .card {
+    border: 0.1em solid #363434;
+    margin:1em 2.5em;
+    width: 85%;
+    height: 20em;
+    box-sizing: border-box;
+    border-radius: 8px; /* Agrega redondez a los elementos */
+    transition: background-color 0.3s, transform 0.3s; /* Transiciones suaves */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    padding: 2em;
+  }
+  
+  .card:hover {
+    background-color: #cdcdcd; /* Cambia el color al pasar el mouse (puedes ajustar el color) */
+    transform: scale(1.02); /* Cambia el tamaño al pasar el mouse (opcional) */
+  }
+  
+  .imagen {
+    margin: 1em;
+    width: 5em;
+    border-radius: 3em;
+    border: 0.1em solid black;
+  }
+
+  .titulo {
+    letter-spacing: 1px;
+    justify-content: center;
+    overflow: hidden; /* Ocultar el texto que desborda */
+    white-space: nowrap; /* Evitar el salto de línea */
+    text-overflow: ellipsis; /* Agregar puntos suspensivos */
+    align-items: start;
+    justify-content: start;
+    font-size: 1.5em;
+    font-weight: 700;
+  }
+
+  .subTitulo {
+    letter-spacing: 1px;
+    justify-content: center;
+    overflow: hidden; /* Ocultar el texto que desborda */
+    white-space: nowrap; /* Evitar el salto de línea */
+    text-overflow: ellipsis; /* Agregar puntos suspensivos */
+    align-items: start;
+    justify-content: start;
+    font-size: 1.2em;
+ 
+  }

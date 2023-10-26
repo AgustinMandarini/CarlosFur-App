@@ -28,18 +28,18 @@ const ToolBar = () => {
     if (nameState === true) {
       const defaultOptionValue = "allOptions"; // Valor que debe coincidir con las opciones que quieres seleccionar
 
-  //     const selects = document.querySelectorAll(`.${style.select}`);
-  //     selects.forEach((select) => {
-  //       select.value = defaultOptionValue;
-  //     });
+      const selects = document.querySelectorAll(`.${style.select}`);
+      selects.forEach((select) => {
+        select.value = defaultOptionValue;
+      });
 
-  //     // Dispara manualmente los eventos "change" para que se refleje en el estado de Redux
-  //     selects.forEach((select) => {
-  //       const event = new Event("change", { bubbles: true });
-  //       select.dispatchEvent(event);
-  //     });
-  //   }
-  // }, [nameState]);
+      // Dispara manualmente los eventos "change" para que se refleje en el estado de Redux
+      selects.forEach((select) => {
+        const event = new Event("change", { bubbles: true });
+        select.dispatchEvent(event);
+      });
+    }
+  }, [nameState]);
 
   const productTypeNames = productTypeList.map((productType) => productType);
   const materialNames = materialList.map((material) => material);

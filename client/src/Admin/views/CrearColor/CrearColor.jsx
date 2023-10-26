@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postColor } from "./../../../redux/actions";
 import style from "./CrearColor.module.css";
 import validation from "./validation";
@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button";
 const clientURL = process.env.REACT_APP_CLIENT_URL;
 
 const CrearProducto = () => {
+  const loggedUser = useSelector((state) => state.loggedUser);
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({});
@@ -39,7 +40,7 @@ const CrearProducto = () => {
   };
 
   const handleAcept = () => {
-    window.location.href = `${clientURL}/admin/crear/producto`;
+    window.location.href = `${clientURL}/user/admin/${loggedUser.id}/crear/producto`;
     setModal(false);
   };
 

@@ -47,7 +47,7 @@ const CrearTipoProducto = () => {
   return (
     <div className={style.cntnForm}>
       <p className={style.tittle}>Nuevo Tipo de Producto:</p>
-      <Form className={style.formConteiner} onSubmit={submitHandler}>
+      <Form className={style.formConteiner} onSubmit={submitHandler} noValidate>
         <Form.Group className={style.formGroup} controlId="formBasicEmail">
           <Form.Label className={style.label}>Tipo de Producto: </Form.Label>
           <div className={style.divinputError}>

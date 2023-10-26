@@ -10,7 +10,6 @@ const semaphore = new Semaphore(); // Crea una instancia del semáforo
 const createOrder = async (req, res) => {
   try {
     const { collection_id, cartId, payment_type, e_mail } = req.body;
-    console.log("COLLECTION ID: " + collection_id);
 
     await semaphore.acquire(); // Adquiere el semáforo
 
@@ -19,9 +18,8 @@ const createOrder = async (req, res) => {
       where: { mercadoPagoId: collection_id },
     });
 
-    console.log("ORDER: " + order);
-
     if (!collection_id) {
+      semaphore.release(); // Libera el semaforo. Es decir libera la espera
       return res
         .status(400)
         .json({ error: "Missing collection_id in the request body" });
@@ -34,6 +32,7 @@ const createOrder = async (req, res) => {
       const cart = await getCartById(cartId);
 
       if (!cart) {
+        semaphore.release(); // Libera el semaforo. Es decir libera la espera
         return res.status(404).json({ error: "Cart not found" });
       }
 
@@ -56,7 +55,7 @@ const createOrder = async (req, res) => {
         products: await Promise.all(
           cart.products.map(async (product) => {
             const foundProduct = await Product.findOne({
-              where: { id: product.productId },
+              where: { id: product?.productId },
             });
             const unitPrice = foundProduct.price;
             const productQuantity = product.product_quantity;
@@ -87,11 +86,14 @@ const createOrder = async (req, res) => {
         (resetPassURL = null),
         orderWithCart
       );
+
+      semaphore.release(); // Libera el semaforo. Es decir libera la espera
       return res.status(201).json(orderWithCart);
     }
 
     // Si la orden ya existe, retorna el mensaje correspondiente
     if (order.mercadoPagoId === collection_id) {
+      semaphore.release(); // Libera el semaforo. Es decir libera la espera
       return res.status(400).json({ error: "Order already created!" });
     }
 
@@ -127,10 +129,6 @@ const createOrder = async (req, res) => {
       cartInfo: cartData,
     };
 
-    orderWithCart.cartInfo.products.forEach((prod) => {
-      console.log("\t-" + prod);
-    });
-
     await nodeMailerConfig(
       e_mail,
       (user_name = orderWithCart.cartInfo.user_name),
@@ -139,8 +137,7 @@ const createOrder = async (req, res) => {
       orderWithCart
     );
 
-    // Libera el semaforo. Es decir libera la espera
-    semaphore.release();
+    semaphore.release(); // Libera el semaforo. Es decir libera la espera
 
     return res.status(201).json(orderWithCart);
   } catch (error) {

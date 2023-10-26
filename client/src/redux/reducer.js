@@ -81,6 +81,10 @@ const initialState = {
   reviews: [],
 
 };
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MATERIAL:

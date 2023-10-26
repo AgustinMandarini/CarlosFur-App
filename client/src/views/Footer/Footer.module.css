@@ -1,5 +1,6 @@
 .cntnFooter {
-  height: 30vh;
+  margin: 0;
+  height: 20vh;
   background-color: black;
   display: flex;
   flex-direction: column; /* Cambiamos a dirección de columna */
@@ -11,8 +12,8 @@
 
 .brandMr {
   font-family: "the seasons";
-  font-size: 75px;
-  margin-top: 20px; /* Ajusta el margen superior según tus necesidades */
+  font-size: 3em;
+  margin-top:0.5em; /* Ajusta el margen superior según tus necesidades */
   text-align: center;
   letter-spacing: 2px;
 }
@@ -21,7 +22,7 @@
   text-align: center; /* Centra el contenido de .divCopy horizontalmente */
   font-size: 15px;
   color: #ae9c8f;
-  margin-bottom: -26px;
+  margin-bottom: 3em;
 }
 
 .pCopy {

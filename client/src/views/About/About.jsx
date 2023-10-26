@@ -1,34 +1,32 @@
 import React from "react";
 import style from "./About.module.css";
+import AboutCard from "../../components/AboutCard/AboutCard";
+import { members } from './AboutMembers';
+import pelado from "./../../imagenes/pelado.jpg"
 
 const About = () => {
   return (
-    <div className={style.cntnAbout}>
-      <h1 className={style.tittle}>Quienes Somos</h1>
-      <div className={style.line}></div>
-      <div className={style.divText}>
-        <p>
-          ​Te presentamos a Hogar, la cadena de equipamiento y artículos para el
-          hogar, pensada para vos y tu familia. Nació a fines de 2004, buscando
-          satisfacer las necesidades de las familias que desean amoblar y
-          equipar sus hogares con productos de calidad, estilo y diseño con la
-          posibilidad de una financiación flexible y acorde a cada necesidad.
-          Así, fuimos creciendo para acercarnos más a vos. Hoy estamos presentes
-          en Mendoza con tres puntos de venta (esto es mentira)
-        </p>
-        <p>
-          <strong className={style.pSubtitle}>¿Como comprar?</strong>
-        </p>
-        <p>
-          ​Te presentamos a Hogar, la cadena de equipamiento y artículos para el
-          hogar, pensada para vos y tu familia. Nació a fines de 2004, buscando
-          satisfacer las necesidades de las familias que desean amoblar y
-          equipar sus hogares con productos de calidad, estilo y diseño con la
-          posibilidad de una financiación flexible y acorde a cada necesidad.
-          Así, fuimos creciendo para acercarnos más a vos. Hoy estamos presentes
-          en Mendoza con tres puntos de venta (esto es mentira)
-        </p>
-      </div>
+    <div className={style.container}>
+ {members.length > 0 ? (
+        members.map((miembro) => {
+          return (
+            <div key={miembro.id} className={style.aboutCard}>
+              <AboutCard
+                id={miembro.id}
+                imagen={pelado}
+                name={miembro.name}
+                subTitle={miembro.subTitle}
+                github={miembro.github}
+                linkedin={miembro.linkedin}
+              />
+            </div>
+          );
+        })
+      ) : (
+        <div className="noProducts">
+          <h1>No se encontraron muebles con esos parámetros</h1>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,63 +1,11 @@
-.cntnAbout {
+.container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* padding-top: 1em; */
-  margin-top: 2em;
-  margin-bottom: 3em;
-}
-.divText {
-  margin-top: 30px;
-}
-.tittle {
-  margin: 1rem;
-}
-.cntnAbout h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 35px;
-  font-weight: 600;
-  /* margin-top: 85px; */
-  margin-bottom: 12px;
-}
-.line {
-  width: 48%;
-  border-top: 1px solid black;
-  height: 1px;
-}
-.divText p {
-  display: flex;
-  justify-content: center;
-  text-align: start;
-  line-height: 25px;
-  font-size: 15px;
-  width: 650px;
-  margin: 0px;
-}
-.pSubtitle {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-
-  font-size: 15px;
-  width: 650px;
-  margin: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Cambia a 'space-between' para distribuir las tarjetas en filas */
 }
 
-/* Estilos responsive */
-@media screen and (max-width: 768px) {
-  .cntnAbout h1 {
-    font-size: 2em; /* Reducimos el tamaño del título */
-    margin: 0.5em;
-  }
-  .divText {
-    width: 80%;
-    text-align: center;
-  }
-  .divText p,
-  .pSubtitle {
-    max-width: 100%; /* Ocupa todo el ancho disponible en pantallas más pequeñas */
-  }
+.aboutCard {
+  width: calc(33.33% - 10px); /* Para que haya 3 tarjetas por fila con un espacio de 10px entre ellas */
+  margin-right: 10px; /* Espacio entre las tarjetas */
+  margin-bottom: 10px; /* Espacio entre las filas */
 }

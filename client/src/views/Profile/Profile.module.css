@@ -52,7 +52,7 @@
 
 .userInfoCard {
   width: 310px !important;
-  height: 150px !important;
+  height: 165px !important;
   box-shadow: 4px 8px rgba(0, 0, 0, 0.2); /* Agrega sombra ancha de color marrón */
   margin-left: -75px !important;
   margin-top: 135px !important;
@@ -84,6 +84,12 @@
   border-radius: 5px;
   padding: 10px 15px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* Transición para el cambio suave de color */
+  transition: background-color 0.3s, color 0.3s;
+  height: 30px;
+  width: 200px;
+  margin-top: 3%;
+
+  /* Añadir estas propiedades para centrar el texto */
+  text-align: center;
+  line-height: 5px; /* Ajustar a la altura del botón */
 }
-/* Añade más estilos según sea necesario */

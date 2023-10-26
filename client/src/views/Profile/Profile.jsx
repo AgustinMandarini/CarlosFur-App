@@ -87,7 +87,10 @@ const Profile = () => {
               </Col>
               {isAdmin ? (
                 <Col md="12">
-                  <Link to={`/user/admin/${loggedUser.id}`}>
+                  <Link
+                    to={`/user/admin/${loggedUser.id}`}
+                    className={styles.link}
+                  >
                     <div className={styles.botonAdmin}>
                       Panel de Administración
                     </div>

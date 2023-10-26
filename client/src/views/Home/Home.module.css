@@ -3,7 +3,80 @@
   flex-direction: column;
 }
 .tittle {
+  position: absolute;
+  left: 15px;
+  top: 320px;
   margin-top: 2rem;
   justify-content: center;
   align-items: center;
+  font-size: 60px;
+  /* color: #63544a; */
+  color: rgba(0, 0, 0, 0.699);
+  font-weight: 800;
+  font-family: the seasons;
+  letter-spacing: 2px;
+  box-shadow: 1;
+}
+.divImg {
+  width: 100%;
+  height: 445px;
+  background-image: url(../../imagenes/members/Carrousel-Home2.jpg);
+  margin-bottom: 20px;
+  border-bottom: 1px solid black;
+}
+.icon {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  /* color: rgba(255, 255, 255, 0.836); */
+  color: black;
+  animation-name: icon;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-moz-keyframes icon {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes icon {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes icon {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.icon:hover {
+  font-size: 25px;
 }

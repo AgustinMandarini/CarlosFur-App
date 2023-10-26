@@ -11,31 +11,25 @@ import {
   CardTitle,
   CardSubtitle,
 } from "reactstrap";
-import { useAuth0 } from "@auth0/auth0-react"; // Importa useAuth0
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null); // Nuevo estado para el mensaje de error
   const { id } = useParams();
-  const { user: auth0User, isAuthenticated } = useAuth0(); // Obtén la información del usuario de Auth0
-
+  const { user: auth0User, isAuthenticated } = useAuth0();
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  const fetchUserProfile = async () => {
-    try {
-      const response = await axios.get(`${apiUrl}/user/profile/${id}`);
-      setUser(response.data);
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setError("No estás autorizado");
-      } else {
-        setError("Error al obtener el perfil del usuario.");
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/user/profile/${id}`);
+        setUser(response.data);
+      } catch (error) {
         console.error("Error al obtener el perfil:", error.message);
       }
-    }
-  };
-  useEffect(() => {
-    fetchUserProfile();
+    };
+
+    fetchUserProfile(); // Llamar a la función fetchUserProfile aquí
   }, [id]);
 
   if (!user) {
@@ -53,6 +47,9 @@ const Profile = () => {
   } else if (user) {
     userName = user.first_name + (user.last_name ? ` ${user.last_name}` : "");
   }
+
+  const isAdmin = user.is_admin; // Verifica si el usuario es administrador
+  console.log(user.is_admin);
 
   return (
     <Container className={`${styles.profileContainer} ${styles.Background}`}>
@@ -86,27 +83,33 @@ const Profile = () => {
                   {user.e_mail || "N/A"}
                 </CardSubtitle>
               </Col>
-              {user.is_admin && (
+              {isAdmin ? (
                 <Col md="12">
                   <button
                     className={styles.botonAdmin}
-                    onClick={() =>
-                      (window.location.href = "http://localhost:3000/admin")
-                    }
+                    onClick={() => {
+                      if (isAdmin) {
+                        window.location.href = `http://localhost:3000/user/admin/${id}`;
+                      } else {
+                        // Mostrar un mensaje de acceso denegado en lugar de redirigir
+                        alert("");
+                      }
+                    }}
                   >
                     Ir al Panel de Administración
                   </button>
+                </Col>
+              ) : (
+                <Col md="12">
+                  <div className={styles.accesoDenegado}>
+                    
+                  </div>
                 </Col>
               )}
             </Row>
           </Card>
         </Col>
       </Row>
-      {error && (
-        <div className={styles.errorContainer}>
-          <p className={styles.errorMessage}>{error}</p>
-        </div>
-      )}
     </Container>
   );
 };

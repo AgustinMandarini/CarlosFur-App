@@ -27,10 +27,6 @@ function Admin() {
       <nav className="AdminNav">
         <NavBar />
       </nav>
-      <Link to="/home">
-        {" "}
-        <button>Home</button>
-      </Link>
       <div className="AdminContent">
         <Route path={`/user/admin/${loggedUser.id}/productos`} component={Productos} />
         <Route path="/admin/productos/editar/:id" component={EditarProducto} />
@@ -43,8 +39,8 @@ function Admin() {
           path={`/user/admin/${loggedUser.id}/crear/tipo-de-producto`}
           component={CrearTipoProducto}
         />
-        <Route path="/admin/reviews" component={Reviews} />
-        <Route path="/admin/detalle/:cartId" component={DetalleCart} />
+        <Route path={`/user/admin/${loggedUser.id}/admin/reviews`} component={Reviews} />
+        <Route path={`/user/admin/${loggedUser.id}/detalle/:cartId`} component={DetalleCart} />
       </div>
     </div>
   );

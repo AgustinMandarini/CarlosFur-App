@@ -18,6 +18,7 @@ const Profile = () => {
   const { id } = useParams();
   const { user: auth0User, isAuthenticated } = useAuth0();
   const apiUrl = process.env.REACT_APP_API_URL;
+  const clientUrl = process.env.REACT_APP_CLIENT_URL;
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -89,14 +90,15 @@ const Profile = () => {
                     className={styles.botonAdmin}
                     onClick={() => {
                       if (isAdmin) {
-                        window.location.href = `http://localhost:3000/user/admin/${id}`;
+                        window.location.href = `${clientUrl}/user/admin/${id}`;
+                        // window.location.href = `http://localhost:3000/user/admin/${id}`;
                       } else {
                         // Mostrar un mensaje de acceso denegado en lugar de redirigir
                         alert("");
                       }
                     }}
                   >
-                    Ir al Panel de Administración
+                    Panel de Administración
                   </button>
                 </Col>
               ) : (

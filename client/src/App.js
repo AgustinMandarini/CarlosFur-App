@@ -36,7 +36,6 @@ function App() {
   const { isLoading, isAuthenticated } = useAuth0();
   const cartProducts = useSelector((state) => state.cartProducts) || [];
   const loggedUser = useSelector((state) => state.loggedUser);
-  const [isAdmin, setIsAdmin] = useState(false); // Para el estado de isAdmin
   const userIsAuthenticated = localStorage.getItem("token") !== null;
 
   useEffect(() => {
@@ -46,29 +45,7 @@ function App() {
       const cartFromLocalStorage = JSON.parse(savedCart);
       dispatch(loadCartFromLocalStorage(cartFromLocalStorage));
     }
-
-    const fetchUserAdminStatus = async () => {
-      if (loggedUser) {
-        try {
-          const response = await axios.get(
-            `http://localhost:3001/user/admin/${loggedUser.id}`
-          );
-          if (response.data.is_admin) {
-            console.log(response);
-            setIsAdmin(true);
-            console.log(isAdmin);
-          } else {
-            setIsAdmin(false);
-          }
-        } catch (error) {
-          console.error("Error al obtener el estado de administrador:", error);
-          setIsAdmin(false); // En caso de error, asumimos que no es admin
-        }
-      }
-    };
-
-    fetchUserAdminStatus();
-  }, [dispatch, isAuthenticated, loggedUser]);
+  }, [dispatch, isAuthenticated]);
 
   if (isLoading) {
     return (
@@ -78,8 +55,10 @@ function App() {
     );
   }
 
+  const isAdmin = loggedUser ? loggedUser.is_admin : false;
+
   const isAdminRoute = pathname.startsWith("/admin");
-  // console.log(isAdminRoute);
+
   return (
     <div className="App">
       {location.pathname !== "/" && !isAdminRoute && <LoginRegisterBar />}
@@ -99,7 +78,19 @@ function App() {
       <Route path="/forgottenPassword" component={ForgottenPassword}></Route>
       <Route path="/resetPassword/:e_mail" component={ResetPassword}></Route>
 
-      <Route path="/user/admin/:userId" component={isAdmin ? Admin : Home} />
+
+      <Route
+        path="/user/admin/:userId"
+        render={({ match }) =>
+          isAdmin ? (
+            <Admin />
+          ) : (
+            <Redirect to={`/user/profile/${match.params.userId}`} />
+          )
+        }
+      />
+      
+
       <Route path="/user/profile/:id" component={Profile} />
       <Footer />
     </div>
@@ -107,3 +98,4 @@ function App() {
 }
 
 export default App;
+

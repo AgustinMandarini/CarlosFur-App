@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import style from "./DetalleCart.module.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 const DetalleCart = () => {
   const { cartId } = useParams();
   const [cart, setCart] = useState({});
-
+  const loggedUser = useSelector((state) => state.loggedUser);
   useEffect(() => {
       axios.get(`http://localhost:3001/cart/${cartId}`)
       .then(({ data }) => {
@@ -47,7 +47,7 @@ const DetalleCart = () => {
             <h4>User Id: </h4>{cart.user_id} <br />
          
         <Button variant="secondary">{" "}
-         <Link to="/admin/ventas" className={style.link}>
+         <Link to={`/user/admin/${loggedUser.id}/ventas`} className={style.link}>
             Volver
          </Link>
         </Button>{""}

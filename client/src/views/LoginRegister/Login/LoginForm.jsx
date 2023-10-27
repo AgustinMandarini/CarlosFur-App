@@ -24,8 +24,8 @@ const mostrarNotificacionBienvenida2 = () => {
     toast.success("Iniciando Sesión", {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
-}
-  
+  };
+
   const mostrarNotificacionBienvenida = () => {
     toast.success("Iniciando Sesión con cuenta de Google", {
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -53,27 +53,25 @@ const mostrarNotificacionBienvenida2 = () => {
       const user = { userId, cartId };
       localStorage.setItem("user", JSON.stringify(user));
     };
-
+  
     const userInfo = { e_mail: form.e_mail, password: form.password };
     if (form.e_mail && form.password) {
       try {
         // La ruta get genera valida si el usuario existe, y si existe genera un token de sesion
-        const response = await axios.get(
-          `${apiUrl}/user?e_mail=${form.e_mail}`
-        );
+        const response = await axios.get(`${apiUrl}/user?e_mail=${form.e_mail}`);
         const data = response.data;
         const userInfoWithToken = {
           ...userInfo,
           accessToken: response.data.accessToken,
         };
-
+  
         if (Object.keys(data).length > 0 && data.user.e_mail === form.e_mail) {
-          // Si el usuario está creado, lo tiene que logear
+          // Si el usuario está creado y no está baneado, lo tiene que logear
           dispatch(login(userInfoWithToken));
           saveUserInfoToLocalStorage(data.user.id, data.user.cartId);
         }
       } catch (error) {
-        toast.error("El usuario no se encuentra registrado", {
+        toast.error("El usuario no está registrado o se encuentra baneado", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 3000,
         });
@@ -117,19 +115,18 @@ const mostrarNotificacionBienvenida2 = () => {
     event.preventDefault();
     const validationErrors = validation(form);
     setErrors(validationErrors);
-  
+
     if (Object.keys(validationErrors).length === 0) {
       mostrarNotificacionBienvenida2(); // Mostrar notificación de bienvenida
       handleLocalLogin(); // Realizar el inicio de sesión
     }
   };
-  
 
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
         <h2 className={styles.title}>Inicio de sesión</h2>
-        <form className={styles.form} onSubmit={submitHandler}>
+        <form className={styles.form} onSubmit={submitHandler} noValidate>
           {/* E_mail input */}
           <div className={styles.inputContainer}>
             <span className={styles.label}>E-mail</span>
@@ -173,7 +170,8 @@ const mostrarNotificacionBienvenida2 = () => {
           </span>
           {/* Buttons */}
           <div className={styles.buttonContainer}>
-            <button className={styles.button} type="submit">
+            <button className={styles.button} type="submit"
+            >
               Iniciar sesión
             </button>
             {/* Botón "Acceder con Google" */}

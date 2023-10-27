@@ -19,6 +19,7 @@ function LoginBar() {
 
   let cartArray = [];
 
+  console.log(cartProducts);
   if (cartProducts.length > 0) {
     cartArray = cartProducts.reduce((result, product) => {
       if (product && product.id !== undefined) {

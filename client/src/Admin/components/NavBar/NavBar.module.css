@@ -7,7 +7,7 @@
   background-color: #ffffff;
   /* padding: 2em; */
   width: 30vh; /* Ancho inicial del Navbar vertical */
-  height: 120vh;
+  height: 140vh;
   border: #000000 0.1em solid;
   background-image: url(../../../imagenes/backLanding.jpg);
   @media (max-width: 768px) {

@@ -39,8 +39,8 @@ const CrearProducto = () => {
     }
   };
 
-  const handleAcept = () => {
-    window.location.href = `${clientURL}/user/admin/${loggedUser.id}/crear/producto`;
+  const handleAcept = () => {  ///user/admin/${loggedUser.id}/crear/producto
+    window.location.href = `/user/admin/${loggedUser.id}/crear/producto`;
     setModal(false);
   };
 

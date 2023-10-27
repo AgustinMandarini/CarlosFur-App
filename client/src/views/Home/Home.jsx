@@ -8,8 +8,7 @@ import ToolBar from "../../components/ToolBar/ToolBar";
 import style from "./Home.module.css";
 import { useCheckUserExists } from "../../helpers/checkUserExist";
 import { getCart, postCart } from "../../redux/actions";
-import { BsArrowDownSquare } from "react-icons/bs";
-
+import { IconArrowBigDownLineFilled } from "@tabler/icons-react";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const Home = () => {
@@ -120,7 +119,11 @@ const Home = () => {
   return (
     <div className={style.cntnHome}>
       <div className={style.divImg}></div>
-      <BsArrowDownSquare className={style.icon} stroke="5px" size="28px" />
+      <IconArrowBigDownLineFilled
+        className={style.icon}
+        stroke="5px"
+        size="31px"
+      />
       <h1 className={style.tittle}>MSC AMOBLAMIENTOS</h1>
       <div>
         <ToolBar />

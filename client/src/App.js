@@ -6,7 +6,7 @@ import GuardedRoute from "./helpers/GuardComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { loadCartFromLocalStorage } from "./redux/actions";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import Admin from "./Admin/Admin";
@@ -47,18 +47,26 @@ function App() {
     }
   }, [dispatch, isAuthenticated]);
 
+  const carritoDelLocal = JSON.parse(localStorage.getItem("cart"));
+
   if (isLoading) {
-    return (
-      <div className="page-layout">
-        <PageLoader />
-      </div>
-    );
+    if (carritoDelLocal !== cartProducts) {
+      console.log("Cargando");
+      return (
+        <div className="page-layout">
+          <PageLoader />
+        </div>
+      );
+    }
   }
 
   const isAdmin = loggedUser ? loggedUser.is_admin : false;
 
   const isAdminRoute = pathname.startsWith("/admin");
 
+  console.log("carritoDelLocal:", carritoDelLocal);
+  console.log("cartProducts:", cartProducts);
+  console.log("Ya cargo");
   return (
     <div className="App">
       {location.pathname !== "/" && !isAdminRoute && <LoginRegisterBar />}
@@ -78,18 +86,24 @@ function App() {
       <Route path="/forgottenPassword" component={ForgottenPassword}></Route>
       <Route path="/resetPassword/:e_mail" component={ResetPassword}></Route>
 
-
       <Route
         path="/user/admin/:userId"
-        render={({ match }) =>
-          isAdmin ? (
-            <Admin />
-          ) : (
-            <Redirect to={`/user/profile/${match.params.userId}`} />
-          )
-        }
+        render={({ match }) => {
+          if (loggedUser && loggedUser.id) {
+            if (isAdmin) {
+              return <Admin />;
+            } else {
+              // Usuario autenticado pero no es administrador
+              toast.error("No permitido para No Administrador");
+              return <Redirect to={`/user/profile/${match.params.userId}`} />;
+            }
+          } else {
+            // Usuario no está logueado
+            toast.error("Usuario no logueado");
+            return <Redirect to="/logIn" />;
+          }
+        }}
       />
-      
 
       <Route path="/user/profile/:id" component={Profile} />
       <Footer />
@@ -98,4 +112,3 @@ function App() {
 }
 
 export default App;
-

@@ -47,7 +47,7 @@ const NavBar = () => {
           <IconHome2 className={style.icon} stroke="1.3" />
           Home
         </Link>
-        <Link to="/reviews" className={style.link}>
+        <Link to={`/user/admin/${loggedUser.id}/reviews`}className={style.link}>
           <IconStar className={style.icon} stroke="1.2" />
           Reviews
         </Link>

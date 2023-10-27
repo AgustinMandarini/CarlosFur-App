@@ -47,7 +47,7 @@ const CrearProducto = () => {
   return (
     <div className={style.cntnForm}>
       <p className={style.tittle}>Nuevo Color:</p>
-      <Form className={style.formConteiner} onSubmit={submitHandler}>
+      <Form className={style.formConteiner} noValidate onSubmit={submitHandler}>
         <Form.Group className={style.formGroup} controlId="formBasicEmail">
           <Form.Label className={style.label}>Nombre del color: </Form.Label>
           <div className={style.divinputError}>

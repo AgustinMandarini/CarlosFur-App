@@ -3,12 +3,14 @@ const mercadopago = require("mercadopago");
 
 const mpCartHandler = async (req, res) => {
   const products = req.body;
+  const stringProducts = JSON.stringify(products);
+  const base64Products = Buffer.from(stringProducts).toString("base64");
 
   let preference = {
     items: products,
     back_urls: {
-      success: `${ACCES_CONTROL_URL}/shoppingcart`,
-      failure: `${ACCES_CONTROL_URL}/shoppingcart`,
+      success: `${ACCES_CONTROL_URL}/newOrder?data=${base64Products}`,
+      failure: `${ACCES_CONTROL_URL}/home`,
       pending: "",
     },
     auto_return: "approved",

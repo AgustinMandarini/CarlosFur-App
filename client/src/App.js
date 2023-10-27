@@ -19,6 +19,7 @@ import {
   LandingPage,
   NavBar,
   ShoppingCart,
+  NewOrder,
   RegisterForm,
   LoginForm,
   Profile,
@@ -81,6 +82,7 @@ function App() {
         component={ShoppingCart}
         auth={userIsAuthenticated}
       />
+      <Route path="/newOrder" component={NewOrder}></Route>
       <Route path="/register" component={RegisterForm} />
       <Route path="/logIn" component={LoginForm} />
       <Route path="/forgottenPassword" component={ForgottenPassword}></Route>

@@ -9,11 +9,12 @@ const semaphore = new Semaphore(); // Crea una instancia del semáforo
 
 const createOrder = async (req, res) => {
   try {
-    const { collection_id, cartId, payment_type, e_mail } = req.body;
+    const { collection_id, cartId, payment_type, e_mail, products } = req.body;
     console.log("POST ORDER - COLLECTION ID: " + collection_id);
     console.log("POST ORDER - CART ID: " + cartId);
     console.log("POST ORDER - PAYMENT TYPE: " + payment_type);
     console.log("POST ORDER - EMAIL: " + e_mail);
+    console.log("POST ORDER - PRODUCTS: " + JSON.stringify(products));
 
     await semaphore.acquire(); // Adquiere el semáforo
 
@@ -62,26 +63,7 @@ const createOrder = async (req, res) => {
         // id: cart.id,
         total_amount: cart.total_amount,
         user_name: cart.user_name,
-        products: await Promise.all(
-          cart.products.map(async (product) => {
-            console.log(
-              "POST ORDER - products.product: " + JSON.stringify(product)
-            );
-            const foundProduct = await Product.findOne({
-              where: { id: product?.productId },
-            });
-            const unitPrice = foundProduct.price;
-            const productQuantity = product.product_quantity;
-            const subtotal = unitPrice * productQuantity;
-            return {
-              name: product.name,
-              product_quantity: productQuantity,
-              productId: product.productId,
-              unit_price: unitPrice,
-              subtotal: subtotal,
-            };
-          })
-        ),
+        products: products,
       };
       // console.log("holis", cartData)
 

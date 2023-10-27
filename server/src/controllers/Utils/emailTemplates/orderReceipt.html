@@ -73,11 +73,11 @@
         {{#each products}}
         <tr style="text-align: center">
           <td>
-            <span>{{ this.name }}</span>
+            <span>{{ this.description }}</span>
           </td>
-          <td><span>{{ this.price }}</span></td>
-          <td>{{ this.product_quantity }}</td>
-          <td><span>{{ this.price }}</span></td>
+          <td><span>$ {{ this.unit_price }}</span></td>
+          <td>{{ this.quantity }}</td>
+          <td><span>$ {{ this.total_price }}</span></td>
         </tr>
         {{/each}}
       </tbody>
@@ -94,7 +94,7 @@
           <td></td>
           <td>
             <span style="color: rgb(219, 201, 0); font-weight: bold"
-              >${{ total_amount }}</span
+              >$ {{ total_amount }}</span
             >
           </td>
         </tr>
@@ -310,7 +310,7 @@
                                       11 a 19hs / Sá de 10:30 a 17hs<br
                                         aria-hidden="true"
                                       />Web:&nbsp;<a
-                                        href="http://www.nakaoutdoors.com.ar/"
+                                        href="https://msc-amoblamientos.vercel.app/home"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         data-auth="NotApplicable"

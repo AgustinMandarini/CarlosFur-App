@@ -5,6 +5,7 @@ import Detail from "./Detail/Detail";
 import About from "./About/About";
 import NavBar from "./Nav/NavBar";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
+import NewOrder from "./NewOrder/NewOrder";
 import LoginForm from "./LoginRegister/Login/LoginForm";
 import RegisterForm from "./LoginRegister/Register/RegisterForm";
 import Profile from "./Profile/Profile";
@@ -21,7 +22,7 @@ export {
   LoginForm,
   RegisterForm,
   Profile,
-
+  NewOrder,
   ForgottenPassword,
   ResetPassword,
 };

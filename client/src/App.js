@@ -59,7 +59,7 @@ function App() {
       );
     }
   }
- //`/user/admin/${loggedUser.id}/productos`
+  //`/user/admin/${loggedUser.id}/productos`
   const isAdmin = loggedUser ? loggedUser.is_admin : false;
 
   const isAdminRoute = pathname.startsWith("/user/admin");
@@ -94,8 +94,12 @@ function App() {
               return <Admin />;
             } else {
               // Usuario autenticado pero no es administrador
-              toast.error("No permitido para No Administrador");
-              return <Redirect to={`/user/profile/${match.params.userId}`} />;
+              toast.error("Acceso denegado, solo se admiten administradores");
+              setTimeout(() => {
+                window.location.href = `/home`;
+              }, 1800);
+
+              // return <Redirect to={`/user/profile/${match.params.userId}`} />;
             }
           } else {
             // Usuario no está logueado

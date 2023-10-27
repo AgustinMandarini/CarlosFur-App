@@ -11,12 +11,7 @@ const CALLBACK_URL = process.env.REACT_APP_AUTH0_CALLBACK_URL;
 
 const NewOrder = () => {
   const dispatch = useDispatch();
-  const cartProducts = useSelector((state) => state.cartProducts);
   const loggedUser = useSelector((state) => state.loggedUser);
-  const cart = useSelector((state) => state.cart);
-  const { isAuthenticated } = useAuth0();
-  const history = useHistory();
-  const userIsAuthenticated = localStorage.getItem("token") !== null;
 
   const urlParams = new URLSearchParams(window.location.search);
   const collectionStatus = urlParams.get("collection_status");
@@ -24,7 +19,6 @@ const NewOrder = () => {
   const collection_id = urlParams.get("collection_id");
   const payment_type = urlParams.get("payment_type");
   const encodedData = urlParams.get("data");
-  console.log("ENCODED DATA DESDE NEWORDER: " + encodedData);
   const decodedData = atob(encodedData);
   const products = JSON.parse(decodedData);
 

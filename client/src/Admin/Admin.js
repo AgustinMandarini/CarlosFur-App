@@ -72,10 +72,7 @@ function Admin() {
           path={`/user/admin/${loggedUser.id}/reviews`}
           component={Reviews}
         />
-        <Route
-          path={`/user/admin/${loggedUser.id}/detalle/:cartId`}
-          component={DetalleCart}
-        />
+        
       </div>
     </div>
   );

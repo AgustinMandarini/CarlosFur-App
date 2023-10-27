@@ -197,7 +197,7 @@ const CrearProducto = () => {
         </Form.Group>
 
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
-          <Form.Label className={style.label}>Limite de cantidad por compra:</Form.Label>
+          <Form.Label className={style.label}>Stock:</Form.Label>
           <div className={style.divinputError}>
             <Form.Control
               size="sm"

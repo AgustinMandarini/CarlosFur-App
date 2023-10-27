@@ -71,7 +71,7 @@ const mostrarNotificacionBienvenida2 = () => {
           saveUserInfoToLocalStorage(data.user.id, data.user.cartId);
         }
       } catch (error) {
-        toast.error("El usuario no está registrado o se encuentra baneado", {
+        toast.error("El usuario no se encuentra registrado", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 3000,
         });

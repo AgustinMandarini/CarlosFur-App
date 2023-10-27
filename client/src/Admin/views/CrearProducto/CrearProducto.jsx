@@ -21,6 +21,7 @@ const CrearProducto = () => {
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState(null);
   const dispatch = useDispatch();
+  console.log(preview);
 
   const [form, setForm] = useState({});
 
@@ -62,6 +63,9 @@ const CrearProducto = () => {
       reader.onload = () => {
         setPreview(reader.result);
         setForm({ ...form, imageBase64: reader.result });
+        // Realiza la validación de la imagen y actualiza los errores
+        const imageErrors = validation({ ...form, imageBase64: reader.result });
+        setErrors({ ...errors, imageBase64: imageErrors.imageBase64 });
       };
     } else {
       toast.error("No es un formato de imagen válido", {

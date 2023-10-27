@@ -73,7 +73,7 @@ const validation = (formState) => {
   }
 
   // Validar campo de imagen
-  if (!formState.imageBase64 || formState.imageBase64 === null) {
+  if (!formState.imageBase64 || formState.imageBase64 === "") {
     errors.imageBase64 = "Por favor adjunte una imagen";
   }
 

@@ -108,9 +108,11 @@ const ShoppingCart = ({ show, handleClose, handleShow }) => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <CartProductContainer />
-          <button className={style.buttonComprar} onClick={handleBuy}>
-            Comprar!
-          </button>
+          {cartProducts.length > 0 && (
+            <button className={style.buttonComprar} onClick={handleBuy}>
+              Comprar
+            </button>
+          )}
           {preferenceId && <Wallet initialization={{ preferenceId }} />}
         </Offcanvas.Body>
       </Offcanvas>

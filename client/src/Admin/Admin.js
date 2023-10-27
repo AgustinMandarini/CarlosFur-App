@@ -1,4 +1,4 @@
-import { Route, Link} from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import Productos from "./views/Productos/Productos";
 import Ventas from "./views/Ventas/Ventas";
 import DetalleCart from "./views/Ventas/DetalleCart";
@@ -28,19 +28,43 @@ function Admin() {
         <NavBar />
       </nav>
       <div className="AdminContent">
-        <Route path={`/user/admin/${loggedUser.id}/productos`} component={Productos} />
+        <Route
+          path={`/user/admin/${loggedUser.id}/productos`}
+          component={Productos}
+        />
         <Route path="/admin/productos/editar/:id" component={EditarProducto} />
-        <Route path={`/user/admin/${loggedUser.id}/ventas`} component={Ventas} />
-        <Route path={`/user/admin/${loggedUser.id}/usuarios`} component={Usuarios} />
-        <Route path={`/user/admin/${loggedUser.id}/crear/producto`} component={CrearProducto} />
-        <Route path={`/user/admin/${loggedUser.id}/crear/color`} component={CrearColor} />
-        <Route path={`/user/admin/${loggedUser.id}/crear/material`} component={CrearMaterial} />
+        <Route
+          path={`/user/admin/${loggedUser.id}/ventas`}
+          component={Ventas}
+        />
+        <Route
+          path={`/user/admin/${loggedUser.id}/usuarios`}
+          component={Usuarios}
+        />
+        <Route
+          path={`/user/admin/${loggedUser.id}/crear/producto`}
+          component={CrearProducto}
+        />
+        <Route
+          path={`/user/admin/${loggedUser.id}/crear/color`}
+          component={CrearColor}
+        />
+        <Route
+          path={`/user/admin/${loggedUser.id}/crear/material`}
+          component={CrearMaterial}
+        />
         <Route
           path={`/user/admin/${loggedUser.id}/crear/tipo-de-producto`}
           component={CrearTipoProducto}
         />
-        <Route path={`/user/admin/${loggedUser.id}/admin/reviews`} component={Reviews} />
-        <Route path={`/user/admin/${loggedUser.id}/detalle/:cartId`} component={DetalleCart} />
+        <Route
+          path={`/user/admin/${loggedUser.id}/admin/reviews`}
+          component={Reviews}
+        />
+        <Route
+          path={`/user/admin/${loggedUser.id}/detalle/:cartId`}
+          component={DetalleCart}
+        />
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
 .containerReg {
+  margin-top: 2em;
+  margin-bottom: 5em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,17 +11,16 @@
 
 .containerData {
 
-  background-color: #ae9c8f;
+  background-color: #b1ada2d7;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100vh;
-  height: 100vh;
-
+  height: 45em;
   border-radius: 10px;
   box-shadow: 0 35px 60px -15px #070707;
   padding: 20px;
-  margin-top: 0px;
+
 }
 
 .inputContainer {
@@ -71,6 +72,10 @@
   cursor: pointer;
   color: white;
   margin: 1rem;
+}
+.submitButton:hover {
+  background-color:  white;
+  color: black;
 }
 
 .text {

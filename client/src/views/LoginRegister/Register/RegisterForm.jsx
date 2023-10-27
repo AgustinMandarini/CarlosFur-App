@@ -155,6 +155,7 @@ const RegisterForm = () => {
               <div className={styles.inputSection}>
                 <div className={`${styles.cInput} ${styles["c-input"]}`}>
                   <div className={styles.data}>
+                  <span className={styles.label}>Nombre</span>
                     <input
                       type="text"
                       value={form.user_name}
@@ -166,49 +167,12 @@ const RegisterForm = () => {
                     {errors.user_name && (
                       <p className={styles.errorText}>{errors.user_name}</p>
                     )}
-                    <span className={styles.label}>Nombre</span>
+                    
                   </div>
                 </div>
-                <div
-                  className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}
-                >
-                  <div className={styles.data}>
-                    <input
-                      type="text"
-                      value={form.e_mail}
-                      name="e_mail"
-                      onChange={changeHandler}
-                      className={styles.inputField}
-                      required
-                    />
-                    {errors.e_mail && (
-                      <p className={styles.errorText}>{errors.e_mail}</p>
-                    )}
-                    <span className={styles.label}>E-mail</span>
-                  </div>
-                </div>
-                <div
-                  className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}
-                >
-                  <div className={styles.data}>
-                    <input
-                      type="password"
-                      value={form.password}
-                      name="password"
-                      onChange={changeHandler}
-                      className={styles.inputField}
-                      required
-                    />
-                    {errors.password && (
-                      <p className={styles.errorText}>{errors.password}</p>
-                    )}
-                    <span className={styles.label}>Contraseña</span>
-                  </div>
-                </div>
-              </div>
-              <div className={`${styles.inputSection} ${styles["w-2/5"]}`}>
                 <div className={`${styles.cInput} ${styles["c-input"]}`}>
                   <div className={styles.data}>
+                  <span className={styles.label}>Apellido</span>
                     <input
                       type="text"
                       value={form.lastName}
@@ -220,13 +184,56 @@ const RegisterForm = () => {
                     {errors.lastName && (
                       <p className={styles.errorText}>{errors.lastName}</p>
                     )}
-                    <span className={styles.label}>Apellido</span>
+                   
+                  </div>
+                </div>
+               
+                <div
+                  className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}
+                >
+                  <div className={styles.data}>
+                  <span className={styles.label}>Contraseña</span>
+                    <input
+                      type="password"
+                      value={form.password}
+                      name="password"
+                      onChange={changeHandler}
+                      className={styles.inputField}
+                      required
+                    />
+                    {errors.password && (
+                      <p className={styles.errorText}>{errors.password}</p>
+                    )}
+                   
+                  </div>
+                </div>
+              </div>
+              <div className={`${styles.inputSection} ${styles["w-2/5"]}`}>
+                <div
+                  className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}
+                >
+
+                  <div className={styles.data}>
+                  <span className={styles.label}>E-mail</span>
+                    <input
+                      type="text"
+                      value={form.e_mail}
+                      name="e_mail"
+                      onChange={changeHandler}
+                      className={styles.inputField}
+                      required
+                    />
+                    {errors.e_mail && (
+                      <p className={styles.errorText}>{errors.e_mail}</p>
+                    )}
+                  
                   </div>
                 </div>
                 <div
                   className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}
                 >
                   <div className={styles.data}>
+                  <span className={styles.label}>Celular</span>
                     <input
                       type="text"
                       value={form.whatsapp}
@@ -238,13 +245,14 @@ const RegisterForm = () => {
                     {errors.whatsapp && (
                       <p className={styles.errorText}>{errors.whatsapp}</p>
                     )}
-                    <span className={styles.label}>Celular</span>
+                   
                   </div>
                 </div>
                 <div
                   className={`${styles.cInput} ${styles["c-input"]} ${styles["mt-2"]}`}
                 >
                   <div className={styles.data}>
+                  <span className={styles.label}>Repetir Contraseña</span>
                     <input
                       type="password"
                       value={form.confPassword}
@@ -256,7 +264,7 @@ const RegisterForm = () => {
                     {errors.confPassword && (
                       <p className={styles.errorText}>{errors.confPassword}</p>
                     )}
-                    <span className={styles.label}>Repetir Contraseña</span>
+                 
                   </div>
                 </div>
               </div>

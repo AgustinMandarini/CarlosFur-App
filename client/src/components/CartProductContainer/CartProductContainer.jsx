@@ -82,7 +82,9 @@ const CartProductContainer = () => {
           <h1>No se ha añadido nada al carrito</h1>
         </div>
       )}
-      <p className={style.p}>Precio total de la compra: ${cartTotal} </p>
+      {cartProducts.length > 0 && (
+        <p className={style.p}>Precio total de la compra: ${cartTotal} </p>
+      )}
     </div>
   );
 };

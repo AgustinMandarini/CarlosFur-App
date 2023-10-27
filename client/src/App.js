@@ -46,7 +46,9 @@ function App() {
       const cartFromLocalStorage = JSON.parse(savedCart);
       dispatch(loadCartFromLocalStorage(cartFromLocalStorage));
     }
-  }, [dispatch, loggedUser]);
+  }, [dispatch]);
+
+  useEffect(() => {}, [loggedUser]);
 
   const carritoDelLocal = JSON.parse(localStorage.getItem("cart"));
 

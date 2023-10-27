@@ -238,7 +238,7 @@ const rootReducer = (state = initialState, action) => {
           };
         } else {
           // No hay suficiente stock para agregar el producto al carrito
-          toast.error("No hay suficiente stock para este producto.", {
+          toast.error("Se excedió la cantidad máxima de compra de este producto.", {
             position: toast.POSITION.BOTTOM_RIGHT,
             autoClose: 3000,
           });

@@ -56,6 +56,8 @@ const createOrder = async (req, res) => {
         paymentTypeId: paymentTypeObj[0].id,
       });
 
+      semaphore.release(); // Libera el semaforo. Es decir libera la espera
+
       const cartData = {
         // id: cart.id,
         total_amount: cart.total_amount,
@@ -102,7 +104,6 @@ const createOrder = async (req, res) => {
         orderWithCart
       );
 
-      semaphore.release(); // Libera el semaforo. Es decir libera la espera
       return res.status(201).json(orderWithCart);
     }
 

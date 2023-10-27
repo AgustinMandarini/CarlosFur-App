@@ -119,11 +119,7 @@ const Home = () => {
   return (
     <div className={style.cntnHome}>
       <div className={style.divImg}></div>
-      <IconArrowBigDownLineFilled
-        className={style.icon}
-        stroke="5px"
-        size="31px"
-      />
+
       <h1 className={style.tittle}>MSC AMOBLAMIENTOS</h1>
       <div>
         <ToolBar />

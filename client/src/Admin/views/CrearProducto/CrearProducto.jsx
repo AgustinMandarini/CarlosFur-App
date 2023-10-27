@@ -85,7 +85,7 @@ const CrearProducto = () => {
   return (
     <div className={style.cntnForm}>
       <p className={style.tittle}>Nuevo Producto</p>
-      <Form className={style.formConteiner} onSubmit={submitHandler}>
+      <Form className={style.formConteiner} onSubmit={submitHandler} noValidate>
         <Form.Group className={style.formGroup} controlId="formBasicEmail">
           <Form.Label className={style.label}>Nombre: </Form.Label>
           <div className={style.divinputError}>
@@ -286,7 +286,7 @@ const CrearProducto = () => {
 
         <Form.Group className={style.formGroup} controlId="formBasicPassword">
           <Form.Label className={style.label} name="productType">
-            Tipo de Producto:
+            Tipo de Ambiente:
           </Form.Label>
           <div className={style.divinputErrorType}>
             <Form.Select

@@ -13,6 +13,7 @@ import {
 } from "reactstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector } from "react-redux";
+import { PageLoader } from "../../components/PageLoader/pageLoader";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -35,7 +36,11 @@ const Profile = () => {
   }, [id]);
 
   if (!user) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <PageLoader />
+      </div>
+    );
   }
 
   const userImage = isAuthenticated ? auth0User.picture : null;

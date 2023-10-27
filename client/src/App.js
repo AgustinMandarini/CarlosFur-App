@@ -59,14 +59,14 @@ function App() {
       );
     }
   }
-
+ //`/user/admin/${loggedUser.id}/productos`
   const isAdmin = loggedUser ? loggedUser.is_admin : false;
 
-  const isAdminRoute = pathname.startsWith("/admin");
+  const isAdminRoute = pathname.startsWith("/user/admin");
 
-  console.log("carritoDelLocal:", carritoDelLocal);
-  console.log("cartProducts:", cartProducts);
-  console.log("Ya cargo");
+  // console.log("carritoDelLocal:", carritoDelLocal);
+  // console.log("cartProducts:", cartProducts);
+  // console.log("Ya cargo");
   return (
     <div className="App">
       {location.pathname !== "/" && !isAdminRoute && <LoginRegisterBar />}

@@ -17,11 +17,14 @@ import {
 import style from "./Productos.module.css";
 
 const Productos = () => {
+
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState(null);
   const [reloadProducts, setReloadProducts] = useState(false);
 
   const productos = useSelector((state) => state.productsAdmin);
+  const loggedUser = useSelector((state) => state.loggedUser);
   const dispatch = useDispatch();
 
   const handleDeleteProduct = (event) => {
@@ -29,6 +32,10 @@ const Productos = () => {
     setProductIdToDelete(id);
     setShowDeleteModal(true);
   };
+  
+  useEffect(() => {
+    dispatch(getProductsAdmin());
+  }, [dispatch]);
 
   // const confirmDelete = () => {
   //   if (productIdToDelete !== null) {
@@ -99,7 +106,7 @@ const Productos = () => {
                     <Button variant="outline-warning">
                       {" "}
                       <Link
-                        to={`/admin/productos/editar/${producto.id}`}
+                        to={`/user/admin/${loggedUser.id}/editar/${producto.id}`}
                         className={style.link}
                       >
                         Editar

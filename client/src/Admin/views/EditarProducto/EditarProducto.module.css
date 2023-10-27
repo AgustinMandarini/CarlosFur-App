@@ -177,13 +177,14 @@
 }
 
 .edit {
+  margin-bottom: 0.2em;
   display: flex;
   flex-direction: row;
   width: 1.4em;
   height: 1.4em;
-  position: absolute;
+  /* position: absolute;
   top: 9.3em;
-  right: 25.6em;
+  right: 25.6em; */
 }
 .edit:hover {
   background-color: #ffffffa9; /* Cambia el color al pasar el mouse (puedes ajustar el color) */

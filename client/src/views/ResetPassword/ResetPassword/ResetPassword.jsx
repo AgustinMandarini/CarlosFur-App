@@ -79,7 +79,7 @@ const ResetPassword = () => {
     <div className={styles.container}>
       <div className={styles.formContainer}>
         <h2 className={styles.title}>Restablecer contraseña</h2>
-        <form className={styles.form} onSubmit={submitHandler}>
+        <form className={styles.form} onSubmit={submitHandler} noValidate>
           {/* Password input */}
           <div className={`${styles.inputContainer} ${styles.mt2}`}>
             <span className={styles.label}>Contraseña nueva</span>

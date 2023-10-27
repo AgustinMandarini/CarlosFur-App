@@ -46,10 +46,10 @@ const CrearTipoProducto = () => {
 
   return (
     <div className={style.cntnForm}>
-      <p className={style.tittle}>Nuevo Tipo de Producto:</p>
+      <p className={style.tittle}>Nuevo Tipo de Ambiente:</p>
       <Form className={style.formConteiner} onSubmit={submitHandler}>
         <Form.Group className={style.formGroup} controlId="formBasicEmail">
-          <Form.Label className={style.label}>Tipo de Producto: </Form.Label>
+          <Form.Label className={style.label}>Tipo de Ambiente: </Form.Label>
           <div className={style.divinputError}>
             <Form.Control
               size="sm"
@@ -98,7 +98,7 @@ const CrearTipoProducto = () => {
       </Form>
       <Modal show={modal}>
         <Modal.Header className={style.headerModal}>
-          <Modal.Title>Tipo de Producto Creado</Modal.Title>
+          <Modal.Title>Tipo de Ambiente Creado</Modal.Title>
         </Modal.Header>
         <Modal.Footer className={style.footerModal}>
           <Button className={style.buttonModal} onClick={handleAcept}>

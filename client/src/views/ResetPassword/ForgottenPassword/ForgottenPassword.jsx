@@ -60,7 +60,7 @@ const ForgottenPassword = () => {
       <div className={styles.container}>
         <div className={styles.formContainer}>
           <h2 className={styles.title}>¿Olvidaste tu contraseña?</h2>
-          <form className={styles.form} onSubmit={submitHandler}>
+          <form className={styles.form} onSubmit={submitHandler} noValidate>
             {/* E_mail input */}
             <div className={styles.inputContainer}>
               <p className={`${styles.text}`}>

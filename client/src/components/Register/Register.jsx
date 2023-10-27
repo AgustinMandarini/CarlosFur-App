@@ -63,7 +63,7 @@ export const Register = () => {
       <div className={styles.containerReg}>
         <div className={styles.containerData}>
           <h2>Crear una cuenta</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} noValidate>
             <div className={styles.inputContainer}>
               <div className={styles.inputSection}>
                 <div className={`${styles.cInput} ${styles["c-input"]}`}>

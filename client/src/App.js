@@ -96,10 +96,9 @@ function App() {
               return <Admin />;
             } else {
               // Usuario autenticado pero no es administrador
+              console.log("Se ingresa al else");
               toast.error("Acceso denegado, solo se admiten administradores");
-              setTimeout(() => {
-                window.location.href = `/home`;
-              }, 1800);
+              return <Redirect to="/home" />;
 
               // return <Redirect to={`/user/profile/${match.params.userId}`} />;
             }

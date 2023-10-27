@@ -18,14 +18,12 @@ const LoginForm = () => {
   const loggedUser = useSelector((state) => state.loggedUser);
   const [isFormValid, setIsFormValid] = useState(false);
 
-
-
-const mostrarNotificacionBienvenida2 = () => {
+  const mostrarNotificacionBienvenida2 = () => {
     toast.success("Iniciando Sesión", {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
-}
-  
+  };
+
   const mostrarNotificacionBienvenida = () => {
     toast.success("Iniciando Sesión con cuenta de Google", {
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -117,19 +115,18 @@ const mostrarNotificacionBienvenida2 = () => {
     event.preventDefault();
     const validationErrors = validation(form);
     setErrors(validationErrors);
-  
+
     if (Object.keys(validationErrors).length === 0) {
       mostrarNotificacionBienvenida2(); // Mostrar notificación de bienvenida
       handleLocalLogin(); // Realizar el inicio de sesión
     }
   };
-  
 
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
         <h2 className={styles.title}>Inicio de sesión</h2>
-        <form className={styles.form} onSubmit={submitHandler}>
+        <form className={styles.form} onSubmit={submitHandler} noValidate>
           {/* E_mail input */}
           <div className={styles.inputContainer}>
             <span className={styles.label}>E-mail</span>

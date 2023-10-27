@@ -404,7 +404,7 @@ export const login = (payload) => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("La contraseña es incorrecta", {
+      toast.error("La contraseña es incorrecta o el usuario se encuentra bloqueado", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
       });

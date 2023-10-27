@@ -137,12 +137,14 @@ const Reviews = ({ id }) => {
           ? reviews.reviews.map((review, index) => (
               <div key={index} className={style.reviewItem}>
                 <div className={style.reviewItemInner}>
-                  <p className={style.p}> {review.user.user_name}</p>
+                  <p className={style.p}>
+                    {review.user && review.user.user_name}
+                  </p>
                   <StarRating rating={review.rating} />
                 </div>
                 <div className={style.reviewItemInner}>
-                  <p className={style.p}>{review.reviewDate}</p>
-                  <p className={style.p}>{review.description}</p>
+                  <p className={style.p}>{review && review.reviewDate}</p>
+                  <p className={style.p}>{review && review.description}</p>
                 </div>
               </div>
             ))
